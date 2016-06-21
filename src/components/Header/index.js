@@ -3,6 +3,7 @@ const Router = require('react-router');
 const Classes = require('./styles.scss');
 
 module.exports = () => (
+
   <div>
     <h1>React Redux Starter Kit</h1>
     <Router.IndexLink to='/' activeClassName={Classes.activeRoute}>
@@ -13,4 +14,5 @@ module.exports = () => (
       Counter
     </Router.Link>
   </div>
+
 );

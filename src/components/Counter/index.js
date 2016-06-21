@@ -1,7 +1,8 @@
 const React = require('react');
 const Classes = require('./styles.scss');
 
-module.exports = exports = (props) => (
+const Counter = (props) => (
+
   <div>
     <h2 className={Classes.counterContainer}>
       Counter:
@@ -18,10 +19,13 @@ module.exports = exports = (props) => (
       Double (Async)
     </button>
   </div>
+
 );
 
-exports.propTypes = {
+Counter.propTypes = {
   counter: React.PropTypes.number.isRequired,
   doubleAsync: React.PropTypes.func.isRequired,
   increment: React.PropTypes.func.isRequired
 };
+
+module.exports = Counter;

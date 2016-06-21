@@ -3,6 +3,7 @@ const DuckImage = require('../assets/Duck.jpg');
 const Classes = require('./HomeView.scss');
 
 module.exports = () => (
+
   <div>
     <h4>Welcome!</h4>
     <img
@@ -10,4 +11,5 @@ module.exports = () => (
       className={Classes.duck}
       src={DuckImage} />
   </div>
+
 );

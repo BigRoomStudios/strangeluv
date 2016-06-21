@@ -1,10 +1,17 @@
 const React = require('react');
 const Router = require('react-router').Router;
-const Provider = require('react-redux').Provider
+const Provider = require('react-redux').Provider;
 
-module.exports = exports = class extends React.Component {
+module.exports = class extends React.Component {
 
-  render () {
+  static propTypes = {
+    history: React.PropTypes.object.isRequired,
+    routes: React.PropTypes.object.isRequired,
+    routerKey: React.PropTypes.number,
+    store: React.PropTypes.object.isRequired
+  }
+
+  render() {
 
     const { history, routes, routerKey, store } = this.props;
 
@@ -17,11 +24,4 @@ module.exports = exports = class extends React.Component {
     );
   }
 
-};
-
-exports.propTypes = {
-  history: React.PropTypes.object.isRequired,
-  routes: React.PropTypes.object.isRequired,
-  routerKey: React.PropTypes.number,
-  store: React.PropTypes.object.isRequired
 };

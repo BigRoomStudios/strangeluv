@@ -37,10 +37,11 @@ module.exports = (initialState = {}, history) => {
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
+
       const reducers = require('./reducers').makeRoot;
       store.replaceReducer(reducers);
     });
   }
 
   return store;
-}
+};

@@ -5,15 +5,19 @@ const Classes = require('./styles.scss');
 // Pull global styles
 require('../../styles/core.scss');
 
-module.exports = exports = ({ children }) => (
+const CoreLayout = ({ children }) => (
+
   <div className='container text-center'>
     <Header />
     <div className={Classes.mainContainer}>
       {children}
     </div>
   </div>
+
 );
 
-exports.propTypes = {
+CoreLayout.propTypes = {
   children: React.PropTypes.element.isRequired
 };
+
+module.exports = CoreLayout;
