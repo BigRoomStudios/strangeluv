@@ -1,6 +1,6 @@
-import HomeView from './components/HomeView'
+const HomeView = require('./components/HomeView');
 
 // Sync route definition
-export default {
-  component: HomeView
-}
+module.exports = {
+    component: HomeView
+};
