@@ -1,3 +1,1 @@
-import Counter from './Counter'
-
-export default Counter
+module.exports = require('./Counter');

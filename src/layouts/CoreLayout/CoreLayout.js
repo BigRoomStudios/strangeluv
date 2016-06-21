@@ -1,19 +1,19 @@
-import React from 'react'
-import Header from '../../components/Header'
-import classes from './CoreLayout.scss'
-import '../../styles/core.scss'
+const React = require('react');
+const Header = require('../../components/Header');
+const Classes = require('./CoreLayout.scss');
 
-export const CoreLayout = ({ children }) => (
+// Pull global styles
+require('../../styles/core.scss');
+
+module.exports = exports = ({ children }) => (
   <div className='container text-center'>
     <Header />
-    <div className={classes.mainContainer}>
+    <div className={Classes.mainContainer}>
       {children}
     </div>
   </div>
-)
+);
 
-CoreLayout.propTypes = {
+exports.propTypes = {
   children: React.PropTypes.element.isRequired
-}
-
-export default CoreLayout
+};

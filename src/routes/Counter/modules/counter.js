@@ -1,17 +1,32 @@
-// ------------------------------------
-// Constants
-// ------------------------------------
-export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
+const KeyMirror = require('keymirror');
 
-// ------------------------------------
-// Actions
-// ------------------------------------
-export function increment (value = 1) {
-  return {
-    type: COUNTER_INCREMENT,
-    payload: value
+// Reducer
+module.exports = exports = (state = 0, action) => {
+
+  switch (action.type) {
+    case types.COUNTER_INCREMENT:
+      return state + action.payload;
+      break;
+    default:
+      return state;
   }
-}
+
+};
+
+// Export types
+const types = exports.types = KeyMirror({
+  COUNTER_INCREMENT: true
+});
+
+// Actions
+
+exports.increment = (value = 1) => {
+
+  return {
+    type: types.COUNTER_INCREMENT,
+    payload: value
+  };
+};
 
 /*  This is a thunk, meaning it is a function that immediately
     returns a function for lazy evaluation. It is incredibly useful for
@@ -21,35 +36,16 @@ export function increment (value = 1) {
     you'd probably want to dispatch an action of COUNTER_DOUBLE and let the
     reducer take care of this logic.  */
 
-export const doubleAsync = () => {
+exports.doubleAsync = () => {
+
   return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch(increment(getState().counter))
-        resolve()
-      }, 200)
-    })
-  }
-}
 
-export const actions = {
-  increment,
-  doubleAsync
-}
+    setTimeout(() => {
 
-// ------------------------------------
-// Action Handlers
-// ------------------------------------
-const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]: (state, action) => state + action.payload
-}
+      const count = getState().counter;
+      const double = exports.increment(count);
 
-// ------------------------------------
-// Reducer
-// ------------------------------------
-const initialState = 0
-export default function counterReducer (state = initialState, action) {
-  const handler = ACTION_HANDLERS[action.type]
-
-  return handler ? handler(state, action) : state
-}
+      dispatch(double);
+    }, 200);
+  };
+};

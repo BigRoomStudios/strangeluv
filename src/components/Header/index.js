@@ -1,3 +1,1 @@
-import Header from './Header'
-
-export default Header
+module.exports = require('./Header');

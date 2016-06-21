@@ -1,18 +1,16 @@
-import React from 'react'
-import { IndexLink, Link } from 'react-router'
-import classes from './Header.scss'
+const React = require('react');
+const Router = require('react-router');
+const Classes = require('./Header.scss');
 
-export const Header = () => (
+module.exports = () => (
   <div>
     <h1>React Redux Starter Kit</h1>
-    <IndexLink to='/' activeClassName={classes.activeRoute}>
+    <Router.IndexLink to='/' activeClassName={Classes.activeRoute}>
       Home
-    </IndexLink>
+    </Router.IndexLink>
     {' · '}
-    <Link to='/counter' activeClassName={classes.activeRoute}>
+    <Router.Link to='/counter' activeClassName={Classes.activeRoute}>
       Counter
-    </Link>
+    </Router.Link>
   </div>
-)
-
-export default Header
+);

@@ -1,3 +1,1 @@
-import CoreLayout from './CoreLayout'
-
-export default CoreLayout
+module.exports = require('./CoreLayout');

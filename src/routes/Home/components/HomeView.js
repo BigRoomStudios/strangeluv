@@ -1,15 +1,13 @@
-import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
-import classes from './HomeView.scss'
+const React = require('react');
+const DuckImage = require('../assets/Duck.jpg');
+const Classes = require('./HomeView.scss');
 
-export const HomeView = () => (
+module.exports = () => (
   <div>
     <h4>Welcome!</h4>
     <img
       alt='This is a duck, because Redux!'
-      className={classes.duck}
+      className={Classes.duck}
       src={DuckImage} />
   </div>
-)
-
-export default HomeView
+);

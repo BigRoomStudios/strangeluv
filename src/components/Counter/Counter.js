@@ -1,12 +1,12 @@
-import React from 'react'
-import classes from './Counter.scss'
+const React = require('react');
+const Classes = require('./Counter.scss');
 
-export const Counter = (props) => (
+module.exports = exports = (props) => (
   <div>
-    <h2 className={classes.counterContainer}>
+    <h2 className={Classes.counterContainer}>
       Counter:
       {' '}
-      <span className={classes['counter--green']}>
+      <span className={Classes['counter--green']}>
         {props.counter}
       </span>
     </h2>
@@ -18,12 +18,10 @@ export const Counter = (props) => (
       Double (Async)
     </button>
   </div>
-)
+);
 
-Counter.propTypes = {
+exports.propTypes = {
   counter: React.PropTypes.number.isRequired,
   doubleAsync: React.PropTypes.func.isRequired,
   increment: React.PropTypes.func.isRequired
-}
-
-export default Counter
+};
