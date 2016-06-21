@@ -4,15 +4,15 @@ const Classes = require('./styles.scss');
 
 module.exports = () => (
 
-  <div>
-    <h1>React Redux Starter Kit</h1>
-    <Router.IndexLink to='/' activeClassName={Classes.activeRoute}>
-      Home
-    </Router.IndexLink>
-    {' · '}
-    <Router.Link to='/counter' activeClassName={Classes.activeRoute}>
-      Counter
-    </Router.Link>
-  </div>
+    <div>
+        <h1>React Redux Starter Kit</h1>
+        <Router.IndexLink to='/' activeClassName={Classes.activeRoute}>
+            Home
+        </Router.IndexLink>
+        {' · '}
+        <Router.Link to='/counter' activeClassName={Classes.activeRoute}>
+            Counter
+        </Router.Link>
+    </div>
 
 );

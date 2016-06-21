@@ -5,12 +5,12 @@ const CounterRoute = require('./Counter');
 
 // Create routes
 module.exports = (store) => ({
-  path: '/',
-  component: CoreLayout,
-  indexRoute: Home,
-  childRoutes: [
-    CounterRoute(store)
-  ]
+    path: '/',
+    component: CoreLayout,
+    indexRoute: Home,
+    childRoutes: [
+        CounterRoute(store)
+    ]
 });
 
 /*  Note: Instead of using JSX, we recommend using react-router

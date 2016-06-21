@@ -7,17 +7,17 @@ require('../../styles/core.scss');
 
 const CoreLayout = ({ children }) => (
 
-  <div className='container text-center'>
-    <Header />
-    <div className={Classes.mainContainer}>
-      {children}
+    <div className='container text-center'>
+        <Header />
+        <div className={Classes.mainContainer}>
+            {children}
+        </div>
     </div>
-  </div>
 
 );
 
 CoreLayout.propTypes = {
-  children: React.PropTypes.element.isRequired
+    children: React.PropTypes.element.isRequired
 };
 
 module.exports = CoreLayout;

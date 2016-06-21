@@ -3,29 +3,29 @@ const KeyMirror = require('keymirror');
 // Reducer
 module.exports = exports = (state = 0, action) => {
 
-  switch (action.type) {
-    case types.COUNTER_INCREMENT:
-      return state + action.payload;
-      break;
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case types.COUNTER_INCREMENT:
+            return state + action.payload;
+            break;
+        default:
+            return state;
+    }
 
 };
 
 // Export types
 const types = exports.types = KeyMirror({
-  COUNTER_INCREMENT: true
+    COUNTER_INCREMENT: true
 });
 
 // Actions
 
 exports.increment = (value = 1) => {
 
-  return {
-    type: types.COUNTER_INCREMENT,
-    payload: value
-  };
+    return {
+        type: types.COUNTER_INCREMENT,
+        payload: value
+    };
 };
 
 /*  This is a thunk, meaning it is a function that immediately
@@ -38,14 +38,14 @@ exports.increment = (value = 1) => {
 
 exports.doubleAsync = () => {
 
-  return (dispatch, getState) => {
+    return (dispatch, getState) => {
 
-    setTimeout(() => {
+        setTimeout(() => {
 
-      const count = getState().counter;
-      const double = exports.increment(count);
+            const count = getState().counter;
+            const double = exports.increment(count);
 
-      dispatch(double);
-    }, 200);
-  };
+            dispatch(double);
+        }, 200);
+    };
 };
