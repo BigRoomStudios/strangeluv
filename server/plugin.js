@@ -1,11 +1,43 @@
 const Url = require('url');
 const Inert = require('inert');
 const HapiWebpack = require('hapi-webpack-plugin');
+const Config = require('../config');
+const Webpack = require('webpack');
+const WebpackConfig = require('../build/webpack.config');
 const Package = require('../package.json');
 
 const internals = {};
 
+// The app as a plugin
+
 module.exports = (server, options, next) => {
+
+    server.register({
+        register: internals.corePlugin,
+        options: {
+            dist: Config.utils_paths.dist(),
+            static: Config.utils_paths.client('static'),
+            compiler: (Config.env === 'dev') && Webpack(WebpackConfig),
+            assets: {
+                publicPath: WebpackConfig.output.publicPath,
+                contentBase: Config.utils_paths.client(),
+                hot: true,
+                quiet: Config.compiler_quiet,
+                noInfo: Config.compiler_quiet,
+                lazy: false,
+                stats: Config.compiler_stats
+            }
+        }
+    }, next);
+};
+
+module.exports.attributes = {
+    pkg: Package
+};
+
+// The core plugin, to be module-ized
+
+internals.corePlugin = (server, options, next) => {
 
     const dev = !!options.compiler;
 
@@ -60,8 +92,8 @@ module.exports = (server, options, next) => {
     });
 };
 
-module.exports.attributes = {
-    pkg: Package
+internals.corePlugin.attributes = {
+    name: 'react-boilerplate-core'
 };
 
 internals.takesHtml = (accept) => {
