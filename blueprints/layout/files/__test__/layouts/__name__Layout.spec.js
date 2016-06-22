@@ -1,7 +1,9 @@
-import React from 'react'
+const React = require('react');
+const <%= pascalEntityName %> = require('layouts/<%= pascalEntityName %>');
 
 describe('(Layout) <%= pascalEntityName %>', () => {
-  it('should exist', () => {
 
-  })
-})
+    it('should exist', () => {
+
+    });
+});

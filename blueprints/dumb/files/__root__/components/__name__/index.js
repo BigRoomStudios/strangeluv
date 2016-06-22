@@ -1,2 +1,9 @@
-import <%= pascalEntityName %> from './<%= pascalEntityName %>'
-export default <%= pascalEntityName %>
+const <%= pascalEntityName %> = (props) => (
+
+    <div></div>
+
+);
+
+<%= pascalEntityName %>.propTypes = {};
+
+module.exports = <%= pascalEntityName %>;

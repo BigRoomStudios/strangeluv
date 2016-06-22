@@ -1,5 +1,6 @@
 module.exports = {
-  description () {
-    return 'generates a functional layout component'
-  }
-}
+    description () {
+
+        return 'generates a functional layout component';
+    }
+};
