@@ -1,25 +1,24 @@
-import webpack from 'webpack'
-import cssnano from 'cssnano'
-import HtmlWebpackPlugin from 'html-webpack-plugin'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import config from '../config'
-import _debug from 'debug'
+const Webpack = require('webpack');
+const Cssnano = require('cssnano');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const Config = require('../config');
+const Debug = require('debug')('app:webpack:config');
 
-const debug = _debug('app:webpack:config')
-const paths = config.utils_paths
-const {__DEV__, __PROD__, __TEST__} = config.globals
+const paths = Config.utils_paths
+const {__DEV__, __PROD__, __TEST__} = Config.globals
 
-debug('Create configuration.')
-const webpackConfig = {
+Debug('Create configuration.')
+const webpackConfig = module.exports = {
   name: 'client',
   target: 'web',
-  devtool: config.compiler_devtool,
+  devtool: Config.compiler_devtool,
   resolve: {
     root: paths.client(),
     extensions: ['', '.js', '.jsx', '.json']
   },
   module: {}
-}
+};
 // ------------------------------------
 // Entry Points
 // ------------------------------------
@@ -30,25 +29,25 @@ const APP_ENTRY_PATHS = [
 
 webpackConfig.entry = {
   app: __DEV__
-    ? APP_ENTRY_PATHS.concat(`webpack-hot-middleware/client?path=${config.compiler_public_path}__webpack_hmr`)
+    ? APP_ENTRY_PATHS.concat(`webpack-hot-middleware/client?path=${Config.compiler_public_path}__webpack_hmr`)
     : APP_ENTRY_PATHS,
-  vendor: config.compiler_vendor
+  vendor: Config.compiler_vendor
 }
 
 // ------------------------------------
 // Bundle Output
 // ------------------------------------
 webpackConfig.output = {
-  filename: `[name].[${config.compiler_hash_type}].js`,
+  filename: `[name].[${Config.compiler_hash_type}].js`,
   path: paths.dist(),
-  publicPath: config.compiler_public_path
+  publicPath: Config.compiler_public_path
 }
 
 // ------------------------------------
 // Plugins
 // ------------------------------------
 webpackConfig.plugins = [
-  new webpack.DefinePlugin(config.globals),
+  new Webpack.DefinePlugin(Config.globals),
   new HtmlWebpackPlugin({
     template: paths.client('index.html'),
     hash: false,
@@ -62,17 +61,17 @@ webpackConfig.plugins = [
 ]
 
 if (__DEV__) {
-  debug('Enable plugins for live development (HMR, NoErrors).')
+  Debug('Enable plugins for live development (HMR, NoErrors).')
   webpackConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new Webpack.HotModuleReplacementPlugin(),
+    new Webpack.NoErrorsPlugin()
   )
 } else if (__PROD__) {
-  debug('Enable plugins for production (OccurenceOrder, Dedupe & UglifyJS).')
+  Debug('Enable plugins for production (OccurenceOrder, Dedupe & UglifyJS).')
   webpackConfig.plugins.push(
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
+    new Webpack.optimize.OccurrenceOrderPlugin(),
+    new Webpack.optimize.DedupePlugin(),
+    new Webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,
         dead_code: true,
@@ -85,7 +84,7 @@ if (__DEV__) {
 // Don't split bundles during testing, since we only want import one bundle
 if (!__TEST__) {
   webpackConfig.plugins.push(
-    new webpack.optimize.CommonsChunkPlugin({
+    new Webpack.optimize.CommonsChunkPlugin({
       names: ['vendor']
     })
   )
@@ -155,7 +154,7 @@ const PATHS_TO_TREAT_AS_CSS_MODULES = [
 ]
 
 // If config has CSS modules enabled, treat this project's styles as CSS modules.
-if (config.compiler_css_modules) {
+if (Config.compiler_css_modules) {
   PATHS_TO_TREAT_AS_CSS_MODULES.push(
     paths.client().replace(/[\^\$\.\*\+\-\?\=\!\:\|\\\/\(\)\[\]\{\}\,]/g, '\\$&') // eslint-disable-line
   )
@@ -225,7 +224,7 @@ webpackConfig.sassLoader = {
 }
 
 webpackConfig.postcss = [
-  cssnano({
+  Cssnano({
     autoprefixer: {
       add: true,
       remove: true,
@@ -262,7 +261,7 @@ webpackConfig.module.loaders.push(
 // need to use the extractTextPlugin to fix this issue:
 // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
 if (!__DEV__) {
-  debug('Apply ExtractTextPlugin to CSS loaders.')
+  Debug('Apply ExtractTextPlugin to CSS loaders.')
   webpackConfig.module.loaders.filter((loader) =>
     loader.loaders && loader.loaders.find((name) => /css/.test(name.split('?')[0]))
   ).forEach((loader) => {
@@ -277,5 +276,3 @@ if (!__DEV__) {
     })
   )
 }
-
-export default webpackConfig
