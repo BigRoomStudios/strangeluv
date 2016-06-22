@@ -2,7 +2,7 @@
   "name": "react-boilerplate",
   "version": "3.0.0-alpha.0",
   "description": "Get started with React, Redux, and React-Router!",
-  "main": "index.js",
+  "main": "server/plugin.js",
   "engines": {
     "node": ">=6",
     "npm": "^3.0.0"
