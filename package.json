@@ -31,7 +31,7 @@
       }
     },
     "dev": {
-      "command": "nodemon --exec node bin/server",
+      "command": "nodemon bin/server",
       "env": {
         "NODE_ENV": "dev",
         "DEBUG": "app:*"
