@@ -1,35 +1,36 @@
-import webpack from 'webpack'
-import _debug from 'debug'
-import config from '../config'
+const Webpack = require('webpack');
+const Config = require('../config');
+const Debug = require('debug')('app:build:webpack-compiler');
 
-const debug = _debug('app:build:webpack-compiler')
-const DEFAULT_STATS_FORMAT = config.compiler_stats
+module.exports = (webpackConfig, statsFormat) => {
 
-export default function webpackCompiler (webpackConfig, statsFormat = DEFAULT_STATS_FORMAT) {
+  statsFormat = statsFormat || Config.compiler_stats;
+
   return new Promise((resolve, reject) => {
-    const compiler = webpack(webpackConfig)
+
+    const compiler = Webpack(webpackConfig);
 
     compiler.run((err, stats) => {
-      const jsonStats = stats.toJson()
 
-      debug('Webpack compile completed.')
-      debug(stats.toString(statsFormat))
+      const jsonStats = stats.toJson();
+
+      Debug('Webpack compile completed.');
+      Debug(stats.toString(statsFormat));
 
       if (err) {
-        debug('Webpack compiler encountered a fatal error.', err)
-        return reject(err)
+        Debug('Webpack compiler encountered a fatal error.', err);
+        return reject(err);
       } else if (jsonStats.errors.length > 0) {
-        debug('Webpack compiler encountered errors.')
-        debug(jsonStats.errors.join('\n'))
-        return reject(new Error('Webpack compiler encountered errors'))
+        Debug('Webpack compiler encountered errors.');
+        Debug(jsonStats.errors.join('\n'));
+        return reject(new Error('Webpack compiler encountered errors'));
       } else if (jsonStats.warnings.length > 0) {
-        debug('Webpack compiler encountered warnings.')
-        debug(jsonStats.warnings.join('\n'))
+        Debug('Webpack compiler encountered warnings.');
+        Debug(jsonStats.warnings.join('\n'));
       } else {
-        debug('No errors or warnings encountered.')
+        Debug('No errors or warnings encountered.');
       }
-      resolve(jsonStats)
-    })
-  })
+      resolve(jsonStats);
+    });
+  });
 }
-
