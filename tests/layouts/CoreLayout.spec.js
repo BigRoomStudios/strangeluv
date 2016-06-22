@@ -1,33 +1,38 @@
-import React from 'react'
-import TestUtils from 'react-addons-test-utils'
-import CoreLayout from 'layouts/CoreLayout/CoreLayout'
+const React = require('react');
+const TestUtils = require('react-addons-test-utils');
+const CoreLayout = require('layouts/CoreLayout');
 
-function shallowRender (component) {
-  const renderer = TestUtils.createRenderer()
+const shallowRender = (component) => {
 
-  renderer.render(component)
-  return renderer.getRenderOutput()
-}
+    const renderer = TestUtils.createRenderer();
 
-function shallowRenderWithProps (props = {}) {
-  return shallowRender(<CoreLayout {...props} />)
-}
+    renderer.render(component);
+    return renderer.getRenderOutput();
+};
 
-describe('(Layout) Core', function () {
-  let _component
-  let _props
-  let _child
+const shallowRenderWithProps = (props = {}) => {
 
-  beforeEach(function () {
-    _child = <h1 className='child'>Child</h1>
-    _props = {
-      children: _child
-    }
+    return shallowRender(<CoreLayout {...props} />);
+};
 
-    _component = shallowRenderWithProps(_props)
-  })
+describe('(Layout) Core', () => {
 
-  it('Should render as a <div>.', function () {
-    expect(_component.type).to.equal('div')
-  })
-})
+    let _component;
+    let _props;
+    let _child;
+
+    beforeEach(() => {
+
+        _child = <h1 className='child'>Child</h1>;
+        _props = {
+            children: _child
+        };
+
+        _component = shallowRenderWithProps(_props);
+    });
+
+    it('Should render as a <div>.', () => {
+
+        expect(_component.type).to.equal('div');
+    });
+});

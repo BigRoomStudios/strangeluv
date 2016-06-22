@@ -1,38 +1,43 @@
-import React from 'react'
-import { Header } from 'components/Header/Header'
-import classes from 'components/Header/Header.scss'
-import { IndexLink, Link } from 'react-router'
-import { shallow } from 'enzyme'
+const React = require('react');
+const Header = require('components/Header');
+const Classes = require('components/Header/styles.scss');
+const ReactRouter = require('react-router');
+const Enzyme = require('enzyme');
 
 describe('(Component) Header', () => {
-  let _wrapper
 
-  beforeEach(() => {
-    _wrapper = shallow(<Header/>)
-  })
+    let _wrapper;
 
-  it('Renders a welcome message', () => {
-    const welcome = _wrapper.find('h1')
-    expect(welcome).to.exist
-    expect(welcome.text()).to.match(/React Redux Starter Kit/)
-  })
+    beforeEach(() => {
 
-  describe('Navigation links...', () => {
+        _wrapper = Enzyme.shallow(<Header />);
+    });
 
-    it('Should render a Link to Home route', () => {
-      expect(_wrapper.contains(
-        <IndexLink activeClassName={classes.activeRoute} to='/'>
-          Home
-        </IndexLink>
-      )).to.be.true
-    })
+    it('Renders a welcome message', () => {
 
-    it('Should render a Link to Counter route', () => {
-      expect(_wrapper.contains(
-        <Link activeClassName={classes.activeRoute} to='/counter'>
-          Counter
-        </Link>
-      )).to.be.true
-    })
-  })
-})
+        const welcome = _wrapper.find('h1');
+        expect(welcome).to.exist;
+        expect(welcome.text()).to.match(/React Redux Starter Kit/);
+    });
+
+    describe('Navigation links...', () => {
+
+        it('Should render a Link to Home route', () => {
+
+            expect(_wrapper.contains(
+                <ReactRouter.IndexLink activeClassName={Classes.activeRoute} to='/'>
+                    Home
+                </ReactRouter.IndexLink>
+            )).to.be.true;
+        });
+
+        it('Should render a Link to Counter route', () => {
+
+            expect(_wrapper.contains(
+                <ReactRouter.Link activeClassName={Classes.activeRoute} to='/counter'>
+                    Counter
+                </ReactRouter.Link>
+            )).to.be.true;
+        });
+    });
+});

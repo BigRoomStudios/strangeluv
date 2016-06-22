@@ -27,6 +27,6 @@ LabbableServer.ready({ immediate: true }, (err, server) => {
             });
         });
 
-        Debug(`Server is now running at ${server.info.uri}.`)
+        Debug(`Server is now running at ${server.info.uri}.`);
     });
 });
