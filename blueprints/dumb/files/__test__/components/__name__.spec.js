@@ -1,8 +1,9 @@
-import React from 'react'
-import <%= pascalEntityName %> from 'components/<%= pascalEntityName %>/<%= pascalEntityName %>'
+const React = require('react');
+const <%= pascalEntityName %> = require('components/<%= pascalEntityName %>');
 
 describe('(Component) <%= pascalEntityName %>', () => {
-  it('should exist', () => {
 
-  })
-})
+    it('should exist', () => {
+
+    });
+});

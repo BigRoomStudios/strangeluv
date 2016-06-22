@@ -1,45 +1,51 @@
-import assert from 'assert'
-import React from 'react'
-import {mount, render, shallow} from 'enzyme'
+const React = require('react');
+const Enzyme = require('enzyme');
+const Assert = require('assert');
 
 class Fixture extends React.Component {
-  render () {
-    return (
-      <div>
-        <input id='checked' defaultChecked />
-        <input id='not' defaultChecked={false} />
-      </div>
-    )
-  }
+    render() {
+
+        return (
+            <div>
+                <input id='checked' defaultChecked />
+                <input id='not' defaultChecked={false} />
+            </div>
+        );
+    }
 }
 
-describe('(Framework) Karma Plugins', function () {
-  it('Should expose "expect" globally.', function () {
-    assert.ok(expect)
-  })
+describe('(Framework) Karma Plugins', () => {
 
-  it('Should expose "should" globally.', function () {
-    assert.ok(should)
-  })
+    it('Should expose "expect" globally.', () => {
 
-  it('Should have chai-as-promised helpers.', function () {
-    const pass = new Promise(res => res('test'))
-    const fail = new Promise((res, rej) => rej())
+        Assert.ok(expect);
+    });
 
-    return Promise.all([
-      expect(pass).to.be.fulfilled,
-      expect(fail).to.not.be.fulfilled
-    ])
-  })
+    it('Should expose "should" globally.', () => {
 
-  it('should have chai-enzyme working', function() {
-    let wrapper = shallow(<Fixture />)
-    expect(wrapper.find('#checked')).to.be.checked()
+        Assert.ok(should);
+    });
 
-    wrapper = mount(<Fixture />)
-    expect(wrapper.find('#checked')).to.be.checked()
+    it('Should have chai-as-promised helpers.', () => {
 
-    wrapper = render(<Fixture />)
-    expect(wrapper.find('#checked')).to.be.checked()
-  })
-})
+        const pass = new Promise((res) => res('test'));
+        const fail = new Promise((res, rej) => rej());
+
+        return Promise.all([
+            expect(pass).to.be.fulfilled,
+            expect(fail).to.not.be.fulfilled
+        ]);
+    });
+
+    it('should have chai-enzyme working', () => {
+
+        let wrapper = Enzyme.shallow(<Fixture />);
+        expect(wrapper.find('#checked')).to.be.checked();
+
+        wrapper = Enzyme.mount(<Fixture />);
+        expect(wrapper.find('#checked')).to.be.checked();
+
+        wrapper = Enzyme.render(<Fixture />);
+        expect(wrapper.find('#checked')).to.be.checked();
+    });
+});

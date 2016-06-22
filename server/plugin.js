@@ -72,7 +72,7 @@ internals.corePlugin = (server, options, next) => {
         });
 
         // To work with the history API
-        server.ext('onRequest', function (request, reply) {
+        server.ext('onRequest', (request, reply) => {
 
             const isGet = (request.method === 'get');
             const takesHtml = internals.takesHtml(request.headers.accept);

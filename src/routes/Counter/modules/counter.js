@@ -40,12 +40,15 @@ exports.doubleAsync = () => {
 
     return (dispatch, getState) => {
 
-        setTimeout(() => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
 
-            const count = getState().counter;
-            const double = exports.increment(count);
+                const count = getState().counter;
+                const double = exports.increment(count);
 
-            dispatch(double);
-        }, 200);
+                dispatch(double);
+                resolve();
+            }, 200);
+        });
     };
 };

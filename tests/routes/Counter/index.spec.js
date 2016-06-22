@@ -1,18 +1,22 @@
-import CounterRoute from 'routes/Counter'
+const CounterRoute = require('routes/Counter');
 
 describe('(Route) Counter', () => {
-  let _route
 
-  beforeEach(() => {
-    _route = CounterRoute({})
-  })
+    let _route;
 
-  it('Should return a route configuration object', () => {
-    expect(typeof(_route)).to.equal('object')
-  })
+    beforeEach(() => {
 
-  it('Configuration should contain path `counter`', () => {
-    expect(_route.path).to.equal('counter')
-  })
+        _route = CounterRoute({});
+    });
 
-})
+    it('Should return a route configuration object', () => {
+
+        expect(typeof (_route)).to.equal('object');
+    });
+
+    it('Configuration should contain path `counter`', () => {
+
+        expect(_route.path).to.equal('counter');
+    });
+
+});

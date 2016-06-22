@@ -1,5 +1,6 @@
 describe('(Component) <%= pascalEntityName %>', () => {
-  it('exists', () => {
 
-  })
-})
+    it('exists', () => {
+
+    });
+});
