@@ -1,11 +1,13 @@
-const CounterModule = require('routes/Counter/modules/counter');
+const CounterActs = require('routes/Counter/actions/Counter');
+const CounterTypes = require('routes/Counter/action-types/Counter');
+const CounterReducer = require('routes/Counter/reducers/Counter');
 
 describe('(Redux Module) Counter', () => {
 
-    const counterReducer = CounterModule;
-    const COUNTER_INCREMENT = CounterModule.types.COUNTER_INCREMENT;
-    const increment = CounterModule.increment;
-    const doubleAsync = CounterModule.doubleAsync;
+    const counterReducer = CounterReducer;
+    const COUNTER_INCREMENT = CounterTypes.COUNTER_INCREMENT;
+    const increment = CounterActs.increment;
+    const doubleAsync = CounterActs.doubleAsync;
 
     it('Should export a constant COUNTER_INCREMENT.', () => {
 
