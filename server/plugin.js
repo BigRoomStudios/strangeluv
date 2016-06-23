@@ -66,19 +66,24 @@ internals.corePlugin = (server, options, next) => {
         server.route({
             method: 'get',
             path: '/{p*}',
-            handler: {
-                directory: { path: '.' }
+            config: {
+                id: 'react-boilerplate-catchall',
+                handler: {
+                    directory: { path: '.' }
+                }
             }
         });
 
         // To work with the history API
         server.ext('onRequest', (request, reply) => {
 
+            const route = request.connection.match(request.method, request.path);
+            const noOtherRoute = (route.settings.id === 'react-boilerplate-catchall');
             const isGet = (request.method === 'get');
             const takesHtml = internals.takesHtml(request.headers.accept);
-            const looksLikeFile = (request.path.indexOf('.') === -1);
+            const looksLikeFile = (request.path.indexOf('.') !== -1);
 
-            if (looksLikeFile && isGet && takesHtml) {
+            if (noOtherRoute && !looksLikeFile && isGet && takesHtml) {
                 request.setUrl('/');
                 request.raw.req.url = Url.format(request.url);
             }
