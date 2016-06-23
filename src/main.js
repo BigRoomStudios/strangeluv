@@ -3,6 +3,7 @@ const ReactDOM = require('react-dom');
 const CreateBrowserHistory = require('history/lib/createBrowserHistory');
 const UseRouterHistory = require('react-router').useRouterHistory;
 const SyncHistoryWithStore = require('react-router-redux').syncHistoryWithStore;
+const RedBox = require('redbox-react');
 const CreateStore = require('./store/createStore');
 const AppContainer = require('./containers/AppContainer');
 
@@ -20,7 +21,7 @@ const browserHistory = UseRouterHistory(CreateBrowserHistory)({
 // react-router-redux reducer under the routerKey "router" in src/routes/index.js,
 // so we need to provide a custom `selectLocationState` to inform
 // react-router-redux of its location.
-const initialState = window.___INITIAL_STATE__;
+const initialState = window.__INITIAL_STATE__;
 const store = CreateStore(initialState, browserHistory);
 const history = SyncHistoryWithStore(browserHistory, store, {
     selectLocationState: (state) => state.router
@@ -63,7 +64,6 @@ if (__DEV__ && module.hot) {
     const renderApp = render;
     const renderError = (error) => {
 
-        const RedBox = require('redbox-react');
         ReactDOM.render(<RedBox error={error} />, MOUNT_NODE);
     };
 

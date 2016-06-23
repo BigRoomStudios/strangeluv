@@ -1,32 +1,13 @@
-const KeyMirror = require('keymirror');
+const CounterTypes = require('../action-types/Counter');
 
-// Reducer
-module.exports = exports = (state = 0, action) => {
-
-    switch (action.type) {
-        case types.COUNTER_INCREMENT:
-            return state + action.payload;
-            break;
-        default:
-            return state;
-    }
-
-};
-
-// Export types
-const types = exports.types = KeyMirror({
-    COUNTER_INCREMENT: true
-});
-
-// Actions
-
-exports.increment = (value = 1) => {
+exports.increment = (amount = 1) => {
 
     return {
-        type: types.COUNTER_INCREMENT,
-        payload: value
+        type: CounterTypes.COUNTER_INCREMENT,
+        payload: amount
     };
 };
+
 
 /*  This is a thunk, meaning it is a function that immediately
     returns a function for lazy evaluation. It is incredibly useful for
@@ -41,6 +22,7 @@ exports.doubleAsync = () => {
     return (dispatch, getState) => {
 
         return new Promise((resolve) => {
+
             setTimeout(() => {
 
                 const count = getState().counter;
