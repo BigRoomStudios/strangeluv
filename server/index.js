@@ -1,7 +1,7 @@
 const Hapi = require('hapi');
 const Labbable = require('labbable');
 const App = require('./plugin');
-const Config = require('../config');
+const Config = require('../config/main');
 
 const labbable = module.exports = new Labbable();
 

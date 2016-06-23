@@ -1,9 +1,9 @@
 const Url = require('url');
 const Inert = require('inert');
 const HapiWebpack = require('hapi-webpack-plugin');
-const Config = require('../config');
+const Config = require('../config/main');
 const Webpack = require('webpack');
-const WebpackConfig = require('../build/webpack.config');
+const WebpackConfig = require('../config/webpack.config');
 const Package = require('../package.json');
 
 const internals = {};

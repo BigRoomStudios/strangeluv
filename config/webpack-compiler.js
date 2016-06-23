@@ -1,5 +1,5 @@
 const Webpack = require('webpack');
-const Config = require('../config');
+const Config = require('./main');
 const Debug = require('debug')('app:build:webpack-compiler');
 
 module.exports = (webpackConfig, statsFormat) => {
