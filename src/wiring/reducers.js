@@ -1,5 +1,5 @@
 const Redux = require('redux');
-const Wiring = require('../wiring');
+const Wiring = require('./');
 
 exports.makeRoot = (asyncReducers) => {
 
