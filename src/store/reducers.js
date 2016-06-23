@@ -1,11 +1,9 @@
 const Redux = require('redux');
-const RouterReducer = require('react-router-redux').routerReducer;
 const Wiring = require('../wiring');
 
 exports.makeRoot = (asyncReducers) => {
 
     return Redux.combineReducers({
-        router: RouterReducer,
         ...Wiring.reducers(), // Everything in reducers/
         ...asyncReducers
     });
