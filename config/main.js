@@ -6,7 +6,6 @@ const Environments = require('./environments');
 const Package = require('../package.json');
 const Debug = require('debug')('app:config');
 
-const localip = Ip.address();
 Debug('Creating default configuration.');
 
 // ========================================================
@@ -27,7 +26,7 @@ const config = module.exports = {
     // ----------------------------------
     // Server Configuration
     // ----------------------------------
-    server_host : localip, // use string 'localhost' to prevent exposure on local network
+    server_host : '0.0.0.0', // use string 'localhost' to prevent exposure on local network
     server_port : process.env.PORT || 3000,
 
     // ----------------------------------
