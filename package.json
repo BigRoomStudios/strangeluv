@@ -64,7 +64,7 @@
       }
     },
     "test": {
-      "command": "babel-node ./node_modules/karma/bin/karma start build/karma.conf",
+      "command": "babel-node ./node_modules/karma/bin/karma start config/karma.conf",
       "env": {
         "NODE_ENV": "test",
         "DEBUG": "app:*"

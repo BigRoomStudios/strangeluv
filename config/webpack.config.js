@@ -2,7 +2,7 @@ const Webpack = require('webpack');
 const Cssnano = require('cssnano');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const Config = require('../config');
+const Config = require('./main');
 const Debug = require('debug')('app:webpack:config');
 
 const paths = Config.utils_paths;
