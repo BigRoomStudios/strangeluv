@@ -1,13 +1,9 @@
-# React Redux Starter Kit
+# whatever
 
-This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more.
-
-The primary goal of this project is to remain as **unopinionated** as possible. Its purpose is not to dictate your project structure or to demonstrate a complete sample application, but to provide a set of tools intended to make front-end development robust, easy, and, most importantly, fun. Check out the full feature list below!
-
-Finally, This project wouldn't be possible without the help of our many contributors, so [thank you](#thank-you) for all of your help.
+Here you find a fork of [this](https://github.com/davezuko/react-redux-starter-kit) starter kit.  We've made it our own.  You'll find React, Redux, and a dope Webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, etc.  Ships with a hapi server and plugin for arbitrarily siiick deployments.  We'll tell you where to put files and make things easy whenever possible.
 
 ## Table of Contents
-1. [Features](#features)
+1. [Toolset](#toolset)
 1. [Requirements](#requirements)
 1. [Getting Started](#getting-started)
 1. [Application Structure](#application-structure)
@@ -23,11 +19,9 @@ Finally, This project wouldn't be possible without the help of our many contribu
   1. [Styles](#styles)
   1. [Server](#server)
   1. [Production Optimization](#production-optimization)
-1. [Learning Resources](#learning-resources)
-1. [FAQ](#troubleshooting)
 1. [Thank You](#thank-you)
 
-## Features
+## Toolset
 * [react](https://github.com/facebook/react)
 * [redux](https://github.com/rackt/redux)
 * [react-router](https://github.com/rackt/react-router)
@@ -39,7 +33,7 @@ Finally, This project wouldn't be possible without the help of our many contribu
 * [eslint](http://eslint.org)
 
 ## Requirements
-* node `^4.2.0`
+* node `^6.0.0`
 * npm `^3.0.0`
 
 ## Getting Started
@@ -47,8 +41,8 @@ Finally, This project wouldn't be possible without the help of our many contribu
 After confirming that your development environment meets the specified [requirements](#requirements), you can follow these steps to get the project up and running:
 
 ```bash
-$ git clone https://github.com/davezuko/react-redux-starter-kit.git
-$ cd react-redux-starter-kit
+$ git clone https://github.com/this/repo
+$ cd this-repo
 $ npm install                   # Install project dependencies
 $ npm start                     # Compile and launch
 ```
@@ -56,8 +50,6 @@ $ npm start                     # Compile and launch
 If everything works, you should see the following:
 
 <img src="http://i.imgur.com/zR7VRG6.png?2" />
-
-While developing, you will probably rely mostly on `npm start`; however, there are additional scripts at your disposal:
 
 |`npm run <script>`|Description|
 |------------------|-----------|
@@ -75,37 +67,33 @@ While developing, you will probably rely mostly on `npm start`; however, there a
 
 ## Application Structure
 
-The application structure presented in this boilerplate is **fractal**, where functionality is grouped primarily by feature rather than file type. Please note, however, that this structure is only meant to serve as a guide, it is by no means prescriptive. That said, it aims to represent generally accepted guidelines and patterns for building scalable applications. If you wish to read more about this pattern, please check out this [awesome writeup](https://github.com/davezuko/react-redux-starter-kit/wiki/Fractal-Project-Structure) by [Justin Greenberg](https://github.com/justingreenberg).
+Note the [nestable `routes/`](https://github.com/davezuko/react-redux-starter-kit/wiki/Fractal-Project-Structure).
 
 ```
 .
-├── bin                      # Build/Start scripts
-├── blueprints               # Blueprint files for redux-cli
-├── build                    # All build-related configuration
-│   └── webpack              # Environment-specific configuration files for webpack
-├── config                   # Project configuration settings
-├── server                   # hapi application (uses webpack middleware)
-│   └── main.js              # Server application entry point
-├── src                      # Application source code
+├── bin/                     # Build/start scripts
+├── blueprints/              # Blueprint files for redux-cli
+├── config/                  # Project configuration settings
+├── server/                  # hapi application (uses webpack middleware)
+│   └── index.js             # Server entry point
+│   └── plugin.js            # hapi plugin for arbitrary hapi deploy
+├── src/                     # Application source code
 │   ├── main.js              # Application bootstrap and rendering
-│   ├── components           # Reusable Presentational Components
-│   ├── containers           # Reusable Container Components
-│   ├── layouts              # Components that dictate major page structure
-│   ├── static               # Static assets (not imported anywhere in source code)
-│   ├── styles               # Application-wide styles (generally settings)
-│   ├── store                # Redux-specific pieces
-│   │   ├── createStore.js   # Create and instrument redux store
-│   │   └── reducers.js      # Reducer registry and injection
-│   └── routes               # Main route definitions and async split points
+│   ├── action-types/        # Action types
+│   ├── actions/             # Action creators
+│   ├── reducers/            # Redux reducers
+│   ├── components/          # Reusable UI-only (dumb/stateless) components
+│   ├── containers/          # Reusable container (smart/stateful) components
+│   ├── layouts/             # Components that dictate major page structure
+│   ├── static/              # Static assets (not imported anywhere in source code)
+│   ├── styles/              # Application-wide styles (generally settings)
+│   ├── wiring/              # Wiring between Redux, routing, and the app
+│   └── routes/              # Main route definitions and async split points
 │       ├── index.js         # Bootstrap main application routes with store
-│       ├── Root.js          # Wrapper component for context-aware providers
-│       └── Home             # Fractal route
+│       └── Home/            # Fractal route
 │           ├── index.js     # Route definitions and async split points
-│           ├── assets       # Assets required to render components
-│           ├── components   # Presentational React Components
-│           ├── container    # Connect components to actions and store
-│           ├── modules      # Collections of reducers/constants/actions
-│           └── routes **    # Fractal sub-routes (** optional)
+│           ├── $$$/         # Any folders you might find under src/ like reducers/, etc.
+│           └── routes/      # Nested sub-routes
 └── tests                    # Unit tests
 ```
 
@@ -113,16 +101,7 @@ The application structure presented in this boilerplate is **fractal**, where fu
 
 #### Developer Tools
 
-**We recommend using the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd).**
-Using the chrome extension allows your monitors to run on a separate thread and affords better performance and functionality. It comes with several of the most popular monitors, is easy to configure, filters actions, and doesn’t require installing any packages.
-
-However, adding the DevTools components to your project is simple. First, grab the packages from npm:
-
-```bash
-npm i --save-dev redux-devtools redux-devtools-log-monitor redux-devtools-dock-monitor
-```
-
-Then follow the [manual integration walkthrough](https://github.com/gaearon/redux-devtools/blob/master/docs/Walkthrough.md).
+Works nicely with the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) and [React DevTools Chrome Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi).  `npm run dev` will enable the tools automatically, while `npm run dev:no-debug` will not.
 
 ### Routing
 We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. See the [application structure](#application-structure) section for more information.
@@ -130,64 +109,19 @@ We use `react-router` [route definitions](https://github.com/reactjs/react-route
 ## Testing
 To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them. If you are using `redux-cli`, test files should automatically be generated when you create a component or redux module.
 
-Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/index.js`.
+Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/main.js`.
 
 ## Deployment
-Out of the box, this starter kit is deployable by serving the `~/dist` folder generated by `npm run deploy` (make sure to specify your target `NODE_ENV` as well). This project does not concern itself with the details of server-side rendering or API structure, since that demands an opinionated structure that makes it difficult to extend the starter kit. However, if you do need help with more advanced deployment strategies, here are a few tips:
+Out of the box, this starter kit is deployable by serving the `~/dist` folder generated by `npm run deploy` (make sure to specify your target `NODE_ENV` as well). This project does not concern itself with the details of server-side rendering or API structure, since that demands an opinionated structure that makes it difficult to extend the starter kit.
 
 ### Static Deployments
 If you are serving the application via a web server such as nginx, make sure to direct incoming routes to the root `~/dist/index.html` file and let react-router take care of the rest. The hapi server that comes with the starter kit is able to be extended to serve as an API or whatever else you need, but that's entirely up to you.
-
-### Heroku
-
-Heroku has `nodejs buildpack` script that does the following when you deploy your app to Heroku.
-1. Find `packages.json` in the root directory.
-2. Install `nodejs` and `npm` packages.
-3. Run `npm postinstall script`
-4. Run `npm start`
-
-Therefore, you need to modify `package.json` before deploying to Heroku. Make the following changes in the `scripts` section of `package.json`.
-
-```
-...
-"start": "better-npm-run start:prod",
-"serve": "better-npm-run start",
-"postinstall": "npm run deploy:prod",
-"betterScripts": {
-  ...
-  "start:prod": {
-    "command": "babel-node bin/server",
-    "env": {
-      "NODE_ENV": "production"
-    }
-  }
-  ...
-},
-```
-
-It's also important to tell Heroku to install all `devDependencies` to successfully compile your app on Heroku's environment. Run the following in your terminal.
-
-```bash
-$ heroku config:set NPM_CONFIG_PRODUCTION=false
-```
-
-With this setup, you will install all the necessray packages, build your app, and start the webserver (e.g. hapi) everytime you push your app to Heroku. Try to deploy to Heroku by running the following commands.
-
-```bash
-$ git add .
-$ git commit -m 'My awesome commit'
-$ git push heroku master
-```
-
-If you fail to deploy for an unknown reason, try [this helpful comment](https://github.com/davezuko/react-redux-starter-kit/issues/730#issuecomment-213997120) by [DonHansDampf](https://github.com/DonHansDampf) addressing Heroku deployments.
-
-Have more questions? Feel free to submit an issue or join the Gitter chat!
 
 ## Build System
 
 ### Configuration
 
-Default project configuration can be found in `~/config/index.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the actual webpack build configuration**.
+Default project configuration can be found in `~/config/main.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the actual webpack build configuration**.
 
 If you need environment-specific overrides (useful for dynamically setting API endpoints, for example), you can edit `~/config/environments.js` and define overrides on a per-NODE_ENV basis. There are examples for both `dev` and `production`, so use those as guidelines. Here are some common configuration options:
 
@@ -203,20 +137,20 @@ If you need environment-specific overrides (useful for dynamically setting API e
 
 
 ### Root Resolve
-Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:
+Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. It should only be used inside the routes/ directory in order to avoid arbitrarily deep directory traversal (`../` ad infinitum).  Here's an example,
 
 ```js
-// current file: ~/src/views/some/nested/View.js
-// What used to be this:
-import SomeComponent from '../../../components/SomeComponent'
+// current file: ~/src/routes/some/nested/View.js
+// What used to be this,
+const SomeComponent = require('../../../components/SomeComponent');
 
-// Can now be this:
-import SomeComponent from 'components/SomeComponent' // Hooray!
+// Can be this,
+const SomeComponent = require('components/SomeComponent'); // Hooray!
 ```
 
 ### Globals
 
-These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/index.js`. When adding new globals, make sure you also add them to `~/.eslintrc`.
+These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/main.js`. When adding new globals, make sure you also add them to `~/.eslintrc`.
 
 |Variable|Description|
 |---|---|
@@ -233,7 +167,7 @@ Both `.scss` and `.css` file extensions are supported out of the box and are con
 
 ### Server
 
-This starter kit comes packaged with an hapi server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. Using a custom hapi app in place of [webpack-dev-server](https://github.com/webpack/webpack-dev-server) makes it easier to extend the starter kit to include functionality such as API's, universal rendering, and more -- all without bloating the base boilerplate.
+This starter kit comes packaged with an hapi server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. Using a custom hapi plugin in place of [webpack-dev-server](https://github.com/webpack/webpack-dev-server) makes it easier to extend the starter kit to include functionality such as API's, universal rendering, and more -- all without bloating the base boilerplate.
 
 ### Production Optimization
 
@@ -241,21 +175,6 @@ Babel is configured to use [babel-plugin-transform-runtime](https://www.npmjs.co
 
 In production, webpack will extract styles to a `.css` file, minify your JavaScript, and perform additional optimizations such as module deduplication.
 
-## Learning Resources
-
-* [Starting out with react-redux-starter-kit](https://suspicious.website/2016/04/29/starting-out-with-react-redux-starter-kit/) is an introduction to the components used in this starter kit with a small example in the end.
-
-## FAQ
-
-Having trouble? Check out our [FAQ](https://github.com/davezuko/react-redux-starter-kit/wiki/FAQ:-Frequently-Asked-Questions) or submit an issue. Please be considerate by only posting issues that are directly related to this project; questions about how to implement certain React or Redux features are both best suited for StackOverflow or their respective repositories.
-
 ## Thank You
 
-This project wouldn't be possible without help from the community, so I'd like to highlight some of its biggest contributors. Thank you all for your hard work, you've made my life a lot easier and taught me a lot in the process.
-
-* [Justin Greenberg](https://github.com/justingreenberg) - For all of your PR's, getting us to Babel 6, and constant work improving our patterns.
-* [Roman Pearah](https://github.com/neverfox) - For your bug reports, help in triaging issues, and PR contributions.
-* [Spencer Dixin](https://github.com/SpencerCDixon) - For your creation of [redux-cli](https://github.com/SpencerCDixon/redux-cli).
-* [Jonas Matser](https://github.com/mtsr) - For your help in triaging issues and unending support in our Gitter channel.
-
-And to everyone else who has contributed, even if you are not listed here your work is appreciated.
+* [Dave Zuko](https://github.com/davezuko) - for creating the [boilerplate](https://github.com/davezuko/react-redux-starter-kit) that we forked (at v3).  It contains a huge amount of effort from dozens of collaborators, and made for a fantastic start.
