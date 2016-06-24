@@ -22,8 +22,8 @@ module.exports = (initialState = {}) => {
     if (module.hot) {
         module.hot.accept('./reducers', () => {
 
-            const reducers = require('./reducers').makeRoot;
-            store.replaceReducer(reducers);
+            const nextReducer = require('./reducers').makeRoot(store.asyncReducers);
+            store.replaceReducer(nextReducer);
         });
     }
 
