@@ -5,9 +5,8 @@ const Enhancers = require('./enhancers');
 
 module.exports = (initialState = {}) => {
 
-    // ======================================================
     // Store Instantiation and HMR Setup
-    // ======================================================
+
     const store = Redux.createStore(
         Reducers.makeRoot(),
         initialState,

@@ -6,30 +6,24 @@ const CreateStore = require('./wiring/create-store');
 const History = require('./wiring/history');
 const AppContainer = require('./containers/AppContainer');
 
-// ========================================================
-// Store and History Instantiation
-// ========================================================
-// Create redux store and sync with react-router-redux. We
-// need to provide a custom `selectLocationState` to inform
-// react-router-redux of its location.
+// Create redux store and sync history with react-router-redux
+
 const initialState = window.__INITIAL_STATE__;
 const store = CreateStore(initialState);
 const enhancedHistory = SyncHistoryWithStore(History, store, {
     selectLocationState: (state) => state.router
 });
 
-// ========================================================
 // Developer Tools Setup
-// ========================================================
+
 if (__DEBUG__) {
     if (window.devToolsExtension) {
         window.devToolsExtension.open();
     }
 }
 
-// ========================================================
 // Render Setup
-// ========================================================
+
 const MOUNT_NODE = document.getElementById('root');
 
 let render = (routerKey) => {
@@ -50,6 +44,7 @@ let render = (routerKey) => {
 
 // Enable HMR and catch runtime errors in RedBox
 // This code is excluded from production bundle
+
 if (__DEV__ && module.hot) {
 
     const renderApp = render;
@@ -71,7 +66,5 @@ if (__DEV__ && module.hot) {
     module.hot.accept(['./routes/index'], () => render());
 }
 
-// ========================================================
 // Go!
-// ========================================================
 render();
