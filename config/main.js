@@ -1,7 +1,6 @@
 /* eslint key-spacing:0 spaced-comment:0 */
 const Path = require('path');
 const Argv = require('yargs').argv;
-const Ip = require('ip');
 const Environments = require('./environments');
 const Package = require('../package.json');
 const Debug = require('debug')('app:config');

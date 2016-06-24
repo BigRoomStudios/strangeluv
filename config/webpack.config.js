@@ -15,10 +15,15 @@ const webpackConfig = module.exports = {
     devtool: Config.compiler_devtool,
     resolve: {
         root: paths.client(),
+        fallback: paths.base('node_modules'),
         extensions: ['', '.js', '.jsx', '.json']
+    },
+    resolveLoader: {
+        fallback: paths.base('node_modules')
     },
     module: {}
 };
+
 // ------------------------------------
 // Entry Points
 // ------------------------------------
