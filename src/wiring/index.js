@@ -1,3 +1,8 @@
 const Wires = require('./wires');
 
-module.exports  = new Wires(require.context('../', true, /\.js$/));
+const wiring = module.exports = new Wires(require.context('../', true, /\.js$/));
+
+if (module.hot) {
+    // Rebuild the sync reducers list
+    module.hot.accept('./reducers.js', () => wiring.flushReducers());
+}

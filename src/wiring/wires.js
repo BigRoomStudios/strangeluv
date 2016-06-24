@@ -41,6 +41,11 @@ module.exports = class Wires {
         return syncReducers;
     }
 
+    flushReducers() {
+
+        this._reducersMemo = null;
+    }
+
     get(file) {
 
         return this.ctx(`./${file}.js`);

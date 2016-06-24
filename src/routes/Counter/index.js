@@ -1,4 +1,4 @@
-const Reducers = require('store/reducers');
+const Reducers = require('wiring/reducers');
 
 module.exports = (store) => ({
     path: 'counter',
