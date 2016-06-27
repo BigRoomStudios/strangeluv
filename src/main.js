@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const RedBox = require('redbox-react');
+const RedBox = require('redbox-react').default;
 const SyncHistoryWithStore = require('react-router-redux').syncHistoryWithStore;
 const CreateStore = require('./wiring/create-store');
 const History = require('./wiring/history');
