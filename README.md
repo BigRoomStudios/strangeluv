@@ -1,4 +1,4 @@
-# whatever
+# strangeluv
 
 Here you find a fork of [this](https://github.com/davezuko/react-redux-starter-kit) starter kit.  We've made it our own.  You'll find React, Redux, and a dope Webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, etc.  Ships with a hapi server and plugin for arbitrarily siiick deployments.  We'll tell you where to put files and make things easy whenever possible.
 

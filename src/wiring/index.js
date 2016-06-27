@@ -1,6 +1,6 @@
-const Wires = require('./wires');
+const Strangeluv = require('strangeluv-core');
 
-const wiring = module.exports = new Wires(require.context('../', true, /\.js$/));
+const wiring = module.exports = new Strangeluv(require.context('../', true, /\.js$/));
 
 if (module.hot) {
     // Rebuild the sync reducers list
