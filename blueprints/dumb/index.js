@@ -1,5 +1,5 @@
 module.exports = {
-    description () {
+    description() {
 
         return 'generates a dumb (pure) component';
     }

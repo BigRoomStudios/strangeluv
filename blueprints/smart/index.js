@@ -1,10 +1,10 @@
 module.exports = {
-    description () {
+    description() {
 
         return 'generates a smart (container) component';
     },
 
-    fileMapTokens () {
+    fileMapTokens() {
 
         return {
             __smart__: (options) => {

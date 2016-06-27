@@ -1,4 +1,4 @@
-const <%= pascalEntityName %>Types = require('../action-types/<%= pascalEntityName %>');
+const <%= pascalEntityName %>Types = require('../action-types/<%= entityName %>');
 
 /*
 exports.actionName = () => {
