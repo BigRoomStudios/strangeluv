@@ -48,7 +48,8 @@ const config = module.exports = {
         'react-redux',
         'react-router',
         'react-router-redux',
-        'redux'
+        'redux',
+        'strangeluv-core'
     ],
 
     // ----------------------------------
