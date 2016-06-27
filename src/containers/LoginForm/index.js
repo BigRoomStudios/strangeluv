@@ -13,6 +13,8 @@ internals.connect = Connect(
     (state) => ({
         // State of the form fields
         fields: state.login.form.fields,
+        // Successfully submitted?
+        submitted: state.login.form.submitted,
         // Build name of a particular model property– the component should not know about the model
         modelProp: internals.modelProp
     }),

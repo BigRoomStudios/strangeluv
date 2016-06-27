@@ -10,6 +10,7 @@ const internals = {
 
 const LoginForm = (props) => {
 
+    const submitted = props.submitted;
     const fields = props.fields;
     const modelProp = props.modelProp;
     const submit = props.submit;
@@ -26,6 +27,10 @@ const LoginForm = (props) => {
             }}
             /* Hook-up submit.  Again, we'll leave this up to the container. */
             onSubmit={submit}>
+
+            {/* Successfully submitted? */}
+            {submitted &&
+                <div>Success!</div>}
 
             <h5>Username</h5>
 
@@ -59,6 +64,7 @@ const LoginForm = (props) => {
 };
 
 LoginForm.propTypes = {
+    submitted: React.PropTypes.bool,
     fields: React.PropTypes.object.isRequired,
     modelProp: React.PropTypes.func.isRequired,
     submit: React.PropTypes.func.isRequired
