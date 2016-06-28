@@ -4,7 +4,7 @@ const RedBox = require('redbox-react').default;
 const SyncHistoryWithStore = require('react-router-redux').syncHistoryWithStore;
 const CreateStore = require('./wiring/create-store');
 const History = require('./wiring/history');
-const AppContainer = require('./containers/AppContainer');
+const AppContainer = require('./containers/App');
 
 // Create redux store and sync history with react-router-redux
 

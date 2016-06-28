@@ -1,5 +1,5 @@
 const React = require('react');
-const DuckImage = require('../assets/Duck.jpg');
+const DuckImage = require('../assets/duck.jpg');
 const Classes = require('./HomeView.scss');
 
 module.exports = () => (

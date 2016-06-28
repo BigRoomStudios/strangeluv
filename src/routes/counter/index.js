@@ -7,8 +7,8 @@ module.exports = (store) => ({
         // code-split-point (laziness)
         require.ensure([], (require) => {
 
-            const Counter = require('./containers/CounterContainer');
-            const reducer = require('./reducers/Counter');
+            const Counter = require('./containers/Counter');
+            const reducer = require('./reducers/counter');
 
             // add reducer late
             Reducers.inject(store, { key: 'counter', reducer });

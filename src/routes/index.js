@@ -1,7 +1,7 @@
 // Just the modules necessary for initial render!
 const CoreLayout = require('../layouts/CoreLayout');
-const Home = require('./Home');
-const CounterRoute = require('./Counter');
+const Home = require('./home');
+const CounterRoute = require('./counter');
 
 // Create routes
 module.exports = (store) => ({
