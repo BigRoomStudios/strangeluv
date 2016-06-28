@@ -1,6 +1,8 @@
 # strangeluv
 
-Here you find a fork of [this](https://github.com/davezuko/react-redux-starter-kit) starter kit.  We've made it our own.  You'll find React, Redux, and a dope Webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, etc.  Ships with a hapi server and plugin for arbitrarily siiick deployments.  We'll tell you where to put files and make things easy whenever possible.
+> How I Learned to Stop Worrying and Love React
+
+Here you find a fork of [this](https://github.com/davezuko/react-redux-starter-kit) React/Redux starter kit.  We've made it our own.  You'll find React, Redux, and a dope Webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, etc.  Ships with a hapi server and plugin for arbitrarily siiick deployments.  We'll tell you where to put files and make things easy whenever possible.
 
 ## Table of Contents
 1. [Toolset](#toolset)
@@ -8,20 +10,13 @@ Here you find a fork of [this](https://github.com/davezuko/react-redux-starter-k
 1. [Getting Started](#getting-started)
 1. [Application Structure](#application-structure)
 1. [Development](#development)
-  1. [Developer Tools](#developer-tools)
-  1. [Routing](#routing)
 1. [Testing](#testing)
 1. [Deployment](#deployment)
 1. [Build System](#build-system)
-  1. [Configuration](#configuration)
-  1. [Root Resolve](#root-resolve)
-  1. [Globals](#globals)
-  1. [Styles](#styles)
-  1. [Server](#server)
-  1. [Production Optimization](#production-optimization)
 1. [Thank You](#thank-you)
 
 ## Toolset
+* [strangeluv-core](https://github.com/BigRoomStudios/strangeluv-core)
 * [react](https://github.com/facebook/react)
 * [redux](https://github.com/rackt/redux)
 * [react-router](https://github.com/rackt/react-router)
@@ -33,18 +28,16 @@ Here you find a fork of [this](https://github.com/davezuko/react-redux-starter-k
 * [eslint](http://eslint.org)
 
 ## Requirements
-* node `^6.0.0`
-* npm `^3.0.0`
+* node `6.x.x`
+* npm `3.x.x`
 
 ## Getting Started
-
-After confirming that your development environment meets the specified [requirements](#requirements), you can follow these steps to get the project up and running:
-
 ```bash
-$ git clone https://github.com/this/repo
-$ cd this-repo
-$ npm install                   # Install project dependencies
-$ npm start                     # Compile and launch
+$ git clone https://github.com/BigRoomStudios/strangeluv
+$ mv strangeluv my-project
+$ cd my-project   # Then adjust package.json and readme as necessary
+$ npm install     # Install project dependencies
+$ npm start       # Compile and launch
 ```
 
 If everything works, you should see the following:
@@ -54,16 +47,14 @@ If everything works, you should see the following:
 |`npm run <script>`|Description|
 |------------------|-----------|
 |`start`|Serves your app at `localhost:3000`. HMR will be enabled in development.|
-|`compile`|Compiles the application to disk (`~/dist` by default).|
+|`compile`|Compiles the application to `dist/`.|
 |`dev`|Same as `npm start`, but enables nodemon for the server as well.|
 |`dev:no-debug`|Same as `npm run dev` but disables devtool instrumentation.|
 |`test`|Runs unit tests with Karma and generates a coverage report.|
-|`test:dev`|Runs Karma and watches for changes to re-run tests; does not generate coverage reports.|
 |`deploy`|Runs linter, tests, and then, on success, compiles your application to disk.|
 |`deploy:dev`|Same as `deploy` but overrides `NODE_ENV` to "dev".|
 |`deploy:prod`|Same as `deploy` but overrides `NODE_ENV` to "production".|
 |`lint`|Lint all `.js` files.|
-|`lint:fix`|Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).|
 
 ## Application Structure
 
@@ -86,8 +77,8 @@ Note the [nestable `routes/`](https://github.com/davezuko/react-redux-starter-ki
 │   ├── containers/          # Reusable container (smart/stateful) components
 │   ├── layouts/             # Components that dictate major page structure
 │   ├── static/              # Static assets (not imported anywhere in source code)
-│   ├── styles/              # Application-wide styles (generally settings)
-│   ├── wiring/              # Wiring between Redux, routing, and the app
+│   ├── styles/              # Application-wide styles
+│   ├── wiring/              # Wiring between Redux and the app
 │   └── routes/              # Main route definitions and async split points
 │       ├── index.js         # Bootstrap main application routes with store
 │       └── Home/            # Fractal route
@@ -97,33 +88,56 @@ Note the [nestable `routes/`](https://github.com/davezuko/react-redux-starter-ki
 └── tests                    # Unit tests
 ```
 
+### Reducer wiring
+Reducers placed in `reducers/` are automatically registered to the Redux store using some automatic wiring found in [strangeluv-core](https://github.com/BigRoomStudios/strangeluv-core).  Reducers can be injected asynchronously (usually for code-splitting within a child route) as such,
+```js
+const Reducers = require('wiring/reducers');
+
+// Let store be the app's store and myReducer be a new reducer
+
+Reducers.inject(store, { key: 'reducerName', reducer: myReducer });
+```
+
+#### A note on file- and directory-naming
+Files should be named with `dash-case.js` except in the case of containers or components, which should use `PascalCase.js`.  This includes reducer, action, and action-type files.  Filenames need not repeat information specified by their directory names.  For example, `containers/Counter.js` or `containers/Counter/index.js` are preferred over `containers/CounterContainer.js` or `containers/CounterContainer/CounterContainer.js`.  The container may still be required into a file using the "full name" e.g.,
+```js
+const CounterContainer = require('./containers/Counter');
+```
+
+Omitting the `.js` extension in calls to `require()` is preferred, as it allows one to transition a simple module at `components/Counter.js` to a complex module with its own internals at `components/Counter/index.js` without affecting how it is referenced.
+
 ## Development
 
 #### Developer Tools
-
 Works nicely with the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) and [React DevTools Chrome Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi).  `npm run dev` will enable the tools automatically, while `npm run dev:no-debug` will not.
 
 ### Routing
 We use `react-router` [route definitions](https://github.com/reactjs/react-router/blob/master/docs/API.md#plainroute) (`<route>/index.js`) to define units of logic within our application. See the [application structure](#application-structure) section for more information.
 
-## Testing
-To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them. If you are using `redux-cli`, test files should automatically be generated when you create a component or redux module.
+### Recipes
+ - Incorporating forms using [react-redux-form](https://github.com/davidkpiano/react-redux-form) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-forms)]
+ - Deployment alongside the [hapi boilerplate](https://github.com/devinivy/boilerplate-api) [[here](https://github.com/devinivy/boilerplate-api/tree/recipe-strangeluv/server)]
 
-Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/main.js`.
+## Testing
+To add a unit test, simply create a `.spec.js` file anywhere in `tests/`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them. If you are using `redux-cli`, test files should automatically be generated when you create a component or redux module.
+
+If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `config/main.js`.
 
 ## Deployment
-Out of the box, this starter kit is deployable by serving the `~/dist` folder generated by `npm run deploy` (make sure to specify your target `NODE_ENV` as well). This project does not concern itself with the details of server-side rendering or API structure, since that demands an opinionated structure that makes it difficult to extend the starter kit.
+### For development (`npm run dev`)
+Runs a hapi server with Webpack HMR and development middleware.  Serves `src/static/` for static assets.
 
-### Static Deployments
-If you are serving the application via a web server such as nginx, make sure to direct incoming routes to the root `~/dist/index.html` file and let react-router take care of the rest. The hapi server that comes with the starter kit is able to be extended to serve as an API or whatever else you need, but that's entirely up to you.
+### For production
+You can serve `dist/`, a complete app distribution generated by `npm run deploy`, by running `NODE_ENV=production npm start`.
+
+### As a hapi plugin
+Both development and production modes are supported when using a strangeluv project as a hapi plugin.  See [this hapi boilerplate recipe](https://github.com/devinivy/boilerplate-api/compare/recipe-strangeluv) for an example.
 
 ## Build System
-
 ### Configuration
+Default project configuration can be found in `config/main.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the actual webpack build configuration**.
 
-Default project configuration can be found in `~/config/main.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the actual webpack build configuration**.
-
-If you need environment-specific overrides (useful for dynamically setting API endpoints, for example), you can edit `~/config/environments.js` and define overrides on a per-NODE_ENV basis. There are examples for both `dev` and `production`, so use those as guidelines. Here are some common configuration options:
+If you need environment-specific overrides (useful for dynamically setting API endpoints, for example), you can edit `config/environments.js` and define overrides on a per-NODE_ENV basis. There are examples for both `dev` and `production`, so use those as guidelines. Here are some common configuration options:
 
 |Key|Description|
 |---|-----------|
@@ -137,10 +151,10 @@ If you need environment-specific overrides (useful for dynamically setting API e
 
 
 ### Root Resolve
-Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. It should only be used inside the routes/ directory in order to avoid arbitrarily deep directory traversal (`../` ad infinitum).  Here's an example,
+Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `src/` directory. It should only be used inside the routes/ directory in order to avoid arbitrarily deep directory traversal (`../` ad infinitum).  Here's an example,
 
 ```js
-// current file: ~/src/routes/some/nested/View.js
+// current file: src/routes/some/nested/View.js
 // What used to be this,
 const SomeComponent = require('../../../components/SomeComponent');
 
@@ -149,8 +163,7 @@ const SomeComponent = require('components/SomeComponent'); // Hooray!
 ```
 
 ### Globals
-
-These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `~/config/main.js`. When adding new globals, make sure you also add them to `~/.eslintrc`.
+These are global variables available to you anywhere in your source code. If you wish to modify them, they can be found as the `globals` key in `config/main.js`. When adding new globals, make sure you also add them to `.eslintrc`.
 
 |Variable|Description|
 |---|---|
@@ -162,19 +175,15 @@ These are global variables available to you anywhere in your source code. If you
 |`__BASENAME__`|[history basename option](https://github.com/rackt/history/blob/master/docs/BasenameSupport.md)|
 
 ### Styles
-
 Both `.scss` and `.css` file extensions are supported out of the box and are configured to use [CSS Modules](https://github.com/css-modules/css-modules). After being imported, styles will be processed with [PostCSS](https://github.com/postcss/postcss) for minification and autoprefixing, and will be extracted to a `.css` file during production builds.
 
 ### Server
-
-This starter kit comes packaged with an hapi server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. Using a custom hapi plugin in place of [webpack-dev-server](https://github.com/webpack/webpack-dev-server) makes it easier to extend the starter kit to include functionality such as API's, universal rendering, and more -- all without bloating the base boilerplate.
+This starter kit comes packaged with an hapi server. It's important to note that the sole purpose of this server is to provide `webpack-dev-middleware` and `webpack-hot-middleware` for hot module replacement. Using a custom hapi plugin in place of [webpack-dev-server](https://github.com/webpack/webpack-dev-server) makes it easier to extend the starter kit to include functionality such as API's, universal rendering, etc.  See also the section on [deployment](#deployment).
 
 ### Production Optimization
-
 Babel is configured to use [babel-plugin-transform-runtime](https://www.npmjs.com/package/babel-plugin-transform-runtime) so transforms aren't inlined. Additionally, in production, we use [react-optimize](https://github.com/thejameskyle/babel-react-optimize) to further optimize your React code.
 
 In production, webpack will extract styles to a `.css` file, minify your JavaScript, and perform additional optimizations such as module deduplication.
 
 ## Thank You
-
 * [Dave Zuko](https://github.com/davezuko) - for creating the [boilerplate](https://github.com/davezuko/react-redux-starter-kit) that we forked (at v3).  It contains a huge amount of effort from dozens of collaborators, and made for a fantastic start.
