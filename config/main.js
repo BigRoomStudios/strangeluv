@@ -11,38 +11,38 @@ Debug('Creating default configuration.');
 // Default Configuration
 // ========================================================
 const config = module.exports = {
-    env : process.env.NODE_ENV || 'dev',
+    env: process.env.NODE_ENV || 'dev',
 
     // ----------------------------------
     // Project Structure
     // ----------------------------------
-    path_base  : Path.resolve(__dirname, '..'),
-    dir_client : 'src',
-    dir_dist   : 'dist',
-    dir_server : 'server',
-    dir_test   : 'tests',
+    path_base: Path.resolve(__dirname, '..'),
+    dir_client: 'src',
+    dir_dist: 'dist',
+    dir_server: 'server',
+    dir_test: 'tests',
 
     // ----------------------------------
     // Server Configuration
     // ----------------------------------
-    server_host : '0.0.0.0', // use string 'localhost' to prevent exposure on local network
-    server_port : process.env.PORT || 3000,
+    server_host: '0.0.0.0', // use string 'localhost' to prevent exposure on local network
+    server_port: process.env.PORT || 3000,
 
     // ----------------------------------
     // Compiler Configuration
     // ----------------------------------
-    compiler_css_modules     : true,
-    compiler_devtool         : 'source-map',
-    compiler_hash_type       : 'hash',
-    compiler_fail_on_warning : false,
-    compiler_quiet           : false,
-    compiler_public_path     : '/',
-    compiler_stats           : {
-        chunks : false,
-        chunkModules : false,
-        colors : true
+    compiler_css_modules: true,
+    compiler_devtool: 'source-map',
+    compiler_hash_type: 'hash',
+    compiler_fail_on_warning: false,
+    compiler_quiet: false,
+    compiler_public_path: '/',
+    compiler_stats: {
+        chunks: false,
+        chunkModules: false,
+        colors: true
     },
-    compiler_vendor : [
+    compiler_vendor: [
         'history',
         'react',
         'react-redux',
@@ -55,9 +55,9 @@ const config = module.exports = {
     // ----------------------------------
     // Test Configuration
     // ----------------------------------
-    coverage_reporters : [
-        { type : 'text-summary' },
-        { type : 'lcov', dir : 'coverage' }
+    coverage_reporters: [
+        { type: 'text-summary' },
+        { type: 'lcov', dir: 'coverage' }
     ]
 };
 
@@ -75,16 +75,16 @@ Edit at Your Own Risk
 // ------------------------------------
 // N.B.: globals added here must _also_ be added to .eslintrc
 config.globals = {
-    'process.env'  : {
-        'NODE_ENV' : JSON.stringify(config.env)
+    'process.env': {
+        NODE_ENV: JSON.stringify(config.env)
     },
-    'NODE_ENV'     : config.env,
-    '__DEV__'      : config.env === 'dev',
-    '__PROD__'     : config.env === 'production',
-    '__TEST__'     : config.env === 'test',
-    '__DEBUG__'    : config.env === 'dev' && !Argv.no_debug,
-    '__COVERAGE__' : !Argv.watch && config.env === 'test',
-    '__BASENAME__' : JSON.stringify(process.env.BASENAME || '')
+    NODE_ENV: config.env,
+    __DEV__: config.env === 'dev',
+    __PROD__: config.env === 'production',
+    __TEST__: config.env === 'test',
+    __DEBUG__: config.env === 'dev' && !Argv.no_debug,
+    __COVERAGE__: !Argv.watch && config.env === 'test',
+    __BASENAME__: JSON.stringify(process.env.BASENAME || '')
 };
 
 // ------------------------------------
@@ -114,9 +114,9 @@ const base = (...args) => {
 
 
 config.utils_paths = {
-    base   : base,
-    client : base.bind(null, config.dir_client),
-    dist   : base.bind(null, config.dir_dist)
+    base: base,
+    client: base.bind(null, config.dir_client),
+    dist: base.bind(null, config.dir_dist)
 };
 
 // ========================================================
