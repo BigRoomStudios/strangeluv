@@ -40,9 +40,15 @@ $ npm install     # Install project dependencies
 $ npm start       # Compile and launch
 ```
 
-If everything works, you should see the following:
-
-<img src="http://i.imgur.com/zR7VRG6.png?2" />
+If all goes well you should see something like this,
+```
+app:config Creating default configuration. +0ms
+app:config Looking for environment overrides for NODE_ENV "dev". +2ms
+app:config Found overrides, applying to default configuration. +1ms
+app:webpack:config Create configuration. +0ms
+app:webpack:config Enable plugins for live development (HMR, NoErrors). +1ms
+app:bin:server Server is now running at http://0.0.0.0:3000. +125ms
+```
 
 |`npm run <script>`|Description|
 |------------------|-----------|
@@ -57,7 +63,6 @@ If everything works, you should see the following:
 |`lint`|Lint all `.js` files.|
 
 ## Application Structure
-
 Note the [nestable `routes/`](https://github.com/davezuko/react-redux-starter-kit/wiki/Fractal-Project-Structure).
 
 ```
