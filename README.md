@@ -112,6 +112,8 @@ const CounterContainer = require('./containers/Counter');
 Omitting the `.js` extension in calls to `require()` is preferred, as it allows one to transition a simple module at `components/Counter.js` to a complex module with its own internals at `components/Counter/index.js` without affecting how it is referenced.
 
 ## Development
+### Style
+We favor the [hapi style guide](hapijs.com/styleguide).  Yes, even when coding for the browser!  The idea is to maintain fluency for developers who work both on the server and in the browser.  It is supposed to be the same language, after all!  Node and V8 move fast enough on their own, so we plan to keep up-to-date with that ecosystem rather than the hyperspeed with which transpilers make available incompletely-spec'd JS features.  It's worth noting that for the time being that includes ES6 modules.  We additionally have some standard React lint rules.  Just `npm run lint` to see how you're doing!
 
 ### Developer Tools
 Works nicely with the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) and [React DevTools Chrome Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi).  `npm run dev` will enable the tools automatically, while `npm run dev:no-debug` will not.
@@ -121,7 +123,7 @@ We use `react-router` [route definitions](https://github.com/reactjs/react-route
 
 ### Recipes
  - Incorporating forms using [react-redux-form](https://github.com/davidkpiano/react-redux-form) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-forms)]
- - Deployment alongside the [hapi boilerplate](https://github.com/devinivy/boilerplate-api) [[here](https://github.com/devinivy/boilerplate-api/tree/recipe-strangeluv/server)]
+ - Deployment alongside the [hapi boilerplate](https://github.com/devinivy/boilerplate-api) [[here](https://github.com/devinivy/boilerplate-api/compare/recipe-strangeluv)]
 
 ## Testing
 To add a unit test, simply create a `.spec.js` file anywhere in `tests/`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them. If you are using `redux-cli`, test files should automatically be generated when you create a component or redux module.
