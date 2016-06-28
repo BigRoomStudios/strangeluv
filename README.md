@@ -42,12 +42,12 @@ $ npm start       # Compile and launch
 
 If all goes well you should see something like this,
 ```
-app:config Creating default configuration. +0ms
-app:config Looking for environment overrides for NODE_ENV "dev". +2ms
-app:config Found overrides, applying to default configuration. +1ms
-app:webpack:config Create configuration. +0ms
-app:webpack:config Enable plugins for live development (HMR, NoErrors). +1ms
-app:bin:server Server is now running at http://0.0.0.0:3000. +125ms
+| app:config Creating default configuration. +0ms
+| app:config Looking for environment overrides for NODE_ENV "dev". +2ms
+| app:config Found overrides, applying to default configuration. +1ms
+| app:webpack:config Create configuration. +0ms
+| app:webpack:config Enable plugins for live development (HMR, NoErrors). +1ms
+| app:bin:server Server is now running at http://0.0.0.0:3000. +125ms
 ```
 
 |`npm run <script>`|Description|
@@ -103,7 +103,7 @@ const Reducers = require('wiring/reducers');
 Reducers.inject(store, { key: 'reducerName', reducer: myReducer });
 ```
 
-#### A note on file- and directory-naming
+### A note on file- and directory-naming
 Files should be named with `dash-case.js` except in the case of containers or components, which should use `PascalCase.js`.  This includes reducer, action, and action-type files.  Filenames need not repeat information specified by their directory names.  For example, `containers/Counter.js` or `containers/Counter/index.js` are preferred over `containers/CounterContainer.js` or `containers/CounterContainer/CounterContainer.js`.  The container may still be required into a file using the "full name" e.g.,
 ```js
 const CounterContainer = require('./containers/Counter');
@@ -113,7 +113,7 @@ Omitting the `.js` extension in calls to `require()` is preferred, as it allows 
 
 ## Development
 
-#### Developer Tools
+### Developer Tools
 Works nicely with the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) and [React DevTools Chrome Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi).  `npm run dev` will enable the tools automatically, while `npm run dev:no-debug` will not.
 
 ### Routing
