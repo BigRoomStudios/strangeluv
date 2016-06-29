@@ -1,6 +1,5 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const RedBox = require('redbox-react').default;
 const SyncHistoryWithStore = require('react-router-redux').syncHistoryWithStore;
 const CreateStore = require('./wiring/create-store');
 const History = require('./wiring/history');
@@ -47,6 +46,7 @@ let render = (routerKey) => {
 
 if (__DEV__ && module.hot) {
 
+    const RedBox = require('redbox-react').default;
     const renderApp = render;
     const renderError = (error) => {
 
@@ -59,6 +59,7 @@ if (__DEV__ && module.hot) {
             renderApp(Math.random());
         }
         catch (error) {
+            console.error(error.stack);
             renderError(error);
         }
     };
