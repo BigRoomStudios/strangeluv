@@ -1,6 +1,6 @@
-const HomeView = require('./components/HomeView');
+const HomeViewContainer = require('./containers/HomeView');
 
 // Sync route definition
 module.exports = {
-    component: HomeView
+    component: HomeViewContainer
 };
