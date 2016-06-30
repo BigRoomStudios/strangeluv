@@ -1,6 +1,6 @@
-const CounterActs = require('routes/Counter/actions/Counter');
-const CounterTypes = require('routes/Counter/action-types/Counter');
-const CounterReducer = require('routes/Counter/reducers/Counter');
+const CounterActs = require('routes/counter/actions/counter');
+const CounterTypes = require('routes/counter/action-types/counter');
+const CounterReducer = require('routes/counter/reducers/counter');
 
 describe('(Redux Module) Counter', () => {
 

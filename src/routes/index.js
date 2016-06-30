@@ -23,7 +23,7 @@ module.exports = (store) => ({
       require.ensure([], (require) => {
         cb(null, [
           // Remove imports!
-          require('./Counter').default(store)
+          require('./counter')(store)
         ])
       })
     }

@@ -1,4 +1,4 @@
-const HomeRoute = require('routes/Home');
+const HomeRoute = require('routes/home');
 
 describe('(Route) Home', () => {
 

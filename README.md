@@ -126,6 +126,8 @@ We use `react-router` [route definitions](https://github.com/reactjs/react-route
  - Deployment alongside the [hapi boilerplate](https://github.com/devinivy/boilerplate-api) [[here](https://github.com/devinivy/boilerplate-api/compare/recipe-strangeluv)]
  - Incorporating an "initial load" of state with an API call [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-initial-load
 )]
+ - Incorporating server-side rendering (_very, very incomplete_) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-server-side
+)]
 
 ## Testing
 To add a unit test, simply create a `.spec.js` file anywhere in `tests/`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them. If you are using `redux-cli`, test files should automatically be generated when you create a component or redux module.
