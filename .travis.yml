@@ -1,4 +1,5 @@
 language: node_js
+
 node_js:
   - "6"
 
@@ -16,5 +17,3 @@ script:
   - NODE_ENV=staging npm run deploy
   - NODE_ENV=production npm run deploy
 
-after_success:
-  - npm run codecov

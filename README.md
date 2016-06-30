@@ -2,6 +2,10 @@
 
 > How I Learned to Stop Worrying and Love React
 
+[![Build Status](https://travis-ci.org/BigRoomStudios/strangeluv.svg?branch=master)](https://travis-ci.org/BigRoomStudios/strangeluv?branch=master)
+[![dependencies](https://david-dm.org/BigRoomStudios/strangeluv.svg)](https://david-dm.org/BigRoomStudios/strangeluv)
+[![devDependency Status](https://david-dm.org/BigRoomStudios/strangeluv/dev-status.svg)](https://david-dm.org/BigRoomStudios/strangeluv#info=devDependencies)
+
 Here you find a fork of [this](https://github.com/davezuko/react-redux-starter-kit) React/Redux starter kit.  We've made it our own.  You'll find React, Redux, and a dope Webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, etc.  Ships with a hapi server and plugin for arbitrarily siiick deployments.  We'll tell you where to put files and make things easy whenever possible.
 
 ## Table of Contents
