@@ -5,7 +5,7 @@ const Classes = require('./styles.scss');
 module.exports = () => (
 
     <div>
-        <h1>React Redux Starter Kit</h1>
+        <h1>Strangeluv</h1>
         <Router.IndexLink to='/' activeClassName={Classes.activeRoute}>
             Home
         </Router.IndexLink>
