@@ -14,6 +14,4 @@ script:
   - npm run lint
   - npm run test
   - NODE_ENV=dev npm run deploy
-  - NODE_ENV=staging npm run deploy
   - NODE_ENV=production npm run deploy
-
