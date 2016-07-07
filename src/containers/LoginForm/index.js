@@ -2,6 +2,9 @@ const Connect = require('react-redux').connect;
 const LoginActions = require('actions/login');
 const LoginForm = require('components/LoginForm');
 
+const StrangeAuth = require('strange-auth');
+const AuthActions = require('../../actions/auth');
+
 const internals = {
     modelProp: (x) => {
 
@@ -16,10 +19,14 @@ internals.connect = Connect(
         // Successfully submitted?
         submitted: state.login.form.submitted,
         // Build name of a particular model property– the component should not know about the model
-        modelProp: internals.modelProp
+        modelProp: internals.modelProp,
+        // Auth
+        isLoggedIn: state.auth.isAuthenticated,
+        isLoginPending: (state.auth.status === StrangeAuth.statuses.WAITING)
     }),
     {
-        submit: LoginActions.submit
+        login: LoginActions.login,
+        logout: LoginActions.logout
     }
 );
 
