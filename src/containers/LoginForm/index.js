@@ -1,6 +1,6 @@
 const Connect = require('react-redux').connect;
-const LoginActions = require('actions/login');
 const LoginForm = require('components/LoginForm');
+const FormActions = require('react-redux-form').actions;
 
 const StrangeAuth = require('strange-auth');
 const AuthActions = require('../../actions/auth');
@@ -22,11 +22,12 @@ internals.connect = Connect(
         modelProp: internals.modelProp,
         // Auth
         isLoggedIn: state.auth.isAuthenticated,
-        isLoginPending: (state.auth.status === StrangeAuth.statuses.WAITING)
+        isLoginPending: (state.auth.status === StrangeAuth.statuses.WAITING),
+        authInfo: state.auth
     }),
     {
-        login: LoginActions.login,
-        logout: LoginActions.logout
+        authLogin: AuthActions.login,
+        authLogout: AuthActions.logout,
     }
 );
 

@@ -10,33 +10,42 @@ const mockServerData = {
 }
 
 module.exports = StrangeAuth.makeActions({
-    // Implement login
-    login: (username, password, cb) => {
-
-        // A real login (using npm axios library) might start with:
-        // axios.post('/login', { username: username, password: password })
-        Promise.resolve()
-        .then(res => {
-            if( username === 'user' && password === 'password' ) {
+    
+    login: (loginCreds, cb) => {
+        
+        // Simulate some latency here
+        setTimeout(() => {
+            // A real login (using npm axios library) might start with:
+            // axios.post('/login', { username: username, password: password })
+            Promise.resolve({})
+            .then(res => {
+                
+                if( loginCreds.username !== 'user' || loginCreds.password !== 'password' ) {
+                    res.error = new Error('Ya blew it!');
+                }
+                
+                if(res.error) {
+                    return cb(res.error);
+                }
                 
                 res = mockServerData;
-                cb(null, {
-                    credentials: res.jwt,
-                    artifacts: res.userInfo
-                });
-            } else {
                 
-                res = new Error('Ya blew it!');
-                cb(res);
-            }
-        })
+                cb(null, {
+                    credentials: {
+                        jwt: res.jwt,
+                        user: res.userInfo
+                    },
+                    artifacts: {}
+                });
+            })
+        
+        }, 1000);
     },
     
     logout: (cb) => {
-
-        // ex:
+        console.log("HELLO!!")
         // axios.get('/logout')
-        Promise.resolve(mockServerData)
+        Promise.resolve({})
         .then(res => {
             cb(null, true);
         })
