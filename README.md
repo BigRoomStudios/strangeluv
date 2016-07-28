@@ -123,6 +123,7 @@ We use `react-router` [route definitions](https://github.com/reactjs/react-route
 
 ### Recipes
  - Incorporating forms using [react-redux-form](https://github.com/davidkpiano/react-redux-form) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-forms)]
+ - Implementing auth for login / logout using [strange-auth](https://github.com/BigRoomStudios/strange-auth) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-forms-auth)]
  - Deployment alongside the [hapi boilerplate](https://github.com/devinivy/boilerplate-api) [[here](https://github.com/devinivy/boilerplate-api/compare/recipe-strangeluv)]
 
 ## Testing
