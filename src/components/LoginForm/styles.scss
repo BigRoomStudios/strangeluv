@@ -3,3 +3,24 @@
   text-align: left;
   display: inline-block;
 }
+
+.emphasized {
+  color: #bc3557;
+  background: #f7f7f9;
+  padding: 4px 6px;
+  border-radius: 3px;
+  border: solid 1px #e1e1e7;
+}
+
+.auth-note {
+  margin-top: 20px;
+}
+
+.auth-button {
+  margin-top: 12px; 
+}
+
+.error {
+  color: red;
+  margin-top: 5px;
+}

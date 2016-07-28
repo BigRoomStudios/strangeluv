@@ -1,6 +1,5 @@
 const Connect = require('react-redux').connect;
 const LoginForm = require('components/LoginForm');
-const FormActions = require('react-redux-form').actions;
 
 const StrangeAuth = require('strange-auth');
 const AuthActions = require('../../actions/auth');
@@ -10,6 +9,14 @@ const internals = {
 
         return x ? `login.vals.${x}` : 'login.vals';
     }
+};
+
+const logout = () => {
+
+    return (dispatch) => {
+
+        dispatch(AuthActions.logout());
+    };
 };
 
 internals.connect = Connect(
@@ -27,7 +34,7 @@ internals.connect = Connect(
     }),
     {
         authLogin: AuthActions.login,
-        authLogout: AuthActions.logout,
+        authLogout: logout
     }
 );
 
