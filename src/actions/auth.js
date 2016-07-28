@@ -1,8 +1,16 @@
 
+const Push = require('react-router-redux').push;
 const StrangeAuth = require('strange-auth');
 
+
+const internals = {};
+
+
+//////////////////////////////////////////
+///////// Represents Server Side /////////
+//////////////////////////////////////////
 // Thrown together random string generator
-const genRandString = () => {
+internals.genRandString = () => {
 
     const genSection = () => {
 
@@ -14,11 +22,11 @@ const genRandString = () => {
     return genSection() + '.' + genSection() + '.' + genSection() + '.';
 };
 
-// Create some mockServerData that changes it's jwt every time a user logs in
-const mockServerData = () => {
+// Create some mock server data that changes it's jwt every time a user logs in
+internals.genMockServerData = () => {
 
     return {
-        jwt: genRandString(),
+        jwt: internals.genRandString(),
         userInfo: {
             name: 'Bruce',
             otherName: 'Batman',
@@ -26,58 +34,76 @@ const mockServerData = () => {
         }
     };
 };
-
-module.exports = exports = StrangeAuth.makeActions({
-
-    login: (loginCreds, cb) => {
-
-        // Simulate some latency here
-        setTimeout(() => {
-            // A real login (using npm axios library) might start with:
-            // axios.post('/login', { username: username, password: password })
-            Promise.resolve({})
-            .then((res) => {
-
-                //////////
-                // This block represents a server login check
-                if (loginCreds.username !== 'user' || loginCreds.password !== 'password') {
-                    res.error = new Error('Ya blew it!');
-                }
-                res.loginResult = mockServerData();
-                //////////
+//////////////////////////////////////////
 
 
-                if (res.error) {
-                    return cb(res.error);
-                }
+exports.login = (loginCreds) => {
 
-                cb(null, {
-                    credentials: {
-                        jwt: res.loginResult.jwt,
-                        user: res.loginResult.userInfo
-                    },
-                    artifacts: {}
-                });
-            });
-        }, 1000);
+    return (dispatch) => {
+
+        dispatch(internals.strangeActions.login(loginCreds)).then((res) => {
+
+            // You'll probably want to change the page after login
+            // dispatch(Push('/dashboard'));
+        })
+        .catch((err) => {
+
+            console.log(err);
+        });
+    };
+};
+
+exports.logout = () => {
+
+    return (dispatch) => {
+
+        dispatch(internals.strangeActions.logout()).then((res) => {
+
+            // You'll probably want to change the page after logout
+            // dispatch(Push('/'));
+        })
+        .catch((err) => {
+
+            console.log(err);
+        });
+    };
+};
+
+
+internals.strangeActions = StrangeAuth.makeActions({
+
+    login: (loginCreds) => {
+
+        // A real login (using npm axios library) might start with:
+        // axios.post('/login', { username: username, password: password })
+
+        const serverResponse  = {};
+
+        if (loginCreds.username !== 'user' || loginCreds.password !== 'password') {
+            serverResponse.error = new Error('Incorrect username or password');
+            return Promise.reject(serverResponse);
+        }
+        serverResponse.loginResult = internals.genMockServerData();
+
+
+        return Promise.resolve(serverResponse)
+        .then((res) => {
+
+            return {
+                credentials: {
+                    jwt: res.loginResult.jwt,
+                    user: res.loginResult.userInfo
+                },
+                artifacts: {}
+            };
+        });
     },
 
-    logout: (cb) => {
+    logout: () => {
 
-        // Simulate some latency here
-        setTimeout(() => {
-
-            // axios.get('/logout')
-            Promise.resolve({ success: true })
-            .then((res) => {
-
-                if (res.success === true) {
-                    cb(null);
-                }
-                else {
-                    cb(new Error('Logout failed'));
-                }
-            });
-        }, 1000);
+        // A real logout (using npm axios library) might start with:
+        // axios.get('/logout')
+        return Promise.resolve({ success: true });
     }
 });
+

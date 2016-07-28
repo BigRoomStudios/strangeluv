@@ -11,14 +11,6 @@ const internals = {
     }
 };
 
-const logout = () => {
-
-    return (dispatch) => {
-
-        dispatch(AuthActions.logout());
-    };
-};
-
 internals.connect = Connect(
     (state) => ({
         // State of the form fields
@@ -34,7 +26,7 @@ internals.connect = Connect(
     }),
     {
         authLogin: AuthActions.login,
-        authLogout: logout
+        authLogout: AuthActions.logout
     }
 );
 
