@@ -6,11 +6,11 @@ module.exports = () => (
 
     <div>
         <h1>Strangeluv</h1>
-        <Router.IndexLink to='/' activeClassName={Classes.activeRoute}>
+        <Router.IndexLink to="/" activeClassName={Classes.activeRoute}>
             Home
         </Router.IndexLink>
         {' · '}
-        <Router.Link to='/counter' activeClassName={Classes.activeRoute}>
+        <Router.Link to="/counter" activeClassName={Classes.activeRoute}>
             Counter
         </Router.Link>
     </div>

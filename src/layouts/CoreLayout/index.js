@@ -7,7 +7,7 @@ require('../../styles/core.scss');
 
 const CoreLayout = ({ children }) => (
 
-    <div className='container text-center'>
+    <div className="container text-center">
         <Header />
         <div className={Classes.mainContainer}>
             {children}
