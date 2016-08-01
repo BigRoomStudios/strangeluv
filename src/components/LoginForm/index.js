@@ -96,7 +96,7 @@ const LoginForm = (props) => {
 
                     <div>JSON Web Token: {authInfo.credentials.jwt}</div>
 
-                    {/* Translate an object into template like so: */}
+                    {/* Translate an object into a template like so: */}
                     {Object.keys(userInfo).map((key) => {
 
                         return <div key={key}>
@@ -107,7 +107,7 @@ const LoginForm = (props) => {
                 <br />
                 <div>login artifacts:</div>
                 <div>
-                    {/* Translate an object into template like so: */}
+                    {/* Translate an object into a template like so: */}
                     {Object.keys(authInfo.artifacts).map((key) => {
 
                         return <div key={key}>
