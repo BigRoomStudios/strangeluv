@@ -137,7 +137,7 @@
     "eslint-config-standard-react": "^3.0.0",
     "eslint-plugin-babel": "^3.2.0",
     "eslint-plugin-hapi": "^4.0.0",
-    "eslint-plugin-react": "^5.0.0",
+    "eslint-plugin-react": "^6.0.0",
     "isparta-loader": "^2.0.0",
     "karma": "^1.0.0",
     "karma-coverage": "^1.0.0",
