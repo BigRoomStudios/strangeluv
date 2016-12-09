@@ -79,7 +79,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-cli": "^6.5.1",
-    "babel-core": "^6.3.17",
+    "babel-core": "^6.20.0",
     "babel-loader": "^6.2.0",
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-polyfill": "^6.9.0",
