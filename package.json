@@ -97,7 +97,7 @@
     "file-loader": "^0.9.0",
     "fs-extra": "^0.30.0",
     "hapi": "^14.0.0",
-    "history": "^2.0.0",
+    "history": "^4.4.1",
     "html-webpack-plugin": "^2.7.1",
     "imports-loader": "^0.6.5",
     "inert": "^4.0.0",
