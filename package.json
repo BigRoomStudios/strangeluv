@@ -103,7 +103,7 @@
     "inert": "^4.0.0",
     "json-loader": "^0.5.4",
     "keymirror": "^0.1.1",
-    "labbable": "^1.1.0",
+    "labbable": "^2.1.0",
     "node-sass": "^4.4.0",
     "normalize.css": "^4.1.1",
     "postcss-loader": "^1.2.1",
