@@ -131,7 +131,7 @@
     "chai-enzyme": "^0.5.0",
     "cheerio": "^0.22.0",
     "codecov": "^1.0.1",
-    "enzyme": "^2.0.0",
+    "enzyme": "^2.5.0",
     "eslint": "^3.1.1",
     "eslint-config-hapi": "^10.0.0",
     "eslint-config-standard-react": "^3.0.0",
