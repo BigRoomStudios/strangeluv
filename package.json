@@ -106,7 +106,7 @@
     "labbable": "^1.1.0",
     "node-sass": "^4.4.0",
     "normalize.css": "^4.1.1",
-    "postcss-loader": "^0.13.0",
+    "postcss-loader": "^1.2.1",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-redux": "^4.0.0",
