@@ -105,7 +105,7 @@
     "keymirror": "^0.1.1",
     "labbable": "^1.1.0",
     "node-sass": "^4.4.0",
-    "normalize.css": "^4.1.1",
+    "normalize.css": "^5.0.0",
     "postcss-loader": "^1.2.1",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
