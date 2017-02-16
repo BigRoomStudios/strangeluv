@@ -120,7 +120,7 @@
     "strangeluv-core": "^1.1.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
-    "webpack": "^1.12.14",
+    "webpack": "^2.2.1",
     "webpack-hot-middleware": "^2.11.0",
     "yargs": "^5.0.0"
   },
