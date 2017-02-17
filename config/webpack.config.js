@@ -21,8 +21,7 @@ const webpackConfig = module.exports = {
     resolveLoader: {
         fallback: paths.base('node_modules')
     },
-    module: {},
-    postcss: {}
+    module: {}
 };
 
 // ------------------------------------
