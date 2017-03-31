@@ -94,7 +94,7 @@
     "cssnano": "^3.8.2",
     "debug": "^2.4.0",
     "extract-text-webpack-plugin": "^1.0.0",
-    "file-loader": "^0.10.0",
+    "file-loader": "^0.11.0",
     "fs-extra": "^2.0.0",
     "hapi": "^14.0.0",
     "history": "^2.0.0",
