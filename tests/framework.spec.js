@@ -7,8 +7,8 @@ class Fixture extends React.Component {
 
         return (
             <div>
-                <input id="checked" defaultChecked />
-                <input id="not" defaultChecked={false} />
+                <input id='checked' defaultChecked />
+                <input id='not' defaultChecked={false} />
             </div>
         );
     }

@@ -72,9 +72,9 @@ webpackConfig.plugins = [
 if (__DEV__) {
     Debug('Enable plugins for live development (HMR, NoErrors).');
     webpackConfig.plugins.push(
-    new Webpack.HotModuleReplacementPlugin(),
-    new Webpack.NoErrorsPlugin()
-  );
+        new Webpack.HotModuleReplacementPlugin(),
+        new Webpack.NoEmitOnErrorsPlugin()
+    );
 }
 else if (__PROD__) {
     Debug('Enable plugins for production (LoaderOptionsPlugin minimize, UglifyJS).');
@@ -161,7 +161,7 @@ const postCssOptions = {
 
 const sassOptions = {
     sourceMap: true,
-    includePaths: paths.client('styles')
+    includePaths: [paths.client('styles')]
 };
 
 

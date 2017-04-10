@@ -23,19 +23,11 @@ const karmaConfig = {
     },
     browsers: ['PhantomJS'],
     webpack: {
+        entry: WebpackConfig.entry,
         devtool: 'cheap-module-source-map',
-        resolve: {
-            ...WebpackConfig.resolve,
-            alias: {
-                ...WebpackConfig.resolve.alias,
-                sinon: 'sinon/pkg/sinon.js'
-            }
-        },
+        resolve: WebpackConfig.resolve,
         plugins: WebpackConfig.plugins,
         module: {
-            noParse: [
-                /\/sinon\.js/
-            ],
             rules: WebpackConfig.module.rules.concat([
                 {
                     test: /sinon(\\|\/)pkg(\\|\/)sinon\.js/,

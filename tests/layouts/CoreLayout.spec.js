@@ -23,7 +23,7 @@ describe('(Layout) Core', () => {
 
     beforeEach(() => {
 
-        _child = <h1 className="child">Child</h1>;
+        _child = <h1 className='child'>Child</h1>;
         _props = {
             children: _child
         };
