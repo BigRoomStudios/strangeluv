@@ -122,7 +122,7 @@
     "url-loader": "^0.5.6",
     "webpack": "^1.14.0",
     "webpack-hot-middleware": "^2.11.0",
-    "yargs": "^6.6.0"
+    "yargs": "^7.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
