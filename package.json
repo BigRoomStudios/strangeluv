@@ -109,7 +109,7 @@
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-redux": "^5.0.2",
-    "react-router": "^2.2.0",
+    "react-router": "^4.0.0",
     "react-router-redux": "^4.0.0",
     "redbox-react": "^1.2.2",
     "redux": "^3.0.0",
