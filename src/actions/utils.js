@@ -1,7 +1,7 @@
 const WebClient = require('../utils/web-client');
 const utils = {} = exports;
 
-utils.webRequest = (beginRequest, complete, requestError) => {
+utils.webRequest = (beginRequest, requestError, requestSuccess) => {
 
     return (method, url, data, cb) => {
 
@@ -37,7 +37,7 @@ utils.webRequest = (beginRequest, complete, requestError) => {
                 }
 
                 // Looks good!
-                dispatch(complete(response));
+                dispatch(requestSuccess(response));
             })
             .catch((err) => {
 
