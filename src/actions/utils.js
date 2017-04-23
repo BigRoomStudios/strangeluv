@@ -14,7 +14,7 @@ utils.webRequest = (beginRequest, complete, requestError) => {
         }
 
         // For get requests, data must be:
-        // `{ params: { userId: 1 } }`
+        // `{ params: { myParam: 1 } }`
 
         // For posts and methods that require a payload:
         // data is just the payload
