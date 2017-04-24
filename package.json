@@ -96,7 +96,7 @@
     "extract-text-webpack-plugin": "^2.0.0",
     "file-loader": "^0.11.0",
     "fs-extra": "^2.0.0",
-    "hapi": "^16.0.0",
+    "hapi": "^16.1.1",
     "history": "^2.0.0",
     "html-webpack-plugin": "^2.7.1",
     "imports-loader": "^0.7.1",
