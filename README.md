@@ -132,6 +132,8 @@ We use `react-router` [route definitions](https://github.com/reactjs/react-route
 )]
  - Incorporating server-side rendering (_very, very incomplete_) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-server-side
 )]
+ - Incorporating a 'webRequest loader' pattern using [axios](https://github.com/mzabriskie/axios) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-server-side
+)] -- This provides utilities to pass actions for in-flight, error, and success to be dispatched from a webRequest.
 
 ## Testing
 To add a unit test, simply create a `.spec.js` file anywhere in `tests/`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them. If you are using `redux-cli`, test files should automatically be generated when you create a component or redux module.
