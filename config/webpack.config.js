@@ -83,6 +83,7 @@ else if (__PROD__) {
             minimize: true
         }),
         new Webpack.optimize.UglifyJsPlugin({
+            sourceMap: !!Config.compiler_devtool,
             compress: {
                 unused: true,
                 dead_code: true,
