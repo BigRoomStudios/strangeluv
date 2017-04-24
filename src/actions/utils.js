@@ -1,5 +1,6 @@
 const WebClient = require('../utils/web-client');
-const utils = {} = exports;
+
+const utils = exports;
 
 utils.webRequest = (beginRequest, requestError, requestSuccess) => {
 
