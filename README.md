@@ -1,5 +1,7 @@
 # strangeluv
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/BigRoomStudios/strangeluv.svg)](https://greenkeeper.io/)
+
 > How I Learned to Stop Worrying and Love React
 
 [![Build Status](https://travis-ci.org/BigRoomStudios/strangeluv.svg?branch=master)](https://travis-ci.org/BigRoomStudios/strangeluv?branch=master)
