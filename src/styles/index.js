@@ -32,7 +32,7 @@ const BootStrapBtnDefault = exports.BootStrapBtnDefault = `
 module.exports = {
 
     CenteredContainer: styled.div`
-      text-align: center;
+        text-align: center;
     `,
     Button: styled.button`
         ${BootStrapBtn}
