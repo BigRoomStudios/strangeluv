@@ -1,31 +1,51 @@
+
 const React = require('react');
-const Classes = require('./styles.scss');
+const T = require('prop-types');
 
-const Counter = (props) => (
+// Styles
 
-    <div>
-        <h2 className={Classes.counterContainer}>
-            Counter:
-            {' '}
-            <span className={Classes['counter--green']}>
-                {props.counter}
-            </span>
-        </h2>
-        <button className='btn btn-default' onClick={props.increment}>
-            Increment
-        </button>
-        {' '}
-        <button className='btn btn-default' onClick={props.doubleAsync}>
-            Double (Async)
-        </button>
-    </div>
+const LStyles = require('./styles'); // local styles
 
-);
+const {
+    CounterContainer,
+    CounterText,
+    Button } = LStyles;
 
-Counter.propTypes = {
-    counter: React.PropTypes.number.isRequired,
-    doubleAsync: React.PropTypes.func.isRequired,
-    increment: React.PropTypes.func.isRequired
+// Component
+
+module.exports = class Counter extends React.PureComponent {
+
+    static propTypes = {
+        counter: T.number.isRequired,
+        doubleAsync: T.func.isRequired,
+        increment: T.func.isRequired
+    };
+
+    render() {
+
+        const {
+            counter,
+            increment,
+            doubleAsync } = this.props;
+
+        return (
+            <div>
+                <CounterContainer>
+                    Counter: {' '}
+                    <CounterText>{counter}</CounterText>
+                </CounterContainer>
+                <Button
+                    onClick={increment}
+                >
+                    Increment
+                </Button>
+                {' '}
+                <Button
+                    onClick={doubleAsync}
+                >
+                    Double (Async)
+                </Button>
+            </div>
+        );
+    };
 };
-
-module.exports = Counter;
