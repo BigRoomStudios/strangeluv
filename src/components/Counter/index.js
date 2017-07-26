@@ -4,12 +4,12 @@ const T = require('prop-types');
 
 // Styles
 
-const LStyles = require('./styles'); // local styles
+const lStyles = require('./styles'); // local styles
 
 const {
     CounterContainer,
     CounterText,
-    Button } = LStyles;
+    Button } = lStyles;
 
 // Component
 
