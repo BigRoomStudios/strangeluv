@@ -3,11 +3,11 @@ const Header = require('components/Header');
 
 // Styles
 
-const GStyles = require('styles'); // global styles
-const LStyles = require('./styles'); // local styles
+const gStyles = require('styles'); // global styles
+const lStyles = require('./styles'); // local styles
 
-const { CenteredContainer } = GStyles;
-const { MainContainer } = LStyles;
+const { CenteredContainer } = gStyles;
+const { MainContainer } = lStyles;
 
 // Component
 
