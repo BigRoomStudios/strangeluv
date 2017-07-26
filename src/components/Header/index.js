@@ -1,18 +1,31 @@
 const React = require('react');
-const Router = require('react-router');
 const Classes = require('./styles.scss');
+
+// Styles
+
+const lStyles = require('./styles'); // local styles
+const { StyledLink } = lStyles;
+
+// Component
 
 module.exports = () => (
 
     <div>
         <h1>Strangeluv</h1>
-        <Router.IndexLink to='/' activeClassName={Classes.activeRoute}>
+        <StyledLink
+            to='/'
+            activeClassName={Classes.activeRoute}
+        >
             Home
-        </Router.IndexLink>
+        </StyledLink>
         {' · '}
-        <Router.Link to='/counter' activeClassName={Classes.activeRoute}>
+        <StyledLink
+            to='/counter'
+            color='orange' // Go have a look at StyledLink in lStyles
+            activeClassName={Classes.activeRoute}
+        >
             Counter
-        </Router.Link>
+        </StyledLink>
     </div>
 
 );

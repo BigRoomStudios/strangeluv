@@ -1,14 +1,19 @@
 const React = require('react');
 const DuckImage = require('../assets/duck.jpg');
-const Classes = require('./HomeView.scss');
+
+// Styles
+
+const lStyles = require('./styles'); // local styles
+const { Duck } = lStyles;
+
+// Component
 
 module.exports = () => (
 
     <div>
         <h4>Welcome!</h4>
-        <img
+        <Duck
             alt='This is a duck, because Redux!'
-            className={Classes.duck}
             src={DuckImage}
         />
     </div>

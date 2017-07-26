@@ -1,19 +1,24 @@
 const React = require('react');
-const Header = require('../../components/Header');
-const Classes = require('./styles.scss');
+const Header = require('components/Header');
 
-// Pull global styles
-require('../../styles/core.scss');
+// Styles
+
+const gStyles = require('styles'); // global styles
+const lStyles = require('./styles'); // local styles
+
+const { CenteredContainer } = gStyles;
+const { MainContainer } = lStyles;
+
+// Component
 
 const CoreLayout = ({ children }) => (
 
-    <div className='container text-center'>
+    <CenteredContainer>
         <Header />
-        <div className={Classes.mainContainer}>
+        <MainContainer>
             {children}
-        </div>
-    </div>
-
+        </MainContainer>
+    </CenteredContainer>
 );
 
 CoreLayout.propTypes = {
