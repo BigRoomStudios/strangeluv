@@ -3,8 +3,8 @@ const Classes = require('./styles.scss');
 
 // Styles
 
-const LStyles = require('./styles'); // local styles
-const { StyledLink } = LStyles;
+const lStyles = require('./styles'); // local styles
+const { StyledLink } = lStyles;
 
 // Component
 
