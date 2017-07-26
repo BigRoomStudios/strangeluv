@@ -3,8 +3,8 @@ const DuckImage = require('../assets/duck.jpg');
 
 // Styles
 
-const LStyles = require('./styles'); // local styles
-const { Duck } = LStyles;
+const lStyles = require('./styles'); // local styles
+const { Duck } = lStyles;
 
 // Component
 
