@@ -21,7 +21,7 @@ module.exports = () => (
         {' · '}
         <StyledLink
             to='/counter'
-            color='orange' // Go have a look at StyledLink in LStyles
+            color='orange' // Go have a look at StyledLink in lStyles
             activeClassName={Classes.activeRoute}
         >
             Counter
