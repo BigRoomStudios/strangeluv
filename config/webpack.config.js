@@ -157,7 +157,7 @@ const postCssOptions = {
             safe: true,
             sourcemap: true
         })
-    ]
+    ], sourceMap: true
 };
 
 const sassOptions = {
