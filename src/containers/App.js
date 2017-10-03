@@ -1,7 +1,12 @@
 const React = require('react');
-const Router = require('react-router').Router;
+const Router = require('react-router-dom').BrowserRouter;
+const Route = require('react-router-dom').Route;
+// removed history from router in v4
 const Provider = require('react-redux').Provider;
 
+const CoreLayout = require('../layouts/CoreLayout');
+
+const Switch = require('react-router-dom').Switch;
 module.exports = class App extends React.Component {
 
     static propTypes = {
@@ -18,7 +23,12 @@ module.exports = class App extends React.Component {
         return (
             <Provider store={store}>
                 <div style={{ height: '100%' }}>
-                    <Router history={history} children={routes} key={routerKey} />
+                    {/* <Router children={routes} key={routerKey} />
+                    
+                     */}
+                    <Router>
+                        <Route path="/" component={CoreLayout} />
+                    </Router>
                 </div>
             </Provider>
         );

@@ -97,7 +97,7 @@
     "file-loader": "^0.11.0",
     "fs-extra": "^3.0.1",
     "hapi": "^16.1.1",
-    "history": "^2.0.0",
+    "history": "^4.7.2",
     "html-webpack-plugin": "^2.7.1",
     "imports-loader": "^0.7.1",
     "inert": "^4.0.0",
@@ -109,8 +109,8 @@
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-redux": "^5.0.2",
-    "react-router": "^2.2.0",
-    "react-router-redux": "^4.0.0",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "5.0.0-alpha.6",
     "redbox-react": "^1.2.2",
     "redux": "^3.0.0",
     "redux-thunk": "^2.0.0",
@@ -122,7 +122,7 @@
     "webpack": "^2.0.0",
     "webpack-hot-middleware": "^2.11.0",
     "yargs": "^8.0.1"
-  },
+  }, 
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "chai": "^3.4.1",
