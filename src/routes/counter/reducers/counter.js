@@ -5,7 +5,7 @@ const internals = {
 };
 
 module.exports = (state, action) => {
-
+console.log('state, action', state, action);
     state = state || internals.initial;
 
     const type = action.type;
