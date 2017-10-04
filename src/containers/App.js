@@ -6,7 +6,6 @@ const Provider = require('react-redux').Provider;
 
 const CoreLayout = require('../layouts/CoreLayout');
 
-const Switch = require('react-router-dom').Switch;
 module.exports = class App extends React.Component {
 
     static propTypes = {
@@ -18,16 +17,13 @@ module.exports = class App extends React.Component {
 
     render() {
 
-        const { history, routes, routerKey, store } = this.props;
+        const { routes, store } = this.props;
 
         return (
             <Provider store={store}>
                 <div style={{ height: '100%' }}>
-                    {/* <Router children={routes} key={routerKey} />
-                    
-                     */}
                     <Router>
-                        <Route path="/" component={CoreLayout} />
+                        <Route path='/' component={CoreLayout} />
                     </Router>
                 </div>
             </Provider>

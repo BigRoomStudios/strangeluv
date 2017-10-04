@@ -18,8 +18,8 @@ const CoreLayout = () => (
         <Header />
         <div className={Classes.mainContainer}>
             <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/counter" component={CounterRoute} />
+                <Route exact path='/' component={Home} />
+                <Route exact path='/counter' component={CounterRoute} />
             </Switch>
         </div>
     </div>
