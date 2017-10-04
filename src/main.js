@@ -1,22 +1,12 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const SyncHistoryWithStore = require('react-router-redux').syncHistoryWithStore;
 const CreateStore = require('./wiring/create-store');
-const History = require('history/createBrowserHistory');
-//const History = require('./wiring/history');
 const AppContainer = require('./containers/App');
 
 // Create redux store and sync history with react-router-redux
 
 const initialState = window.__INITIAL_STATE__;
 const store = CreateStore(initialState);
-/*
-const enhancedHistory = SyncHistoryWithStore(History, store, {
-    selectLocationState: (state) => state.router
-});
-*/
-const createHistory = require('history').createBrowserHistory;
-const history = createHistory();
 
 // Developer Tools Setup
 
@@ -30,18 +20,10 @@ if (__DEBUG__) {
 
 const MOUNT_NODE = document.getElementById('root');
 
-let render = (routerKey) => {
-
-    routerKey = routerKey || null;
-    const routes = require('./routes')(store);
+let render = () => {
 
     ReactDOM.render(
-        <AppContainer
-            store={store}
-            history={history}
-            routes={routes}
-            routerKey={routerKey}
-        />,
+        <AppContainer store={store} />,
         MOUNT_NODE
     );
 };
