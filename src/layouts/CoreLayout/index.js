@@ -23,7 +23,6 @@ const CoreLayout = () => (
             </Switch>
         </div>
     </div>
-
 );
 module.exports = CoreLayout;
 {/*
@@ -31,5 +30,3 @@ CoreLayout.propTypes = {
     children: React.PropTypes.element.isRequired
 };
 */}
-
-
