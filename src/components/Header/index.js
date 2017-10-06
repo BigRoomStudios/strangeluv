@@ -1,6 +1,5 @@
 const React = require('react');
 const NavLink = require('react-router-dom').NavLink;
-const Link = require('react-router-dom').Link;
 const Classes = require('./styles.scss');
 
 module.exports = () => (

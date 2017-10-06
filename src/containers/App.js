@@ -14,11 +14,11 @@ module.exports = class App extends React.Component {
 
         const { store, routes, history } = this.props;
         const pathName = history.location.pathname;
-        
+
         let LayoutComponent;
         let RouteComponent;
         for (let i = 0; i < routes.length; ++i) {
-            if(routes[i].path === pathName){
+            if (routes[i].path === pathName){
                 LayoutComponent = routes[i].layout;
                 RouteComponent = routes[i].component.component;
             }

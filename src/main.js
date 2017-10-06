@@ -21,10 +21,9 @@ if (__DEBUG__) {
 // Render Setup
 
 const MOUNT_NODE = document.getElementById('root');
+const Routes = require('./routes')(store);
 
 let render = () => {
-
-    const Routes = require('./routes')(store);
 
     ReactDOM.render(
 
