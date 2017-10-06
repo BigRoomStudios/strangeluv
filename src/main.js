@@ -23,19 +23,25 @@ if (__DEBUG__) {
 const MOUNT_NODE = document.getElementById('root');
 
 let render = () => {
-  
+
     const Routes = require('./routes')(store);
 
     ReactDOM.render(
 
-       <AppContainer 
-        store={store} 
-        routes={Routes}
-        history={History}
-      />,
+        <AppContainer
+            store={store}
+            routes={Routes}
+            history={History}
+        />,
         MOUNT_NODE
     );
 };
+
+// when history changes, reload AppContainer
+History.listen((location, action) => {
+  
+    render();
+});
 
 // Enable HMR and catch runtime errors in RedBox
 // This code is excluded from production bundle
