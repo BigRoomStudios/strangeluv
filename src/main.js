@@ -39,7 +39,7 @@ let render = () => {
 
 // when history changes, reload AppContainer
 History.listen((location, action) => {
-  
+
     render();
 });
 
