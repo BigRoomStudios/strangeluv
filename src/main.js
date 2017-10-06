@@ -2,6 +2,8 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const CreateStore = require('./wiring/create-store');
 const AppContainer = require('./containers/App');
+const createHistory = require('history').createBrowserHistory;
+const History = createHistory();
 
 // Create redux store and sync history with react-router-redux
 
@@ -21,9 +23,16 @@ if (__DEBUG__) {
 const MOUNT_NODE = document.getElementById('root');
 
 let render = () => {
+  
+    const Routes = require('./routes')(store);
 
     ReactDOM.render(
-        <AppContainer store={store} />,
+
+       <AppContainer 
+        store={store} 
+        routes={Routes}
+        history={History}
+      />,
         MOUNT_NODE
     );
 };

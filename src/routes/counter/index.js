@@ -1,4 +1,9 @@
-module.exports = (store) => ({
+const Counter = require('./containers/Counter');
 
-    path: 'counter'
-});
+// Sync route definition
+
+module.exports = {
+
+    path: '/counter',
+    component: Counter
+};
