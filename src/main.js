@@ -1,9 +1,8 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const CreateStore = require('./wiring/create-store');
+const History = require('./wiring/history');
 const AppContainer = require('./containers/App');
-const createHistory = require('history').createBrowserHistory;
-const History = createHistory();
 
 // Create redux store and sync history with react-router-redux
 

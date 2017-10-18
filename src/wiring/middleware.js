@@ -1,8 +1,7 @@
 const Thunk = require('redux-thunk').default;
 const RouterMiddleware = require('react-router-redux').routerMiddleware;
 
-const createHistory = require('history').createBrowserHistory;
-const History = createHistory();
+const History = require('./history');
 
 module.exports = [
     Thunk,
