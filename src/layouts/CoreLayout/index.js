@@ -1,4 +1,5 @@
 const React = require('react');
+const PropTypes = require('prop-types');
 const Header = require('../../components/Header');
 const Classes = require('./styles.scss');
 
@@ -17,7 +18,7 @@ const CoreLayout = ({ children }) => (
 );
 
 CoreLayout.propTypes = {
-    children: React.PropTypes.element.isRequired
+    children: PropTypes.element.isRequired
 };
 
 module.exports = CoreLayout;
