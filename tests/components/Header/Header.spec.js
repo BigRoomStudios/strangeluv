@@ -1,7 +1,7 @@
 const React = require('react');
 const Header = require('components/Header');
 const Classes = require('components/Header/styles.scss');
-const ReactRouter = require('react-router');
+const ReactRouter = require('react-router-dom');
 const Enzyme = require('enzyme');
 
 describe('(Component) Header', () => {

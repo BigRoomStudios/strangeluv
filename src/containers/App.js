@@ -1,28 +1,37 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const Router = require('react-router').Router;
+const Router = require('react-router-dom').Router;
 const Provider = require('react-redux').Provider;
 
 module.exports = class App extends React.Component {
 
     static propTypes = {
-        history: PropTypes.object.isRequired,
-        routes: PropTypes.object.isRequired,
-        routerKey: PropTypes.number,
-        store: PropTypes.object.isRequired
+        store: PropTypes.object.isRequired,
+        routes: PropTypes.array,
+        history: PropTypes.object.isRequired
     }
 
     render() {
 
-        const { history, routes, routerKey, store } = this.props;
+        const { store, routes, history } = this.props;
+        const pathName = history.location.pathname;
 
+        let LayoutComponent;
+        let RouteComponent;
+        for (let i = 0; i < routes.length; ++i) {
+            if (routes[i].path === pathName){
+                LayoutComponent = routes[i].layout;
+                RouteComponent = routes[i].component.component;
+            }
+        }
         return (
             <Provider store={store}>
                 <div style={{ height: '100%' }}>
-                    <Router history={history} children={routes} key={routerKey} />
+                    <Router history={history}>
+                        <LayoutComponent children={<RouteComponent store={store} />} />
+                    </Router>
                 </div>
             </Provider>
         );
     }
-
 };

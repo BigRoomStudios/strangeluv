@@ -1,4 +1,4 @@
-const CounterTypes = require('../action-types/counter');
+const CounterTypes = require('action-types/counter');
 
 const internals = {
     initial: 0

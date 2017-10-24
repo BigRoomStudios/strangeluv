@@ -1,6 +1,5 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const SyncHistoryWithStore = require('react-router-redux').syncHistoryWithStore;
 const CreateStore = require('./wiring/create-store');
 const History = require('./wiring/history');
 const AppContainer = require('./containers/App');
@@ -9,9 +8,6 @@ const AppContainer = require('./containers/App');
 
 const initialState = window.__INITIAL_STATE__;
 const store = CreateStore(initialState);
-const enhancedHistory = SyncHistoryWithStore(History, store, {
-    selectLocationState: (state) => state.router
-});
 
 // Developer Tools Setup
 
@@ -24,22 +20,26 @@ if (__DEBUG__) {
 // Render Setup
 
 const MOUNT_NODE = document.getElementById('root');
+const Routes = require('./routes')(store);
 
-let render = (routerKey) => {
-
-    routerKey = routerKey || null;
-    const routes = require('./routes')(store);
+let render = () => {
 
     ReactDOM.render(
+
         <AppContainer
             store={store}
-            history={enhancedHistory}
-            routes={routes}
-            routerKey={routerKey}
+            routes={Routes}
+            history={History}
         />,
         MOUNT_NODE
     );
 };
+
+// when history changes, reload AppContainer
+History.listen((location, action) => {
+
+    render();
+});
 
 // Enable HMR and catch runtime errors in RedBox
 // This code is excluded from production bundle

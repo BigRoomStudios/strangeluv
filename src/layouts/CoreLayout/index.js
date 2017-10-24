@@ -14,7 +14,6 @@ const CoreLayout = ({ children }) => (
             {children}
         </div>
     </div>
-
 );
 
 CoreLayout.propTypes = {

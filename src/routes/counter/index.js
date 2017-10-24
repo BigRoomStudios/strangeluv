@@ -1,20 +1,9 @@
-const Reducers = require('wiring/reducers');
+const Counter = require('./containers/Counter');
 
-module.exports = (store) => ({
-    path: 'counter',
-    getComponent(location, cb) { // async
+// Sync route definition
 
-        // code-split-point (laziness)
-        require.ensure([], (require) => {
+module.exports = {
 
-            const Counter = require('./containers/Counter');
-            const reducer = require('./reducers/counter');
-
-            // add reducer late
-            Reducers.inject(store, { key: 'counter', reducer });
-
-            cb(null, Counter);
-        },
-        'counter'); // webpack name
-    }
-});
+    path: '/counter',
+    component: Counter
+};
