@@ -1,5 +1,5 @@
 const React = require('react');
-const PropTypes = require('prop-types');
+const T = require('prop-types');
 const Classes = require('./styles.scss');
 
 const Counter = (props) => (
@@ -24,9 +24,9 @@ const Counter = (props) => (
 );
 
 Counter.propTypes = {
-    counter: PropTypes.number.isRequired,
-    doubleAsync: PropTypes.func.isRequired,
-    increment: PropTypes.func.isRequired
+    counter: T.number.isRequired,
+    doubleAsync: T.func.isRequired,
+    increment: T.func.isRequired
 };
 
 module.exports = Counter;

@@ -1,14 +1,14 @@
 const React = require('react');
-const PropTypes = require('prop-types');
+const T = require('prop-types');
 const Router = require('react-router-dom').Router;
 const Provider = require('react-redux').Provider;
 
 module.exports = class App extends React.Component {
 
     static propTypes = {
-        store: PropTypes.object.isRequired,
-        routes: PropTypes.array,
-        history: PropTypes.object.isRequired
+        store: T.object.isRequired,
+        routes: T.array,
+        history: T.object.isRequired
     }
 
     render() {
