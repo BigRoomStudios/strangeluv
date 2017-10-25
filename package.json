@@ -78,6 +78,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.17.0",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.20.0",
     "babel-loader": "^7.0.0",
@@ -117,6 +118,7 @@
     "redux-thunk": "^2.0.0",
     "rimraf": "^2.5.1",
     "sass-loader": "^6.0.3",
+    "strange-auth": "^1.0.0",
     "strangeluv-core": "^1.2.0",
     "style-loader": "^0.18.1",
     "url-loader": "^0.5.6",
