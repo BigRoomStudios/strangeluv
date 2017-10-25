@@ -13,6 +13,10 @@ module.exports = () => (
         <NavLink to='/counter' activeClassName={Classes.activeRoute}>
             Counter
         </NavLink>
+        {' · '}
+        <NavLink to='/login' activeClassName={Classes.activeRoute}>
+            Login
+        </NavLink>
     </div>
 
 );

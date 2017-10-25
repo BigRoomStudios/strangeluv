@@ -2,6 +2,7 @@
 const CoreLayout = require('../layouts/CoreLayout');
 const Home = require('./home');
 const CounterRoute = require('./counter');
+const LoginRoute = require('./login');
 
 // Create routes
 module.exports = () => {
@@ -16,6 +17,11 @@ module.exports = () => {
             path: '/counter',
             layout: CoreLayout,
             component: CounterRoute
+        },
+        {
+            path: '/login',
+            layout: CoreLayout,
+            component: LoginRoute
         }
     ];
 
