@@ -3,6 +3,9 @@ const CoreLayout = require('../layouts/CoreLayout');
 const Home = require('./home');
 const CounterRoute = require('./counter');
 const LoginRoute = require('./login');
+const DashboardRoute = require('./dashboard');
+const withRouter = require('react-router').withRouter;
+const Authenticate = require('./auth');
 
 // Create routes
 module.exports = () => {
@@ -22,6 +25,11 @@ module.exports = () => {
             path: '/login',
             layout: CoreLayout,
             component: LoginRoute
+        },
+        {
+            path: '/dashboard',
+            layout: withRouter(Authenticate(CoreLayout)),
+            component: DashboardRoute
         }
     ];
 
