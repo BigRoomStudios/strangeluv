@@ -20,7 +20,6 @@ if (__DEBUG__) {
 // Render Setup
 
 const MOUNT_NODE = document.getElementById('root');
-const Routes = require('./routes')(store);
 
 let render = () => {
 
@@ -28,18 +27,11 @@ let render = () => {
 
         <AppContainer
             store={store}
-            routes={Routes}
             history={History}
         />,
         MOUNT_NODE
     );
 };
-
-// when history changes, reload AppContainer
-History.listen((location, action) => {
-
-    render();
-});
 
 // Enable HMR and catch runtime errors in RedBox
 // This code is excluded from production bundle
@@ -64,7 +56,7 @@ if (__DEV__ && module.hot) {
         }
     };
 
-    module.hot.accept(['./routes/index'], () => render());
+    // module.hot.accept(['./routes/index'], () => render());
 }
 
 // Go!
