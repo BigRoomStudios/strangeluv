@@ -1,5 +1,5 @@
 const React = require('react');
-const PropTypes = require('prop-types');
+const T = require('prop-types');
 const Router = require('react-router-dom').Router;
 const Route = require('react-router-dom').Route;
 const Switch = require('react-router-dom').Switch;
@@ -10,8 +10,8 @@ const CoreLayout = require('layouts/CoreLayout');
 module.exports = class App extends React.Component {
 
     static propTypes = {
-        store: React.PropTypes.object.isRequired,
-        history: React.PropTypes.object.isRequired
+        store: T.object.isRequired,
+        history: T.object.isRequired
     }
 
     render() {
