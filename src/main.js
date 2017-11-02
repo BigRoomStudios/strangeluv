@@ -59,7 +59,7 @@ if (__DEV__ && module.hot) {
         }
     };
 
-    // module.hot.accept(['./routes/index'], () => render());
+    module.hot.accept(['./routes/index'], () => render());
 }
 
 // Go!
