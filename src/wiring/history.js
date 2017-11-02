@@ -1,6 +1,4 @@
-const CreateBrowserHistory = require('history/lib/createBrowserHistory');
-const UseRouterHistory = require('react-router').useRouterHistory;
+const createHistory = require('history').createBrowserHistory;
+const History = createHistory();
 
-module.exports = UseRouterHistory(CreateBrowserHistory)({
-    basename: __BASENAME__
-});
+module.exports = History;

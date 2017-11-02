@@ -4,6 +4,8 @@ module.exports = (store) => ({
     path: 'counter',
     getComponent(location, cb) { // async
 
+        console.warn('OSDKFIOJSDIFJISDJFISDJF');
+
         // code-split-point (laziness)
         require.ensure([], (require) => {
 
