@@ -1,34 +1,27 @@
 const React = require('react');
-const PropTypes = require('prop-types');
-const Router = require('react-router-dom').Router;
-const Route = require('react-router-dom').Route;
-const Switch = require('react-router-dom').Switch;
-const Provider = require('react-redux').Provider;
+const T = require('prop-types');
 
-const CoreLayout = require('layouts/CoreLayout');
+const { Router: StrangeRouter } = require('routes/strange-router');
+const Provider = require('react-redux').Provider;
 
 module.exports = class App extends React.Component {
 
     static propTypes = {
-        store: React.PropTypes.object.isRequired,
-        history: React.PropTypes.object.isRequired
+        history: T.object.isRequired,
+        routes: T.array.isRequired,
+        store: T.object.isRequired
     }
 
     render() {
 
-        const { store, history } = this.props;
+        const { store, routes, history } = this.props;
 
         return (
             <Provider store={store}>
                 <div style={{ height: '100%' }}>
-                    <Router history={history}>
-                        <Switch>
-                            <Route path={'/'} render={() =>
-
-                                <CoreLayout />
-                            } />
-                        </Switch>
-                    </Router>
+                    <StrangeRouter
+                        history={history}
+                        routes={routes} />
                 </div>
             </Provider>
         );

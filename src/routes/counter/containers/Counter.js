@@ -1,6 +1,6 @@
 const Connect = require('react-redux').connect;
 const CounterAct = require('actions/counter');
-const Counter = require('components/Counter');
+const Counter = require('../components/Counter');
 
 const internals = {};
 

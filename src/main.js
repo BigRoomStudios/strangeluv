@@ -23,11 +23,14 @@ const MOUNT_NODE = document.getElementById('root');
 
 let render = () => {
 
+    const routes = require('./routes')(store);
+
     ReactDOM.render(
 
         <AppContainer
-            store={store}
             history={History}
+            routes={routes}
+            store={store}
         />,
         MOUNT_NODE
     );
