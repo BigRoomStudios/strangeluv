@@ -7,8 +7,8 @@ const CounterRoute = require('./counter');
 module.exports = (store) => ([{
     path: '/',
     component: CoreLayout,
-    indexRoute: Home,
     childRoutes: [
+        Home,
         CounterRoute(store)
     ]
 }]);

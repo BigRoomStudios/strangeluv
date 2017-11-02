@@ -27,11 +27,16 @@ exports.Router = class StrangeRouter extends React.PureComponent {
 
         const renderRouteRecursive = (route, i) => {
 
+            let path = route.path;
+            if (path[0] !== '/') {
+                path = `/${path}`;
+            }
+
             return (
                 <Route
                     exact={route.exact}
                     key={i}
-                    path={route.path}
+                    path={path}
                     strict={route.strict}
                     render={(props) => (
 
@@ -39,7 +44,9 @@ exports.Router = class StrangeRouter extends React.PureComponent {
                             {
                                 route.childRoutes &&
                                 route.childRoutes.length &&
-                                route.childRoutes.map(renderRouteRecursive)
+                                <Switch>
+                                    {route.childRoutes.map(renderRouteRecursive)}
+                                </Switch>
                             }
                         </route.component>
                     )}
