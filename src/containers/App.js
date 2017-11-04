@@ -1,7 +1,7 @@
 const React = require('react');
 const T = require('prop-types');
 
-const { Router: StrangeRouter } = require('routes/strange-router');
+const { Router: StrangeRouter } = require('strange-router');
 const Provider = require('react-redux').Provider;
 
 module.exports = class App extends React.Component {
