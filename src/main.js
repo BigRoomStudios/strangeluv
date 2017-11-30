@@ -1,6 +1,5 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const SyncHistoryWithStore = require('react-router-redux').syncHistoryWithStore;
 const CreateStore = require('./wiring/create-store');
 const History = require('./wiring/history');
 const AppContainer = require('./containers/App');
@@ -9,9 +8,6 @@ const AppContainer = require('./containers/App');
 
 const initialState = window.__INITIAL_STATE__;
 const store = CreateStore(initialState);
-const enhancedHistory = SyncHistoryWithStore(History, store, {
-    selectLocationState: (state) => state.router
-});
 
 // Developer Tools Setup
 
@@ -25,17 +21,16 @@ if (__DEBUG__) {
 
 const MOUNT_NODE = document.getElementById('root');
 
-let render = (routerKey) => {
+let render = () => {
 
-    routerKey = routerKey || null;
     const routes = require('./routes')(store);
 
     ReactDOM.render(
+
         <AppContainer
-            store={store}
-            history={enhancedHistory}
+            history={History}
             routes={routes}
-            routerKey={routerKey}
+            store={store}
         />,
         MOUNT_NODE
     );
