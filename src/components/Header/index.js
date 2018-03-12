@@ -6,6 +6,10 @@ module.exports = () => (
 
     <div>
         <h1>Strangeluv</h1>
+        <NavLink exact to='/admin' activeClassName={Classes.activeRoute}>
+            Admin
+        </NavLink>
+        {' · '}
         <NavLink exact to='/' activeClassName={Classes.activeRoute}>
             Home
         </NavLink>
