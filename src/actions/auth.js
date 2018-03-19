@@ -1,8 +1,16 @@
 const StrangeAuth = require('strange-auth');
 const WebClient = require('../utils/web-client');
 const History = require('../wiring/history');
+const AuthType = require('../action-types/auth');
 
 const internals = {};
+
+exports.noToken = () => {
+
+    return {
+        type: AuthType.NO_TOKEN
+    };
+};
 
 exports.login = (email, password) => {
 
