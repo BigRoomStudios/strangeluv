@@ -1,8 +1,10 @@
-const Dashboard = require('components/Dashboard');
+const Dashboard = require('./components/Dashboard');
+const Authenticate = require('../auth').authenticate;
 
 module.exports = {
 
     path: 'dashboard',
-    component: Dashboard
+    component: Authenticate(Dashboard),
+    exact: true
 
 };
