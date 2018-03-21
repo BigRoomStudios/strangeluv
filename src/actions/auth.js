@@ -1,22 +1,14 @@
 const StrangeAuth = require('strange-auth');
 const WebClient = require('../utils/web-client');
 const History = require('../wiring/history');
-const AuthType = require('../action-types/auth');
 
 const internals = {};
 
-exports.noToken = () => {
-
-    return {
-        type: AuthType.NO_TOKEN
-    };
-};
-
-exports.login = (email, password) => {
+exports.login = ({ email, password, token }) => {
 
     return (dispatch) => {
 
-        const strangeLogin = internals.strangeActions.login(email, password);
+        const strangeLogin = internals.strangeActions.login({ email, password, token });
 
         return dispatch(strangeLogin)
 
@@ -39,26 +31,40 @@ exports.logout = () => {
 };
 
 internals.strangeActions = StrangeAuth.makeActions({
-    login: (email, password) => {
+    login: ({ email, password, token }) => {
 
-        let token;
+        let authPromise;
+        let finalToken;
 
-        return WebClient.post('/login', { email, password }, { responseType: 'text' })
-        .then(({ data, status }) => {
+        if ( !!token) {
 
-            if (status !== 200) {
-                const err = new Error('Bad login');
-                err.info = data;
-                return Promise.reject(err);
-            }
+            finalToken = token;
 
-            token = data;
-
-            return WebClient.get('/user', {
-                headers: { authorization: `Bearer ${token}` }
+            authPromise = WebClient.get('/user', {
+                headers: { authorization: `Bearer ${finalToken}` }
             });
-        })
-        .then(({ data, status }) => {
+        }
+
+        else {
+
+            authPromise = WebClient.post('/login', { email, password }, { responseType: 'text' })
+            .then(({ data, status }) => {
+
+                if (status !== 200) {
+                    const err = new Error('Bad login');
+                    err.info = data;
+                    return Promise.reject(err);
+                }
+
+                finalToken = data;
+
+                return WebClient.get('/user', {
+                    headers: { authorization: `Bearer ${finalToken}` }
+                });
+            });
+        }
+
+        return authPromise.then(({ data, status }) => {
 
             if (status !== 200) {
                 const err = new Error('Bad login');
@@ -68,7 +74,7 @@ internals.strangeActions = StrangeAuth.makeActions({
 
             return {
                 credentials: {
-                    token,
+                    token: finalToken,
                     user: data
                 }
             };

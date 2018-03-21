@@ -1,5 +1,5 @@
 const Connect = require('react-redux').connect;
-const Login = require('components/Login');
+const Login = require('../components/Login');
 const AuthAct = require('actions/auth');
 
 const internals = {};

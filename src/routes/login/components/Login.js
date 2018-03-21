@@ -36,7 +36,7 @@ module.exports = class extends React.Component {
 
     loginUser() {
 
-        this.props.login(this.state.email, this.state.password);
+        this.props.login({ email: this.state.email, password: this.state.password });
     }
 
     render() {
