@@ -6,18 +6,19 @@ const Link = require('react-router-dom').Link;
 const Colors = require('styles/colors');
 // https://github.com/mui-org/material-ui/blob/28c1f7ab5d60d757c5fbdb8dd11194b3ca0141d2/docs/src/pages/guides/interoperability.md#styled-components.
 
-const SuperCoolButton = Styled(Button)`
+const SuperCoolButton = Styled((props) => <Button {...props} classes={{ label: 'label' }} />)`
     background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
     border-radius: 3px;
     border: 0;
-    color: white;
     height: 48px;
     padding: 0 30px;
-    box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .30);
-    &&{ // hit the root element
+    && { // hit the root element
+        box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .30);
+    },
+    & .label {
         color: white;
-    }
-    &:hover{
+    },
+    &:hover {
         background: linear-gradient(45deg, #FE6B8B 30%, ${Colors.yellow} 90%);
     }
 `;
