@@ -117,7 +117,7 @@ Omitting the `.js` extension in calls to `require()` is preferred, as it allows 
 
 ## Development
 ### Style
-We favor the [hapi style guide](hapijs.com/styleguide).  Yes, even when coding for the browser!  The idea is to maintain fluency for developers who work both on the server and in the browser.  It is supposed to be the same language, after all!  Node and V8 move fast enough on their own, so we plan to keep up-to-date with that ecosystem rather than the hyperspeed with which transpilers make available incompletely-spec'd JS features.  It's worth noting that for the time being that includes ES6 modules.  We additionally have some standard React lint rules.  Just `npm run lint` to see how you're doing!
+We favor the [hapi style guide](https://hapijs.com/styleguide).  Yes, even when coding for the browser!  The idea is to maintain fluency for developers who work both on the server and in the browser.  It is supposed to be the same language, after all!  Node and V8 move fast enough on their own, so we plan to keep up-to-date with that ecosystem rather than the hyperspeed with which transpilers make available incompletely-spec'd JS features.  It's worth noting that for the time being that includes ES6 modules.  We additionally have some standard React lint rules.  Just `npm run lint` to see how you're doing!
 
 ### Developer Tools
 Works nicely with the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) and [React DevTools Chrome Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi).  `npm run dev` will enable the tools automatically, while `npm run dev:no-debug` will not.
