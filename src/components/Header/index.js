@@ -26,6 +26,10 @@ module.exports = class Header extends React.Component {
                     Counter
                 </NavLink>
                 {' · '}
+                <NavLink to='/dashboard' activeClassName={Classes.activeRoute}>
+                    Dashboard
+                </NavLink>
+                {' · '}
                 {isAuthenticated ? <button className='btn-link' onClick={logout}>Logout</button> : <NavLink to='/login' activeClassName={Classes.activeRoute}>Login</NavLink>}
             </div>
         );
