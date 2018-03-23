@@ -41,7 +41,6 @@ module.exports = (store) => {
         // }
     });
 
-    if (token) {
-        store.dispatch(AuthActions.login({ token }));
-    }
+    store.dispatch(AuthActions.login({ token }));
+
 };

@@ -1,17 +1,16 @@
-const connectedReduxRedirect = require('redux-auth-wrapper/history3/redirect').connectedReduxRedirect;
+const { connectedRouterRedirect } = require('redux-auth-wrapper/history4/redirect');
 const AuthStatuses = require('strange-auth').statuses;
-const History = require('wiring/history');
+const Replace = require('react-router-redux').replace;
 
-const Authenticate = connectedReduxRedirect({
-    redirectPath: 'not-being-used',
-    authenticatedSelector: (state) => state.auth.isAuthenticated !== false,
+exports.authenticate = connectedRouterRedirect({
+    authenticatedSelector: (state) => state.auth.isAuthenticated,
     authenticatingSelector: (state) => {
 
         return (state.auth.status === AuthStatuses.INIT) ||
-                (state.auth.status === AuthStatuses.WAITING);
+               (state.auth.status === AuthStatuses.WAITING);
     },
-    wrapperDisplayName: 'UserIsAuthenticated',
-    redirectAction: History.push('/login')
+    redirectPath: '/login',
+    redirectAction: Replace,
+    failureRedirectPath: '/',
+    allowRedirectBack: false
 });
-
-module.exports = Authenticate;
