@@ -30,7 +30,16 @@ module.exports = class Header extends React.Component {
                     Dashboard
                 </NavLink>
                 {' · '}
+                {!isAuthenticated &&
+                    <NavLink to='/sign-up' activeClassName={Classes.activeRoute}>
+                        Sign Up
+                    </NavLink>
+                }
+                {!isAuthenticated &&
+                    <span> · </span>
+                }
                 {isAuthenticated ? <button className='btn-link' onClick={logout}>Logout</button> : <NavLink to='/login' activeClassName={Classes.activeRoute}>Login</NavLink>}
+
             </div>
         );
     }

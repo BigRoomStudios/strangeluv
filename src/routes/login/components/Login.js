@@ -78,9 +78,6 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
     render() {
 
-        console.log(this.props.rememberMe);
-        console.log(this.state.rememberMe);
-
         // TODO in MBM we had form validation here. Is this the right spot? What does strangeforms invalid() do?
 
         return (
@@ -113,7 +110,6 @@ module.exports = class Login extends StrangeForms(React.Component) {
                         />
                         Remember Me
                     </label>
-
                 </div>
 
                 {/* TODO fix this! Currently this errors because of the auth initializer, and we need to adjust this to show an error when it actually errors from a bad request - not just based on state */}
