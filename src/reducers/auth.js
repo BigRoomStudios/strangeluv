@@ -1,6 +1,6 @@
 const StrangeAuth = require('strange-auth');
 const AuthTypes = require('../action-types/auth');
-//const Deeply = require('../utils/deeply');
+const Deeply = require('../utils/deeply');
 
 const authReducer = StrangeAuth.makeReducer();
 
@@ -25,10 +25,9 @@ module.exports = (state, action) => {
 
         case AuthTypes.REMEMBER_ME:
 
-            localStorage.setItem({ 'remember': payload });
-
-            //set local storage??
-            //set this in state????
+            return Deeply(state)
+                .set('rememberMe', payload)
+                .value();
     }
 
     return state;

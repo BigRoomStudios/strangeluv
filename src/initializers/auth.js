@@ -13,32 +13,32 @@ module.exports = (store) => {
     const persistGet = (key) => JSON.parse(localStorage.getItem(key) || 'null');
     const persistRemove = (key) => localStorage.removeItem(key);
 
-    // const getShouldRemember = () => selectors.getShouldRemember(store.getState());
+    const getShouldRemember = () => AuthSelectors.getShouldRemember(store.getState());
     const getIsAuthenticated = () => AuthSelectors.getIsAuthenticated(store.getState());
     const getToken = () => AuthSelectors.getToken(store.getState());
 
-    // const remember = persistGet('remember') || false;
+    const remember = persistGet('remember') || false;
     const token = persistGet('token');
 
-    // store.dispatch(AuthActions.rememberMe({ remember }));
+    store.dispatch(AuthActions.rememberMe({ remember }));
 
     store.subscribe(() => {
 
-        // if (!getShouldRemember()) {
-        //     persistSet('remember', false);
-        //     persistRemove('token');
-        // }
-        // else {
-
-        persistSet('remember', false);
-        if (getIsAuthenticated()) {
-            persistSet('token', getToken());
-        }
-        else {
+        if (!getShouldRemember()) {
+            persistSet('remember', false);
             persistRemove('token');
         }
 
-        // }
+        else {
+
+            persistSet('remember', true);
+            if (getIsAuthenticated()) {
+                persistSet('token', getToken());
+            }
+            else {
+                persistRemove('token');
+            }
+        }
     });
 
     store.dispatch(AuthActions.login({ token }));

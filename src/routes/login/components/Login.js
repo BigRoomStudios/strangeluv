@@ -7,8 +7,8 @@ module.exports = class Login extends StrangeForms(React.Component) {
     static propTypes = {
         errored: T.bool,
         login: T.func.isRequired,
-        remember: T.func.isRequired
-        // put remember me in props
+        rememberMe: T.bool.isRequired,
+        rememberAct: T.func.isRequired
     };
 
     constructor(props, context) {
@@ -18,7 +18,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
         this.state = {
             email: '',
             password: '',
-            rememberMe: false
+            rememberMe: this.props.rememberMe
         };
 
         // TODO is this the binding pattern we wanna use? Bek likes arrow functions
@@ -29,9 +29,11 @@ module.exports = class Login extends StrangeForms(React.Component) {
             get: {
                 '*': (someProps, field) => ''
                 // add remember me get cause it's from props
-
             },
-            act: this.act.bind(this),
+            act: {
+                // rememberMe: this.formCheck.bind(this),
+                '*': this.formField.bind(this)
+            },
             // add remember me action cause it's from props
             getFormValue: {
                 rememberMe: this.getCheckedValue.bind(this),
@@ -50,7 +52,12 @@ module.exports = class Login extends StrangeForms(React.Component) {
         return e.target.value || '';
     }
 
-    act(field, value) {
+    formCheck(field, value) {
+
+        // this
+    }
+
+    formField(field, value) {
 
         this.setState({ [field]: value });
     }
@@ -66,12 +73,13 @@ module.exports = class Login extends StrangeForms(React.Component) {
     loginUser() {
 
         this.props.login({ email: this.state.email, password: this.state.password });
-        this.props.remember({ remember: this.state.rememberMe });
+        this.props.rememberAct({ remember: this.state.rememberMe });
     }
 
     render() {
 
-        console.log(this.state);
+        console.log(this.props.rememberMe);
+        console.log(this.state.rememberMe);
 
         // TODO in MBM we had form validation here. Is this the right spot? What does strangeforms invalid() do?
 
