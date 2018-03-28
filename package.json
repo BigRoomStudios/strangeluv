@@ -120,6 +120,7 @@
     "rimraf": "^2.5.1",
     "sass-loader": "^6.0.3",
     "strange-auth": "^1.0.0",
+    "strange-forms": "^1.1.0",
     "strange-router": "^0.1.0",
     "strangeluv-core": "^1.2.0",
     "style-loader": "^0.18.1",

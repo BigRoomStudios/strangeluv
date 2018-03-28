@@ -1,7 +1,8 @@
 const React = require('react');
 const T = require('prop-types');
+const StrangeForms = require('strange-forms');
 
-module.exports = class extends React.Component {
+module.exports = class Login extends StrangeForms(React.Component) {
 
     static propTypes = {
         errored: T.bool,
@@ -17,22 +18,36 @@ module.exports = class extends React.Component {
             password: ''
         };
 
+        // TODO is this the binding pattern we wanna use? Bek likes arrow functions
         this._boundLoginUser = this.loginUser.bind(this);
+
+        this.strangeForm({
+            fields: ['email', 'password'],
+            get: {
+                '*': (someProps, field) => ''
+            },
+            act: this.act.bind(this),
+            getFormValue: this.getFormValue.bind(this)
+        });
     }
 
-    handleEmailChange = (event) => {
+    getFormValue(e) {
 
-        this.setState({
-            email: event.target.value
+        return e.target.value || '';
+    }
+
+    act(field, value) {
+
+        this.setState({ [field]: value });
+    }
+
+    invalid() {
+
+        return ['email', 'password'].some((field) => {
+
+            return this.fieldError(field);
         });
-    };
-
-    handlePasswordChange = (event) => {
-
-        this.setState({
-            password: event.target.value
-        });
-    };
+    }
 
     loginUser() {
 
@@ -41,6 +56,10 @@ module.exports = class extends React.Component {
 
     render() {
 
+        console.log(this.state);
+
+        // TODO in MBM we had form validation here. Is this the right spot? What does strangeforms invalid() do?
+
         return (
 
             <div>
@@ -48,14 +67,23 @@ module.exports = class extends React.Component {
                 <h2>Login</h2>
                 <div className='form-group'>
                     <label>Email:</label>
-                    <input className='form-control' value={this.state.email} onChange={this.handleEmailChange} />
+                    <input
+                        className='form-control'
+                        value={this.fieldValue('email')}
+                        onChange={this.proposeNew('email')}
+                    />
                 </div>
                 <div className='form-group'>
                     <label>Password:</label>
-                    <input className='form-control' value={this.state.password} onChange={this.handlePasswordChange} />
+                    <input
+                        className='form-control'
+                        value={this.fieldValue('password')}
+                        onChange={this.proposeNew('password')} />
                 </div>
 
+                {/* TODO fix this! Currently this errors because of the auth initializer, and we need to adjust this to show an error when it actually errors from a bad request - not just based on state */}
                 {this.props.errored &&
+
                     <div className='alert-danger alert'>Looks like you have bad credentials. Please try again!</div>}
 
                 <button className='btn btn-default' onClick={this._boundLoginUser}>Login</button>
