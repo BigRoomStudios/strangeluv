@@ -1,8 +1,17 @@
 const StrangeAuth = require('strange-auth');
 const WebClient = require('../utils/web-client');
 const History = require('../wiring/history');
+const AuthAct = require('../action-types/auth');
 
 const internals = {};
+
+exports.rememberMe = ({ remember }) => {
+
+    return {
+        type: AuthAct.REMEMBER_ME,
+        payload: remember
+    };
+};
 
 exports.login = ({ email, password, token }) => {
 

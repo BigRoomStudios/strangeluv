@@ -1,5 +1,5 @@
 const StrangeAuth = require('strange-auth');
-// const AuthTypes = require('../action-types/auth');
+const AuthTypes = require('../action-types/auth');
 //const Deeply = require('../utils/deeply');
 
 const authReducer = StrangeAuth.makeReducer();
@@ -8,9 +8,10 @@ module.exports = (state, action) => {
 
     state = authReducer(state, action);
 
-    // const { type } = action;
+    const { type } = action;
+    const { payload } = action;
 
-    // switch (type) {
+    switch (type) {
 
     //     case AuthTypes.NO_TOKEN:
     //
@@ -21,7 +22,14 @@ module.exports = (state, action) => {
     //             .set('isAuthenticated', false)
     //             .set('status', '@@auth-status/FINISHED')
     //             .value();
-    // }
+
+        case AuthTypes.REMEMBER_ME:
+
+            localStorage.setItem({ 'remember': payload });
+
+            //set local storage??
+            //set this in state????
+    }
 
     return state;
 };

@@ -6,7 +6,9 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
     static propTypes = {
         errored: T.bool,
-        login: T.func.isRequired
+        login: T.func.isRequired,
+        remember: T.func.isRequired
+        // put remember me in props
     };
 
     constructor(props, context) {
@@ -15,20 +17,32 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            rememberMe: false
         };
 
         // TODO is this the binding pattern we wanna use? Bek likes arrow functions
         this._boundLoginUser = this.loginUser.bind(this);
 
         this.strangeForm({
-            fields: ['email', 'password'],
+            fields: ['email', 'password', 'rememberMe'],
             get: {
                 '*': (someProps, field) => ''
+                // add remember me get cause it's from props
+
             },
             act: this.act.bind(this),
-            getFormValue: this.getFormValue.bind(this)
+            // add remember me action cause it's from props
+            getFormValue: {
+                rememberMe: this.getCheckedValue.bind(this),
+                '*': this.getFormValue.bind(this)
+            }
         });
+    }
+
+    getCheckedValue(e) {
+
+        return e.target.checked;
     }
 
     getFormValue(e) {
@@ -43,7 +57,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
     invalid() {
 
-        return ['email', 'password'].some((field) => {
+        return ['email', 'password', 'rememberMe'].some((field) => {
 
             return this.fieldError(field);
         });
@@ -52,6 +66,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
     loginUser() {
 
         this.props.login({ email: this.state.email, password: this.state.password });
+        this.props.remember({ remember: this.state.rememberMe });
     }
 
     render() {
@@ -77,8 +92,20 @@ module.exports = class Login extends StrangeForms(React.Component) {
                     <label>Password:</label>
                     <input
                         className='form-control'
+                        type='password'
                         value={this.fieldValue('password')}
                         onChange={this.proposeNew('password')} />
+                </div>
+                <div className='checkbox'>
+                    <label>
+                        <input
+                            type='checkbox'
+                            checked={this.fieldValue('rememberMe')}
+                            onChange={this.proposeNew('rememberMe')}
+                        />
+                        Remember Me
+                    </label>
+
                 </div>
 
                 {/* TODO fix this! Currently this errors because of the auth initializer, and we need to adjust this to show an error when it actually errors from a bad request - not just based on state */}

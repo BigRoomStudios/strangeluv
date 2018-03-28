@@ -30,7 +30,7 @@ module.exports = (store) => {
         // }
         // else {
 
-        persistSet('remember', true);
+        persistSet('remember', false);
         if (getIsAuthenticated()) {
             persistSet('token', getToken());
         }

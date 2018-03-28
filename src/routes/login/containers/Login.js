@@ -10,7 +10,8 @@ internals.connect = Connect(
         errored: state.auth.error.login
     }),
     {
-        login: AuthAct.login
+        login: AuthAct.login,
+        rememberMe: AuthAct.remember
     }
 );
 
