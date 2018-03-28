@@ -6,7 +6,7 @@ const internals = {};
 
 internals.connect = Connect(
     (state) => ({
-        // TODO: Have error in state like this, or dispatch an error action like MBM? 
+        // TODO: Have error in state like this, or dispatch an error action like MBM?
         errored: state.auth.error.login
     }),
     {
