@@ -1,4 +1,4 @@
-const Signup = require('./components/Signup');
+const Signup = require('./containers/Signup');
 
 module.exports = {
 
