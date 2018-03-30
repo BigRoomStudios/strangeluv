@@ -1,7 +1,8 @@
 const React = require('react');
 const T = require('prop-types');
+const StrangeForms = require('strange-forms');
 
-module.exports = class Signup extends React.Component {
+module.exports = class Signup extends StrangeForms(React.Component) {
 
     static propTypes = {
         onSubmit: T.func.isRequired
@@ -19,12 +20,35 @@ module.exports = class Signup extends React.Component {
         };
 
         //this.submit = this._submit.bind(this);
-    };
+
+        this.strangeForm({
+            fields: ['email', 'password', 'confirmPassword'],
+            get: {
+                '*': (someProps, field) => ''
+            },
+            act: {
+                '*': this.formField.bind(this)
+            },
+            getFormValue: {
+                '*': this.getFormValue.bind(this)
+            }
+        });
+    }
+
+    getFormValue(e) {
+
+        return e.target.value || '';
+    }
+
+    formField(field, value) {
+
+        this.setState({ [field]: value });
+    }
 
     submit = (ev) => {
 
         const { email, password } = this.state;
-        this.props.onSubmit(email, password);
+        this.props.onSubmit({ email, password });
         ev.preventDefault();
     }
 
@@ -39,18 +63,26 @@ module.exports = class Signup extends React.Component {
                         <label>Email</label>
                         <input
                             className='form-control'
+                            value={this.fieldValue('email')}
+                            onChange={this.proposeNew('email')}
                         />
                     </div>
                     <div className='form-group'>
                         <label>Password</label>
                         <input
                             className='form-control'
+                            type='password'
+                            value={this.fieldValue('password')}
+                            onChange={this.proposeNew('password')}
                         />
                     </div>
                     <div className='form-group'>
                         <label>Confirm Password</label>
                         <input
                             className='form-control'
+                            type='password'
+                            value={this.fieldValue('confirmPassword')}
+                            onChange={this.proposeNew('confirmPassword')}
                         />
                     </div>
                     <div className='checkbox'>
@@ -61,7 +93,7 @@ module.exports = class Signup extends React.Component {
                             Remember Me
                         </label>
                     </div>
-                    <button className='btn btn-default' type='submit' onClick={this._submit}>Sign Up</button>
+                    <button className='btn btn-default' type='submit' onClick={this.submit}>Sign Up</button>
                 </form>
             </div>
         );

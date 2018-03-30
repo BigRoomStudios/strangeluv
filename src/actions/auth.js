@@ -48,7 +48,7 @@ exports.registerUser = ({ email, password }) => {
             const errMessage = typeof err.response !== 'undefined' ? err.response.data.message : 'Signup failed. Please try again.';
             console.log(errMessage);
             //dispatch(SnackbarActions.messageSnackbar(errMessage));
-            dispatch(actions.registrationFail());
+            dispatch(actions.registrationFailure());
         });
 
         return newUser;

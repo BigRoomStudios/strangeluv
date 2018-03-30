@@ -99,7 +99,8 @@ module.exports = class Login extends StrangeForms(React.Component) {
                         className='form-control'
                         type='password'
                         value={this.fieldValue('password')}
-                        onChange={this.proposeNew('password')} />
+                        onChange={this.proposeNew('password')}
+                    />
                 </div>
                 <div className='checkbox'>
                     <label>

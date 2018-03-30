@@ -11,7 +11,7 @@ internals.connect = Connect(
         rememberMe: state.auth.rememberMe
     }),
     {
-        registerUser: AuthAct.registerUser,
+        onSubmit: AuthAct.registerUser,
         rememberAct: AuthAct.rememberMe
     }
 );
