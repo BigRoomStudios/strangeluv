@@ -28,20 +28,20 @@ exports.registrationFailure = () => {
     };
 };
 
-exports.registerUser = ({ email, password }) => {
+exports.registerUser = ({ email, password, firstName, lastName }) => {
 
     return (dispatch) => {
 
         dispatch(actions.registrationRequest());
 
-        const newUser = WebClient.post('/users', { email, password });
+        const newUser = WebClient.post('/users', { email, password, firstName, lastName });
 
         newUser
         .then(({ response }) => {
 
             //dispatch(SnackbarActions.messageSnackbar('Signup successful!'));
             dispatch(actions.registrationSuccess());
-            dispatch(actions.login(email, password));
+            dispatch(actions.login({ email, password }));
         })
         .catch((err) => {
 

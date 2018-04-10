@@ -13,6 +13,8 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         super(props);
 
         this.state = {
+            firstName: '',
+            lastName: '',
             email: '',
             password: '',
             confirmPassword: '',
@@ -22,7 +24,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         //this.submit = this._submit.bind(this);
 
         this.strangeForm({
-            fields: ['email', 'password', 'confirmPassword'],
+            fields: ['firstName', 'lastName', 'email', 'password', 'confirmPassword'],
             get: {
                 '*': (someProps, field) => ''
             },
@@ -47,8 +49,8 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
     submit = (ev) => {
 
-        const { email, password } = this.state;
-        this.props.onSubmit({ email, password });
+        const { firstName, lastName, email, password } = this.state;
+        this.props.onSubmit({ email, password, firstName, lastName  });
         ev.preventDefault();
     }
 
@@ -59,6 +61,22 @@ module.exports = class Signup extends StrangeForms(React.Component) {
             <div>
                 <h2>Sign Up</h2>
                 <form onSubmit={this.submit}>
+                    <div className='form-group'>
+                        <label>First Name</label>
+                        <input
+                            className='form-control'
+                            value={this.fieldValue('firstName')}
+                            onChange={this.proposeNew('firstName')}
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label>Last Name</label>
+                        <input
+                            className='form-control'
+                            value={this.fieldValue('lastName')}
+                            onChange={this.proposeNew('lastName')}
+                        />
+                    </div>
                     <div className='form-group'>
                         <label>Email</label>
                         <input
