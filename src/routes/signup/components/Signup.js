@@ -1,5 +1,6 @@
 const React = require('react');
 const T = require('prop-types');
+const NavLink = require('react-router-dom').NavLink;
 const StrangeForms = require('strange-forms');
 
 module.exports = class Signup extends StrangeForms(React.Component) {
@@ -111,6 +112,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                             Remember Me
                         </label>
                     </div>
+                    <p>Already have an account? <NavLink to='login'>Login</NavLink> now.</p>
                     <button className='btn btn-default' type='submit' onClick={this.submit}>Sign Up</button>
                 </form>
             </div>

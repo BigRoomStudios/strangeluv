@@ -7,6 +7,8 @@ const internals = {};
 
 const actions = exports;
 
+// New User Registration
+
 exports.registrationRequest = () => {
 
     return {
@@ -64,6 +66,8 @@ exports.rememberMe = ({ remember }) => {
     };
 };
 
+// Login and Logout
+
 exports.login = ({ email, password, token }) => {
 
     return (dispatch) => {
@@ -89,6 +93,80 @@ exports.logout = () => {
         return History.push('/');
     };
 };
+
+// Request Reset & Reset Password
+
+exports.requestResetRequest = () => {
+
+    return {
+        type: AuthAct.REQUEST_RESET_REQUEST
+    };
+};
+
+exports.requestResetSuccess = () => {
+
+    return {
+        type: AuthAct.REQUEST_RESET_SUCCESS
+    };
+};
+
+exports.requestResetFailure = () => {
+
+    return {
+        type: AuthAct.REQUEST_RESET_FAILURE
+    };
+};
+
+exports.requestPasswordReset = ({ email }) => {
+
+    return (dispatch) => {
+
+        dispatch(actions.requestResetRequest());
+
+        return WebClient.post('/users/request-reset', { email }, { responseType: 'text' })
+            .then(({ data, status }) => {
+
+                //dispatch(SnackbarActions.messageSnackbar('Password reset email successfully sent!'));
+                dispatch(actions.requestResetSuccess());
+                return History.push('/login');
+
+            })
+            .catch((err) => {
+
+                let errMessage = 'Unable to reset password. Please try again';
+
+                if (typeof err.response !== 'undefined') {
+                    errMessage = err.response.data.message;
+                }
+
+                dispatch(actions.requestResetFailure());
+
+                //return dispatch(SnackbarActions.messageSnackbar(errMessage));
+            })
+        ;
+    };
+};
+
+exports.resetPassword = (email, newPassword, resetToken) => {
+
+    return (dispatch) => {
+
+        return WebClient.post('/users/reset-password', { email, newPassword, resetToken }, { responseType: 'text' })
+            .then(({ data, status }) => {
+
+                //dispatch(SnackbarActions.messageSnackbar('Password successfully reset!'));
+                return History.push('/login');
+
+            })
+            .catch((ignoreErr) => {
+
+                //return dispatch(SnackbarActions.messageSnackbar('Error resetting email, please try again!'));
+            })
+        ;
+    };
+};
+
+// StrangeAuth
 
 internals.strangeActions = StrangeAuth.makeActions({
     login: ({ email, password, token }) => {

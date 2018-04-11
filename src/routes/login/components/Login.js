@@ -1,5 +1,6 @@
 const React = require('react');
 const T = require('prop-types');
+const NavLink = require('react-router-dom').NavLink;
 const StrangeForms = require('strange-forms');
 
 module.exports = class Login extends StrangeForms(React.Component) {
@@ -22,7 +23,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
         };
 
         // TODO is this the binding pattern we wanna use? Bek likes arrow functions
-        this._boundLoginUser = this.loginUser.bind(this);
+        this.loginUser = this._loginUser.bind(this);
 
         this.strangeForm({
             fields: ['email', 'password', 'rememberMe'],
@@ -52,11 +53,6 @@ module.exports = class Login extends StrangeForms(React.Component) {
         return e.target.value || '';
     }
 
-    formCheck(field, value) {
-
-        // this
-    }
-
     formField(field, value) {
 
         this.setState({ [field]: value });
@@ -70,7 +66,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
         });
     }
 
-    loginUser() {
+    _loginUser() {
 
         this.props.login({ email: this.state.email, password: this.state.password });
         this.props.rememberAct({ remember: this.state.rememberMe });
@@ -112,13 +108,15 @@ module.exports = class Login extends StrangeForms(React.Component) {
                         Remember Me
                     </label>
                 </div>
+                <p>Don't have an account? <NavLink to='sign-up'>Sign up</NavLink> now.</p>
+                <p><NavLink to='forgot-password'>Forget password?</NavLink></p>
 
                 {/* TODO fix this! Currently this errors because of the auth initializer, and we need to adjust this to show an error when it actually errors from a bad request - not just based on state */}
                 {this.props.errored &&
 
                     <div className='alert-danger alert'>Looks like you have bad credentials. Please try again!</div>}
 
-                <button className='btn btn-default' onClick={this._boundLoginUser}>Login</button>
+                <button className='btn btn-default' onClick={this.loginUser}>Login</button>
 
             </div>
         );
