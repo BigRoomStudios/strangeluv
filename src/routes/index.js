@@ -6,6 +6,7 @@ const LoginRoute = require('./login');
 const DashboardRoute = require('./dashboard');
 const SignupRoute = require('./signup');
 const ForgotPasswordRoute = require('./forgot-password');
+const ResetPasswordRoute = require('./reset-password');
 
 // Create routes
 module.exports = (store) => ([{
@@ -17,6 +18,7 @@ module.exports = (store) => ([{
         LoginRoute,
         DashboardRoute,
         SignupRoute,
-        ForgotPasswordRoute
+        ForgotPasswordRoute,
+        ResetPasswordRoute
     ]
 }]);
