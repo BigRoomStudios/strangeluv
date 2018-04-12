@@ -55,6 +55,8 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         ev.preventDefault();
     }
 
+    // TODO let's add some validation for email, matching passwords!
+
     render() {
 
         return (

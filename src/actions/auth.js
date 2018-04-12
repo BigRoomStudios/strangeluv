@@ -117,6 +117,27 @@ exports.requestResetFailure = () => {
     };
 };
 
+exports.resetPasswordRequest = () => {
+
+    return {
+        type: AuthAct.RESET_PASSWORD_REQUEST
+    };
+};
+
+exports.resetPasswordSuccess = () => {
+
+    return {
+        type: AuthAct.RESET_PASSWORD_SUCCESS
+    };
+};
+
+exports.resetPasswordFailure = () => {
+
+    return {
+        type: AuthAct.RESET_PASSWORD_FAILURE
+    };
+};
+
 exports.requestPasswordReset = ({ email }) => {
 
     return (dispatch) => {
@@ -151,16 +172,20 @@ exports.resetPassword = (email, newPassword, resetToken) => {
 
     return (dispatch) => {
 
+        dispatch(actions.resetPasswordRequest());
+
         return WebClient.post('/users/reset-password', { email, newPassword, resetToken }, { responseType: 'text' })
             .then(({ data, status }) => {
 
                 //dispatch(SnackbarActions.messageSnackbar('Password successfully reset!'));
+                dispatch(actions.resetPasswordSuccess());
                 return History.push('/login');
 
             })
             .catch((ignoreErr) => {
 
                 //return dispatch(SnackbarActions.messageSnackbar('Error resetting email, please try again!'));
+                dispatch(actions.resetPasswordFailure());
             })
         ;
     };

@@ -1,4 +1,4 @@
-const ResetPassword = require('./components/ResetPassword');
+const ResetPassword = require('./containers/ResetPassword');
 
 module.exports = {
 

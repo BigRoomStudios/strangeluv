@@ -1,8 +1,12 @@
 const React = require('react');
+const T = require('prop-types');
 const StrangeForms = require('strange-forms');
 
-
 module.exports = class ResetPassword extends StrangeForms(React.Component) {
+
+    static propTypes = {
+        resetPassword: T.func.isRequired
+    };
 
     constructor(props) {
 
@@ -45,6 +49,15 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
             return this.fieldError(field);
         });
     }
+
+    _resetPassword() {
+
+        const { email, password } = this.state;
+
+        //this.props.resetPassword(email, password);
+    }
+
+    // TODO let's add some validation for email, matching passwords!
 
     render() {
 
