@@ -78,7 +78,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "ajv": "^6.4.0",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.20.0",
     "babel-loader": "^7.0.0",
@@ -112,7 +111,6 @@
     "react-redux": "^5.0.2",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "5.0.0-alpha.9",
-    "react-test-renderer": "^16.3.1",
     "redbox-react": "^1.2.2",
     "redux": "^3.0.0",
     "redux-thunk": "^2.0.0",
@@ -154,6 +152,7 @@
     "nodemon": "^1.8.1",
     "pre-commit": "^1.1.3",
     "puppeteer": "^1.3.0",
+    "react-test-renderer": "^16.3.1",
     "sinon": "^4.5.0",
     "sinon-chai": "^3.0.0"
   }
