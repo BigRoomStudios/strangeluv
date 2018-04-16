@@ -2,7 +2,7 @@ const ResetPassword = require('./containers/ResetPassword');
 
 module.exports = {
 
-    path: 'reset-password',
+    path: 'reset-password/:token',
     component: ResetPassword
 
 };

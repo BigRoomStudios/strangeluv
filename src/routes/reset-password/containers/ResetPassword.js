@@ -7,7 +7,7 @@ const internals = {};
 internals.connect = Connect(
     null,
     {
-        requestReset: AuthAct.ResetPassword
+        resetPassword: AuthAct.resetPassword
     }
 );
 
