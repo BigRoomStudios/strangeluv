@@ -3,8 +3,6 @@ const Config = require('./main');
 const WebpackConfig = require('./webpack.config');
 const Debug = require('debug')('app:karma');
 
-process.env.CHROME_BIN = require('puppeteer').executablePath();
-
 Debug('Create configuration.');
 
 const karmaConfig = {
