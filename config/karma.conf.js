@@ -3,6 +3,8 @@ const Config = require('./main');
 const WebpackConfig = require('./webpack.config');
 const Debug = require('debug')('app:karma');
 
+process.env.CHROME_BIN = require('puppeteer').executablePath();
+
 Debug('Create configuration.');
 
 const karmaConfig = {
@@ -21,7 +23,13 @@ const karmaConfig = {
     preprocessors: {
         [`${Config.dir_test}/test-bundler.js`]: ['webpack']
     },
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers: {
+        ChromeHeadlessNoSandbox: {
+            base: 'ChromeHeadless',
+            flags: ['--no-sandbox']
+        }
+    },
     webpack: {
         entry: WebpackConfig.entry,
         devtool: 'cheap-module-source-map',
