@@ -12,7 +12,7 @@ const actions = exports;
 exports.registrationRequest = () => {
 
     return {
-        type: AuthAct.REGISTRATION_REQUEST
+        type: AuthAct.REGISTRATION_BEGIN
     };
 };
 
@@ -99,28 +99,28 @@ exports.logout = () => {
 exports.requestResetRequest = () => {
 
     return {
-        type: AuthAct.REQUEST_RESET_REQUEST
+        type: AuthAct.REQUEST_PASSWORD_RESET_BEGIN
     };
 };
 
 exports.requestResetSuccess = () => {
 
     return {
-        type: AuthAct.REQUEST_RESET_SUCCESS
+        type: AuthAct.REQUEST_PASSWORD_RESET_SUCCESS
     };
 };
 
 exports.requestResetFailure = () => {
 
     return {
-        type: AuthAct.REQUEST_RESET_FAILURE
+        type: AuthAct.REQUEST_PASSWORD_RESET_FAILURE
     };
 };
 
 exports.resetPasswordRequest = () => {
 
     return {
-        type: AuthAct.RESET_PASSWORD_REQUEST
+        type: AuthAct.RESET_PASSWORD_BEGIN
     };
 };
 
