@@ -1,12 +1,23 @@
 const React = require('react');
+const T = require('prop-types');
 
-const Dashboard = () => (
+module.exports = class Dashboard extends React.Component {
 
-    <div>
-        <h1>Dashboard</h1>
-        <p>Welcome to your dashboard!</p>
-    </div>
-);
+    static propTypes = {
+        firstName: T.string.isRequired
+    };
 
+    render() {
 
-module.exports = Dashboard;
+        const { firstName } = this.props;
+
+        return (
+
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome to your dashboard, {firstName}!</p>
+            </div>
+
+        );
+    }
+};

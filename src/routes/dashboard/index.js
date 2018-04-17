@@ -1,4 +1,4 @@
-const Dashboard = require('./components/Dashboard');
+const Dashboard = require('./containers/Dashboard');
 const Authenticate = require('../auth').authenticate;
 
 module.exports = {
