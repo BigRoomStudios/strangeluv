@@ -22,10 +22,6 @@ module.exports = class Header extends React.Component {
                     Home
                 </NavLink>
                 {' · '}
-                <NavLink to='/counter' activeClassName={Classes.activeRoute}>
-                    Counter
-                </NavLink>
-                {' · '}
                 <NavLink to='/dashboard' activeClassName={Classes.activeRoute}>
                     Dashboard
                 </NavLink>
