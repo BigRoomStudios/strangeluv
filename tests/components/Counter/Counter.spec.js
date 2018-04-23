@@ -1,6 +1,6 @@
 const React = require('react');
 const Redux = require('redux');
-const Counter = require('components/Counter');
+const Counter = require('routes/counter/components/Counter');
 const Enzyme = require('enzyme');
 
 describe('(Component) Counter', () => {

@@ -1,5 +1,5 @@
 const React = require('react');
-const HomeView = require('routes/Home/components/HomeView');
+const HomeView = require('routes/home/components/HomeView');
 const Enzyme = require('enzyme');
 
 describe('(View) Home', () => {

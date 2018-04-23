@@ -1,27 +1,29 @@
 const React = require('react');
-const Router = require('react-router').Router;
+const T = require('prop-types');
+
+const { Router: StrangeRouter } = require('strange-router');
 const Provider = require('react-redux').Provider;
 
-module.exports = class extends React.Component {
+module.exports = class App extends React.Component {
 
     static propTypes = {
-        history: React.PropTypes.object.isRequired,
-        routes: React.PropTypes.object.isRequired,
-        routerKey: React.PropTypes.number,
-        store: React.PropTypes.object.isRequired
+        history: T.object.isRequired,
+        routes: T.array.isRequired,
+        store: T.object.isRequired
     }
 
     render() {
 
-        const { history, routes, routerKey, store } = this.props;
+        const { store, routes, history } = this.props;
 
         return (
             <Provider store={store}>
                 <div style={{ height: '100%' }}>
-                    <Router history={history} children={routes} key={routerKey} />
+                    <StrangeRouter
+                        history={history}
+                        routes={routes} />
                 </div>
             </Provider>
         );
     }
-
 };

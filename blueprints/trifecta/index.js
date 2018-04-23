@@ -1,3 +1,5 @@
+const InRoute = require('../in-route');
+
 module.exports = {
     description() {
 
@@ -15,17 +17,7 @@ module.exports = {
     fileMapTokens() {
 
         return {
-            __root__: (options) => {
-
-                const base = options.settings.getSetting('sourceBase');
-                const route = options.entity.options.in;
-
-                if (!route) {
-                    return base;
-                }
-
-                return `${base}/routes/${route.replace('/', '/routes/')}`;
-            },
+            __root__: InRoute,
             __name__: (options) => {
 
                 // Don't adjust case

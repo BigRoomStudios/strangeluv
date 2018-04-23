@@ -2,6 +2,10 @@
 
 > How I Learned to Stop Worrying and Love React
 
+[![Build Status](https://travis-ci.org/BigRoomStudios/strangeluv.svg?branch=master)](https://travis-ci.org/BigRoomStudios/strangeluv?branch=master)
+[![dependencies](https://david-dm.org/BigRoomStudios/strangeluv.svg)](https://david-dm.org/BigRoomStudios/strangeluv)
+[![devDependency Status](https://david-dm.org/BigRoomStudios/strangeluv/dev-status.svg)](https://david-dm.org/BigRoomStudios/strangeluv#info=devDependencies)
+
 Here you find a fork of [this](https://github.com/davezuko/react-redux-starter-kit) React/Redux starter kit.  We've made it our own.  You'll find React, Redux, and a dope Webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, etc.  Ships with a hapi server and plugin for arbitrarily siiick deployments.  We'll tell you where to put files and make things easy whenever possible.
 
 ## Table of Contents
@@ -113,7 +117,7 @@ Omitting the `.js` extension in calls to `require()` is preferred, as it allows 
 
 ## Development
 ### Style
-We favor the [hapi style guide](hapijs.com/styleguide).  Yes, even when coding for the browser!  The idea is to maintain fluency for developers who work both on the server and in the browser.  It is supposed to be the same language, after all!  Node and V8 move fast enough on their own, so we plan to keep up-to-date with that ecosystem rather than the hyperspeed with which transpilers make available incompletely-spec'd JS features.  It's worth noting that for the time being that includes ES6 modules.  We additionally have some standard React lint rules.  Just `npm run lint` to see how you're doing!
+We favor the [hapi style guide](https://hapijs.com/styleguide).  Yes, even when coding for the browser!  The idea is to maintain fluency for developers who work both on the server and in the browser.  It is supposed to be the same language, after all!  Node and V8 move fast enough on their own, so we plan to keep up-to-date with that ecosystem rather than the hyperspeed with which transpilers make available incompletely-spec'd JS features.  It's worth noting that for the time being that includes ES6 modules.  We additionally have some standard React lint rules.  Just `npm run lint` to see how you're doing!
 
 ### Developer Tools
 Works nicely with the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) and [React DevTools Chrome Extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi).  `npm run dev` will enable the tools automatically, while `npm run dev:no-debug` will not.
@@ -124,6 +128,10 @@ We use `react-router` [route definitions](https://github.com/reactjs/react-route
 ### Recipes
  - Incorporating forms using [react-redux-form](https://github.com/davidkpiano/react-redux-form) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-forms)]
  - Deployment alongside the [hapi boilerplate](https://github.com/devinivy/boilerplate-api) [[here](https://github.com/devinivy/boilerplate-api/compare/recipe-strangeluv)]
+ - Incorporating an "initial load" of state with an API call [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-initial-load
+)]
+ - Incorporating server-side rendering (_very, very incomplete_) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-server-side
+)]
 
 ## Testing
 To add a unit test, simply create a `.spec.js` file anywhere in `tests/`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them. If you are using `redux-cli`, test files should automatically be generated when you create a component or redux module.
