@@ -1,4 +1,5 @@
 const React = require('react');
+const T = require('prop-types');
 const DuckImage = require('../assets/duck.jpg');
 const Classes = require('./HomeView.scss');
 const MoonPhase = require('./MoonPhase');
@@ -6,10 +7,10 @@ const MoonPhase = require('./MoonPhase');
 module.exports = class extends React.Component {
 
     static propTypes = {
-        loadMoon: React.PropTypes.func.isRequired,
-        moonId: React.PropTypes.number,
-        isLoading: React.PropTypes.bool,
-        errorMessage: React.PropTypes.string
+        loadMoon: T.func.isRequired,
+        moonId: T.number,
+        isLoading: T.bool,
+        errorMessage: T.string
     }
 
     // Indicates that the component is going to be rendered onto the page

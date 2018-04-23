@@ -1,4 +1,5 @@
 const React = require('react');
+const T = require('prop-types');
 
 const internals = {};
 
@@ -10,7 +11,7 @@ const MoonPhase = ({ moonId }) => (
 
 // Make sure we don't get any weird moonIds
 MoonPhase.propTypes = {
-    moonId: React.PropTypes.number
+    moonId: T.number
 };
 
 module.exports = MoonPhase;

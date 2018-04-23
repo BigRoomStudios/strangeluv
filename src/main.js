@@ -1,18 +1,16 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const RedBox = require('redbox-react').default;
-const SyncHistoryWithStore = require('react-router-redux').syncHistoryWithStore;
 const CreateStore = require('./wiring/create-store');
 const History = require('./wiring/history');
 const AppContainer = require('./containers/App');
+const Initializers = require('./initializers');
 
 // Create redux store and sync history with react-router-redux
 
 const initialState = window.__INITIAL_STATE__;
 const store = CreateStore(initialState);
-const enhancedHistory = SyncHistoryWithStore(History, store, {
-    selectLocationState: (state) => state.router
-});
+
+Initializers.run(store);
 
 // Developer Tools Setup
 
@@ -26,17 +24,16 @@ if (__DEBUG__) {
 
 const MOUNT_NODE = document.getElementById('root');
 
-let render = (routerKey) => {
+let render = () => {
 
-    routerKey = routerKey || null;
     const routes = require('./routes')(store);
 
     ReactDOM.render(
+
         <AppContainer
-            store={store}
-            history={enhancedHistory}
+            history={History}
             routes={routes}
-            routerKey={routerKey}
+            store={store}
         />,
         MOUNT_NODE
     );
@@ -47,6 +44,7 @@ let render = (routerKey) => {
 
 if (__DEV__ && module.hot) {
 
+    const RedBox = require('redbox-react').default;
     const renderApp = render;
     const renderError = (error) => {
 
@@ -59,6 +57,7 @@ if (__DEV__ && module.hot) {
             renderApp(Math.random());
         }
         catch (error) {
+            console.error(error.stack);
             renderError(error);
         }
     };

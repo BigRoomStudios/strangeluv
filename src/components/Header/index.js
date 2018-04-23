@@ -1,18 +1,18 @@
 const React = require('react');
-const Router = require('react-router');
+const NavLink = require('react-router-dom').NavLink;
 const Classes = require('./styles.scss');
 
 module.exports = () => (
 
     <div>
-        <h1>React Redux Starter Kit</h1>
-        <Router.IndexLink to='/' activeClassName={Classes.activeRoute}>
+        <h1>Strangeluv</h1>
+        <NavLink exact to='/' activeClassName={Classes.activeRoute}>
             Home
-        </Router.IndexLink>
+        </NavLink>
         {' · '}
-        <Router.Link to='/counter' activeClassName={Classes.activeRoute}>
+        <NavLink to='/counter' activeClassName={Classes.activeRoute}>
             Counter
-        </Router.Link>
+        </NavLink>
     </div>
 
 );
