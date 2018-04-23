@@ -8,7 +8,7 @@ describe('(View) Home', () => {
 
     beforeEach(() => {
 
-        _component = Enzyme.render(<HomeView />);
+        _component = Enzyme.render(<HomeView loadMoon={() => null} />);
     });
 
     it('Renders a welcome message', () => {
