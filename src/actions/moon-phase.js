@@ -1,5 +1,4 @@
 const Axios = require('axios');
-const Types = require('../action-types/moon-phase');
 
 const actions = exports;
 
