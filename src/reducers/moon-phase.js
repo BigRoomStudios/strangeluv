@@ -17,17 +17,17 @@ module.exports = (state, action) => {
     const payload = action.payload;
 
     switch (type) {
-        case MoonPhaseTypes.MOON_LOAD_BEGIN:
+        case MoonPhaseTypes.MOON_LOAD_START:
             return Object.assign({}, state, {
                 isLoading: true
             });
-        case MoonPhaseTypes.MOON_LOADED:
+        case MoonPhaseTypes.MOON_LOAD_SUCCESS:
             return Object.assign({}, state, {
                 isLoading: false,
                 moonId: payload.Index,
                 error: null
             });
-        case MoonPhaseTypes.MOON_LOAD_ERROR:
+        case MoonPhaseTypes.MOON_LOAD_FAIL:
             return Object.assign({}, state, {
                 isLoading: false,
                 moonId: null,
