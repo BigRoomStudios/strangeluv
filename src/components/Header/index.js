@@ -4,6 +4,7 @@ const Classes = require('./styles.scss');
 
 const ButtonComponent = require('../material/button');
 const ButtonStyledComponent = require('../material/button-styledComponent');
+const ButtonEmotion = require('../material/button-emotion');
 const Button = require('material-ui/Button').default;
 
 module.exports = () => (
@@ -15,6 +16,10 @@ module.exports = () => (
 
         <NavLink exact to='/counter' activeClassName={Classes.activeRoute}> {/* Button Component, with styled component */}
             <ButtonStyledComponent title='Styled Button Title' />
+        </NavLink>
+
+        <NavLink exact to='/counter' activeClassName={Classes.activeRoute}> {/* Button Component, with styled component */}
+            <ButtonEmotion title='Im emotional' />
         </NavLink>
 
         <Button color='secondary'>Secondary Button</Button> {/* Basic button */}
