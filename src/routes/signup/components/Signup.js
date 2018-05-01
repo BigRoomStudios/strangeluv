@@ -2,6 +2,7 @@ const React = require('react');
 const T = require('prop-types');
 const NavLink = require('react-router-dom').NavLink;
 const StrangeForms = require('strange-forms');
+const IsEmail = require('utils/is-email');
 
 module.exports = class Signup extends StrangeForms(React.Component) {
 
@@ -17,12 +18,11 @@ module.exports = class Signup extends StrangeForms(React.Component) {
             firstName: '',
             lastName: '',
             email: '',
+            emailBlurred: false,
             password: '',
-            confirmPassword: '',
-            confirmPasswordHasBlurred: false
+            passwordConfirm: '',
+            passwordBlurred: false
         };
-
-        //this.submit = this._submit.bind(this);
 
         this.strangeForm({
             fields: ['firstName', 'lastName', 'email', 'password', 'confirmPassword'],
@@ -48,6 +48,58 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         this.setState({ [field]: value });
     }
 
+    invalid() {
+
+        return ['email', 'password', 'confirmPassword'].some((field) => {
+
+            // returns true if invalid
+            return this.fieldError(field);
+        });
+    }
+
+    validateEmail = () => {
+
+        if ( this.state.emailBlurred) {
+
+            if ( IsEmail(this.state.email) ) {
+
+                return false;
+            }
+
+            return true;
+        }
+
+        return null;
+    }
+
+    fieldBlurred = (ev) => {
+
+        if (ev.target.id === 'email') {
+
+            this.setState({ emailBlurred: true });
+        };
+
+        if (ev.target.id === 'confirmPassword') {
+
+            this.setState({ passwordBlurred: true });
+        };
+    }
+
+    validatePassword = () => {
+
+        if (this.state.passwordBlurred) {
+
+            if (this.state.password === this.state.confirmPassword) {
+
+                return false;
+            }
+
+            return true;
+        }
+
+        return null;
+    }
+
     submit = (ev) => {
 
         const { firstName, lastName, email, password } = this.state;
@@ -59,23 +111,31 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
     render() {
 
+        // console.log(this.invalid());
+        // console.log(this.state.passwordBlurred);
+        console.log(this.validateEmail());
+
         return (
 
             <div>
+
                 <h2>Sign Up</h2>
                 <form onSubmit={this.submit}>
                     <div className='form-group'>
                         <label>First Name</label>
                         <input
                             className='form-control'
+                            id='firstName'
                             value={this.fieldValue('firstName')}
                             onChange={this.proposeNew('firstName')}
                         />
+
                     </div>
                     <div className='form-group'>
                         <label>Last Name</label>
                         <input
                             className='form-control'
+                            id='lastName'
                             value={this.fieldValue('lastName')}
                             onChange={this.proposeNew('lastName')}
                         />
@@ -84,14 +144,19 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         <label>Email</label>
                         <input
                             className='form-control'
+                            id='email'
                             value={this.fieldValue('email')}
                             onChange={this.proposeNew('email')}
+                            onBlur={this.fieldBlurred}
+                            type='email'
                         />
+                        {this.validateEmail() && <label>Please enter a valid email address</label>}
                     </div>
                     <div className='form-group'>
                         <label>Password</label>
                         <input
                             className='form-control'
+                            id='password'
                             type='password'
                             value={this.fieldValue('password')}
                             onChange={this.proposeNew('password')}
@@ -101,10 +166,14 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         <label>Confirm Password</label>
                         <input
                             className='form-control'
+                            id='confirmPassword'
                             type='password'
                             value={this.fieldValue('confirmPassword')}
                             onChange={this.proposeNew('confirmPassword')}
+                            onBlur={this.fieldBlurred}
                         />
+                        {this.validatePassword() && <label>Please enter matching passwords</label>}
+
                     </div>
                     <div className='checkbox'>
                         <label>
@@ -115,7 +184,11 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         </label>
                     </div>
                     <p>Already have an account? <NavLink to='login'>Login</NavLink> now.</p>
-                    <button className='btn btn-default' type='submit' onClick={this.submit}>Sign Up</button>
+                    <button
+                        className='btn btn-default'
+                        type='submit'
+                        onClick={this.submit}
+                    >Sign Up</button>
                 </form>
             </div>
         );
