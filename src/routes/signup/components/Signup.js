@@ -7,7 +7,8 @@ const IsEmail = require('utils/is-email');
 module.exports = class Signup extends StrangeForms(React.Component) {
 
     static propTypes = {
-        onSubmit: T.func.isRequired
+        onSubmit: T.func.isRequired,
+        errored: T.string
     };
 
     constructor(props) {
@@ -126,6 +127,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         <input
                             className='form-control'
                             id='firstName'
+                            type='text'
                             value={this.fieldValue('firstName')}
                             onChange={this.proposeNew('firstName')}
                         />
@@ -136,6 +138,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         <input
                             className='form-control'
                             id='lastName'
+                            type='text'
                             value={this.fieldValue('lastName')}
                             onChange={this.proposeNew('lastName')}
                         />
@@ -145,12 +148,12 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         <input
                             className='form-control'
                             id='email'
+                            type='email'
                             value={this.fieldValue('email')}
                             onChange={this.proposeNew('email')}
                             onBlur={this.fieldBlurred}
-                            type='email'
                         />
-                        {this.validateEmail() && <label>Please enter a valid email address</label>}
+                        {this.validateEmail() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
                     </div>
                     <div className='form-group'>
                         <label>Password</label>
@@ -172,7 +175,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                             onChange={this.proposeNew('confirmPassword')}
                             onBlur={this.fieldBlurred}
                         />
-                        {this.validatePassword() && <label>Please enter matching passwords</label>}
+                        {this.validatePassword() && <label style={{ color:'red' }}>Please enter matching passwords</label>}
 
                     </div>
                     <div className='checkbox'>
@@ -184,6 +187,9 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         </label>
                     </div>
                     <p>Already have an account? <NavLink to='login'>Login</NavLink> now.</p>
+                    {this.props.errored &&
+                        <div style={{ color: 'red' }}>Error! {this.props.errored}</div>
+                    }
                     <button
                         className='btn btn-default'
                         type='submit'

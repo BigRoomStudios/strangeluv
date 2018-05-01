@@ -18,6 +18,18 @@ module.exports = (state, action) => {
             return Deeply(state)
                 .set('rememberMe', payload)
                 .value();
+
+        case AuthTypes.REGISTRATION_FAILURE:
+
+            return Deeply(state)
+                .set('error.message', payload)
+                .value();
+
+        case AuthTypes.REGISTRATION_SUCCESS:
+
+            return Deeply(state)
+                .set('error.message', null)
+                .value();
     }
 
     return state;

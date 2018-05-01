@@ -23,10 +23,11 @@ exports.registrationSuccess = () => {
     };
 };
 
-exports.registrationFailure = () => {
+exports.registrationFailure = (errMessage) => {
 
     return {
-        type: AuthAct.REGISTRATION_FAILURE
+        type: AuthAct.REGISTRATION_FAILURE,
+        payload: errMessage
     };
 };
 
@@ -50,7 +51,7 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
             const errMessage = typeof err.response !== 'undefined' ? err.response.data.message : 'Signup failed. Please try again.';
             console.log(errMessage);
             //dispatch(SnackbarActions.messageSnackbar(errMessage));
-            dispatch(actions.registrationFailure());
+            dispatch(actions.registrationFailure(errMessage));
         });
 
         return newUser;
