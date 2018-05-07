@@ -105,7 +105,6 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
                     <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                 }
                 <button className='btn btn-default' onClick={this.requestPasswordReset}>Reset Password</button>
-
             </div>
         );
     }

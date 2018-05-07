@@ -174,8 +174,8 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         </label>
                     </div>
                     <p>Already have an account? <NavLink to='login'>Login</NavLink> now.</p>
-                    {this.props.errored &&
-                        <div style={{ color: 'red' }}>Error! {this.props.errored}</div>
+                    {this.props.errorMessage &&
+                        <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
                     <button
                         className='btn btn-default'
