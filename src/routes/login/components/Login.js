@@ -6,7 +6,7 @@ const StrangeForms = require('strange-forms');
 module.exports = class Login extends StrangeForms(React.Component) {
 
     static propTypes = {
-        errored: T.bool,
+        errorMessage: T.string,
         login: T.func.isRequired,
         rememberMe: T.bool.isRequired,
         rememberAct: T.func.isRequired
@@ -74,8 +74,6 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
     render() {
 
-        // TODO in MBM we had form validation here. Is this the right spot? What does strangeforms invalid() do?
-
         return (
 
             <div>
@@ -112,10 +110,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
                 <p><NavLink to='forgot-password'>Forget password?</NavLink></p>
 
                 {/* TODO fix this! Currently this errors because of the auth initializer, and we need to adjust this to show an error when it actually errors from a bad request - not just based on state */}
-                {this.props.errored &&
-
-                    <div className='alert-danger alert'>Looks like you have bad credentials. Please try again!</div>}
-
+                {this.props.errorMessage && <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>}
                 <button className='btn btn-default' onClick={this.loginUser}>Login</button>
 
             </div>

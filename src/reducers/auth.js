@@ -34,6 +34,12 @@ module.exports = (state, action) => {
             return Deeply(state)
                 .set('error.message', null)
                 .value();
+
+        case StrangeAuth.types.LOGIN_FAIL:
+
+            return Deeply(state)
+                .set('error.message', 'Login failed, please check your email and password.')
+                .value();
     }
 
     return state;
