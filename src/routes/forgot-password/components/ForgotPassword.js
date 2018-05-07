@@ -1,6 +1,7 @@
 const React = require('react');
 const T = require('prop-types');
 const StrangeForms = require('strange-forms');
+const IsEmail = require('utils/is-email');
 
 module.exports = class ForgotPassword extends StrangeForms(React.Component) {
 
@@ -14,7 +15,10 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         super(props);
 
         this.state = {
-            email: ''
+            email: '',
+            isBlurred: {
+                email: false
+            }
         };
 
         this.requestPasswordReset = this._requestPasswordReset.bind(this);
@@ -51,6 +55,29 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         });
     }
 
+    fieldBlurred = (ev) => {
+
+        const isBlurred = { ...this.state.isBlurred };
+        const field = ev.target.id;
+
+        isBlurred[field] = true;
+
+        this.setState({ isBlurred });
+    }
+
+    invalidEmail = () => {
+
+        if ( this.state.isBlurred.email) {
+
+            if ( IsEmail(this.state.email) ) {
+
+                return false;
+            }
+
+            return true;
+        }
+    }
+
     _requestPasswordReset() {
 
         this.props.requestReset({ email: this.state.email });
@@ -67,9 +94,12 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
                     <label>Email:</label>
                     <input
                         className='form-control'
+                        id='email'
                         value={this.fieldValue('email')}
                         onChange={this.proposeNew('email')}
+                        onBlur={this.fieldBlurred}
                     />
+                    {this.invalidEmail() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
                 </div>
                 {this.props.errorMessage &&
                     <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>

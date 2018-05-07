@@ -120,7 +120,6 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                             value={this.fieldValue('firstName')}
                             onChange={this.proposeNew('firstName')}
                         />
-
                     </div>
                     <div className='form-group'>
                         <label>Last Name</label>
@@ -165,7 +164,6 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                             onBlur={this.fieldBlurred}
                         />
                         {this.invalidPassword() && <label style={{ color:'red' }}>Please enter matching passwords</label>}
-
                     </div>
                     <div className='checkbox'>
                         <label>
