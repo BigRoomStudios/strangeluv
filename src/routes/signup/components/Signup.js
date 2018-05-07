@@ -19,10 +19,12 @@ module.exports = class Signup extends StrangeForms(React.Component) {
             firstName: '',
             lastName: '',
             email: '',
-            emailBlurred: false,
             password: '',
-            passwordConfirm: '',
-            passwordBlurred: false
+            confirmPassword: '',
+            isBlurred: {
+                email: false,
+                confirmPassword: false
+            }
         };
 
         this.strangeForm({
@@ -60,21 +62,17 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
     fieldBlurred = (ev) => {
 
-        if (ev.target.id === 'email') {
+        const isBlurred = { ...this.state.isBlurred };
+        const field = ev.target.id;
 
-            this.setState({ emailBlurred: true });
-        };
+        isBlurred[field] = true;
 
-        if (ev.target.id === 'confirmPassword') {
-
-            this.setState({ passwordBlurred: true });
-        };
-
+        this.setState({ isBlurred });
     }
 
     invalidEmail = () => {
 
-        if ( this.state.emailBlurred) {
+        if ( this.state.isBlurred.email) {
 
             if ( IsEmail(this.state.email) ) {
 
@@ -87,7 +85,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
     invalidPassword = () => {
 
-        if (this.state.passwordBlurred) {
+        if (this.state.isBlurred.confirmPassword) {
 
             if (this.state.password === this.state.confirmPassword) {
 
@@ -105,13 +103,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         ev.preventDefault();
     }
 
-    // TODO let's add some validation for email, matching passwords!
-
     render() {
-
-        //console.log(this.invalid());
-        // console.log(this.state.passwordBlurred);
-        console.log(this.invalidEmail());
 
         return (
 
