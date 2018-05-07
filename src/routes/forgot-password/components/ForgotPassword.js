@@ -5,7 +5,8 @@ const StrangeForms = require('strange-forms');
 module.exports = class ForgotPassword extends StrangeForms(React.Component) {
 
     static propTypes = {
-        requestReset: T.func.isRequired
+        requestReset: T.func.isRequired,
+        errorMessage: T.string
     };
 
     constructor(props) {
@@ -70,6 +71,9 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
                         onChange={this.proposeNew('email')}
                     />
                 </div>
+                {this.props.errorMessage &&
+                    <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
+                }
                 <button className='btn btn-default' onClick={this.requestPasswordReset}>Reset Password</button>
 
             </div>

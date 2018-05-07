@@ -49,7 +49,6 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
         .catch((err) => {
 
             const errMessage = typeof err.response !== 'undefined' ? err.response.data.message : 'Signup failed. Please try again.';
-            console.log(errMessage);
             //dispatch(SnackbarActions.messageSnackbar(errMessage));
             dispatch(actions.registrationFailure(errMessage));
         });
@@ -111,10 +110,11 @@ exports.requestResetSuccess = () => {
     };
 };
 
-exports.requestResetFailure = () => {
+exports.requestResetFailure = (errMessage) => {
 
     return {
-        type: AuthAct.REQUEST_PASSWORD_RESET_FAILURE
+        type: AuthAct.REQUEST_PASSWORD_RESET_FAILURE,
+        payload: errMessage
     };
 };
 
@@ -132,10 +132,11 @@ exports.resetPasswordSuccess = () => {
     };
 };
 
-exports.resetPasswordFailure = () => {
+exports.resetPasswordFailure = (errMessage) => {
 
     return {
-        type: AuthAct.RESET_PASSWORD_FAILURE
+        type: AuthAct.RESET_PASSWORD_FAILURE,
+        payload: errMessage
     };
 };
 
@@ -161,7 +162,7 @@ exports.requestPasswordReset = ({ email }) => {
                     errMessage = err.response.data.message;
                 }
 
-                dispatch(actions.requestResetFailure());
+                dispatch(actions.requestResetFailure(errMessage));
 
                 //return dispatch(SnackbarActions.messageSnackbar(errMessage));
             })
@@ -183,10 +184,16 @@ exports.resetPassword = (email, newPassword, resetToken) => {
                 return History.push('/login');
 
             })
-            .catch((ignoreErr) => {
+            .catch((err) => {
 
-                //return dispatch(SnackbarActions.messageSnackbar('Error resetting email, please try again!'));
-                dispatch(actions.resetPasswordFailure());
+                let errMessage = 'Unable to reset password. Please try again.';
+
+                if (typeof err.response !== 'undefined') {
+                    errMessage = err.message;
+                }
+
+                //return dispatch(SnackbarActions.messageSnackbar('Error resetting password, please try again!'));
+                dispatch(actions.resetPasswordFailure(errMessage));
             })
         ;
     };

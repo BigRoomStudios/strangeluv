@@ -5,7 +5,9 @@ const AuthAct = require('actions/auth');
 const internals = {};
 
 internals.connect = Connect(
-    null,
+    (state) => ({
+        errorMessage: state.auth.error.message
+    }),
     {
         resetPassword: AuthAct.resetPassword
     }

@@ -20,12 +20,16 @@ module.exports = (state, action) => {
                 .value();
 
         case AuthTypes.REGISTRATION_FAILURE:
+        case AuthTypes.REQUEST_PASSWORD_RESET_FAILURE:
+        case AuthTypes.RESET_PASSWORD_FAILURE:
 
             return Deeply(state)
                 .set('error.message', payload)
                 .value();
 
         case AuthTypes.REGISTRATION_SUCCESS:
+        case AuthTypes.REQUEST_PASSWORD_RESET_SUCCESS:
+        case AuthTypes.RESET_PASSWORD_SUCCESS:
 
             return Deeply(state)
                 .set('error.message', null)

@@ -6,7 +6,8 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
 
     static propTypes = {
         resetPassword: T.func.isRequired,
-        match: T.object
+        match: T.object,
+        errorMessage: T.string
     };
 
     constructor(props) {
@@ -59,14 +60,14 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
 
         const resetToken = this.props.match.params.token;
 
-        console.log(resetToken);
-
         this.props.resetPassword(email, password, resetToken);
     }
 
     // TODO let's add some validation for email, matching passwords!
 
     render() {
+
+        console.log(this.props);
 
         return (
             <div>
@@ -98,6 +99,9 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
                         onChange={this.proposeNew('confirmPassword')}
                     />
                 </div>
+                {this.props.errorMessage &&
+                    <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
+                }
                 <button className='btn btn-default' type='submit' onClick={this.resetPassword}>Update Password</button>
             </div>
 
