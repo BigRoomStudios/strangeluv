@@ -99,6 +99,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
     submit = (ev) => {
 
         const { firstName, lastName, email, password } = this.state;
+
         this.props.onSubmit({ email, password, firstName, lastName  });
         ev.preventDefault();
     }
@@ -108,7 +109,6 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         return (
 
             <div>
-
                 <h2>Sign Up</h2>
                 <form onSubmit={this.submit}>
                     <div className='form-group'>

@@ -25,8 +25,6 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
             }
         };
 
-        this.resetPassword = this._resetPassword.bind(this);
-
         this.strangeForm({
             fields: ['email', 'password', 'confirmPassword'],
             get: {
@@ -95,10 +93,9 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         }
     }
 
-    _resetPassword() {
+    resetPassword = () => {
 
         const { email, password } = this.state;
-
         const resetToken = this.props.match.params.token;
 
         this.props.resetPassword(email, password, resetToken);
@@ -120,7 +117,9 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
                         onChange={this.proposeNew('email')}
                         onBlur={this.fieldBlurred}
                     />
-                    {this.invalidEmail() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
+                    {this.invalidEmail() &&
+                        <label style={{ color:'red' }}>Please enter a valid email address</label>
+                    }
                 </div>
                 <div className='form-group'>
                     <label>Password</label>
@@ -142,7 +141,9 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
                         onChange={this.proposeNew('confirmPassword')}
                         onBlur={this.fieldBlurred}
                     />
-                    {this.invalidPassword() && <label style={{ color:'red' }}>Please enter matching passwords</label>}
+                    {this.invalidPassword() &&
+                        <label style={{ color:'red' }}>Please enter matching passwords</label>
+                    }
                 </div>
                 {this.props.errorMessage &&
                     <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>

@@ -22,9 +22,6 @@ module.exports = class Login extends StrangeForms(React.Component) {
             rememberMe: this.props.rememberMe
         };
 
-        // TODO is this the binding pattern we wanna use? Bek likes arrow functions
-        this.loginUser = this._loginUser.bind(this);
-
         this.strangeForm({
             fields: ['email', 'password', 'rememberMe'],
             get: {
@@ -66,10 +63,16 @@ module.exports = class Login extends StrangeForms(React.Component) {
         });
     }
 
-    _loginUser() {
+    submit = (ev) => {
 
-        this.props.login({ email: this.state.email, password: this.state.password });
-        this.props.rememberAct({ remember: this.state.rememberMe });
+
+        const { email, password, rememberMe } = this.state;
+
+        this.props.login({ email, password });
+        this.props.rememberAct({ rememberMe });
+
+        ev.preventDefault();
+
     }
 
     render() {
@@ -77,42 +80,46 @@ module.exports = class Login extends StrangeForms(React.Component) {
         return (
 
             <div>
-
-                <h2>Login</h2>
-                <div className='form-group'>
-                    <label>Email:</label>
-                    <input
-                        className='form-control'
-                        value={this.fieldValue('email')}
-                        onChange={this.proposeNew('email')}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label>Password:</label>
-                    <input
-                        className='form-control'
-                        type='password'
-                        value={this.fieldValue('password')}
-                        onChange={this.proposeNew('password')}
-                    />
-                </div>
-                <div className='checkbox'>
-                    <label>
+                <form onSubmit={this.submit}>
+                    <h2>Login</h2>
+                    <div className='form-group'>
+                        <label>Email:</label>
                         <input
-                            type='checkbox'
-                            checked={this.fieldValue('rememberMe')}
-                            onChange={this.proposeNew('rememberMe')}
+                            className='form-control'
+                            value={this.fieldValue('email')}
+                            onChange={this.proposeNew('email')}
                         />
-                        Remember Me
-                    </label>
-                </div>
-                <p>Don't have an account? <NavLink to='sign-up'>Sign up</NavLink> now.</p>
-                <p><NavLink to='forgot-password'>Forget password?</NavLink></p>
-
-                {/* TODO fix this! Currently this errors because of the auth initializer, and we need to adjust this to show an error when it actually errors from a bad request - not just based on state */}
-                {this.props.errorMessage && <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>}
-                <button className='btn btn-default' onClick={this.loginUser}>Login</button>
-
+                    </div>
+                    <div className='form-group'>
+                        <label>Password:</label>
+                        <input
+                            className='form-control'
+                            type='password'
+                            value={this.fieldValue('password')}
+                            onChange={this.proposeNew('password')}
+                        />
+                    </div>
+                    <div className='checkbox'>
+                        <label>
+                            <input
+                                type='checkbox'
+                                checked={this.fieldValue('rememberMe')}
+                                onChange={this.proposeNew('rememberMe')}
+                            />
+                            Remember Me
+                        </label>
+                    </div>
+                    <p>Don't have an account? <NavLink to='sign-up'>Sign up</NavLink> now.</p>
+                    <p><NavLink to='forgot-password'>Forget password?</NavLink></p>
+                    {this.props.errorMessage &&
+                        <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
+                    }
+                    <button
+                        className='btn btn-default'
+                        type='submit'
+                        onClick={this.submit}
+                    >Login</button>
+                </form>
             </div>
         );
     }

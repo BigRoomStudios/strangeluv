@@ -21,8 +21,6 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
             }
         };
 
-        this.requestPasswordReset = this._requestPasswordReset.bind(this);
-
         this.strangeForm({
             fields: ['email'],
             get: {
@@ -78,7 +76,7 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         }
     }
 
-    _requestPasswordReset() {
+    requestPasswordReset = () => {
 
         this.props.requestReset({ email: this.state.email });
     }
@@ -99,7 +97,9 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
                         onChange={this.proposeNew('email')}
                         onBlur={this.fieldBlurred}
                     />
-                    {this.invalidEmail() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
+                    {this.invalidEmail() &&
+                        <label style={{ color:'red' }}>Please enter a valid email address</label>
+                    }
                 </div>
                 {this.props.errorMessage &&
                     <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
