@@ -1,6 +1,7 @@
 const StrangeAuth = require('strange-auth');
 const AuthTypes = require('../action-types/auth');
 const Deeply = require('../utils/deeply');
+const RouterTypes = require('react-router-redux');
 
 const authReducer = StrangeAuth.makeReducer();
 
@@ -27,9 +28,7 @@ module.exports = (state, action) => {
                 .set('error.message', payload)
                 .value();
 
-        case AuthTypes.REGISTRATION_SUCCESS:
-        case AuthTypes.REQUEST_PASSWORD_RESET_SUCCESS:
-        case AuthTypes.RESET_PASSWORD_SUCCESS:
+        case RouterTypes.LOCATION_CHANGE:
 
             return Deeply(state)
                 .set('error.message', null)
