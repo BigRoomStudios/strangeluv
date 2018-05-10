@@ -27,17 +27,13 @@ module.exports = class Signup extends StrangeForms(React.Component) {
             }
         };
 
+        // TODO add rememberme ya dingdong!
+
         this.strangeForm({
             fields: ['firstName', 'lastName', 'email', 'password', 'confirmPassword'],
-            get: {
-                '*': (someProps, field) => ''
-            },
-            act: {
-                '*': this.formField.bind(this)
-            },
-            getFormValue: {
-                '*': this.getFormValue.bind(this)
-            }
+            get: (someProps, field) => this.state[field],
+            act: this.formField.bind(this),
+            getFormValue: this.getFormValue.bind(this)
         });
     }
 
@@ -181,7 +177,6 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         className='btn btn-default'
                         type='submit'
                         onClick={this.submit}
-                        // disabled={!this.invalid()}
                     >Sign Up</button>
                 </form>
             </div>

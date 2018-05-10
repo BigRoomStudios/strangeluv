@@ -23,15 +23,9 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
 
         this.strangeForm({
             fields: ['email'],
-            get: {
-                '*': (someProps, field) => ''
-            },
-            act: {
-                '*': this.formField.bind(this)
-            },
-            getFormValue: {
-                '*': this.getFormValue.bind(this)
-            }
+            get: (someProps, field) => this.state[field],
+            act: this.formField.bind(this),
+            getFormValue: this.getFormValue.bind(this)
         });
     }
 
@@ -43,14 +37,6 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
     formField(field, value) {
 
         this.setState({ [field]: value });
-    }
-
-    invalid() {
-
-        return ['email', 'password', 'rememberMe'].some((field) => {
-
-            return this.fieldError(field);
-        });
     }
 
     fieldBlurred = (ev) => {
@@ -76,9 +62,14 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         }
     }
 
-    requestPasswordReset = () => {
+    submit = (ev) => {
 
-        this.props.requestReset({ email: this.state.email });
+        const { email } = this.state;
+
+        this.props.requestReset({ email });
+
+        ev.preventDefault();
+
     }
 
     render() {
@@ -86,25 +77,31 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         return (
 
             <div>
-                <h2>Forgot your password?</h2>
-                <p>To reset your password, enter your email below and we will email a link to reset your password.</p>
-                <div className='form-group'>
-                    <label>Email:</label>
-                    <input
-                        className='form-control'
-                        id='email'
-                        value={this.fieldValue('email')}
-                        onChange={this.proposeNew('email')}
-                        onBlur={this.fieldBlurred}
-                    />
-                    {this.invalidEmail() &&
-                        <label style={{ color:'red' }}>Please enter a valid email address</label>
+                <form onSubmit={this.submit}>
+                    <h2>Forgot your password?</h2>
+                    <p>To reset your password, enter your email below and we will email a link to reset your password.</p>
+                    <div className='form-group'>
+                        <label>Email:</label>
+                        <input
+                            className='form-control'
+                            id='email'
+                            value={this.fieldValue('email')}
+                            onChange={this.proposeNew('email')}
+                            onBlur={this.fieldBlurred}
+                        />
+                        {this.invalidEmail() &&
+                            <label style={{ color:'red' }}>Please enter a valid email address</label>
+                        }
+                    </div>
+                    {this.props.errorMessage &&
+                        <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
-                </div>
-                {this.props.errorMessage &&
-                    <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
-                }
-                <button className='btn btn-default' onClick={this.requestPasswordReset}>Reset Password</button>
+                    <button
+                        className='btn btn-default'
+                        type='submit'
+                        onClick={this.submit}
+                    >Reset Password</button>
+                </form>
             </div>
         );
     }

@@ -27,15 +27,9 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
 
         this.strangeForm({
             fields: ['email', 'password', 'confirmPassword'],
-            get: {
-                '*': (someProps, field) => ''
-            },
-            act: {
-                '*': this.formField.bind(this)
-            },
-            getFormValue: {
-                '*': this.getFormValue.bind(this)
-            }
+            get: (someProps, field) => this.state[field],
+            act: this.formField.bind(this),
+            getFormValue: this.getFormValue.bind(this)
         });
     }
 
@@ -47,14 +41,6 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
     formField(field, value) {
 
         this.setState({ [field]: value });
-    }
-
-    invalid() {
-
-        return ['email', 'password', 'confirmPassword'].some((field) => {
-
-            return this.fieldError(field);
-        });
     }
 
     fieldBlurred = (ev) => {
@@ -93,62 +79,70 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         }
     }
 
-    resetPassword = () => {
+    submit= (ev) => {
 
         const { email, password } = this.state;
         const resetToken = this.props.match.params.token;
 
         this.props.resetPassword(email, password, resetToken);
+
+        ev.preventDefault();
     }
 
     render() {
 
         return (
             <div>
-                <h2>Reset Password</h2>
-                <p>Please confirm your email address and set your new password below.</p>
-                <div className='form-group'>
-                    <label>Email</label>
-                    <input
-                        className='form-control'
-                        id='email'
-                        type='email'
-                        value={this.fieldValue('email')}
-                        onChange={this.proposeNew('email')}
-                        onBlur={this.fieldBlurred}
-                    />
-                    {this.invalidEmail() &&
-                        <label style={{ color:'red' }}>Please enter a valid email address</label>
+                <form onSubmit={this.submit}>
+                    <h2>Reset Password</h2>
+                    <p>Please confirm your email address and set your new password below.</p>
+                    <div className='form-group'>
+                        <label>Email</label>
+                        <input
+                            className='form-control'
+                            id='email'
+                            type='email'
+                            value={this.fieldValue('email')}
+                            onChange={this.proposeNew('email')}
+                            onBlur={this.fieldBlurred}
+                        />
+                        {this.invalidEmail() &&
+                            <label style={{ color:'red' }}>Please enter a valid email address</label>
+                        }
+                    </div>
+                    <div className='form-group'>
+                        <label>Password</label>
+                        <input
+                            className='form-control'
+                            id='password'
+                            type='password'
+                            value={this.fieldValue('password')}
+                            onChange={this.proposeNew('password')}
+                        />
+                    </div>
+                    <div className='form-group'>
+                        <label>Confirm Password</label>
+                        <input
+                            className='form-control'
+                            id='confirmPassword'
+                            type='password'
+                            value={this.fieldValue('confirmPassword')}
+                            onChange={this.proposeNew('confirmPassword')}
+                            onBlur={this.fieldBlurred}
+                        />
+                        {this.invalidPassword() &&
+                            <label style={{ color:'red' }}>Please enter matching passwords</label>
+                        }
+                    </div>
+                    {this.props.errorMessage &&
+                        <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
-                </div>
-                <div className='form-group'>
-                    <label>Password</label>
-                    <input
-                        className='form-control'
-                        id='password'
-                        type='password'
-                        value={this.fieldValue('password')}
-                        onChange={this.proposeNew('password')}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label>Confirm Password</label>
-                    <input
-                        className='form-control'
-                        id='confirmPassword'
-                        type='password'
-                        value={this.fieldValue('confirmPassword')}
-                        onChange={this.proposeNew('confirmPassword')}
-                        onBlur={this.fieldBlurred}
-                    />
-                    {this.invalidPassword() &&
-                        <label style={{ color:'red' }}>Please enter matching passwords</label>
-                    }
-                </div>
-                {this.props.errorMessage &&
-                    <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
-                }
-                <button className='btn btn-default' type='submit' onClick={this.resetPassword}>Update Password</button>
+                    <button
+                        className='btn btn-default'
+                        type='submit'
+                        onClick={this.submit}
+                    >Update Password</button>
+                </form>
             </div>
         );
     }
