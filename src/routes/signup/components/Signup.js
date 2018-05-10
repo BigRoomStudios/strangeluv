@@ -8,7 +8,8 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
     static propTypes = {
         onSubmit: T.func.isRequired,
-        errorMessage: T.string
+        errorMessage: T.string,
+        rememberAct: T.func.isRequired
     };
 
     constructor(props) {
@@ -21,20 +22,27 @@ module.exports = class Signup extends StrangeForms(React.Component) {
             email: '',
             password: '',
             confirmPassword: '',
+            rememberMe: true,
             isBlurred: {
                 email: false,
                 confirmPassword: false
             }
         };
 
-        // TODO add rememberme ya dingdong!
-
         this.strangeForm({
-            fields: ['firstName', 'lastName', 'email', 'password', 'confirmPassword'],
+            fields: ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'rememberMe'],
             get: (someProps, field) => this.state[field],
             act: this.formField.bind(this),
-            getFormValue: this.getFormValue.bind(this)
+            getFormValue: {
+                rememberMe: this.getCheckedValue.bind(this),
+                '*': this.getFormValue.bind(this)
+            }
         });
+    }
+
+    getCheckedValue(e) {
+
+        return e.target.checked;
     }
 
     getFormValue(e) {
@@ -45,15 +53,6 @@ module.exports = class Signup extends StrangeForms(React.Component) {
     formField(field, value) {
 
         this.setState({ [field]: value });
-    }
-
-    invalid() {
-
-        return ['firstName', 'lastName', 'email', 'password', 'confirmPassword'].some((field) => {
-
-            // returns true if invalid
-            return this.fieldError(field);
-        });
     }
 
     fieldBlurred = (ev) => {
@@ -165,6 +164,8 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         <label>
                             <input
                                 type='checkbox'
+                                checked={this.fieldValue('rememberMe')}
+                                onChange={this.proposeNew('rememberMe')}
                             />
                             Remember Me
                         </label>
