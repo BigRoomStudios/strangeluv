@@ -6,8 +6,7 @@ const internals = {};
 
 internals.connect = Connect(
     (state) => ({
-        errorMessage: state.auth.error.message,
-        rememberMe: state.auth.rememberMe
+        errorMessage: state.auth.error.message
     }),
     {
         login: AuthAct.login,

@@ -8,7 +8,6 @@ module.exports = class Login extends StrangeForms(React.Component) {
     static propTypes = {
         errorMessage: T.string,
         login: T.func.isRequired,
-        rememberMe: T.bool.isRequired,
         rememberAct: T.func.isRequired
     };
 
@@ -19,20 +18,13 @@ module.exports = class Login extends StrangeForms(React.Component) {
         this.state = {
             email: '',
             password: '',
-            rememberMe: this.props.rememberMe
+            rememberMe: true
         };
 
         this.strangeForm({
             fields: ['email', 'password', 'rememberMe'],
-            get: {
-                '*': (someProps, field) => ''
-                // add remember me get cause it's from props
-            },
-            act: {
-                // rememberMe: this.formCheck.bind(this),
-                '*': this.formField.bind(this)
-            },
-            // add remember me action cause it's from props
+            get: (someProps, field) => this.state[field],
+            act: this.formField.bind(this),
             getFormValue: {
                 rememberMe: this.getCheckedValue.bind(this),
                 '*': this.getFormValue.bind(this)
@@ -55,16 +47,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
         this.setState({ [field]: value });
     }
 
-    invalid() {
-
-        return ['email', 'password', 'rememberMe'].some((field) => {
-
-            return this.fieldError(field);
-        });
-    }
-
     submit = (ev) => {
-
 
         const { email, password, rememberMe } = this.state;
 
