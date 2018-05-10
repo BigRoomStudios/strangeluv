@@ -5,7 +5,10 @@ const AuthSelectors = require('selectors/auth');
 module.exports = (store) => {
 
     if (!LocalStorageAvailable()) {
+
+        // This forces strange-auth auth status to be set
         store.dispatch(AuthActions.login({ token: false }));
+
         return;
     }
 
@@ -25,6 +28,7 @@ module.exports = (store) => {
     store.subscribe(() => {
 
         if (!getShouldRemember()) {
+
             persistSet('remember', false);
             persistRemove('token');
         }
@@ -32,15 +36,18 @@ module.exports = (store) => {
         else {
 
             persistSet('remember', true);
+
             if (getIsAuthenticated()) {
+
                 persistSet('token', getToken());
             }
+
             else {
+
                 persistRemove('token');
             }
         }
     });
 
     store.dispatch(AuthActions.login({ token }));
-
 };
