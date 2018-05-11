@@ -20,6 +20,9 @@ module.exports = (state, action) => {
                 .set('rememberMe', payload)
                 .value();
 
+        // Set server error message in state to display on our components
+        // TODO one day clean this up with some action creator magic
+
         case AuthTypes.REGISTRATION_FAILURE:
         case AuthTypes.REQUEST_PASSWORD_RESET_FAILURE:
         case AuthTypes.RESET_PASSWORD_FAILURE:
@@ -28,11 +31,18 @@ module.exports = (state, action) => {
                 .set('error.message', payload)
                 .value();
 
+        // Clear server error message on route change to prevent
+        // error messages from displaying when it doesn't make sense to the user
+        // example: login attempt fails, user navigates away then back to login
+        // user wouldn't expect to see the login error
+
         case RouterTypes.LOCATION_CHANGE:
 
             return Deeply(state)
                 .set('error.message', null)
                 .value();
+
+        // Example of modifying a strange-auth action-type
 
         case StrangeAuth.types.LOGIN_FAIL:
 

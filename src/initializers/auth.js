@@ -7,6 +7,7 @@ module.exports = (store) => {
     if (!LocalStorageAvailable()) {
 
         // This forces strange-auth auth status to be set
+        // If no local storage, then we can determine there's no token
         store.dispatch(AuthActions.login({ token: false }));
 
         return;
