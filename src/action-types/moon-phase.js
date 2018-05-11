@@ -1,7 +1,5 @@
-const KeyMirror = require('keymirror');
+const { ASYNC } = require('utils/redux-helpers');
 
-module.exports = KeyMirror({
-    MOON_LOAD_BEGIN: true,
-    MOON_LOADED: true,
-    MOON_LOAD_ERROR: true
-});
+module.exports = {
+    MOON_LOAD: ASYNC
+};

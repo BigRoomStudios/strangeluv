@@ -10,7 +10,7 @@ internals.connect = Connect(
         counter: state.counter
     }),
     {
-        increment: () => CounterAct.increment(1),
+        increment: () => CounterAct.increment({ amount: 1 }),
         doubleAsync: CounterAct.doubleAsync
     }
 );
