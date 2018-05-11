@@ -34,7 +34,7 @@ module.exports = class Header extends React.Component {
                 {!isAuthenticated &&
                     <span> · </span>
                 }
-                {isAuthenticated ? <button className='btn-link' onClick={logout}>Logout</button> : <NavLink to='/login' activeClassName={Classes.activeRoute}>Login</NavLink>}
+                {isAuthenticated ? <button onClick={logout}>Logout</button> : <NavLink to='/login' activeClassName={Classes.activeRoute}>Login</NavLink>}
 
             </div>
         );

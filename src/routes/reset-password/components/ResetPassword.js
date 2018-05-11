@@ -96,10 +96,9 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
                 <form onSubmit={this.submit}>
                     <h2>Reset Password</h2>
                     <p>Please confirm your email address and set your new password below.</p>
-                    <div className='form-group'>
+                    <div>
                         <label>Email</label>
                         <input
-                            className='form-control'
                             id='email'
                             type='email'
                             value={this.fieldValue('email')}
@@ -110,20 +109,18 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
                             <label style={{ color:'red' }}>Please enter a valid email address</label>
                         }
                     </div>
-                    <div className='form-group'>
+                    <div>
                         <label>Password</label>
                         <input
-                            className='form-control'
                             id='password'
                             type='password'
                             value={this.fieldValue('password')}
                             onChange={this.proposeNew('password')}
                         />
                     </div>
-                    <div className='form-group'>
+                    <div>
                         <label>Confirm Password</label>
                         <input
-                            className='form-control'
                             id='confirmPassword'
                             type='password'
                             value={this.fieldValue('confirmPassword')}
@@ -138,7 +135,6 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
                         <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
                     <button
-                        className='btn btn-default'
                         type='submit'
                         onClick={this.submit}
                     >Update Password</button>

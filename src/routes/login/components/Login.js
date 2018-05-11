@@ -65,40 +65,35 @@ module.exports = class Login extends StrangeForms(React.Component) {
             <div>
                 <form onSubmit={this.submit}>
                     <h2>Login</h2>
-                    <div className='form-group'>
+                    <div>
                         <label>Email:</label>
                         <input
-                            className='form-control'
                             value={this.fieldValue('email')}
                             onChange={this.proposeNew('email')}
                         />
                     </div>
-                    <div className='form-group'>
+                    <div>
                         <label>Password:</label>
                         <input
-                            className='form-control'
                             type='password'
                             value={this.fieldValue('password')}
                             onChange={this.proposeNew('password')}
                         />
                     </div>
-                    <div className='checkbox'>
-                        <label>
-                            <input
-                                type='checkbox'
-                                checked={this.fieldValue('rememberMe')}
-                                onChange={this.proposeNew('rememberMe')}
-                            />
-                            Remember Me
-                        </label>
-                    </div>
-                    <p>Don't have an account? <NavLink to='sign-up'>Sign up</NavLink> now.</p>
+                    <label>
+                        <input
+                            type='checkbox'
+                            checked={this.fieldValue('rememberMe')}
+                            onChange={this.proposeNew('rememberMe')}
+                        />
+                        Remember Me
+                    </label>
+                    <p>Don&rsquo;t have an account? <NavLink to='sign-up'>Sign up</NavLink> now.</p>
                     <p><NavLink to='forgot-password'>Forget password?</NavLink></p>
                     {this.props.errorMessage &&
                         <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
                     <button
-                        className='btn btn-default'
                         type='submit'
                         onClick={this.submit}
                     >Login</button>

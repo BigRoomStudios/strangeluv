@@ -106,30 +106,27 @@ module.exports = class Signup extends StrangeForms(React.Component) {
             <div>
                 <h2>Sign Up</h2>
                 <form onSubmit={this.submit}>
-                    <div className='form-group'>
+                    <div>
                         <label>First Name</label>
                         <input
-                            className='form-control'
                             id='firstName'
                             type='text'
                             value={this.fieldValue('firstName')}
                             onChange={this.proposeNew('firstName')}
                         />
                     </div>
-                    <div className='form-group'>
+                    <div>
                         <label>Last Name</label>
                         <input
-                            className='form-control'
                             id='lastName'
                             type='text'
                             value={this.fieldValue('lastName')}
                             onChange={this.proposeNew('lastName')}
                         />
                     </div>
-                    <div className='form-group'>
+                    <div>
                         <label>Email</label>
                         <input
-                            className='form-control'
                             id='email'
                             type='email'
                             value={this.fieldValue('email')}
@@ -138,20 +135,18 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         />
                         {this.invalidEmail() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
                     </div>
-                    <div className='form-group'>
+                    <div>
                         <label>Password</label>
                         <input
-                            className='form-control'
                             id='password'
                             type='password'
                             value={this.fieldValue('password')}
                             onChange={this.proposeNew('password')}
                         />
                     </div>
-                    <div className='form-group'>
+                    <div>
                         <label>Confirm Password</label>
                         <input
-                            className='form-control'
                             id='confirmPassword'
                             type='password'
                             value={this.fieldValue('confirmPassword')}
@@ -160,22 +155,19 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         />
                         {this.invalidPassword() && <label style={{ color:'red' }}>Please enter matching passwords</label>}
                     </div>
-                    <div className='checkbox'>
-                        <label>
-                            <input
-                                type='checkbox'
-                                checked={this.fieldValue('rememberMe')}
-                                onChange={this.proposeNew('rememberMe')}
-                            />
-                            Remember Me
-                        </label>
-                    </div>
+                    <label>
+                        <input
+                            type='checkbox'
+                            checked={this.fieldValue('rememberMe')}
+                            onChange={this.proposeNew('rememberMe')}
+                        />
+                        Remember Me
+                    </label>
                     <p>Already have an account? <NavLink to='login'>Login</NavLink> now.</p>
                     {this.props.errorMessage &&
                         <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
                     <button
-                        className='btn btn-default'
                         type='submit'
                         onClick={this.submit}
                     >Sign Up</button>

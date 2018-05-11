@@ -80,10 +80,9 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
                 <form onSubmit={this.submit}>
                     <h2>Forgot your password?</h2>
                     <p>To reset your password, enter your email below and we will email a link to reset your password.</p>
-                    <div className='form-group'>
+                    <div>
                         <label>Email:</label>
                         <input
-                            className='form-control'
                             id='email'
                             value={this.fieldValue('email')}
                             onChange={this.proposeNew('email')}
@@ -97,7 +96,6 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
                         <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
                     <button
-                        className='btn btn-default'
                         type='submit'
                         onClick={this.submit}
                     >Reset Password</button>
