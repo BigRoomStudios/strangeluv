@@ -22,6 +22,7 @@ module.exports = (state, action) => {
 
         // Set server error message in state to display on our components
         // TODO one day clean this up with some action creator magic
+        // This could be managed in a separate alert reducer if it makes sense for your project
 
         case AuthTypes.REGISTRATION_FAILURE:
         case AuthTypes.REQUEST_PASSWORD_RESET_FAILURE:
