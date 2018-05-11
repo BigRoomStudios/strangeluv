@@ -42,14 +42,13 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
         newUser
         .then(({ response }) => {
 
-            //dispatch(SnackbarActions.messageSnackbar('Signup successful!'));
             dispatch(actions.registrationSuccess());
             dispatch(actions.login({ email, password }));
         })
         .catch((err) => {
 
             const errMessage = typeof err.response !== 'undefined' ? err.response.data.message : 'Signup failed. Please try again.';
-            //dispatch(SnackbarActions.messageSnackbar(errMessage));
+
             dispatch(actions.registrationFailure(errMessage));
         });
 
@@ -149,7 +148,6 @@ exports.requestPasswordReset = ({ email }) => {
         return WebClient.post('/users/request-reset', { email }, { responseType: 'text' })
             .then(({ data, status }) => {
 
-                //dispatch(SnackbarActions.messageSnackbar('Password reset email successfully sent!'));
                 dispatch(actions.requestResetSuccess());
                 return History.push('/login');
 
@@ -163,8 +161,6 @@ exports.requestPasswordReset = ({ email }) => {
                 }
 
                 dispatch(actions.requestResetFailure(errMessage));
-
-                //return dispatch(SnackbarActions.messageSnackbar(errMessage));
             })
         ;
     };
@@ -179,7 +175,6 @@ exports.resetPassword = (email, newPassword, resetToken) => {
         return WebClient.post('/users/reset-password', { email, newPassword, resetToken }, { responseType: 'text' })
             .then(({ data, status }) => {
 
-                //dispatch(SnackbarActions.messageSnackbar('Password successfully reset!'));
                 dispatch(actions.resetPasswordSuccess());
                 return History.push('/login');
 
@@ -192,7 +187,6 @@ exports.resetPassword = (email, newPassword, resetToken) => {
                     errMessage = err.message;
                 }
 
-                //return dispatch(SnackbarActions.messageSnackbar('Error resetting password, please try again!'));
                 dispatch(actions.resetPasswordFailure(errMessage));
             })
         ;
