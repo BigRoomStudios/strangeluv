@@ -1,22 +1,15 @@
 const Hapi = require('hapi');
-const Labbable = require('labbable');
 const App = require('./plugin');
 const Config = require('../config/main');
 
-const labbable = module.exports = new Labbable();
+exports.deployment = async () => {
 
-const server = new Hapi.Server();
+    const server = Hapi.Server({
+        host: Config.server_host,
+        port: Config.server_port
+    });
 
-server.connection({
-    host: Config.server_host,
-    port: Config.server_port
-});
+    await server.register(App);
 
-server.register(App, (err) => {
-
-    if (err) {
-        throw err;
-    }
-
-    labbable.using(server);
-});
+    return server;
+};
