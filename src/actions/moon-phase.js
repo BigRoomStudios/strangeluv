@@ -20,7 +20,6 @@ actions.load = makeActionCreator(
 
                 // Format of response from Farmsense API looks like [{ ... }]
                 const result = response.data[0];
-                // const result = false;
 
                 // Bad result
                 if (!result || result.Error) {
