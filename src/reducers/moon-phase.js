@@ -22,6 +22,9 @@ module.exports = (state, action) => {
                 isLoading: true
             });
         case Types.MOON_LOAD.SUCCESS:
+            if (!payload) {
+                return state;
+            }
             return Object.assign({}, state, {
                 isLoading: false,
                 moonId: payload.result.Index,

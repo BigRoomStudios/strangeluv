@@ -127,6 +127,11 @@ const makeAsyncActionCreator = (
             ).then(
                 (rawResult) => {
 
+                    // Rethrow if Error
+                    if (rawResult instanceof Error) {
+                        throw rawResult;
+                    }
+
                     const result = makePayload({
                         rawPayload: rawResult,
                         propTypes: resultPropTypes,

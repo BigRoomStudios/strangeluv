@@ -13,33 +13,23 @@ actions.load = makeActionCreator(
             // We'll want to lookup the moon phase for this very millisecond
             const now = Date.now();
 
-            return new Promise((resolve, reject) => {
+            // Make a request to the Farmsense API
+            const getMoonPhase = Axios.get(`http://api.farmsense.net/v1/moonphases/?d=${now}`);
 
-                // Make a request to the Farmsense API
-                const getMoonPhase = Axios.get(`http://api.farmsense.net/v1/moonphases/?d=${now}`);
+            return getMoonPhase.then((response) => {
 
-                // NOTE We don't just return the api call here because we want to mutate the result
+                // Format of response from Farmsense API looks like [{ ... }]
+                const result = response.data[0];
+                // const result = false;
 
-                getMoonPhase.then((response) => {
+                // Bad result
+                if (!result || result.Error) {
+                    const err = result && result.Error ? result.Error : new Error('An error occurred getting the moon!');
+                    throw err;
+                }
 
-                    // Format of response from Farmsense API looks like [{ ... }]
-                    const result = response.data[0];
-
-                    // Bad result
-                    if (!result || result.Error) {
-                        return reject(result);
-                    }
-
-                    // Looks good!
-                    return resolve(result);
-                })
-                .catch((err) => {
-
-                    return reject(err);
-                });
-
-                // Pass-through the promise for testing purposes
-                return getMoonPhase;
+                // Looks good!
+                return result;
             });
         }
     }
