@@ -17,8 +17,11 @@ module.exports = () => (
             <ButtonStyledComponent title='Styled Button Title' />
         </NavLink>
 
-        <Button color='secondary'>Secondary Button</Button> {/* Basic button */}
+        <Button style={{ background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)', borderRadius: 3, border: 0, height: 48, padding: '0 30', color: 'white' }}> Inline Style Button</Button> {/* Basic button */}
 
+        <Button className={Classes.button}>CSS Module Button</Button>
+
+        <Button color='secondary'>Secondary Button</Button> {/* Basic button */}
         <br />
 
         <NavLink exact to='/' activeClassName={Classes.activeRoute}>
