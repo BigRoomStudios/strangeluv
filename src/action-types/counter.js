@@ -1,5 +1,6 @@
-const KeyMirror = require('keymirror');
+const { SIMPLE, ASYNC } = require('utils/redux-helpers');
 
-module.exports = KeyMirror({
-    COUNTER_INCREMENT: true
-});
+module.exports = {
+    COUNTER_INCREMENT: SIMPLE,
+    COUNTER_DOUBLE: ASYNC
+};

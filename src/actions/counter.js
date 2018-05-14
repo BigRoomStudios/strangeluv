@@ -1,36 +1,33 @@
-const CounterTypes = require('action-types/counter');
+const T = require('prop-types');
+const { makeActionCreator } = require('utils/redux-helpers');
+const { COUNTER: Types } = require('action-types');
 
-exports.increment = (amount = 1) => {
+const actions = exports;
 
-    return {
-        type: CounterTypes.COUNTER_INCREMENT,
-        payload: amount
-    };
-};
+// Notice a limitation here -- can't set a default of 1 to increment
+actions.increment = makeActionCreator(
+    Types.COUNTER_INCREMENT,
+    { amount: T.number }, // A schema of this action's arguments
+    {} // Can put an { after } here if desired
+);
 
+actions.doubleAsync = makeActionCreator(
+    Types.COUNTER_DOUBLE,
+    {}, // No schema needed, as no args are passed
+    {
+        async: (request, { dispatch, getState }) => {
 
-/*  This is a thunk, meaning it is a function that immediately
-    returns a function for lazy evaluation. It is incredibly useful for
-    creating async actions, especially when combined with redux-thunk!
+            return new Promise((resolve) => {
 
-    NOTE: This is solely for demonstration purposes. In a real application,
-    you'd probably want to dispatch an action of COUNTER_DOUBLE and let the
-    reducer take care of this logic.  */
+                setTimeout(() => {
 
-exports.doubleAsync = () => {
+                    const count = getState().counter;
+                    const double = actions.increment({ amount: count });
 
-    return (dispatch, getState) => {
-
-        return new Promise((resolve) => {
-
-            setTimeout(() => {
-
-                const count = getState().counter;
-                const double = exports.increment(count);
-
-                dispatch(double);
-                resolve();
-            }, 200);
-        });
-    };
-};
+                    dispatch(double);
+                    resolve();
+                }, 1000);
+            });
+        }
+    }
+);

@@ -1,4 +1,4 @@
-const CounterTypes = require('action-types/counter');
+const { COUNTER: Types } = require('action-types');
 
 const internals = {
     initial: 0
@@ -12,8 +12,8 @@ module.exports = (state, action) => {
     const payload = action.payload;
 
     switch (type) {
-        case CounterTypes.COUNTER_INCREMENT:
-            return state + payload;
+        case Types.COUNTER_INCREMENT:
+            return state + payload.amount;
         default:
             return state;
     }
