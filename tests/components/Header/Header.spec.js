@@ -30,14 +30,5 @@ describe('(Component) Header', () => {
                 </NavLink>
             )).to.be.true;
         });
-
-        it('Should render a Link to Counter route', () => {
-
-            expect(_wrapper.contains(
-                <NavLink to='/counter' activeClassName={Classes.activeRoute}>
-                    Counter
-                </NavLink>
-            )).to.be.true;
-        });
     });
 });
