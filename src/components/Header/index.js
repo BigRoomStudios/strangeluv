@@ -10,32 +10,44 @@ module.exports = class Header extends React.Component {
         isAuthenticated: T.bool.isRequired
     };
 
+    renderNotAuthenticated = () => {
+
+        return (
+
+            <React.Fragment>
+                {' · '}
+                <NavLink to='/sign-up' activeClassName={Classes.activeRoute}>Sign Up</NavLink>
+                {' · '}
+                <NavLink to='/login' activeClassName={Classes.activeRoute}>Login</NavLink>
+            </React.Fragment>
+        );
+    }
+
+    renderAuthenticated = () => {
+
+        return (
+
+            <React.Fragment>
+                {' '}
+                <button onClick={this.props.logout}>Logout</button>
+            </React.Fragment>
+        );
+    }
+
     render() {
 
-        const { isAuthenticated, logout } = this.props;
+        const { isAuthenticated } = this.props;
+
+        const renderNav = isAuthenticated ? this.renderAuthenticated() : this.renderNotAuthenticated();
 
         return (
 
             <div>
                 <h1>Strangeluv</h1>
-                <NavLink exact to='/' activeClassName={Classes.activeRoute}>
-                    Home
-                </NavLink>
+                <NavLink exact to='/' activeClassName={Classes.activeRoute}>Home</NavLink>
                 {' · '}
-                <NavLink to='/dashboard' activeClassName={Classes.activeRoute}>
-                    Dashboard
-                </NavLink>
-                {' · '}
-                {!isAuthenticated &&
-                    <NavLink to='/sign-up' activeClassName={Classes.activeRoute}>
-                        Sign Up
-                    </NavLink>
-                }
-                {!isAuthenticated &&
-                    <span> · </span>
-                }
-                {isAuthenticated ? <button onClick={logout}>Logout</button> : <NavLink to='/login' activeClassName={Classes.activeRoute}>Login</NavLink>}
-
+                <NavLink to='/dashboard' activeClassName={Classes.activeRoute}>Dashboard</NavLink>
+                {renderNav}
             </div>
         );
     }
