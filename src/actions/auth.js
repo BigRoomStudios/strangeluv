@@ -40,6 +40,7 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
         const newUser = WebClient.post('/users', { email, password, firstName, lastName });
 
         newUser
+
         .then(({ response }) => {
 
             dispatch(actions.registrationSuccess());
@@ -47,7 +48,11 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
         })
         .catch((err) => {
 
-            const errMessage = typeof err.response !== 'undefined' ? err.response.data.message : 'Signup failed. Please try again.';
+            let errMessage = 'Signup failed. Please try again.';
+
+            if (typeof err.response !== 'undefined') {
+                errMessage = err.response.data.message;
+            }
 
             dispatch(actions.registrationFailure(errMessage));
         });
@@ -146,23 +151,23 @@ exports.requestPasswordReset = ({ email }) => {
         dispatch(actions.requestResetRequest());
 
         return WebClient.post('/users/request-reset', { email }, { responseType: 'text' })
-            .then(({ data, status }) => {
 
-                dispatch(actions.requestResetSuccess());
-                return History.push('/login');
+        .then(({ data, status }) => {
 
-            })
-            .catch((err) => {
+            dispatch(actions.requestResetSuccess());
+            return History.push('/login');
 
-                let errMessage = 'Unable to reset password. Please try again';
+        })
+        .catch((err) => {
 
-                if (typeof err.response !== 'undefined') {
-                    errMessage = err.response.data.message;
-                }
+            let errMessage = 'Unable to reset password. Please try again';
 
-                dispatch(actions.requestResetFailure(errMessage));
-            })
-        ;
+            if (typeof err.response !== 'undefined') {
+                errMessage = err.response.data.message;
+            }
+
+            dispatch(actions.requestResetFailure(errMessage));
+        });
     };
 };
 
@@ -173,23 +178,23 @@ exports.resetPassword = (email, newPassword, resetToken) => {
         dispatch(actions.resetPasswordRequest());
 
         return WebClient.post('/users/reset-password', { email, newPassword, resetToken }, { responseType: 'text' })
-            .then(({ data, status }) => {
 
-                dispatch(actions.resetPasswordSuccess());
-                return History.push('/login');
+        .then(({ data, status }) => {
 
-            })
-            .catch((err) => {
+            dispatch(actions.resetPasswordSuccess());
+            return History.push('/login');
 
-                let errMessage = 'Unable to reset password. Please try again.';
+        })
+        .catch((err) => {
 
-                if (typeof err.response !== 'undefined') {
-                    errMessage = err.message;
-                }
+            let errMessage = 'Unable to reset password. Please try again.';
 
-                dispatch(actions.resetPasswordFailure(errMessage));
-            })
-        ;
+            if (typeof err.response !== 'undefined') {
+                errMessage = err.response.data.message;
+            }
+
+            dispatch(actions.resetPasswordFailure(errMessage));
+        });
     };
 };
 
@@ -201,41 +206,27 @@ internals.strangeActions = StrangeAuth.makeActions({
         let authPromise;
         let finalToken;
 
-        if ( !!token) {
+        if (!!token) {
 
             finalToken = token;
 
-            authPromise = WebClient.get('/user', {
-                headers: { authorization: `Bearer ${finalToken}` }
-            });
-        }
+            authPromise = internals.getUser(finalToken);
 
+        }
         else {
 
             authPromise = WebClient.post('/login', { email, password }, { responseType: 'text' })
-            .then(({ data, status }) => {
 
-                if (status !== 200) {
-                    const err = new Error('Bad login');
-                    err.info = data;
-                    return Promise.reject(err);
-                }
+            .then(({ data, status }) => {
 
                 finalToken = data;
 
-                return WebClient.get('/user', {
-                    headers: { authorization: `Bearer ${finalToken}` }
-                });
+                return internals.getUser(finalToken);
+
             });
         }
 
         return authPromise.then(({ data, status }) => {
-
-            if (status !== 200) {
-                const err = new Error('Bad login');
-                err.info = data;
-                return Promise.reject(err);
-            }
 
             return {
                 credentials: {
@@ -246,3 +237,10 @@ internals.strangeActions = StrangeAuth.makeActions({
         });
     }
 });
+
+internals.getUser = (token) => {
+
+    return WebClient.get('/user', {
+        headers: { authorization: `Bearer ${token}` }
+    });
+};
