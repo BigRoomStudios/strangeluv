@@ -6,10 +6,10 @@ const Classes = require('./styles.scss');
 // Pull global styles
 require('../../styles/core.scss');
 
-const CoreLayout = ({ children, location }) => (
+const CoreLayout = ({ children }) => (
 
     <div className='container text-center'>
-        <Header location={location} />
+        <Header />
         <div className={Classes.mainContainer}>
             {children}
         </div>
@@ -17,8 +17,7 @@ const CoreLayout = ({ children, location }) => (
 );
 
 CoreLayout.propTypes = {
-    children: T.element.isRequired,
-    location: T.object.isRequired
+    children: T.element.isRequired
 };
 
 module.exports = CoreLayout;
