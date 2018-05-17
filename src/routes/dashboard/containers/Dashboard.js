@@ -7,7 +7,6 @@ internals.connect = Connect(
     (state) => ({
         firstName: state.auth.credentials.user.firstName
     })
-
 );
 
 module.exports = internals.connect(Dashboard);

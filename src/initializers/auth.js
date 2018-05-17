@@ -33,7 +33,6 @@ module.exports = (store) => {
             persistSet('remember', false);
             persistRemove('token');
         }
-
         else {
 
             persistSet('remember', true);
@@ -42,7 +41,6 @@ module.exports = (store) => {
 
                 persistSet('token', getToken());
             }
-
             else {
 
                 persistRemove('token');

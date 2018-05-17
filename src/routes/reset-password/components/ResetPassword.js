@@ -55,9 +55,8 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
 
     invalidEmail = () => {
 
-        if ( this.state.isBlurred.email) {
-
-            if ( IsEmail(this.state.email) ) {
+        if (this.state.isBlurred.email) {
+            if (IsEmail(this.state.email)) {
 
                 return false;
             }
@@ -69,7 +68,6 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
     invalidPassword = () => {
 
         if (this.state.isBlurred.confirmPassword) {
-
             if (this.state.password === this.state.confirmPassword) {
 
                 return false;

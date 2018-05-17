@@ -51,9 +51,8 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
 
     invalidEmail = () => {
 
-        if ( this.state.isBlurred.email) {
-
-            if ( IsEmail(this.state.email) ) {
+        if (this.state.isBlurred.email) {
+            if (IsEmail(this.state.email)) {
 
                 return false;
             }
