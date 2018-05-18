@@ -57,8 +57,9 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
     disableButton = () => {
 
         const { email } = this.state;
+        const fieldHasValue = email !== '';
 
-        if (email !== '' && IsEmail(email)) {
+        if (fieldHasValue && IsEmail(email)) {
             return false;
         }
 

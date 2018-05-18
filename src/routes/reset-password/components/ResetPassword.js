@@ -66,8 +66,10 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
     disableButton = () => {
 
         const { email, password, confirmPassword } = this.state;
+        const fieldHasValue = (email && password) !== '';
+        const passwordsMatch = password === confirmPassword;
 
-        if ((email && password) !== '' && IsEmail(email) && (password === confirmPassword)) {
+        if (fieldHasValue && IsEmail(email) && passwordsMatch) {
             return false;
         }
 

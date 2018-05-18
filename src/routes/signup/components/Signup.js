@@ -78,8 +78,10 @@ module.exports = class Signup extends StrangeForms(React.Component) {
     disableButton = () => {
 
         const { firstName, lastName, email, password, confirmPassword } = this.state;
+        const fieldHasValue = (firstName && lastName && email && password) !== '';
+        const passwordsMatch = password === confirmPassword;
 
-        if ((firstName && lastName && email && password) !== '' && IsEmail(email) && (password === confirmPassword) ) {
+        if (fieldHasValue && IsEmail(email) && passwordsMatch) {
             return false;
         }
 
