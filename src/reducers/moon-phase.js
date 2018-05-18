@@ -1,5 +1,3 @@
-const MoonPhaseTypes = require('../action-types/moon-phase');
-
 const internals = {
     // We want to keep track of...
     initial: () => ({
@@ -17,17 +15,17 @@ module.exports = (state, action) => {
     const payload = action.payload;
 
     switch (type) {
-        case MoonPhaseTypes.MOON_LOAD_BEGIN:
+        case 'MOON_LOAD':
             return Object.assign({}, state, {
                 isLoading: true
             });
-        case MoonPhaseTypes.MOON_LOADED:
+        case 'MOON_LOAD_FULFILLED':
             return Object.assign({}, state, {
                 isLoading: false,
                 moonId: payload.Index,
                 error: null
             });
-        case MoonPhaseTypes.MOON_LOAD_ERROR:
+        case 'MOON_LOAD_REJECTED':
             return Object.assign({}, state, {
                 isLoading: false,
                 moonId: null,
