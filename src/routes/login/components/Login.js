@@ -2,6 +2,7 @@ const React = require('react');
 const T = require('prop-types');
 const NavLink = require('react-router-dom').NavLink;
 const StrangeForms = require('strange-forms');
+const IsEmail = require('utils/is-email');
 
 module.exports = class Login extends StrangeForms(React.Component) {
 
@@ -18,13 +19,16 @@ module.exports = class Login extends StrangeForms(React.Component) {
         this.state = {
             email: '',
             password: '',
-            rememberMe: true
+            rememberMe: true,
+            isBlurred: {
+                email: false
+            }
         };
 
         this.strangeForm({
             fields: ['email', 'password', 'rememberMe'],
             get: (someProps, field) => this.state[field],
-            act: this.formField.bind(this),
+            act: this.setFormField.bind(this),
             getFormValue: {
                 rememberMe: this.getCheckedValue.bind(this),
                 '*': this.getFormValue.bind(this)
@@ -42,9 +46,43 @@ module.exports = class Login extends StrangeForms(React.Component) {
         return e.target.value || '';
     }
 
-    formField(field, value) {
+    setFormField(field, value) {
 
         this.setState({ [field]: value });
+    }
+
+    fieldBlurred = (ev) => {
+
+        const isBlurred = { ...this.state.isBlurred };
+        const field = ev.target.id;
+
+        isBlurred[field] = true;
+
+        this.setState({ isBlurred });
+    }
+
+    showEmailError = () => {
+
+        return (this.state.isBlurred.email) && !IsEmail(this.state.email);
+    }
+
+    renderButton = () => {
+
+        const { email, password } = this.state;
+        let disabled = true;
+
+        if ((email, password) && IsEmail(email)) {
+            disabled = false;
+        }
+
+        return (
+
+            <button
+                type='submit'
+                onClick={this.submit}
+                disabled={disabled}
+            >Login</button>
+        );
     }
 
     submit = (ev) => {
@@ -55,7 +93,6 @@ module.exports = class Login extends StrangeForms(React.Component) {
         this.props.rememberAct({ rememberMe });
 
         ev.preventDefault();
-
     }
 
     render() {
@@ -68,9 +105,12 @@ module.exports = class Login extends StrangeForms(React.Component) {
                     <div>
                         <label>Email:</label>
                         <input
+                            id='email'
                             value={this.fieldValue('email')}
                             onChange={this.proposeNew('email')}
+                            onBlur={this.fieldBlurred}
                         />
+                        {this.showEmailError() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
                     </div>
                     <div>
                         <label>Password:</label>
@@ -93,10 +133,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
                     {this.props.errorMessage &&
                         <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
-                    <button
-                        type='submit'
-                        onClick={this.submit}
-                    >Login</button>
+                    {this.renderButton()}
                 </form>
             </div>
         );

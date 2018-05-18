@@ -32,7 +32,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         this.strangeForm({
             fields: ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'rememberMe'],
             get: (someProps, field) => this.state[field],
-            act: this.formField.bind(this),
+            act: this.setFormField.bind(this),
             getFormValue: {
                 rememberMe: this.getCheckedValue.bind(this),
                 '*': this.getFormValue.bind(this)
@@ -50,7 +50,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         return e.target.value || '';
     }
 
-    formField(field, value) {
+    setFormField(field, value) {
 
         this.setState({ [field]: value });
     }
@@ -65,28 +65,33 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         this.setState({ isBlurred });
     }
 
-    invalidEmail = () => {
+    showEmailError = () => {
 
-        if (this.state.isBlurred.email) {
-            if (IsEmail(this.state.email)) {
-
-                return false;
-            }
-
-            return true;
-        }
+        return (this.state.isBlurred.email) && !IsEmail(this.state.email);
     }
 
-    invalidPassword = () => {
+    showPasswordError = () => {
 
-        if (this.state.isBlurred.confirmPassword) {
-            if (this.state.password === this.state.confirmPassword) {
+        return this.state.isBlurred.confirmPassword && this.state.password !== this.state.confirmPassword;
+    }
 
-                return false;
-            }
+    renderButton = () => {
 
-            return true;
+        const { firstName, lastName, email, password, confirmPassword } = this.state;
+        let disabled = true;
+
+        if ((firstName, lastName, email, password) && IsEmail(email) && (password === confirmPassword)) {
+            disabled = false;
         }
+
+        return (
+
+            <button
+                type='submit'
+                onClick={this.submit}
+                disabled={disabled}
+            >Sign Up</button>
+        );
     }
 
     submit = (ev) => {
@@ -111,6 +116,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                             type='text'
                             value={this.fieldValue('firstName')}
                             onChange={this.proposeNew('firstName')}
+                            onBlur={this.fieldBlurred}
                         />
                     </div>
                     <div>
@@ -120,6 +126,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                             type='text'
                             value={this.fieldValue('lastName')}
                             onChange={this.proposeNew('lastName')}
+                            onBlur={this.fieldBlurred}
                         />
                     </div>
                     <div>
@@ -131,7 +138,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                             onChange={this.proposeNew('email')}
                             onBlur={this.fieldBlurred}
                         />
-                        {this.invalidEmail() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
+                        {this.showEmailError() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
                     </div>
                     <div>
                         <label>Password</label>
@@ -151,7 +158,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                             onChange={this.proposeNew('confirmPassword')}
                             onBlur={this.fieldBlurred}
                         />
-                        {this.invalidPassword() && <label style={{ color:'red' }}>Please enter matching passwords</label>}
+                        {this.showPasswordError() && <label style={{ color:'red' }}>Please enter matching passwords</label>}
                     </div>
                     <label>
                         <input
@@ -165,10 +172,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                     {this.props.errorMessage &&
                         <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
-                    <button
-                        type='submit'
-                        onClick={this.submit}
-                    >Sign Up</button>
+                    {this.renderButton()}
                 </form>
             </div>
         );

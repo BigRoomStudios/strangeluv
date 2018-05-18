@@ -28,7 +28,7 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         this.strangeForm({
             fields: ['email', 'password', 'confirmPassword'],
             get: (someProps, field) => this.state[field],
-            act: this.formField.bind(this),
+            act: this.setFormField.bind(this),
             getFormValue: this.getFormValue.bind(this)
         });
     }
@@ -38,7 +38,7 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         return e.target.value || '';
     }
 
-    formField(field, value) {
+    setFormField(field, value) {
 
         this.setState({ [field]: value });
     }
@@ -53,28 +53,33 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         this.setState({ isBlurred });
     }
 
-    invalidEmail = () => {
+    showEmailError = () => {
 
-        if (this.state.isBlurred.email) {
-            if (IsEmail(this.state.email)) {
-
-                return false;
-            }
-
-            return true;
-        }
+        return (this.state.isBlurred.email) && !IsEmail(this.state.email);
     }
 
-    invalidPassword = () => {
+    showPasswordError = () => {
 
-        if (this.state.isBlurred.confirmPassword) {
-            if (this.state.password === this.state.confirmPassword) {
+        return this.state.isBlurred.confirmPassword && this.state.password !== this.state.confirmPassword;
+    }
 
-                return false;
-            }
+    renderButton = () => {
 
-            return true;
+        const { email, password, confirmPassword } = this.state;
+        let disabled = true;
+
+        if ((email, password) && IsEmail(email) && (password === confirmPassword)) {
+            disabled = false;
         }
+
+        return (
+
+            <button
+                type='submit'
+                onClick={this.submit}
+                disabled={disabled}
+            >Update Password</button>
+        );
     }
 
     submit= (ev) => {
@@ -103,7 +108,7 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
                             onChange={this.proposeNew('email')}
                             onBlur={this.fieldBlurred}
                         />
-                        {this.invalidEmail() &&
+                        {this.showEmailError() &&
                             <label style={{ color:'red' }}>Please enter a valid email address</label>
                         }
                     </div>
@@ -125,17 +130,14 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
                             onChange={this.proposeNew('confirmPassword')}
                             onBlur={this.fieldBlurred}
                         />
-                        {this.invalidPassword() &&
+                        {this.showPasswordError() &&
                             <label style={{ color:'red' }}>Please enter matching passwords</label>
                         }
                     </div>
                     {this.props.errorMessage &&
                         <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
-                    <button
-                        type='submit'
-                        onClick={this.submit}
-                    >Update Password</button>
+                    {this.renderButton()}
                 </form>
             </div>
         );

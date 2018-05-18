@@ -24,7 +24,7 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         this.strangeForm({
             fields: ['email'],
             get: (someProps, field) => this.state[field],
-            act: this.formField.bind(this),
+            act: this.setFormField.bind(this),
             getFormValue: this.getFormValue.bind(this)
         });
     }
@@ -34,7 +34,7 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         return e.target.value || '';
     }
 
-    formField(field, value) {
+    setFormField(field, value) {
 
         this.setState({ [field]: value });
     }
@@ -49,16 +49,28 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         this.setState({ isBlurred });
     }
 
-    invalidEmail = () => {
+    showEmailError = () => {
 
-        if (this.state.isBlurred.email) {
-            if (IsEmail(this.state.email)) {
+        return (this.state.isBlurred.email) && !IsEmail(this.state.email);
+    }
 
-                return false;
-            }
+    renderButton = () => {
 
-            return true;
+        const { email } = this.state;
+        let disabled = true;
+
+        if (email && IsEmail(email)) {
+            disabled = false;
         }
+
+        return (
+
+            <button
+                type='submit'
+                onClick={this.submit}
+                disabled={disabled}
+            >Reset Password</button>
+        );
     }
 
     submit = (ev) => {
@@ -68,7 +80,6 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         this.props.requestReset({ email });
 
         ev.preventDefault();
-
     }
 
     render() {
@@ -87,17 +98,14 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
                             onChange={this.proposeNew('email')}
                             onBlur={this.fieldBlurred}
                         />
-                        {this.invalidEmail() &&
+                        {this.showEmailError() &&
                             <label style={{ color:'red' }}>Please enter a valid email address</label>
                         }
                     </div>
                     {this.props.errorMessage &&
                         <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
-                    <button
-                        type='submit'
-                        onClick={this.submit}
-                    >Reset Password</button>
+                    {this.renderButton()}
                 </form>
             </div>
         );
