@@ -1,7 +1,7 @@
 exports.run = (store) => {
 
     const initializers = [
-        //require('./file-name'),
+        require('./auth')
     ];
 
     initializers.forEach((init) => init(store));

@@ -1,6 +1,6 @@
 const React = require('react');
 const T = require('prop-types');
-const Header = require('../../components/Header');
+const Header = require('../../containers/Header');
 const Classes = require('./styles.scss');
 
 // Pull global styles

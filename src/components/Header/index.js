@@ -1,18 +1,54 @@
 const React = require('react');
+const T = require('prop-types');
 const NavLink = require('react-router-dom').NavLink;
 const Classes = require('./styles.scss');
 
-module.exports = () => (
+module.exports = class Header extends React.Component {
 
-    <div>
-        <h1>Strangeluv</h1>
-        <NavLink exact to='/' activeClassName={Classes.activeRoute}>
-            Home
-        </NavLink>
-        {' · '}
-        <NavLink to='/counter' activeClassName={Classes.activeRoute}>
-            Counter
-        </NavLink>
-    </div>
+    static propTypes = {
+        logout: T.func.isRequired,
+        isAuthenticated: T.bool.isRequired
+    };
 
-);
+    renderNotAuthenticated = () => {
+
+        return (
+
+            <React.Fragment>
+                {' · '}
+                <NavLink to='/sign-up' activeClassName={Classes.activeRoute}>Sign Up</NavLink>
+                {' · '}
+                <NavLink to='/login' activeClassName={Classes.activeRoute}>Login</NavLink>
+            </React.Fragment>
+        );
+    }
+
+    renderAuthenticated = () => {
+
+        return (
+
+            <React.Fragment>
+                {' '}
+                <button onClick={this.props.logout}>Logout</button>
+            </React.Fragment>
+        );
+    }
+
+    render() {
+
+        const { isAuthenticated } = this.props;
+
+        const renderNav = isAuthenticated ? this.renderAuthenticated() : this.renderNotAuthenticated();
+
+        return (
+
+            <div>
+                <h1>Strangeluv</h1>
+                <NavLink exact to='/' activeClassName={Classes.activeRoute}>Home</NavLink>
+                {' · '}
+                <NavLink to='/dashboard' activeClassName={Classes.activeRoute}>Dashboard</NavLink>
+                {renderNav}
+            </div>
+        );
+    }
+};

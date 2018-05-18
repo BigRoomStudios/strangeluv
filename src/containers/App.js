@@ -1,6 +1,5 @@
 const React = require('react');
 const T = require('prop-types');
-
 const { Router: StrangeRouter } = require('strange-router');
 const Provider = require('react-redux').Provider;
 
