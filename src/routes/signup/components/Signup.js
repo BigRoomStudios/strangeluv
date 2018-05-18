@@ -75,23 +75,15 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         return this.state.isBlurred.confirmPassword && this.state.password !== this.state.confirmPassword;
     }
 
-    renderButton = () => {
+    disableButton = () => {
 
         const { firstName, lastName, email, password, confirmPassword } = this.state;
-        let disabled = true;
 
-        if ((firstName, lastName, email, password) && IsEmail(email) && (password === confirmPassword)) {
-            disabled = false;
+        if ((firstName && lastName && email && password) !== '' && IsEmail(email) && (password === confirmPassword) ) {
+            return false;
         }
 
-        return (
-
-            <button
-                type='submit'
-                onClick={this.submit}
-                disabled={disabled}
-            >Sign Up</button>
-        );
+        return true;
     }
 
     submit = (ev) => {
@@ -172,7 +164,11 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                     {this.props.errorMessage &&
                         <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
                     }
-                    {this.renderButton()}
+                    <button
+                        type='submit'
+                        onClick={this.submit}
+                        disabled={this.disableButton()}
+                    >Sign Up</button>
                 </form>
             </div>
         );
