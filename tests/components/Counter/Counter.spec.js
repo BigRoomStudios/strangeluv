@@ -41,7 +41,7 @@ describe('(Component) Counter', () => {
 
     it('Should render exactly two buttons.', () => {
 
-        expect(_wrapper).to.have.descendants('.btn');
+        expect(_wrapper).to.have.descendants('button');
     });
 
     //
