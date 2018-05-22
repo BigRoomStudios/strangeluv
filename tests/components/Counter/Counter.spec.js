@@ -41,7 +41,7 @@ describe('(Component) Counter', () => {
 
     it('Should render exactly two buttons.', () => {
 
-        expect(_wrapper).to.have.descendants('.btn');
+        expect(_wrapper).to.have.descendants('button');
     });
 
     //
@@ -52,11 +52,6 @@ describe('(Component) Counter', () => {
         beforeEach(() => {
 
             _button = _wrapper.find('button').filterWhere((a) => a.text() === 'Increment');
-        });
-
-        it('has bootstrap classes', () => {
-
-            expect(_button.hasClass('btn btn-default')).to.be.true;
         });
 
         it('Should dispatch a `increment` action when clicked', () => {
@@ -77,11 +72,6 @@ describe('(Component) Counter', () => {
         beforeEach(() => {
 
             _button = _wrapper.find('button').filterWhere((a) => a.text() === 'Double (Async)');
-        });
-
-        it('has bootstrap classes', () => {
-
-            expect(_button.hasClass('btn btn-default')).to.be.true;
         });
 
         it('Should dispatch a `doubleAsync` action when clicked', () => {
