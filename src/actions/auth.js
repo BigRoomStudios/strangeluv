@@ -82,7 +82,7 @@ exports.login = ({ email, password, token }) => {
 
         .then(() => {
 
-            History.push('/dashboard');
+            return History.push('/dashboard');
 
         })
         .catch(::console.warn);
@@ -182,7 +182,7 @@ exports.resetPassword = (email, newPassword, resetToken) => {
         .then(({ data, status }) => {
 
             dispatch(actions.resetPasswordSuccess());
-            return History.push('/login');
+            dispatch(actions.login({ email, password: newPassword }));
 
         })
         .catch((err) => {
