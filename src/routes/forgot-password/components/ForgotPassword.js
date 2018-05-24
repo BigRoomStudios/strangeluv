@@ -57,13 +57,8 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
     disableButton = () => {
 
         const { email } = this.state;
-        const fieldHasValue = email !== '';
 
-        if (fieldHasValue && IsEmail(email)) {
-            return false;
-        }
-
-        return true;
+        return !IsEmail(email);
     }
 
     submit = (ev) => {
@@ -79,32 +74,30 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
 
         return (
 
-            <div>
-                <form onSubmit={this.submit}>
-                    <h2>Forgot your password?</h2>
-                    <p>To reset your password, enter your email below and we will email a link to reset your password.</p>
-                    <div>
-                        <label>Email:</label>
-                        <input
-                            id='email'
-                            value={this.fieldValue('email')}
-                            onChange={this.proposeNew('email')}
-                            onBlur={this.fieldBlurred}
-                        />
-                        {this.showEmailError() &&
-                            <label style={{ color:'red' }}>Please enter a valid email address</label>
-                        }
-                    </div>
-                    {this.props.errorMessage &&
-                        <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
+            <form onSubmit={this.submit}>
+                <h2>Forgot your password?</h2>
+                <p>To reset your password, enter your email below and we will email a link to reset your password.</p>
+                <div>
+                    <label>Email:</label>
+                    <input
+                        id='email'
+                        value={this.fieldValue('email')}
+                        onChange={this.proposeNew('email')}
+                        onBlur={this.fieldBlurred}
+                    />
+                    {this.showEmailError() &&
+                        <label style={{ color:'red' }}>Please enter a valid email address</label>
                     }
-                    <button
-                        type='submit'
-                        onClick={this.submit}
-                        disabled={this.disableButton()}
-                    >Reset Password</button>
-                </form>
-            </div>
+                </div>
+                {this.props.errorMessage &&
+                    <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
+                }
+                <button
+                    type='submit'
+                    onClick={this.submit}
+                    disabled={this.disableButton()}
+                >Reset Password</button>
+            </form>
         );
     }
 };

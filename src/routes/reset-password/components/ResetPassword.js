@@ -89,55 +89,53 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
     render() {
 
         return (
-            <div>
-                <form onSubmit={this.submit}>
-                    <h2>Reset Password</h2>
-                    <p>Please confirm your email address and set your new password below.</p>
-                    <div>
-                        <label>Email</label>
-                        <input
-                            id='email'
-                            type='email'
-                            value={this.fieldValue('email')}
-                            onChange={this.proposeNew('email')}
-                            onBlur={this.fieldBlurred}
-                        />
-                        {this.showEmailError() &&
-                            <label style={{ color:'red' }}>Please enter a valid email address</label>
-                        }
-                    </div>
-                    <div>
-                        <label>Password</label>
-                        <input
-                            id='password'
-                            type='password'
-                            value={this.fieldValue('password')}
-                            onChange={this.proposeNew('password')}
-                        />
-                    </div>
-                    <div>
-                        <label>Confirm Password</label>
-                        <input
-                            id='confirmPassword'
-                            type='password'
-                            value={this.fieldValue('confirmPassword')}
-                            onChange={this.proposeNew('confirmPassword')}
-                            onBlur={this.fieldBlurred}
-                        />
-                        {this.showPasswordError() &&
-                            <label style={{ color:'red' }}>Please enter matching passwords</label>
-                        }
-                    </div>
-                    {this.props.errorMessage &&
-                        <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
+            <form onSubmit={this.submit}>
+                <h2>Reset Password</h2>
+                <p>Please confirm your email address and set your new password below.</p>
+                <div>
+                    <label>Email</label>
+                    <input
+                        id='email'
+                        type='email'
+                        value={this.fieldValue('email')}
+                        onChange={this.proposeNew('email')}
+                        onBlur={this.fieldBlurred}
+                    />
+                    {this.showEmailError() &&
+                        <label style={{ color:'red' }}>Please enter a valid email address</label>
                     }
-                    <button
-                        type='submit'
-                        onClick={this.submit}
-                        disabled={this.disableButton()}
-                    >Update Password</button>
-                </form>
-            </div>
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input
+                        id='password'
+                        type='password'
+                        value={this.fieldValue('password')}
+                        onChange={this.proposeNew('password')}
+                    />
+                </div>
+                <div>
+                    <label>Confirm Password</label>
+                    <input
+                        id='confirmPassword'
+                        type='password'
+                        value={this.fieldValue('confirmPassword')}
+                        onChange={this.proposeNew('confirmPassword')}
+                        onBlur={this.fieldBlurred}
+                    />
+                    {this.showPasswordError() &&
+                        <label style={{ color:'red' }}>Please enter matching passwords</label>
+                    }
+                </div>
+                {this.props.errorMessage &&
+                    <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
+                }
+                <button
+                    type='submit'
+                    onClick={this.submit}
+                    disabled={this.disableButton()}
+                >Update Password</button>
+            </form>
         );
     }
 };

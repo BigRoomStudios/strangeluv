@@ -38,7 +38,7 @@ module.exports = class Header extends React.Component {
 
         const { isAuthenticated } = this.props;
 
-        const renderNav = isAuthenticated ? this.renderAuthenticated() : this.renderNotAuthenticated();
+        const renderedNav = isAuthenticated ? this.renderAuthenticated() : this.renderNotAuthenticated();
 
         return (
 
@@ -47,7 +47,7 @@ module.exports = class Header extends React.Component {
                 <NavLink exact to='/' activeClassName={Classes.activeRoute}>Home</NavLink>
                 {' · '}
                 <NavLink to='/dashboard' activeClassName={Classes.activeRoute}>Dashboard</NavLink>
-                {renderNav}
+                {renderedNav}
             </div>
         );
     }
