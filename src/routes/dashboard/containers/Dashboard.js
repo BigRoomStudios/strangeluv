@@ -1,11 +1,12 @@
 const Connect = require('react-redux').connect;
 const Dashboard = require('../components/Dashboard');
+const AuthSelectors = require('selectors/auth');
 
 const internals = {};
 
 internals.connect = Connect(
     (state) => ({
-        firstName: state.auth.credentials.user.firstName
+        firstName: AuthSelectors.getUserName(state)
     })
 );
 

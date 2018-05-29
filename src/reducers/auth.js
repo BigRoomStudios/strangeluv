@@ -9,8 +9,7 @@ module.exports = (state, action) => {
 
     state = authReducer(state, action);
 
-    const { type } = action;
-    const { payload } = action;
+    const { type, payload } = action;
 
     switch (type) {
 
