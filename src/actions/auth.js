@@ -1,7 +1,7 @@
 const StrangeAuth = require('strange-auth');
 const WebClient = require('../utils/web-client');
-const History = require('../wiring/history');
 const AuthAct = require('../action-types/auth');
+const Router = require('react-router-redux');
 
 const internals = {};
 
@@ -9,27 +9,18 @@ const actions = exports;
 
 // New User Registration
 
-exports.registrationRequest = () => {
+exports.registrationRequest = () => ({
+    type: AuthAct.REGISTRATION_BEGIN
+});
 
-    return {
-        type: AuthAct.REGISTRATION_BEGIN
-    };
-};
+exports.registrationSuccess = () => ({
+    type: AuthAct.REGISTRATION_SUCCESS
+});
 
-exports.registrationSuccess = () => {
-
-    return {
-        type: AuthAct.REGISTRATION_SUCCESS
-    };
-};
-
-exports.registrationFailure = (errMessage) => {
-
-    return {
-        type: AuthAct.REGISTRATION_FAILURE,
-        payload: errMessage
-    };
-};
+exports.registrationFailure = (errMessage) => ({
+    type: AuthAct.REGISTRATION_FAILURE,
+    payload: errMessage
+});
 
 exports.registerUser = ({ email, password, firstName, lastName }) => {
 
@@ -40,7 +31,6 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
         const newUser = WebClient.post('/users', { email, password, firstName, lastName });
 
         newUser
-
         .then(({ response }) => {
 
             dispatch(actions.registrationSuccess());
@@ -62,13 +52,10 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
 
 };
 
-exports.rememberMe = ({ remember }) => {
-
-    return {
-        type: AuthAct.REMEMBER_ME,
-        payload: remember
-    };
-};
+exports.rememberMe = ({ remember }) => ({
+    type: AuthAct.REMEMBER_ME,
+    payload: remember
+});
 
 // Login and Logout
 
@@ -82,10 +69,9 @@ exports.login = ({ email, password, token }) => {
 
         .then(() => {
 
-            return History.push('/dashboard');
-
+            dispatch(Router.push('/dashboard'));
         })
-        .catch(::console.warn);
+        .catch(console.warn.bind(console));
     };
 };
 
@@ -94,55 +80,37 @@ exports.logout = () => {
     return (dispatch) => {
 
         dispatch(internals.strangeActions.logout());
-        return History.push('/');
+        dispatch(Router.push('/'));
     };
 };
 
 // Request Reset & Reset Password
 
-exports.requestResetRequest = () => {
+exports.requestResetRequest = () => ({
+    type: AuthAct.REQUEST_PASSWORD_RESET_BEGIN
+});
 
-    return {
-        type: AuthAct.REQUEST_PASSWORD_RESET_BEGIN
-    };
-};
+exports.requestResetSuccess = () => ({
+    type: AuthAct.REQUEST_PASSWORD_RESET_SUCCESS
+});
 
-exports.requestResetSuccess = () => {
+exports.requestResetFailure = (errMessage) => ({
+    type: AuthAct.REQUEST_PASSWORD_RESET_FAILURE,
+    payload: errMessage
+});
 
-    return {
-        type: AuthAct.REQUEST_PASSWORD_RESET_SUCCESS
-    };
-};
+exports.resetPasswordRequest = () => ({
+    type: AuthAct.RESET_PASSWORD_BEGIN
+});
 
-exports.requestResetFailure = (errMessage) => {
+exports.resetPasswordSuccess = () => ({
+    type: AuthAct.RESET_PASSWORD_SUCCESS
+});
 
-    return {
-        type: AuthAct.REQUEST_PASSWORD_RESET_FAILURE,
-        payload: errMessage
-    };
-};
-
-exports.resetPasswordRequest = () => {
-
-    return {
-        type: AuthAct.RESET_PASSWORD_BEGIN
-    };
-};
-
-exports.resetPasswordSuccess = () => {
-
-    return {
-        type: AuthAct.RESET_PASSWORD_SUCCESS
-    };
-};
-
-exports.resetPasswordFailure = (errMessage) => {
-
-    return {
-        type: AuthAct.RESET_PASSWORD_FAILURE,
-        payload: errMessage
-    };
-};
+exports.resetPasswordFailure = (errMessage) => ({
+    type: AuthAct.RESET_PASSWORD_FAILURE,
+    payload: errMessage
+});
 
 exports.requestPasswordReset = ({ email }) => {
 
@@ -155,7 +123,7 @@ exports.requestPasswordReset = ({ email }) => {
         .then(({ data, status }) => {
 
             dispatch(actions.requestResetSuccess());
-            return History.push('/login');
+            dispatch(Router.push('/login'));
 
         })
         .catch((err) => {
