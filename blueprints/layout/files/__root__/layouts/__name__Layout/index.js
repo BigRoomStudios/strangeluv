@@ -1,5 +1,4 @@
 const React = require('react');
-const T = require('prop-types');
 
 const <%= pascalEntityName %> = ({ children }) => (
 
@@ -10,7 +9,7 @@ const <%= pascalEntityName %> = ({ children }) => (
 );
 
 <%= pascalEntityName %>.propTypes = {
-    children: T.element
+    children: React.PropTypes.element
 };
 
 module.exports = <%= pascalEntityName %>;
