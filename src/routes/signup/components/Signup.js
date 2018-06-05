@@ -32,12 +32,18 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         this.strangeForm({
             fields: ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'rememberMe'],
             get: (someProps, field) => this.state[field],
-            act: this.setFormField.bind(this),
+            act: (field, value) => this.setState({ [field]: value }),
             getFormValue: {
                 rememberMe: this.getCheckedValue.bind(this),
                 '*': this.getFormValue.bind(this)
             }
         });
+
+        this.fieldBlurred = this._fieldBlurred.bind(this);
+        this.showEmailError = this._showEmailError.bind(this);
+        this.showPasswordError = this._showEmailError.bind(this);
+        this.disableButton = this._disableButton.bind(this);
+        this.submit = this._submit.bind(this);
     }
 
     getCheckedValue(e) {
@@ -50,12 +56,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         return e.target.value || '';
     }
 
-    setFormField(field, value) {
-
-        this.setState({ [field]: value });
-    }
-
-    fieldBlurred = (ev) => {
+    _fieldBlurred(ev) {
 
         const isBlurred = { ...this.state.isBlurred };
         const field = ev.target.id;
@@ -65,17 +66,17 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         this.setState({ isBlurred });
     }
 
-    showEmailError = () => {
+    _showEmailError() {
 
         return (this.state.isBlurred.email) && !IsEmail(this.state.email);
     }
 
-    showPasswordError = () => {
+    _showPasswordError() {
 
         return this.state.isBlurred.confirmPassword && this.state.password !== this.state.confirmPassword;
     }
 
-    disableButton = () => {
+    _disableButton() {
 
         const { firstName, lastName, email, password, confirmPassword } = this.state;
         const fieldHasValue = (firstName && lastName && email && password) !== '';
@@ -88,7 +89,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         return true;
     }
 
-    submit = (ev) => {
+    _submit(ev) {
 
         const { firstName, lastName, email, password } = this.state;
 

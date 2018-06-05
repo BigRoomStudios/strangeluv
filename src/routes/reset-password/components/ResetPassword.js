@@ -28,22 +28,18 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         this.strangeForm({
             fields: ['email', 'password', 'confirmPassword'],
             get: (someProps, field) => this.state[field],
-            act: this.setFormField.bind(this),
-            getFormValue: this.getFormValue.bind(this)
+            act: (field, value) => this.setState({ [field]: value }),
+            getFormValue: (e) => e.target.value || ''
         });
+
+        this.fieldBlurred = this._fieldBlurred.bind(this);
+        this.showEmailError = this._showEmailError.bind(this);
+        this.showPasswordError = this._showEmailError.bind(this);
+        this.disableButton = this._disableButton.bind(this);
+        this.submit = this._submit.bind(this);
     }
 
-    getFormValue(e) {
-
-        return e.target.value || '';
-    }
-
-    setFormField(field, value) {
-
-        this.setState({ [field]: value });
-    }
-
-    fieldBlurred = (ev) => {
+    _fieldBlurred(ev) {
 
         const isBlurred = { ...this.state.isBlurred };
         const field = ev.target.id;
@@ -53,17 +49,17 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         this.setState({ isBlurred });
     }
 
-    showEmailError = () => {
+    _showEmailError() {
 
         return (this.state.isBlurred.email) && !IsEmail(this.state.email);
     }
 
-    showPasswordError = () => {
+    _showPasswordError() {
 
         return this.state.isBlurred.confirmPassword && this.state.password !== this.state.confirmPassword;
     }
 
-    disableButton = () => {
+    _disableButton() {
 
         const { email, password, confirmPassword } = this.state;
         const fieldHasValue = (email && password) !== '';
@@ -76,7 +72,7 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         return true;
     }
 
-    submit= (ev) => {
+    _submit(ev) {
 
         const { email, password } = this.state;
         const resetToken = this.props.match.params.token;
