@@ -10,10 +10,18 @@ module.exports = class Header extends React.Component {
         isAuthenticated: T.bool.isRequired
     };
 
-    renderNotAuthenticated = () => {
+    constructor(props) {
+
+        super(props);
+
+        this.renderNotAuthenticated = this._renderNotAuthenticated.bind(this);
+        this.renderAuthenticated = this._renderAuthenticated.bind(this);
+
+    }
+
+    _renderNotAuthenticated() {
 
         return (
-
             <React.Fragment>
                 {' · '}
                 <NavLink to='/sign-up' activeClassName={Classes.activeRoute}>Sign Up</NavLink>
@@ -23,10 +31,9 @@ module.exports = class Header extends React.Component {
         );
     }
 
-    renderAuthenticated = () => {
+    _renderAuthenticated() {
 
         return (
-
             <React.Fragment>
                 {' '}
                 <button onClick={this.props.logout}>Logout</button>
