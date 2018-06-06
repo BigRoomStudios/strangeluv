@@ -52,7 +52,7 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
 
 };
 
-exports.rememberMe = ({ remember }) => ({
+exports.rememberMe = (remember) => ({
     type: AuthAct.REMEMBER_ME,
     payload: remember
 });
@@ -179,7 +179,6 @@ internals.strangeActions = StrangeAuth.makeActions({
             finalToken = token;
 
             authPromise = internals.getUser(finalToken);
-
         }
         else {
 

@@ -84,7 +84,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
         const { email, password, rememberMe } = this.state;
 
         this.props.login({ email, password });
-        this.props.rememberAct({ rememberMe });
+        this.props.rememberAct(rememberMe);
 
         ev.preventDefault();
     }

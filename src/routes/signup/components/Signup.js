@@ -91,9 +91,11 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
     _submit(ev) {
 
-        const { firstName, lastName, email, password } = this.state;
+        const { firstName, lastName, email, password, rememberMe } = this.state;
 
         this.props.onSubmit({ email, password, firstName, lastName  });
+        this.props.rememberAct(rememberMe);
+
         ev.preventDefault();
     }
 

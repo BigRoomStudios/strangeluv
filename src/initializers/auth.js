@@ -24,7 +24,7 @@ module.exports = (store) => {
     const remember = persistGet('remember') || false;
     const token = persistGet('token');
 
-    store.dispatch(AuthActions.rememberMe({ remember }));
+    store.dispatch(AuthActions.rememberMe( remember ));
 
     store.subscribe(() => {
 

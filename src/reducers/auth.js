@@ -16,7 +16,7 @@ module.exports = (state, action) => {
         case AuthTypes.REMEMBER_ME:
 
             return Deeply(state)
-                .set('rememberMe', payload)
+                .set('remember', payload)
                 .value();
 
         // Set server error message in state to display on our components
