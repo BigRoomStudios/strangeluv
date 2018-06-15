@@ -9,12 +9,16 @@ const actions = exports;
 
 // New User Registration
 
-exports.registrationRequest = () => ({
-    type: AuthAct.REGISTRATION_BEGIN
+exports.registrationRequest = ({ args }) => ({
+    //We're not doing anything with the payload in this recipe
+    type: AuthAct.REGISTRATION_BEGIN,
+    payload: { args }
 });
 
-exports.registrationSuccess = () => ({
-    type: AuthAct.REGISTRATION_SUCCESS
+exports.registrationSuccess = (data) => ({
+    //We're not doing anything with the payload in this recipe
+    type: AuthAct.REGISTRATION_SUCCESS,
+    payload: data
 });
 
 exports.registrationFailure = (errMessage) => ({
@@ -26,14 +30,14 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
 
     return (dispatch) => {
 
-        dispatch(actions.registrationRequest());
+        dispatch(actions.registrationRequest({ email, password, firstName, lastName }));
 
         const newUser = WebClient.post('/users', { email, password, firstName, lastName });
 
         newUser
         .then(({ response }) => {
 
-            dispatch(actions.registrationSuccess());
+            dispatch(actions.registrationSuccess(response));
             dispatch(actions.login({ email, password }));
         })
         .catch((err) => {
@@ -86,12 +90,16 @@ exports.logout = () => {
 
 // Request Reset & Reset Password
 
-exports.requestResetRequest = () => ({
-    type: AuthAct.REQUEST_PASSWORD_RESET_BEGIN
+exports.requestResetRequest = ({ args }) => ({
+    //We're not doing anything with the payload in this recipe
+    type: AuthAct.REQUEST_PASSWORD_RESET_BEGIN,
+    payload: args
 });
 
-exports.requestResetSuccess = () => ({
-    type: AuthAct.REQUEST_PASSWORD_RESET_SUCCESS
+exports.requestResetSuccess = (data) => ({
+    //We're not doing anything with the payload in this recipe
+    type: AuthAct.REQUEST_PASSWORD_RESET_SUCCESS,
+    payload: data
 });
 
 exports.requestResetFailure = (errMessage) => ({
@@ -99,12 +107,16 @@ exports.requestResetFailure = (errMessage) => ({
     payload: errMessage
 });
 
-exports.resetPasswordRequest = () => ({
-    type: AuthAct.RESET_PASSWORD_BEGIN
+exports.resetPasswordRequest = ({ args }) => ({
+    //We're not doing anything with the payload in this recipe
+    type: AuthAct.RESET_PASSWORD_BEGIN,
+    payload: args
 });
 
-exports.resetPasswordSuccess = () => ({
-    type: AuthAct.RESET_PASSWORD_SUCCESS
+exports.resetPasswordSuccess = (data) => ({
+    //We're not doing anything with the payload in this recipe
+    type: AuthAct.RESET_PASSWORD_SUCCESS,
+    payload: data
 });
 
 exports.resetPasswordFailure = (errMessage) => ({
@@ -116,13 +128,13 @@ exports.requestPasswordReset = ({ email }) => {
 
     return (dispatch) => {
 
-        dispatch(actions.requestResetRequest());
+        dispatch(actions.requestResetRequest({ email }));
 
         return WebClient.post('/users/request-reset', { email }, { responseType: 'text' })
 
         .then(({ data, status }) => {
 
-            dispatch(actions.requestResetSuccess());
+            dispatch(actions.requestResetSuccess(data));
             dispatch(Router.push('/login'));
 
         })
@@ -143,13 +155,13 @@ exports.resetPassword = (email, newPassword, resetToken) => {
 
     return (dispatch) => {
 
-        dispatch(actions.resetPasswordRequest());
+        dispatch(actions.resetPasswordRequest({ email, newPassword, resetToken }));
 
         return WebClient.post('/users/reset-password', { email, newPassword, resetToken }, { responseType: 'text' })
 
         .then(({ data, status }) => {
 
-            dispatch(actions.resetPasswordSuccess());
+            dispatch(actions.resetPasswordSuccess(data));
             dispatch(actions.login({ email, password: newPassword }));
 
         })
@@ -174,7 +186,7 @@ internals.strangeActions = StrangeAuth.makeActions({
         let authPromise;
         let finalToken;
 
-        if (!!token) {
+        if (token) {
 
             finalToken = token;
 
