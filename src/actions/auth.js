@@ -10,13 +10,13 @@ const actions = exports;
 // New User Registration
 
 exports.registrationRequest = ({ args }) => ({
-    //We're not doing anything with the payload in this recipe
+    // We're not doing anything with the payload in this recipe
     type: AuthAct.REGISTRATION_BEGIN,
     payload: { args }
 });
 
 exports.registrationSuccess = (data) => ({
-    //We're not doing anything with the payload in this recipe
+    // We're not doing anything with the payload in this recipe
     type: AuthAct.REGISTRATION_SUCCESS,
     payload: data
 });
@@ -91,13 +91,13 @@ exports.logout = () => {
 // Request Reset & Reset Password
 
 exports.requestResetRequest = ({ args }) => ({
-    //We're not doing anything with the payload in this recipe
+    // We're not doing anything with the payload in this recipe
     type: AuthAct.REQUEST_PASSWORD_RESET_BEGIN,
     payload: args
 });
 
 exports.requestResetSuccess = (data) => ({
-    //We're not doing anything with the payload in this recipe
+    // We're not doing anything with the payload in this recipe
     type: AuthAct.REQUEST_PASSWORD_RESET_SUCCESS,
     payload: data
 });
@@ -108,13 +108,13 @@ exports.requestResetFailure = (errMessage) => ({
 });
 
 exports.resetPasswordRequest = ({ args }) => ({
-    //We're not doing anything with the payload in this recipe
+    // We're not doing anything with the payload in this recipe
     type: AuthAct.RESET_PASSWORD_BEGIN,
     payload: args
 });
 
 exports.resetPasswordSuccess = (data) => ({
-    //We're not doing anything with the payload in this recipe
+    // We're not doing anything with the payload in this recipe
     type: AuthAct.RESET_PASSWORD_SUCCESS,
     payload: data
 });
@@ -183,29 +183,27 @@ exports.resetPassword = (email, newPassword, resetToken) => {
 internals.strangeActions = StrangeAuth.makeActions({
     login: ({ email, password, token }) => {
 
-        let authPromise;
+        const getToken = () => {
+
+            if (token) {
+                return Promise.resolve(token);
+            }
+
+            return WebClient.post('/login', { email, password }, { responseType: 'text' })
+                .then(({ data }) => data);
+        };
+
         let finalToken;
 
-        if (token) {
+        return getToken()
 
-            finalToken = token;
+        .then((result) => {
 
-            authPromise = internals.getUser(finalToken);
-        }
-        else {
+            finalToken = result;
+            return internals.getUser(finalToken);
+        })
 
-            authPromise = WebClient.post('/login', { email, password }, { responseType: 'text' })
-
-            .then(({ data, status }) => {
-
-                finalToken = data;
-
-                return internals.getUser(finalToken);
-
-            });
-        }
-
-        return authPromise.then(({ data, status }) => {
+        .then(({ data }) => {
 
             return {
                 credentials: {
