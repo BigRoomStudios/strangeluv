@@ -1,5 +1,5 @@
 const Connect = require('react-redux').connect;
-const <%= pascalEntityName %> = require('components/<%= pascalEntityName %>');
+const <%= pascalEntityName %> = require('../components/<%= pascalEntityName %>');
 
 const internals = {};
 

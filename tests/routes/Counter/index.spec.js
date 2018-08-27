@@ -1,4 +1,4 @@
-const CounterRoute = require('routes/Counter');
+const CounterRoute = require('routes/counter');
 
 describe('(Route) Counter', () => {
 

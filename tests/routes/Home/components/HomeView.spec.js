@@ -1,5 +1,5 @@
 const React = require('react');
-const HomeView = require('routes/Home/components/HomeView');
+const HomeView = require('routes/home/components/HomeView');
 const Enzyme = require('enzyme');
 
 describe('(View) Home', () => {
@@ -8,7 +8,7 @@ describe('(View) Home', () => {
 
     beforeEach(() => {
 
-        _component = Enzyme.render(<HomeView />);
+        _component = Enzyme.render(<HomeView loadMoon={() => null} />);
     });
 
     it('Renders a welcome message', () => {

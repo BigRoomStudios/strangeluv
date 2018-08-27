@@ -1,6 +1,9 @@
 const React = require('react');
 const Enzyme = require('enzyme');
 const Assert = require('assert');
+const EnzymeAdapterReact16 = require('enzyme-adapter-react-16');
+
+Enzyme.configure({ adapter: new EnzymeAdapterReact16() });
 
 class Fixture extends React.Component {
     render() {

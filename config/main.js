@@ -43,10 +43,11 @@ const config = module.exports = {
         colors: true
     },
     compiler_vendor: [
+        'babel-polyfill',
         'history',
         'react',
         'react-redux',
-        'react-router',
+        'react-router-dom',
         'react-router-redux',
         'redux',
         'strangeluv-core'
@@ -113,7 +114,7 @@ const base = (...args) => {
 
 
 config.utils_paths = {
-    base: base,
+    base,
     client: base.bind(null, config.dir_client),
     dist: base.bind(null, config.dir_dist)
 };

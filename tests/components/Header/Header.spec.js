@@ -1,7 +1,7 @@
 const React = require('react');
 const Header = require('components/Header');
 const Classes = require('components/Header/styles.scss');
-const ReactRouter = require('react-router');
+const NavLink = require('react-router-dom').NavLink;
 const Enzyme = require('enzyme');
 
 describe('(Component) Header', () => {
@@ -17,7 +17,7 @@ describe('(Component) Header', () => {
 
         const welcome = _wrapper.find('h1');
         expect(welcome).to.exist;
-        expect(welcome.text()).to.match(/React Redux Starter Kit/);
+        expect(welcome.text()).to.match(/Strangeluv/);
     });
 
     describe('Navigation links...', () => {
@@ -25,18 +25,18 @@ describe('(Component) Header', () => {
         it('Should render a Link to Home route', () => {
 
             expect(_wrapper.contains(
-                <ReactRouter.IndexLink activeClassName={Classes.activeRoute} to='/'>
+                <NavLink exact to='/' activeClassName={Classes.activeRoute}>
                     Home
-                </ReactRouter.IndexLink>
+                </NavLink>
             )).to.be.true;
         });
 
         it('Should render a Link to Counter route', () => {
 
             expect(_wrapper.contains(
-                <ReactRouter.Link activeClassName={Classes.activeRoute} to='/counter'>
+                <NavLink to='/counter' activeClassName={Classes.activeRoute}>
                     Counter
-                </ReactRouter.Link>
+                </NavLink>
             )).to.be.true;
         });
     });

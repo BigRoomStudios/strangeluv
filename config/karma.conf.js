@@ -21,25 +21,23 @@ const karmaConfig = {
     preprocessors: {
         [`${Config.dir_test}/test-bundler.js`]: ['webpack']
     },
-    browsers: ['PhantomJS'],
+    browsers: ['ChromeHeadlessNoSandbox'],
+    customLaunchers: {
+        ChromeHeadlessNoSandbox: {
+            base: 'ChromeHeadless',
+            flags: ['--no-sandbox']
+        }
+    },
     webpack: {
+        entry: WebpackConfig.entry,
         devtool: 'cheap-module-source-map',
-        resolve: {
-            ...WebpackConfig.resolve,
-            alias: {
-                ...WebpackConfig.resolve.alias,
-                sinon: 'sinon/pkg/sinon.js'
-            }
-        },
+        resolve: WebpackConfig.resolve,
         plugins: WebpackConfig.plugins,
         module: {
-            noParse: [
-                /\/sinon\.js/
-            ],
-            loaders: WebpackConfig.module.loaders.concat([
+            rules: WebpackConfig.module.rules.concat([
                 {
                     test: /sinon(\\|\/)pkg(\\|\/)sinon\.js/,
-                    loader: 'imports?define=>false,require=>false'
+                    use: ['imports-loader?define=>false,require=>false']
                 }
             ])
         },
@@ -50,8 +48,7 @@ const karmaConfig = {
             'react/addons': true,
             'react/lib/ExecutionEnvironment': true,
             'react/lib/ReactContext': 'window'
-        },
-        sassLoader: WebpackConfig.sassLoader
+        }
     },
     webpackMiddleware: {
         noInfo: true
@@ -63,12 +60,13 @@ const karmaConfig = {
 
 if (Config.globals.__COVERAGE__) {
     karmaConfig.reporters.push('coverage');
-    karmaConfig.webpack.module.preLoaders = [{
+    karmaConfig.webpack.module.rules.push({
         test: /\.(js|jsx)$/,
+        enforce: 'pre',
         include: new RegExp(Config.dir_client),
-        loader: 'isparta',
-        exclude: /node_modules/
-    }];
+        exclude: /node_modules/,
+        use: ['isparta-loader']
+    });
 }
 
 module.exports = (cfg) => cfg.set(karmaConfig);
