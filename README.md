@@ -134,7 +134,7 @@ We use `react-router` [route definitions](https://github.com/reactjs/react-route
 )]
  - Incorporating server-side rendering (_very, very incomplete_) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-server-side
 )]
- - Basic login recipe with account creation, authenticated routes and password reset (_requires an API with SES for password reset_) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-login)]
+ - Basic login recipe with account creation, authenticated routes and password reset (_designed to work with [user pal](https://github.com/mattboutet/user-pal)_) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-login)]
 
 ## Testing
 To add a unit test, simply create a `.spec.js` file anywhere in `tests/`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them. If you are using `redux-cli`, test files should automatically be generated when you create a component or redux module.
