@@ -84,7 +84,9 @@ Note the [nestable `routes/`](https://github.com/davezuko/react-redux-starter-ki
 │   ├── reducers/            # Redux reducers
 │   ├── components/          # Reusable UI-only (dumb/stateless) components
 │   ├── containers/          # Reusable container (smart/stateful) components
+│   ├── initializers/        # Initialize the application
 │   ├── layouts/             # Components that dictate major page structure
+│   ├── selectors/           # Application-wide state selectors
 │   ├── static/              # Static assets (not imported anywhere in source code)
 │   ├── styles/              # Application-wide styles
 │   ├── wiring/              # Wiring between Redux and the app
@@ -132,6 +134,7 @@ We use `react-router` [route definitions](https://github.com/reactjs/react-route
 )]
  - Incorporating server-side rendering (_very, very incomplete_) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-server-side
 )]
+ - Basic login recipe with account creation, authenticated routes and password reset (_designed to work with [user pal](https://github.com/mattboutet/user-pal)_) [[here](https://github.com/BigRoomStudios/strangeluv/compare/recipe-login)]
 
 ## Testing
 To add a unit test, simply create a `.spec.js` file anywhere in `tests/`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them. If you are using `redux-cli`, test files should automatically be generated when you create a component or redux module.
