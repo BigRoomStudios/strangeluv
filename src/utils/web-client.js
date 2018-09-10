@@ -1,7 +1,7 @@
 const Axios = require('axios');
 
 const internals = {
-    //Configure this to your environment
+    // Configure this to your environment
     host: process.env.API_HOST || 'http://0.0.0.0:3001',
     prefix: process.env.API_PREFIX || '',
     getApiBase: () => {
