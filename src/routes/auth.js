@@ -4,11 +4,7 @@ const Replace = require('react-router-redux').replace;
 
 exports.authenticate = connectedRouterRedirect({
     authenticatedSelector: (state) => state.auth.isAuthenticated,
-    authenticatingSelector: (state) => {
-
-        return (state.auth.status === AuthStatuses.INIT) ||
-               (state.auth.status === AuthStatuses.WAITING);
-    },
+    authenticatingSelector: (state) => (state.auth.status === AuthStatuses.WAITING),
     redirectPath: '/login',
     redirectAction: Replace,
     failureRedirectPath: '/',
