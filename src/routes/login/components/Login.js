@@ -3,6 +3,8 @@ const T = require('prop-types');
 const NavLink = require('react-router-dom').NavLink;
 const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
+const { Paper } = require('@material-ui/core');
+const Classes = require('./styles.scss');
 
 module.exports = class Login extends StrangeForms(React.Component) {
 
@@ -93,45 +95,47 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
         return (
 
-            <form onSubmit={this.submit}>
-                <h2>Login</h2>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        id='email'
-                        value={this.fieldValue('email')}
-                        onChange={this.proposeNew('email')}
-                        onBlur={this.fieldBlurred}
-                    />
-                    {this.showEmailError() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input
-                        type='password'
-                        value={this.fieldValue('password')}
-                        onChange={this.proposeNew('password')}
-                    />
-                </div>
-                <label>
-                    <input
-                        type='checkbox'
-                        checked={this.fieldValue('rememberMe')}
-                        onChange={this.proposeNew('rememberMe')}
-                    />
-                    Remember Me
-                </label>
-                <p>Don&rsquo;t have an account? <NavLink to='sign-up'>Sign up</NavLink> now.</p>
-                <p><NavLink to='forgot-password'>Forget password?</NavLink></p>
-                {this.props.errorMessage &&
-                    <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
-                }
-                <button
-                    type='submit'
-                    onClick={this.submit}
-                    disabled={this.disableButton()}
-                >Login</button>
-            </form>
+            <Paper className={Classes.paper}>
+                <form onSubmit={this.submit}>
+                    <h2>Login</h2>
+                    <div>
+                        <label>Email:</label>
+                        <input
+                            id='email'
+                            value={this.fieldValue('email')}
+                            onChange={this.proposeNew('email')}
+                            onBlur={this.fieldBlurred}
+                        />
+                        {this.showEmailError() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input
+                            type='password'
+                            value={this.fieldValue('password')}
+                            onChange={this.proposeNew('password')}
+                        />
+                    </div>
+                    <label>
+                        <input
+                            type='checkbox'
+                            checked={this.fieldValue('rememberMe')}
+                            onChange={this.proposeNew('rememberMe')}
+                        />
+                        Remember Me
+                    </label>
+                    <p>Don&rsquo;t have an account? <NavLink to='sign-up'>Sign up</NavLink> now.</p>
+                    <p><NavLink to='forgot-password'>Forget password?</NavLink></p>
+                    {this.props.errorMessage &&
+                        <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
+                    }
+                    <button
+                        type='submit'
+                        onClick={this.submit}
+                        disabled={this.disableButton()}
+                    >Login</button>
+                </form>
+            </Paper>
         );
     }
 };

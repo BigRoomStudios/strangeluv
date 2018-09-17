@@ -2,6 +2,11 @@ const React = require('react');
 const T = require('prop-types');
 const NavLink = require('react-router-dom').NavLink;
 const Classes = require('./styles.scss');
+const { AppBar } = require('@material-ui/core');
+const { Toolbar } = require('@material-ui/core');
+const { Button } = require('@material-ui/core');
+
+
 
 module.exports = class Header extends React.Component {
 
@@ -23,10 +28,18 @@ module.exports = class Header extends React.Component {
 
         return (
             <React.Fragment>
-                {' · '}
-                <NavLink to='/sign-up' activeClassName={Classes.activeRoute}>Sign Up</NavLink>
-                {' · '}
-                <NavLink to='/login' activeClassName={Classes.activeRoute}>Login</NavLink>
+                <Button
+                    component={(props) => <NavLink to='/sign-up' {...props} />}
+                    activeClassName={Classes.activeRoute}
+                >
+                    Sign Up
+                </Button>
+                <Button
+                    component={(props) => <NavLink to='/login' {...props} />}
+                    activeClassName={Classes.activeRoute}
+                >
+                    Login
+                </Button>
             </React.Fragment>
         );
     }
@@ -35,8 +48,11 @@ module.exports = class Header extends React.Component {
 
         return (
             <React.Fragment>
-                {' '}
-                <button onClick={this.props.logout}>Logout</button>
+                <Button
+                    onClick={this.props.logout}
+                >
+                    Logout
+                </Button>
             </React.Fragment>
         );
     }
@@ -49,13 +65,26 @@ module.exports = class Header extends React.Component {
 
         return (
 
-            <div>
-                <h1>Strangeluv</h1>
-                <NavLink exact to='/' activeClassName={Classes.activeRoute}>Home</NavLink>
-                {' · '}
-                <NavLink to='/dashboard' activeClassName={Classes.activeRoute}>Dashboard</NavLink>
-                {renderedNav}
-            </div>
+            <AppBar
+                color='secondary'
+            >
+                <Toolbar>
+                    <p>Strangeluv</p>
+                    <Button
+                        component={(props) => <NavLink exact to='/' {...props} />}
+                        activeClassName={Classes.activeRoute}
+                    >
+                        Home
+                    </Button>
+                    <Button
+                        component={(props) => <NavLink to='/dashboard' {...props} />}
+                        activeClassName={Classes.activeRoute}
+                    >
+                        Dashboard
+                    </Button>
+                    {renderedNav}
+                </Toolbar>
+            </AppBar>
         );
     }
 };
