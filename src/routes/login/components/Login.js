@@ -3,8 +3,8 @@ const T = require('prop-types');
 const NavLink = require('react-router-dom').NavLink;
 const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
-const { Paper } = require('@material-ui/core');
 const Classes = require('./styles.scss');
+const { Paper, Button, TextField, FormHelperText, FormControlLabel, Checkbox, Divider } = require('@material-ui/core');
 
 module.exports = class Login extends StrangeForms(React.Component) {
 
@@ -98,42 +98,69 @@ module.exports = class Login extends StrangeForms(React.Component) {
             <Paper className={Classes.paper}>
                 <form onSubmit={this.submit}>
                     <h2>Login</h2>
-                    <div>
-                        <label>Email:</label>
-                        <input
-                            id='email'
-                            value={this.fieldValue('email')}
-                            onChange={this.proposeNew('email')}
-                            onBlur={this.fieldBlurred}
-                        />
-                        {this.showEmailError() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
-                    </div>
-                    <div>
-                        <label>Password:</label>
-                        <input
-                            type='password'
-                            value={this.fieldValue('password')}
-                            onChange={this.proposeNew('password')}
-                        />
-                    </div>
-                    <label>
-                        <input
-                            type='checkbox'
-                            checked={this.fieldValue('rememberMe')}
-                            onChange={this.proposeNew('rememberMe')}
-                        />
-                        Remember Me
-                    </label>
-                    <p>Don&rsquo;t have an account? <NavLink to='sign-up'>Sign up</NavLink> now.</p>
-                    <p><NavLink to='forgot-password'>Forget password?</NavLink></p>
                     {this.props.errorMessage &&
-                        <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
+                        <FormHelperText>Oops, something went wrong! {this.props.errorMessage}</FormHelperText>
                     }
-                    <button
+                    <TextField
+                        id='email'
+                        variant='outlined'
+                        label='Email'
+                        margin='normal'
+                        fullWidth
+                        value={this.fieldValue('email')}
+                        onChange={this.proposeNew('email')}
+                        onBlur={this.fieldBlurred}
+                        error={this.showEmailError()}
+                    />
+                    {this.showEmailError() &&
+                        <FormHelperText>
+                            Please enter a valid email address.
+                        </FormHelperText>
+                    }
+                    <TextField
+                        variant='outlined'
+                        label='Password'
+                        margin='normal'
+                        fullWidth
+                        type='password'
+                        value={this.fieldValue('password')}
+                        onChange={this.proposeNew('password')}
+                    />
+                    <Button
+                        variant='contained'
                         type='submit'
                         onClick={this.submit}
                         disabled={this.disableButton()}
-                    >Login</button>
+                        color='primary'
+                        size='large'
+                    >Login</Button>
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={this.fieldValue('rememberMe')}
+                                onChange={this.proposeNew('rememberMe')}
+                                color='primary'
+                            />
+                        }
+                        label='Remember Me'
+                    />
+                    <div>
+                        <Divider />
+                        <Button
+                            variant='text'
+                            size='small'
+                            component={(props) => <NavLink to='/forgot-password' {...props} />}
+                        >
+                            Forget password?
+                        </Button>
+                        <Button
+                            variant='text'
+                            size='small'
+                            component={(props) => <NavLink to='/sign-up' {...props} />}
+                        >
+                            Create an account
+                        </Button>
+                    </div>
                 </form>
             </Paper>
         );
