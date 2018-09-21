@@ -3,8 +3,8 @@ const T = require('prop-types');
 const NavLink = require('react-router-dom').NavLink;
 const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
-const Classes = require('./styles.scss');
-const { Paper, Button, TextField, FormHelperText, FormControlLabel, Checkbox, Divider } = require('@material-ui/core');
+const { Button, TextField, FormHelperText, FormControlLabel, Checkbox, Divider } = require('@material-ui/core');
+const { FormWrapper, TextWrapper, ButtonWrapper } = require('./styles.js');
 
 module.exports = class Login extends StrangeForms(React.Component) {
 
@@ -95,74 +95,78 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
         return (
 
-            <Paper className={Classes.paper}>
+            <FormWrapper>
                 <form onSubmit={this.submit}>
-                    <h2>Login</h2>
-                    {this.props.errorMessage &&
-                        <FormHelperText>Oops, something went wrong! {this.props.errorMessage}</FormHelperText>
-                    }
-                    <TextField
-                        id='email'
-                        variant='outlined'
-                        label='Email'
-                        margin='normal'
-                        fullWidth
-                        value={this.fieldValue('email')}
-                        onChange={this.proposeNew('email')}
-                        onBlur={this.fieldBlurred}
-                        error={this.showEmailError()}
-                    />
-                    {this.showEmailError() &&
-                        <FormHelperText>
-                            Please enter a valid email address.
-                        </FormHelperText>
-                    }
-                    <TextField
-                        variant='outlined'
-                        label='Password'
-                        margin='normal'
-                        fullWidth
-                        type='password'
-                        value={this.fieldValue('password')}
-                        onChange={this.proposeNew('password')}
-                    />
-                    <Button
-                        variant='contained'
-                        type='submit'
-                        onClick={this.submit}
-                        disabled={this.disableButton()}
-                        color='primary'
-                        size='large'
-                    >Login</Button>
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                checked={this.fieldValue('rememberMe')}
-                                onChange={this.proposeNew('rememberMe')}
-                                color='primary'
-                            />
+                    <TextWrapper>
+                        <h2>Login</h2>
+                        {this.props.errorMessage &&
+                            <FormHelperText>Oops, something went wrong! {this.props.errorMessage}</FormHelperText>
                         }
-                        label='Remember Me'
-                    />
-                    <div>
+                        <TextField
+                            id='email'
+                            variant='outlined'
+                            label='Email'
+                            margin='normal'
+                            fullWidth
+                            value={this.fieldValue('email')}
+                            onChange={this.proposeNew('email')}
+                            onBlur={this.fieldBlurred}
+                            error={this.showEmailError()}
+                        />
+                        {this.showEmailError() &&
+                            <FormHelperText>
+                                Please enter a valid email address.
+                            </FormHelperText>
+                        }
+                        <TextField
+                            variant='outlined'
+                            label='Password'
+                            margin='normal'
+                            fullWidth
+                            type='password'
+                            value={this.fieldValue('password')}
+                            onChange={this.proposeNew('password')}
+                        />
+                    </TextWrapper>
+                    <ButtonWrapper>
+                        <Button
+                            variant='contained'
+                            type='submit'
+                            onClick={this.submit}
+                            disabled={this.disableButton()}
+                            color='primary'
+                            size='large'
+                        >Login</Button>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={this.fieldValue('rememberMe')}
+                                    onChange={this.proposeNew('rememberMe')}
+                                    color='primary'
+                                />
+                            }
+                            label='Remember Me'
+                        />
+                    </ButtonWrapper>
+                    <TextWrapper>
                         <Divider />
-                        <Button
-                            variant='text'
-                            size='small'
-                            component={(props) => <NavLink to='/forgot-password' {...props} />}
-                        >
-                            Forget password?
-                        </Button>
-                        <Button
-                            variant='text'
-                            size='small'
-                            component={(props) => <NavLink to='/sign-up' {...props} />}
-                        >
-                            Create an account
-                        </Button>
-                    </div>
+                    </TextWrapper>
+                    <Button
+                        variant='text'
+                        size='small'
+                        component={(props) => <NavLink to='/forgot-password' {...props} />}
+                    >
+                        Forget password?
+                    </Button>
+                    <Button
+                        variant='text'
+                        size='small'
+                        component={(props) => <NavLink to='/sign-up' {...props} />}
+                    >
+                        Create an account
+                    </Button>
                 </form>
-            </Paper>
+            </FormWrapper>
         );
     }
 };
