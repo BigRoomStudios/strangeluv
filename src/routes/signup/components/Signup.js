@@ -3,6 +3,9 @@ const T = require('prop-types');
 const NavLink = require('react-router-dom').NavLink;
 const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
+const { Button, TextField, FormHelperText, FormControlLabel, Checkbox, Divider } = require('@material-ui/core');
+const { FormWrapper, TextWrapper, ButtonWrapper } = require('styles/global-components.js');
+
 
 module.exports = class Signup extends StrangeForms(React.Component) {
 
@@ -61,6 +64,8 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         const isBlurred = { ...this.state.isBlurred };
         const field = ev.target.id;
 
+        console.log(field);
+
         isBlurred[field] = true;
 
         this.setState({ isBlurred });
@@ -73,7 +78,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
     _showPasswordError() {
 
-        return this.state.isBlurred.confirmPassword && this.state.password !== this.state.confirmPassword;
+        return this.state.isBlurred.confirmPassword && (this.state.password !== this.state.confirmPassword);
     }
 
     _disableButton() {
@@ -101,79 +106,125 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
     render() {
 
+        console.log(this.showEmailError());
+        console.log(this.showPasswordError());
+        console.log(this.state);
+
         return (
 
-            <form onSubmit={this.submit}>
-                <h2>Sign Up</h2>
-                <div>
-                    <label>First Name</label>
-                    <input
-                        id='firstName'
-                        type='text'
-                        value={this.fieldValue('firstName')}
-                        onChange={this.proposeNew('firstName')}
-                        onBlur={this.fieldBlurred}
-                    />
-                </div>
-                <div>
-                    <label>Last Name</label>
-                    <input
-                        id='lastName'
-                        type='text'
-                        value={this.fieldValue('lastName')}
-                        onChange={this.proposeNew('lastName')}
-                        onBlur={this.fieldBlurred}
-                    />
-                </div>
-                <div>
-                    <label>Email</label>
-                    <input
-                        id='email'
-                        type='email'
-                        value={this.fieldValue('email')}
-                        onChange={this.proposeNew('email')}
-                        onBlur={this.fieldBlurred}
-                    />
-                    {this.showEmailError() && <label style={{ color:'red' }}>Please enter a valid email address</label>}
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input
-                        id='password'
-                        type='password'
-                        value={this.fieldValue('password')}
-                        onChange={this.proposeNew('password')}
-                    />
-                </div>
-                <div>
-                    <label>Confirm Password</label>
-                    <input
-                        id='confirmPassword'
-                        type='password'
-                        value={this.fieldValue('confirmPassword')}
-                        onChange={this.proposeNew('confirmPassword')}
-                        onBlur={this.fieldBlurred}
-                    />
-                    {this.showPasswordError() && <label style={{ color:'red' }}>Please enter matching passwords</label>}
-                </div>
-                <label>
-                    <input
-                        type='checkbox'
-                        checked={this.fieldValue('rememberMe')}
-                        onChange={this.proposeNew('rememberMe')}
-                    />
-                    Remember Me
-                </label>
-                <p>Already have an account? <NavLink to='login'>Login</NavLink> now.</p>
-                {this.props.errorMessage &&
-                    <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
-                }
-                <button
-                    type='submit'
-                    onClick={this.submit}
-                    disabled={this.disableButton()}
-                >Sign Up</button>
-            </form>
+            <FormWrapper>
+                <form onSubmit={this.submit}>
+                    <TextWrapper>
+                        <h2>Sign Up</h2>
+                        {this.props.errorMessage &&
+                            <FormHelperText>Oops, something went wrong! {this.props.errorMessage}</FormHelperText>
+                        }
+                        <TextField
+                            id='firstName'
+                            type='text'
+                            variant='outlined'
+                            label='First Name'
+                            margin='normal'
+                            fullWidth
+                            value={this.fieldValue('firstName')}
+                            onChange={this.proposeNew('firstName')}
+                            onBlur={this.fieldBlurred}
+                        />
+                        <TextField
+                            id='lastName'
+                            type='text'
+                            variant='outlined'
+                            label='Last Name'
+                            margin='normal'
+                            fullWidth
+                            value={this.fieldValue('lastName')}
+                            onChange={this.proposeNew('lastName')}
+                            onBlur={this.fieldBlurred}
+                        />
+                        <TextField
+                            id='email'
+                            type='email'
+                            variant='outlined'
+                            label='Email'
+                            margin='normal'
+                            fullWidth
+                            value={this.fieldValue('email')}
+                            onChange={this.proposeNew('email')}
+                            onBlur={this.fieldBlurred}
+                            error={this.showEmailError()}
+                        />
+                        {this.showEmailError() &&
+                            <FormHelperText>
+                                Please enter a valid email address.
+                            </FormHelperText>
+                        }
+                        <TextField
+                            id='password'
+                            type='password'
+                            variant='outlined'
+                            label='Password'
+                            margin='normal'
+                            fullWidth
+                            value={this.fieldValue('password')}
+                            onChange={this.proposeNew('password')}
+                        />
+                        <TextField
+                            id='confirmPassword'
+                            type='password'
+                            variant='outlined'
+                            label='Confirm Password'
+                            margin='normal'
+                            fullWidth
+                            value={this.fieldValue('confirmPassword')}
+                            onChange={this.proposeNew('confirmPassword')}
+                            onBlur={this.fieldBlurred}
+                            error={this.showPasswordError()}
+                        />
+                        {this.showPasswordError() &&
+                            <FormHelperText>
+                                Please enter matching passwords.
+                            </FormHelperText>
+                        }
+                    </TextWrapper>
+                    <ButtonWrapper>
+                        <Button
+                            variant='contained'
+                            type='submit'
+                            onClick={this.submit}
+                            disabled={this.disableButton()}
+                            color='primary'
+                            size='large'
+                        >Create Account</Button>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={this.fieldValue('rememberMe')}
+                                    onChange={this.proposeNew('rememberMe')}
+                                    color='primary'
+                                />
+                            }
+                            label='Remember Me'
+                        />
+                    </ButtonWrapper>
+                    <TextWrapper>
+                        <Divider />
+                    </TextWrapper>
+                    <Button
+                        variant='text'
+                        size='small'
+                        component={(props) => <NavLink to='/forgot-password' {...props} />}
+                    >
+                        Forget password?
+                    </Button>
+                    <Button
+                        variant='text'
+                        size='small'
+                        component={(props) => <NavLink to='/login' {...props} />}
+                    >
+                        Log into an existing account
+                    </Button>
+                </form>
+            </FormWrapper>
         );
     }
 };

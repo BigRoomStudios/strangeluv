@@ -4,7 +4,7 @@ const NavLink = require('react-router-dom').NavLink;
 const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
 const { Button, TextField, FormHelperText, FormControlLabel, Checkbox, Divider } = require('@material-ui/core');
-const { FormWrapper, TextWrapper, ButtonWrapper } = require('./styles.js');
+const { FormWrapper, TextWrapper, ButtonWrapper } = require('styles/global-components.js');
 
 module.exports = class Login extends StrangeForms(React.Component) {
 
