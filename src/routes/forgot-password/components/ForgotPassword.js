@@ -2,6 +2,8 @@ const React = require('react');
 const T = require('prop-types');
 const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
+const { FormWrapper, TextWrapper } = require('styles/global-components.js');
+const { Button, TextField, FormHelperText, Typography } = require('@material-ui/core');
 
 module.exports = class ForgotPassword extends StrangeForms(React.Component) {
 
@@ -70,30 +72,43 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
 
         return (
 
-            <form onSubmit={this.submit}>
-                <h2>Forgot your password?</h2>
-                <p>To reset your password, enter your email below and we will email a link to reset your password.</p>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        id='email'
-                        value={this.fieldValue('email')}
-                        onChange={this.proposeNew('email')}
-                        onBlur={this.fieldBlurred}
-                    />
-                    {this.showEmailError() &&
-                        <label style={{ color:'red' }}>Please enter a valid email address</label>
-                    }
-                </div>
-                {this.props.errorMessage &&
-                    <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
-                }
-                <button
-                    type='submit'
-                    onClick={this.submit}
-                    disabled={this.disableButton()}
-                >Reset Password</button>
-            </form>
+            <FormWrapper>
+                <form onSubmit={this.submit}>
+                    <TextWrapper>
+                        <Typography variant='headline' gutterBottom>Forgot your password?</Typography>
+                        <Typography variant='body1'>Enter your email below and we will email you a link to reset your password.</Typography>
+                        <div>
+                            <TextField
+                                id='email'
+                                variant='outlined'
+                                label='Email'
+                                margin='normal'
+                                fullWidth
+                                value={this.fieldValue('email')}
+                                onChange={this.proposeNew('email')}
+                                onBlur={this.fieldBlurred}
+                                error={this.showEmailError()}
+                            />
+                            {this.showEmailError() &&
+                                <FormHelperText>
+                                    Please enter a valid email address.
+                                </FormHelperText>
+                            }
+                        </div>
+                        {this.props.errorMessage &&
+                            <FormHelperText error>Error! {this.props.errorMessage}</FormHelperText>
+                        }
+                    </TextWrapper>
+                    <Button
+                        variant='contained'
+                        type='submit'
+                        onClick={this.submit}
+                        disabled={this.disableButton()}
+                        color='primary'
+                        size='large'
+                    >Reset Password</Button>
+                </form>
+            </FormWrapper>
         );
     }
 };
