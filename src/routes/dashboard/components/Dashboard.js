@@ -1,5 +1,7 @@
 const React = require('react');
 const T = require('prop-types');
+const { PageWrapper } = require('styles/global-components.js');
+const { Typography } = require('@material-ui/core');
 
 module.exports = class Dashboard extends React.Component {
 
@@ -13,10 +15,10 @@ module.exports = class Dashboard extends React.Component {
 
         return (
 
-            <div>
-                <h1>Dashboard</h1>
-                <p>Welcome to your dashboard, {firstName}!</p>
-            </div>
+            <PageWrapper>
+                <Typography variant='display2' gutterBottom>Dashboard</Typography>
+                <Typography>Welcome to your dashboard, {firstName}!</Typography>
+            </PageWrapper>
 
         );
     }

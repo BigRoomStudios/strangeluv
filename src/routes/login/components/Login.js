@@ -136,7 +136,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
                             disabled={this.disableButton()}
                             color='primary'
                             size='large'
-                        >Login</Button>
+                        >Log In</Button>
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -156,7 +156,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
                         size='small'
                         component={(props) => <NavLink to='/forgot-password' {...props} />}
                     >
-                        Forget password?
+                        Forgot password?
                     </Button>
                     <Button
                         variant='text'

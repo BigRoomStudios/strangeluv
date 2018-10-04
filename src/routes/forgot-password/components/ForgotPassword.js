@@ -76,7 +76,7 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
                 <form onSubmit={this.submit}>
                     <TextWrapper>
                         <Typography variant='headline' gutterBottom>Forgot your password?</Typography>
-                        <Typography variant='body1'>Enter your email below and we will email you a link to reset your password.</Typography>
+                        <Typography>Enter your email below and we will email you a link to reset your password.</Typography>
                         <div>
                             <TextField
                                 id='email'

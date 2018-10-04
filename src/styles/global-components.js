@@ -17,5 +17,14 @@ module.exports = {
         display: flex;
         justify-content: space-between;
         margin: 0 0 1.5rem;
+    `,
+
+    PageWrapper: Styled.div`
+        padding: 0px 16px;
+        margin: 0 auto;
+
+        @media (min-width: 600px) {
+            padding: 0 24px;
+        }
     `
 };

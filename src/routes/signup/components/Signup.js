@@ -44,7 +44,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
         this.fieldBlurred = this._fieldBlurred.bind(this);
         this.showEmailError = this._showEmailError.bind(this);
-        this.showPasswordError = this._showEmailError.bind(this);
+        this.showPasswordError = this._showPasswordError.bind(this);
         this.disableButton = this._disableButton.bind(this);
         this.submit = this._submit.bind(this);
     }
@@ -63,8 +63,6 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
         const isBlurred = { ...this.state.isBlurred };
         const field = ev.target.id;
-
-        console.log(field);
 
         isBlurred[field] = true;
 
@@ -105,10 +103,6 @@ module.exports = class Signup extends StrangeForms(React.Component) {
     }
 
     render() {
-
-        console.log(this.showEmailError());
-        console.log(this.showPasswordError());
-        console.log(this.state);
 
         return (
 
@@ -214,7 +208,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                         size='small'
                         component={(props) => <NavLink to='/forgot-password' {...props} />}
                     >
-                        Forget password?
+                        Forgot password?
                     </Button>
                     <Button
                         variant='text'

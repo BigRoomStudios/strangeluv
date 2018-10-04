@@ -1,3 +1,10 @@
 .mainContainer {
-  padding-top: 100px;
+
+    @media (min-width: 500px) {
+        padding: 50px 0 50px;
+    }
+
+    @media (min-width: 600px) {
+        padding-top: 100px;
+    }
 }

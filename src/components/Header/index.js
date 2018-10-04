@@ -2,9 +2,7 @@ const React = require('react');
 const T = require('prop-types');
 const NavLink = require('react-router-dom').NavLink;
 const Classes = require('./styles.scss');
-const { AppBar } = require('@material-ui/core');
-const { Toolbar } = require('@material-ui/core');
-const { Button } = require('@material-ui/core');
+const { AppBar, Typography, Toolbar, Button } = require('@material-ui/core');
 
 
 
@@ -29,16 +27,20 @@ module.exports = class Header extends React.Component {
         return (
             <React.Fragment>
                 <Button
+                    style={{ whiteSpace: 'nowrap' }}
+                    color='inherit'
                     component={(props) => <NavLink to='/sign-up' {...props} />}
                     activeClassName={Classes.activeRoute}
                 >
                     Sign Up
                 </Button>
                 <Button
+                    style={{ whiteSpace: 'nowrap' }}
+                    color='inherit'
                     component={(props) => <NavLink to='/login' {...props} />}
                     activeClassName={Classes.activeRoute}
                 >
-                    Login
+                    Log In
                 </Button>
             </React.Fragment>
         );
@@ -49,9 +51,11 @@ module.exports = class Header extends React.Component {
         return (
             <React.Fragment>
                 <Button
+                    style={{ whiteSpace: 'nowrap' }}
+                    color='inherit'
                     onClick={this.props.logout}
                 >
-                    Logout
+                    Log Out
                 </Button>
             </React.Fragment>
         );
@@ -66,17 +70,27 @@ module.exports = class Header extends React.Component {
         return (
 
             <AppBar
+                style={{ position: 'relative' }}
                 color='secondary'
             >
                 <Toolbar>
-                    <p>Strangeluv</p>
+                    <Typography
+                        noWrap
+                        variant='title'
+                        color='inherit'
+                        style={{ flex: 1 }}
+                    >
+                        Strangeluv
+                    </Typography>
                     <Button
+                        color='inherit'
                         component={(props) => <NavLink exact to='/' {...props} />}
                         activeClassName={Classes.activeRoute}
                     >
                         Home
                     </Button>
                     <Button
+                        color='inherit'
                         component={(props) => <NavLink to='/dashboard' {...props} />}
                         activeClassName={Classes.activeRoute}
                     >
