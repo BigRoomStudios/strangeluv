@@ -77,26 +77,24 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
                     <TextWrapper>
                         <Typography variant='headline' gutterBottom>Forgot your password?</Typography>
                         <Typography>Enter your email below and we will email you a link to reset your password.</Typography>
-                        <div>
-                            <TextField
-                                id='email'
-                                variant='outlined'
-                                label='Email'
-                                margin='normal'
-                                fullWidth
-                                value={this.fieldValue('email')}
-                                onChange={this.proposeNew('email')}
-                                onBlur={this.fieldBlurred}
-                                error={this.showEmailError()}
-                            />
-                            {this.showEmailError() &&
-                                <FormHelperText>
-                                    Please enter a valid email address.
-                                </FormHelperText>
-                            }
-                        </div>
+                        <TextField
+                            id='email'
+                            variant='outlined'
+                            label='Email'
+                            margin='normal'
+                            fullWidth
+                            value={this.fieldValue('email')}
+                            onChange={this.proposeNew('email')}
+                            onBlur={this.fieldBlurred}
+                            error={this.showEmailError()}
+                        />
+                        {this.showEmailError() &&
+                            <FormHelperText>
+                                Please enter a valid email address.
+                            </FormHelperText>
+                        }
                         {this.props.errorMessage &&
-                            <FormHelperText error>Error! {this.props.errorMessage}</FormHelperText>
+                            <FormHelperText error>Error: {this.props.errorMessage}</FormHelperText>
                         }
                     </TextWrapper>
                     <Button

@@ -2,6 +2,8 @@ const React = require('react');
 const T = require('prop-types');
 const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
+const { FormWrapper, TextWrapper } = require('styles/global-components.js');
+const { Button, TextField, FormHelperText, Typography } = require('@material-ui/core');
 
 module.exports = class ResetPassword extends StrangeForms(React.Component) {
 
@@ -34,7 +36,7 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
 
         this.fieldBlurred = this._fieldBlurred.bind(this);
         this.showEmailError = this._showEmailError.bind(this);
-        this.showPasswordError = this._showEmailError.bind(this);
+        this.showPasswordError = this._showPasswordError.bind(this);
         this.disableButton = this._disableButton.bind(this);
         this.submit = this._submit.bind(this);
     }
@@ -85,53 +87,68 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
     render() {
 
         return (
-            <form onSubmit={this.submit}>
-                <h2>Reset Password</h2>
-                <p>Please confirm your email address and set your new password below.</p>
-                <div>
-                    <label>Email</label>
-                    <input
-                        id='email'
-                        type='email'
-                        value={this.fieldValue('email')}
-                        onChange={this.proposeNew('email')}
-                        onBlur={this.fieldBlurred}
-                    />
-                    {this.showEmailError() &&
-                        <label style={{ color:'red' }}>Please enter a valid email address</label>
-                    }
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input
-                        id='password'
-                        type='password'
-                        value={this.fieldValue('password')}
-                        onChange={this.proposeNew('password')}
-                    />
-                </div>
-                <div>
-                    <label>Confirm Password</label>
-                    <input
-                        id='confirmPassword'
-                        type='password'
-                        value={this.fieldValue('confirmPassword')}
-                        onChange={this.proposeNew('confirmPassword')}
-                        onBlur={this.fieldBlurred}
-                    />
-                    {this.showPasswordError() &&
-                        <label style={{ color:'red' }}>Please enter matching passwords</label>
-                    }
-                </div>
-                {this.props.errorMessage &&
-                    <div style={{ color: 'red' }}>Error! {this.props.errorMessage}</div>
-                }
-                <button
-                    type='submit'
-                    onClick={this.submit}
-                    disabled={this.disableButton()}
-                >Update Password</button>
-            </form>
+            <FormWrapper>
+                <form onSubmit={this.submit}>
+                    <TextWrapper>
+                        <Typography variant='headline' gutterBottom>Reset Password</Typography>
+                        <Typography>Please confirm your email address and set your new password below.</Typography>
+                        {this.props.errorMessage &&
+                            <FormHelperText>Error: {this.props.errorMessage}</FormHelperText>
+                        }
+                        <TextField
+                            id='email'
+                            variant='outlined'
+                            label='Email'
+                            margin='normal'
+                            fullWidth
+                            value={this.fieldValue('email')}
+                            onChange={this.proposeNew('email')}
+                            onBlur={this.fieldBlurred}
+                            error={this.showEmailError()}
+                        />
+                        {this.showEmailError() &&
+                            <FormHelperText>
+                                Please enter a valid email address.
+                            </FormHelperText>
+                        }
+                        <TextField
+                            id='password'
+                            type='password'
+                            variant='outlined'
+                            label='Password'
+                            margin='normal'
+                            fullWidth
+                            value={this.fieldValue('password')}
+                            onChange={this.proposeNew('password')}
+                        />
+                        <TextField
+                            id='confirmPassword'
+                            type='password'
+                            variant='outlined'
+                            label='Confirm Password'
+                            margin='normal'
+                            fullWidth
+                            value={this.fieldValue('confirmPassword')}
+                            onChange={this.proposeNew('confirmPassword')}
+                            onBlur={this.fieldBlurred}
+                            error={this.showPasswordError()}
+                        />
+                        {this.showPasswordError() &&
+                            <FormHelperText>
+                                Please enter matching passwords.
+                            </FormHelperText>
+                        }
+                    </TextWrapper>
+                    <Button
+                        variant='contained'
+                        type='submit'
+                        onClick={this.submit}
+                        disabled={this.disableButton()}
+                        color='primary'
+                        size='large'
+                    >Update Password</Button>
+                </form>
+            </FormWrapper>
         );
     }
 };
