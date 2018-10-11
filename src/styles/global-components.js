@@ -1,5 +1,6 @@
 const Styled = require('styled-components').default;
-const { Paper } = require('@material-ui/core');
+const { Paper, ListItem } = require('@material-ui/core');
+const Theme = require('../styles/mui-theme');
 
 module.exports = {
 
@@ -26,5 +27,11 @@ module.exports = {
         @media (min-width: 600px) {
             padding: 0 24px;
         }
+    `,
+
+    UserListItem: Styled(ListItem)`
+        width: 100%;
+        max-width: 360px;
+        background-color: ${Theme.palette.background.paper} !important;
     `
 };
