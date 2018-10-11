@@ -37,11 +37,10 @@ module.exports = class Settings extends StrangeForms(React.Component) {
         };
 
         this.strangeForm({
-            fields: ['firstName', 'lastName', 'email', 'currentPassword', 'password', 'confirmPassword', 'rememberMe'],
+            fields: ['firstName', 'lastName', 'email', 'currentPassword', 'password', 'confirmPassword'],
             get: (someProps, field) => this.state[field],
             act: (field, value) => this.setState({ [field]: value }),
             getFormValue: {
-                rememberMe: this.getCheckedValue.bind(this),
                 '*': this.getFormValue.bind(this)
             }
         });
@@ -101,7 +100,8 @@ module.exports = class Settings extends StrangeForms(React.Component) {
         //     return false;
         // }
 
-        if (fieldHasChanged || requestPasswordChange) {
+        // TODO: Make sure this OR statement doesn't mess things up if something is half-filled or something
+        if (fieldHasChanged || (requestPasswordChange)) {
             return false;
         }
 
@@ -110,10 +110,9 @@ module.exports = class Settings extends StrangeForms(React.Component) {
 
     _submit(ev) {
 
-        const { firstName, lastName, email, password, rememberMe } = this.state;
+        const { firstName, lastName, email, password } = this.state;
 
         this.props.onSubmit({ email, password, firstName, lastName  });
-        this.props.rememberAct(rememberMe);
 
         ev.preventDefault();
     }
@@ -127,7 +126,7 @@ module.exports = class Settings extends StrangeForms(React.Component) {
                     <TextWrapper>
                         <Typography variant='headline' gutterBottom>Settings</Typography>
                         {this.props.errorMessage &&
-                            <FormHelperText>Oops, something went wrong! {this.props.errorMessage}</FormHelperText>
+                            <FormHelperText>Error: {this.props.errorMessage}</FormHelperText>
                         }
                         <TextField
                             id='firstName'
