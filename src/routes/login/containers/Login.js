@@ -16,7 +16,7 @@ internals.connect = Connect(
 
                 return Promise.resolve()
                 .then(() => dispatch(AuthAct.login(...args)))
-                .then(() => dispatch(Router.push('/dashboard')));
+                .then((success) => success && dispatch(Router.push('/dashboard')));
             };
         },
         rememberAct: AuthAct.rememberMe
