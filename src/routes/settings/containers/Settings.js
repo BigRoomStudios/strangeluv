@@ -16,7 +16,7 @@ internals.connect = Connect(
     }),
     {
         // onSubmit: AuthAct.registerUser
-        onSubmit: (console.log('Trying to submit on Settings page'))
+        onSubmit: () => console.log('Trying to submit on Settings page')
     }
 );
 

@@ -30,8 +30,7 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         this.strangeForm({
             fields: ['email', 'password', 'confirmPassword'],
             get: (someProps, field) => this.state[field],
-            act: (field, value) => this.setState({ [field]: value }),
-            getFormValue: (e) => e.target.value || ''
+            act: (field, value) => this.setState({ [field]: value })
         });
 
         this.fieldBlurred = this._fieldBlurred.bind(this);

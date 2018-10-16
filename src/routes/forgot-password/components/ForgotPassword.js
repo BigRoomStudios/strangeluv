@@ -26,8 +26,7 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         this.strangeForm({
             fields: ['email'],
             get: (someProps, field) => this.state[field],
-            act: (field, value) => this.setState({ [field]: value }),
-            getFormValue: (e) => e.target.value || ''
+            act: (field, value) => this.setState({ [field]: value })
 
         });
 

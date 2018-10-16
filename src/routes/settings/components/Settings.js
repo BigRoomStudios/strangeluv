@@ -39,10 +39,7 @@ module.exports = class Settings extends StrangeForms(React.Component) {
         this.strangeForm({
             fields: ['firstName', 'lastName', 'email', 'currentPassword', 'password', 'confirmPassword'],
             get: (someProps, field) => this.state[field],
-            act: (field, value) => this.setState({ [field]: value }),
-            getFormValue: {
-                '*': this.getFormValue.bind(this)
-            }
+            act: (field, value) => this.setState({ [field]: value })
         });
 
         this.fieldBlurred = this._fieldBlurred.bind(this);
@@ -50,16 +47,6 @@ module.exports = class Settings extends StrangeForms(React.Component) {
         this.showPasswordError = this._showPasswordError.bind(this);
         this.disableButton = this._disableButton.bind(this);
         this.submit = this._submit.bind(this);
-    }
-
-    getCheckedValue(e) {
-
-        return e.target.checked;
-    }
-
-    getFormValue(e) {
-
-        return e.target.value || '';
     }
 
     _fieldBlurred(ev) {
@@ -85,22 +72,17 @@ module.exports = class Settings extends StrangeForms(React.Component) {
     _disableButton() {
 
         const { firstName, lastName, email, currentPassword, password, confirmPassword } = this.state;
-        // const fieldHasValue = (firstName && lastName && email && password) !== '';
         const fieldHasChanged =
-            (firstName !== this.props.userDetails.firstName)
-            || (lastName !== this.props.userDetails.lastName)
-            || (email !== this.props.userDetails.email);
+            (firstName !== this.props.userDetails.firstName) ||
+            (lastName !== this.props.userDetails.lastName) ||
+            (email !== this.props.userDetails.email);
         const passwordsMatch = password === confirmPassword;
-        const requestPasswordChange = (password !== '')
-            && passwordsMatch
-            && (currentPassword !== password)
-            && (currentPassword !== '');
+        const requestPasswordChange = (password !== '') &&
+            passwordsMatch &&
+            (currentPassword !== password) &&
+            (currentPassword !== '');
 
-        // if (fieldHasValue && IsEmail(email) && passwordsMatch) {
-        //     return false;
-        // }
-
-        // TODO: Make sure this OR statement doesn't mess things up if something is half-filled or something
+        // When hooking this up, we'll want to make sure we only send relevant changes
         if (fieldHasChanged || (requestPasswordChange)) {
             return false;
         }
@@ -120,7 +102,6 @@ module.exports = class Settings extends StrangeForms(React.Component) {
     render() {
 
         return (
-
             <FormWrapper>
                 <form onSubmit={this.submit}>
                     <TextWrapper>

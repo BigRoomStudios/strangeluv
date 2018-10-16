@@ -32,8 +32,8 @@ module.exports = class Login extends StrangeForms(React.Component) {
             get: (someProps, field) => this.state[field],
             act: (field, value) => this.setState({ [field]: value }),
             getFormValue: {
-                rememberMe: this.getCheckedValue.bind(this),
-                '*': this.getFormValue.bind(this)
+                rememberMe: (e) => e.target.checked,
+                '*': (e) => e.target.value || ''
             }
         });
 
@@ -42,16 +42,6 @@ module.exports = class Login extends StrangeForms(React.Component) {
         this.showPasswordError = this._showEmailError.bind(this);
         this.disableButton = this._disableButton.bind(this);
         this.submit = this._submit.bind(this);
-    }
-
-    getCheckedValue(e) {
-
-        return e.target.checked;
-    }
-
-    getFormValue(e) {
-
-        return e.target.value || '';
     }
 
     _fieldBlurred(ev) {
