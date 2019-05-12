@@ -12,7 +12,9 @@ internals.connect = Connect(
     }),
     () => ({
         increment: () => M.dispatch.counter.increment(1),
-        doubleAsync: M.dispatch.counter.doubleAsync
+        doubleAsync: () => M.dispatch.counter.doubleAsync(
+            Math.round(Math.random() * 2000)
+        )
     })
 );
 

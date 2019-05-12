@@ -17,12 +17,7 @@ const Counter = (props) => (
             Increment
         </button>
         {' '}
-        <button onClick={() => {
-
-            props.doubleAsync(
-                Math.round(Math.random() * 2000)
-            );
-        }}>
+        <button onClick={props.doubleAsync}>
             Double (Async)
         </button>
     </div>
