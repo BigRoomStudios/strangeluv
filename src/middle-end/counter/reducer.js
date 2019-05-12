@@ -10,6 +10,6 @@ internals.defaultState = () => ({
 module.exports = H.makeReducer({ mutable: true }, internals.defaultState(), {
     [INCREMENT]: (state, { payload }) => {
 
-        state.count = state.count + payload;
+        state.count += payload;
     }
 });
