@@ -1,5 +1,3 @@
-const H = require('middle-end/helpers');
-
 const internals = {};
 
 // Actions here, see counter/actions for examples

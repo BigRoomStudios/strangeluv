@@ -9,7 +9,7 @@ const M = module.exports = {};
 // a selector for instance. (See middle-end/counter/actions.js)
 
 // But since we need the action file to run to initialize our
-// middle-end, and the action file requires the middle-end at
+// middle-end (via "require('./counter').actions"), and the action file requires the middle-end at
 // the top, we have a crazy mutual dependency issue going on!!
 
 // So we need the middle-end to be able to export {} until
@@ -17,7 +17,6 @@ const M = module.exports = {};
 // M in the actions file, you'll have access to all the other
 // selectors and actions. But when you first require it,
 // it'll be '{}'
-
 
 MakeMiddleEnd.apply(M, {
     counter: require('./counter'),
