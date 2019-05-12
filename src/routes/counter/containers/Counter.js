@@ -1,19 +1,20 @@
 const Connect = require('react-redux').connect;
-const CounterAct = require('actions/counter');
 const Counter = require('../components/Counter');
+
+const M = require('middle-end');
 
 const internals = {};
 
 // What state and actions do we want to hook-up?
 internals.connect = Connect(
     (state) => ({
-        counter: state.counter
+        counter: M.selectors.counter.getCount(state)
     }),
-    {
-        increment: () => CounterAct.increment(1),
-        doubleAsync: CounterAct.doubleAsync
-    }
+    () => ({
+        increment: () => M.dispatch.counter.increment(1),
+        doubleAsync: M.dispatch.counter.doubleAsync
+    })
 );
 
-// Hook them up to the counter
+// Hook them up to the Counter component
 module.exports = internals.connect(Counter);

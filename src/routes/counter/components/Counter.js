@@ -4,7 +4,6 @@ const T = require('prop-types');
 const Classes = require('./styles.scss');
 
 const Counter = (props) => (
-
     <div>
         <h2 className={Classes.counterContainer}>
             Counter:
@@ -17,11 +16,12 @@ const Counter = (props) => (
             Increment
         </button>
         {' '}
-        <button onClick={props.doubleAsync}>
+        <button onClick={() => props.doubleAsync(
+            Math.round(Math.random() * 2000)
+        )}>
             Double (Async)
         </button>
     </div>
-
 );
 
 Counter.propTypes = {

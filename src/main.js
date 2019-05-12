@@ -1,16 +1,10 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const CreateStore = require('./wiring/create-store');
-const History = require('./wiring/history');
 const AppContainer = require('./containers/App');
-const Initializers = require('./initializers');
+const MiddleEnd = require('./middle-end');
 
-// Create redux store and sync history with react-router-redux
-
-const initialState = window.__INITIAL_STATE__;
-const store = CreateStore(initialState);
-
-Initializers.run(store);
+// Run initializers
+MiddleEnd.init();
 
 // Developer Tools Setup
 
@@ -26,14 +20,14 @@ const MOUNT_NODE = document.getElementById('root');
 
 let render = () => {
 
-    const routes = require('./routes')(store);
+    const routes = require('./routes')(MiddleEnd.store);
 
     ReactDOM.render(
 
         <AppContainer
-            history={History}
+            store={MiddleEnd.store}
+            history={MiddleEnd.mods.router.history}
             routes={routes}
-            store={store}
         />,
         MOUNT_NODE
     );
