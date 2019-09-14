@@ -1,6 +1,7 @@
 const Connect = require('react-redux').connect;
 const Login = require('../components/Login');
 const AuthAct = require('actions/auth');
+const Router = require('react-router-redux');
 
 const internals = {};
 
@@ -9,7 +10,15 @@ internals.connect = Connect(
         errorMessage: state.auth.error.message
     }),
     {
-        login: AuthAct.login,
+        login: (...args) => {
+
+            return (dispatch) => {
+
+                return Promise.resolve()
+                .then(() => dispatch(AuthAct.login(...args)))
+                .then((success) => success && dispatch(Router.push('/dashboard')));
+            };
+        },
         rememberAct: AuthAct.rememberMe
     }
 );

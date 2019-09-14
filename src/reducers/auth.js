@@ -46,6 +46,10 @@ module.exports = (state, action) => {
 
         case StrangeAuth.types.LOGIN_FAIL:
 
+            if (payload.code === 'NO_TOKEN_ON_INIT') {
+                return state;
+            }
+
             return Deeply(state)
                 .set('error.message', 'Login failed, please check your email and password.')
                 .value();

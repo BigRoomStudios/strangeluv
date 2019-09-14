@@ -63,19 +63,11 @@ exports.rememberMe = (remember) => ({
 
 // Login and Logout
 
-exports.login = ({ email, password, token }) => {
+exports.login = (...args) => {
 
     return (dispatch) => {
 
-        const strangeLogin = internals.strangeActions.login({ email, password, token });
-
-        return dispatch(strangeLogin)
-
-        .then(() => {
-
-            dispatch(Router.push('/dashboard'));
-        })
-        .catch(console.warn.bind(console));
+        return dispatch(internals.strangeActions.login(...args)).catch(console.warn);
     };
 };
 
@@ -185,7 +177,14 @@ internals.strangeActions = StrangeAuth.makeActions({
 
         const getToken = () => {
 
-            if (token) {
+            if (typeof token !== 'undefined') {
+
+                if (!token) {
+                    const error = new Error('No login token on init');
+                    error.code = 'NO_TOKEN_ON_INIT';
+                    return Promise.reject(error);
+                }
+
                 return Promise.resolve(token);
             }
 
