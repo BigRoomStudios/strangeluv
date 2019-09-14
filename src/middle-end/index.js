@@ -1,6 +1,6 @@
 const Redux = require('redux');
 const { routerMiddleware: RouterMiddleware } = require('react-router-redux');
-const { middleware: { thunk, errorLogger }, ...M } = require('strange-middle-end');
+const { middleware: { thunk, errorLogger }, ...M } = require('strange-middle-end/dist/strange-middle-end');
 
 const Enhancers = require('./enhancers');
 const History = require('./history');
