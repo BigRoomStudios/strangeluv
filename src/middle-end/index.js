@@ -19,7 +19,6 @@ module.exports = M.create({
 
         return Redux.createStore(
             reducer,
-            {},
             Redux.compose(
                 Redux.applyMiddleware(
                     thunk,
