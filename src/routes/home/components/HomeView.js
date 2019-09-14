@@ -1,16 +1,24 @@
 const React = require('react');
 const DuckImage = require('../assets/duck.jpg');
-const Classes = require('./HomeView.scss');
+const { default: Styled } = require('styled-components');
 
-module.exports = () => (
+const internals = {};
 
-    <div>
-        <h4>Welcome!</h4>
-        <img
-            alt='This is a duck, because Redux!'
-            className={Classes.duck}
-            src={DuckImage}
-        />
-    </div>
+module.exports = () => {
 
-);
+    const { Duck } = internals;
+
+    return (
+
+        <div>
+            <h4>Welcome!</h4>
+            <Duck src={DuckImage} />
+        </div>
+    );
+};
+
+internals.Duck = Styled.img`
+    display: block;
+    width: 120px;
+    margin: 1.5rem auto;
+`;

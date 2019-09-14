@@ -1,33 +1,43 @@
 const React = require('react');
 const T = require('prop-types');
+const { default: Styled } = require('styled-components');
 
-const Classes = require('./styles.scss');
+const internals = {};
 
-const Counter = (props) => (
+module.exports = (props) => {
 
-    <div>
-        <h2 className={Classes.counterContainer}>
-            Counter:
-            {' '}
-            <span className={Classes['counter--green']}>
-                {props.counter}
-            </span>
-        </h2>
-        <button onClick={props.increment}>
-            Increment
-        </button>
-        {' '}
-        <button onClick={props.doubleAsync}>
-            Double (Async)
-        </button>
-    </div>
+    const {
+        CounterContainer,
+        CounterNumber
+    } = internals;
 
-);
+    return (
 
-Counter.propTypes = {
+        <div>
+            <CounterContainer>
+                {'Counter: '}
+                <CounterNumber>
+                    {props.counter}
+                </CounterNumber>
+            </CounterContainer>
+            <button onClick={props.increment}>
+                Increment
+            </button>
+        </div>
+
+    );
+};
+
+module.exports.propTypes = {
     counter: T.number.isRequired,
-    doubleAsync: T.func.isRequired,
     increment: T.func.isRequired
 };
 
-module.exports = Counter;
+internals.CounterContainer = Styled.h2`
+    margin: 1em auto;
+`;
+
+internals.CounterNumber = Styled.span`
+    font-weight: bold;
+    color: rgb(25, 200, 25);
+`;

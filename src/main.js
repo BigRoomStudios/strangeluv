@@ -1,16 +1,10 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-const CreateStore = require('./wiring/create-store');
-const History = require('./wiring/history');
-const AppContainer = require('./containers/App');
-const Initializers = require('./initializers');
+const AppContainer = require('containers/App');
+const M = require('middle-end');
 
-// Create redux store and sync history with react-router-redux
-
-const initialState = window.__INITIAL_STATE__;
-const store = CreateStore(initialState);
-
-Initializers.run(store);
+// Initialize strange-middle-end
+M.initialize();
 
 // Developer Tools Setup
 
@@ -26,14 +20,14 @@ const MOUNT_NODE = document.getElementById('root');
 
 let render = () => {
 
-    const routes = require('./routes')(store);
+    const routes = require('./routes')(M.store);
 
     ReactDOM.render(
 
         <AppContainer
-            history={History}
+            store={M.store}
+            history={M.mods.router.history}
             routes={routes}
-            store={store}
         />,
         MOUNT_NODE
     );

@@ -1,9 +1,10 @@
-const CounterTypes = require('action-types/counter');
+const { COUNTER_INCREMENT } = require('action-types/counter');
+
 
 exports.increment = (amount = 1) => {
 
     return {
-        type: CounterTypes.COUNTER_INCREMENT,
+        type: COUNTER_INCREMENT,
         payload: amount
     };
 };
