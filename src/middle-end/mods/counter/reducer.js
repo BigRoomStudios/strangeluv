@@ -1,10 +1,10 @@
 
-const M = require('middle-end');
+const MiddleEnd = require('middle-end');
 const { INCREMENT } = require('./action-types');
 
 const initialState = {};
 
-module.exports = M.createReducer({ mutable: true }, initialState, {
+module.exports = MiddleEnd.createReducer({ mutable: true }, initialState, {
     [INCREMENT]: (draft) => {
 
         draft.count++;

@@ -1,8 +1,8 @@
 
-const M = require('middle-end');
+const MiddleEnd = require('strange-middle-end');
 
 const { INCREMENT } = require('./action-types');
 
 module.exports = {
-    increment: M.createAction(INCREMENT)
+    increment: MiddleEnd.createAction(INCREMENT)
 };

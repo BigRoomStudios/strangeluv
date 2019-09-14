@@ -1,6 +1,6 @@
 
-const M = require('middle-end');
+const MiddleEnd = require('strange-middle-end');
 
-module.exports = M.createTypes({
-    INCREMENT: M.type.simple
+module.exports = MiddleEnd.createTypes({
+    INCREMENT: MiddleEnd.type.simple
 });
