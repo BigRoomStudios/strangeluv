@@ -117,7 +117,7 @@
     "redux-thunk": "^2.3.0",
     "rimraf": "^2.5.1",
     "sass-loader": "^6.0.3",
-    "strange-middle-end": "^0.1.0",
+    "strange-middle-end": "^0.1.1",
     "strange-router": "^0.1.2",
     "strangeluv-core": "^2.0.0",
     "style-loader": "^0.20.3",

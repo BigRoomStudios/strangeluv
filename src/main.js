@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 const AppContainer = require('containers/App');
 const M = require('middle-end');
+const History = require('middle-end/history');
 
 // Initialize strange-middle-end
 M.initialize();
@@ -26,7 +27,7 @@ let render = () => {
 
         <AppContainer
             store={M.store}
-            history={M.mods.router.history}
+            history={History}
             routes={routes}
         />,
         MOUNT_NODE
