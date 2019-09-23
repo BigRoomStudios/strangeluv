@@ -1,22 +1,20 @@
-// Just the modules necessary for initial render!
-const CoreLayout = require('../layouts/CoreLayout');
-const Home = require('./home');
-const CounterRoute = require('./counter');
+const Layout = require('../components/Layout');
+const HomePage = require('./home/components/HomePage');
+// const CounterRoute = require('./counter');
 
-// Create routesbut not all of us use the same
 module.exports = {
     path: '/',
-    component: CoreLayout,
+    component: Layout,
     childRoutes: [
         {
             path: '/',
-            component: HomeView,
-            exact: true
-        },
-        {
-            path: 'counter',
-            component: Counter,
+            component: HomePage,
             exact: true
         }
+        // {
+        //     path: 'counter',
+        //     component: Counter,
+        //     exact: true
+        // }
     ]
 };
