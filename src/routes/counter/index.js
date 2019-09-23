@@ -1,7 +1,7 @@
 const Counter = require('./containers/Counter');
 
-module.exports = (store) => ({
+module.exports = {
     path: 'counter',
     component: Counter,
     exact: true
-});
+};

@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - "8"
+  - "10"
 
 cache:
   directories:
@@ -13,5 +13,5 @@ install:
 script:
   - npm run lint
   - npm run test
-  - NODE_ENV=dev npm run deploy
+  - NODE_ENV=development npm run deploy
   - NODE_ENV=production npm run deploy
