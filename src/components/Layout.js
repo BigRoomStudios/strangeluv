@@ -11,7 +11,11 @@ module.exports = ({ children }) => {
 
     return <div>
         <Header />
-        <Container>{children}</Container>
+        <Container>
+            <React.Suspense fallback='Loading...'>
+                {children}
+            </React.Suspense>
+        </Container>
     </div>;
 };
 
