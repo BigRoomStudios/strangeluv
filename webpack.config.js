@@ -33,7 +33,11 @@ module.exports = {
 	entry: './src/index.js',
 	output: {
 		filename: '[name].[hash].js', // TODO HMR vs prod
-		path: Path.resolve(__dirname, 'dist')
+		path: Path.resolve(__dirname, 'dist'),
+		// Allows clickable/openable stacktraces in development
+		devtoolModuleFilenameTemplate: isEnvProduction ?
+			(info) => Path.relative(Path.resolve(__dirname, 'src'), info.absoluteResourcePath).replace(/\\/g, '/') :
+			(info) => Path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
 	},
 	resolve: {
 		alias: {
