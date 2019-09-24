@@ -1,18 +1,24 @@
 const React = require('react');
-const NavLink = require('react-router-dom').NavLink;
-const Classes = require('./styles.scss');
+const { NavLink } = require('react-router-dom');
+const { default: Styled } = require('styled-components');
 
-module.exports = () => (
+const internals = {};
 
-    <div>
+module.exports = () => {
+
+    const { Link } = internals;
+
+    return <div>
         <h1>Strangeluv</h1>
-        <NavLink exact to='/' activeClassName={Classes.activeRoute}>
-            Home
-        </NavLink>
+        <Link exact to='/'>Home</Link>
         {' · '}
-        <NavLink to='/counter' activeClassName={Classes.activeRoute}>
-            Counter
-        </NavLink>
-    </div>
+        <Link to='/counter'>Counter</Link>
+    </div>;
+};
 
-);
+internals.Link = Styled(NavLink)`
+    &.active {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+`;

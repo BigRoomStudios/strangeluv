@@ -1,3 +1,24 @@
 const React = require('react');
+const T = require('prop-types');
+const Header = require('./Header');
+const { default: Styled } = require('styled-components');
 
-module.exports = ({ children }) => <div style={{ border: '1px solid red' }}>{children}</div>;
+const internals = {};
+
+module.exports = ({ children }) => {
+
+    const { Container } = internals;
+
+    return <div>
+        <Header />
+        <Container>{children}</Container>
+    </div>;
+};
+
+module.exports.propTypes = {
+    children: T.any
+};
+
+internals.Container = Styled.div`
+    padding-top:20px;
+`;
