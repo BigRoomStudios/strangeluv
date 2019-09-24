@@ -1,7 +1,7 @@
 {
   "name": "strangeluv",
-  "version": "0.0.0",
-  "description": "How I Learned to Stop Worrying and Love React",
+  "version": "1.0.0",
+  "description": "My webpack project",
   "main": "server/plugin.js",
   "engines": {
     "node": ">=10"
@@ -11,14 +11,15 @@
     "compile": "todo",
     "lint": "todo",
     "lint:src": "todo",
-    "start": "todo",
+    "start": "webpack-dev-server",
     "dev": "todo",
     "dev:no-debug": "todo",
     "test": "todo",
     "deploy": "todo",
     "deploy:dev": "todo",
     "deploy:prod": "todo",
-    "codecov": "todo"
+    "codecov": "todo",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-hot-loader": "^4.12.14",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
@@ -42,5 +44,16 @@
     "strange-router": "^2.0.0",
     "styled-components": "^4.4.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "@hot-loader/react-dom": "^16.9.0",
+    "babel-loader": "^8.0.6",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
+  }
 }
