@@ -11,7 +11,7 @@
     "compile": "todo",
     "lint": "todo",
     "lint:src": "todo",
-    "start": "webpack-dev-server",
+    "start": "NODE_ENV=development webpack-dev-server",
     "dev": "todo",
     "dev:no-debug": "todo",
     "test": "todo",
@@ -19,7 +19,7 @@
     "deploy:dev": "todo",
     "deploy:prod": "todo",
     "codecov": "todo",
-    "build": "webpack"
+    "build": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -46,10 +46,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
-    "@babel/preset-env": "^7.6.2",
-    "@babel/preset-react": "^7.0.0",
     "@hot-loader/react-dom": "^16.9.0",
     "babel-loader": "^8.0.6",
+    "babel-preset-react-app": "^9.0.2",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.40.2",

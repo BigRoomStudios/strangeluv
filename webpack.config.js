@@ -1,4 +1,4 @@
-const path = require('path');
+const Path = require('path');
 const webpack = require('webpack');
 
 /*
@@ -25,15 +25,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
  *
  */
 
+const isEnvProduction = process.env.NODE_ENV === 'production';
+
 module.exports = {
-	mode: 'development',	// TODO
+	mode: isEnvProduction ? 'production' : 'development',	// TODO
 	entry: [
 		'react-hot-loader/patch',
 		'./src/index.js'
 	],
 	output: {
 		filename: '[name].[hash].js', // TODO HMR vs prod
-		path: path.resolve(__dirname, 'dist')
+		path: Path.resolve(__dirname, 'dist')
 	},
 	resolve: {
 		alias: {
@@ -49,13 +51,47 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'babel-loader'
-			},
-			{
-				test: /\.(png|svg|jpg|gif)$/,
-				loader: 'file-loader'
+				oneOf: [
+					{
+						test: /\.(js|mjs|jsx|ts|tsx)$/,
+						exclude: /node_modules/,
+						loader: 'babel-loader',
+						options: {
+							sourceType: 'unambiguous',
+							// customize: require.resolve('babel-preset-react-app/webpack-overrides'),
+							cacheDirectory: true,
+							cacheCompression: false,
+							compact: isEnvProduction
+						}
+					},
+					{
+						test: /\.(js|mjs)$/,
+						exclude: /@babel(?:\/|\\{1,2})runtime/,
+						loader: 'babel-loader',
+						options: {
+							presets: [
+								[
+									require.resolve('babel-preset-react-app/dependencies'),
+									{ helpers: true }
+								]
+							],
+							babelrc: false,
+							configFile: false,
+							compact: false,
+							cacheDirectory: true,
+							cacheCompression: false,
+							// If an error happens in a package, it's possible to be
+							// because it was compiled. Thus, we don't want the browser
+							// debugger to show the original code. Instead, the code
+							// being evaluated would be much more helpful.
+							sourceMaps: false
+						}
+					},
+					{
+						test: /\.(png|svg|jpg|gif)$/,
+						loader: 'file-loader'
+					}
+				]
 			}
 		]
 	},
@@ -74,7 +110,8 @@ module.exports = {
 		}
 	},
 	devServer: {
-		// open: true,
-		hot: true
+		open: true,
+		hot: true,
+		historyApiFallback: true
 	}
 };
