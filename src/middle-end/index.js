@@ -1,4 +1,5 @@
 const Redux = require('redux');
+const ReduxDevtools = require('redux-devtools-extension/logOnlyInProduction')
 const MiddleEnd = require('strange-middle-end');
 
 module.exports = MiddleEnd.create({
@@ -8,10 +9,14 @@ module.exports = MiddleEnd.create({
     }),
     createStore: (reducer, { router }) => {
 
-        return Redux.createStore(reducer, Redux.applyMiddleware(
-            MiddleEnd.middleware.thunk,
-            MiddleEnd.middleware.errorLogger,    // TODO only in debug mode
-            router.middleware
+        console.log(process.env)
+
+        return Redux.createStore(reducer, ReduxDevtools.composeWithDevTools(
+            Redux.applyMiddleware(
+                MiddleEnd.middleware.thunk,
+                MiddleEnd.middleware.errorLogger,    // TODO only in debug mode
+                router.middleware
+            )
         ));
     }
 });

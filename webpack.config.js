@@ -1,5 +1,6 @@
 const Path = require('path');
-const webpack = require('webpack');
+const Dotenv = require('dotenv');
+const Webpack = require('webpack');
 
 /*
  * SplitChunksPlugin is enabled by default and replaced
@@ -26,6 +27,8 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
  *
  */
 
+Dotenv.config();
+
 const isEnvProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
@@ -45,7 +48,15 @@ module.exports = {
 		}
 	},
 	plugins: [
-		new webpack.ProgressPlugin(),
+		new Webpack.ProgressPlugin(),
+		new Webpack.DefinePlugin({
+			'process.env': [
+				'NODE_ENV'
+			].reduce((collect, key) => ({
+				...collect,
+				[key]: JSON.stringify(process.env[key])
+			}), {})
+		}),
 		new ErrorOverlayPlugin(),
 		new HtmlWebpackPlugin({
 			template: 'src/index.html'
