@@ -1,6 +1,6 @@
 const Layout = require('../components/Layout');
 const HomePage = require('./home/components/HomePage');
-// const CounterRoute = require('./counter');
+const CounterPage = require('./counter/containers/CounterPage');
 
 module.exports = [
     {
@@ -11,12 +11,12 @@ module.exports = [
                 path: '/',
                 component: HomePage,
                 exact: true
+            },
+            {
+                path: 'counter',
+                component: CounterPage,
+                exact: true
             }
-            // {
-            //     path: 'counter',
-            //     component: Counter,
-            //     exact: true
-            // }
         ]
     }
 ];
