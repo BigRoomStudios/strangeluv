@@ -49,6 +49,7 @@
     "@hot-loader/react-dom": "^16.9.0",
     "babel-loader": "^8.0.6",
     "babel-preset-react-app": "^9.0.2",
+    "error-overlay-webpack-plugin": "^0.4.1",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.40.2",

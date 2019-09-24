@@ -15,6 +15,7 @@ const webpack = require('webpack');
  */
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
 /*
  * We've enabled HtmlWebpackPlugin for you! This generates a html
@@ -29,10 +30,7 @@ const isEnvProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
 	mode: isEnvProduction ? 'production' : 'development',	// TODO
-	entry: [
-		'react-hot-loader/patch',
-		'./src/index.js'
-	],
+	entry: './src/index.js',
 	output: {
 		filename: '[name].[hash].js', // TODO HMR vs prod
 		path: Path.resolve(__dirname, 'dist')
@@ -44,10 +42,12 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.ProgressPlugin(),
+		new ErrorOverlayPlugin(),
 		new HtmlWebpackPlugin({
 			template: 'src/index.html'
 		})
 	],
+	devtool: 'cheap-module-source-map',	// Not 'eval' for overlay
 	module: {
 		rules: [
 			{
@@ -58,7 +58,7 @@ module.exports = {
 						loader: 'babel-loader',
 						options: {
 							sourceType: 'unambiguous',
-							// customize: require.resolve('babel-preset-react-app/webpack-overrides'),
+							customize: require.resolve('babel-preset-react-app/webpack-overrides'),
 							cacheDirectory: true,
 							cacheCompression: false,
 							compact: isEnvProduction
