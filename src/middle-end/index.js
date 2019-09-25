@@ -9,8 +9,6 @@ module.exports = MiddleEnd.create({
     }),
     createStore: (reducer, { router }) => {
 
-        console.log(process.env)
-
         return Redux.createStore(reducer, ReduxDevtools.composeWithDevTools(
             Redux.applyMiddleware(
                 MiddleEnd.middleware.thunk,

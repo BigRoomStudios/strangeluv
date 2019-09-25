@@ -37,6 +37,7 @@ module.exports = {
     output: {
         filename: '[name].[hash].js', // TODO HMR vs prod
         path: Path.resolve(__dirname, 'dist'),
+        publicPath: '/',    // TODO configurable
         // Allows clickable/openable stacktraces in development
         devtoolModuleFilenameTemplate: isEnvProduction ?
             (info) => Path.relative(Path.resolve(__dirname, 'src'), info.absoluteResourcePath).replace(/\\/g, '/') :
