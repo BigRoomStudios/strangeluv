@@ -7,10 +7,12 @@ it('renders without crashing.', () => {
 
     M.initialize();
 
-    const { getByText } = Testing.render(<App
-        store={M.store}
-        history={M.mods.router.history}
-    />);
+    const { getByText } = Testing.render(
+        <App
+            store={M.store}
+            history={M.mods.router.history}
+        />
+    );
 
     expect(getByText('Strangeluv')).toBeDefined();
 });
