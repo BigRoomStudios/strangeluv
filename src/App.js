@@ -11,14 +11,16 @@ const Routes = require('./routes');
 
 module.exports = ({ store, Router = ConnectedRouter, ...routerProps }) => {
 
-    return <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <ReactRedux.Provider store={store}>
-            <GlobalStyle />
-            <Router {...routerProps}>
-                <StrangeRouter.Routes routes={Routes} />
-            </Router>
-        </ReactRedux.Provider>
-    </ErrorBoundary>;
+    return (
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <ReactRedux.Provider store={store}>
+                <GlobalStyle />
+                <Router {...routerProps}>
+                    <StrangeRouter.Routes routes={Routes} />
+                </Router>
+            </ReactRedux.Provider>
+        </ErrorBoundary>
+    );
 };
 
 module.exports.propTypes = {

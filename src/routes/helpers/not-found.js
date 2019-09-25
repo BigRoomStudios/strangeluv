@@ -1,28 +1,55 @@
 const React = require('react');
+const T = require('prop-types');
 const { Redirect } = require('react-router-dom');
 
 exports.CatchAllRoute = {
     path: '',
-    render: ({ location }) => {
+    render: class NotFoundCatchAll extends React.Component {
 
-        return <Redirect to={{
-            ...location,
-            state: {
-                ...location.state,
-                notFound: true
-            }
-        }} />;
+        static propTypes = {
+            location: T.shape({
+                state: T.object
+            })
+        }
+
+        render() {
+
+            const { location } = this.props;
+
+            return (
+                <Redirect
+                    to={{
+                        ...location,
+                        state: {
+                            ...location.state,
+                            notFound: true
+                        }
+                    }}
+                />
+            );
+        }
     }
 };
 
 exports.withNotFoundPage = (RouteComponent, NotFoundComponent) => {
 
-    return (props) => {
+    return class RouteComponentWithNotFoundPage extends React.Component {
 
-        const { location } = props;
+        static propTypes = {
+            location: T.shape({
+                state: T.shape({
+                    notFound: T.bool
+                })
+            })
+        }
 
-        return location.state && location.state.notFound ?
-            <RouteComponent {...props} children={<NotFoundComponent {...props} />} /> :
-            <RouteComponent {...props} />;
+        render() {
+
+            const { location } = this.props;
+
+            return location.state && location.state.notFound ?
+                <RouteComponent {...this.props} children={<NotFoundComponent {...this.props} />} /> :
+                <RouteComponent {...this.props} />;
+        }
     };
 };

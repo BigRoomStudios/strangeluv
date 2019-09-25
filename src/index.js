@@ -14,7 +14,10 @@ const App = require('./App');
     M.initialize();
 
     ReactDOM.render(
-        <App store={M.store} history={M.mods.router.history} />,
+        <App
+            store={M.store}
+            history={M.mods.router.history}
+        />,
         document.getElementById('root')
     );
 })();

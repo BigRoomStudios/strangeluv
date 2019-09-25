@@ -1,5 +1,5 @@
 const Redux = require('redux');
-const ReduxDevtools = require('redux-devtools-extension/logOnlyInProduction')
+const ReduxDevtools = require('redux-devtools-extension/logOnlyInProduction');
 const MiddleEnd = require('strange-middle-end');
 
 module.exports = MiddleEnd.create({

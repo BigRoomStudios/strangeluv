@@ -1,3 +1,5 @@
+'use strict';
+
 const Path = require('path');
 const Dotenv = require('dotenv');
 const Webpack = require('webpack');
@@ -45,7 +47,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-          'react-dom': '@hot-loader/react-dom'
+            'react-dom': '@hot-loader/react-dom'
         }
     },
     plugins: [
@@ -66,6 +68,15 @@ module.exports = {
     devtool: 'cheap-module-source-map',    // Not 'eval' for overlay
     module: {
         rules: [
+            {
+                enforce: 'pre',
+                test: /\.(js|mjs|jsx|ts|tsx)$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader',
+                options: {
+                    cache: true
+                }
+            },
             {
                 oneOf: [
                     {

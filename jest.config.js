@@ -17,6 +17,6 @@ module.exports = {
         '^(?!.*\\.(js|json)$)': '<rootDir>/jest-file-transform.js'
     },
     transformIgnorePatterns: [
-        '[/\\\\]node_modules[/\\\\].+\\.(js)$',
+        '[/\\\\]node_modules[/\\\\].+\\.(js)$'
     ]
 };

@@ -8,18 +8,20 @@ module.exports = ({ counter, increment, double }) => {
 
     const { CounterContainer, CounterText } = internals;
 
-    return <div>
-        <CounterContainer>
-            Counter: <CounterText>{counter}</CounterText>
-        </CounterContainer>
-        <button onClick={increment}>
-            Increment
-        </button>
-        {' '}
-        <button onClick={double}>
-            Double (Async)
-        </button>
-    </div>;
+    return (
+        <div>
+            <CounterContainer>
+                Counter: <CounterText>{counter}</CounterText>
+            </CounterContainer>
+            <button onClick={increment}>
+                Increment
+            </button>
+            {' '}
+            <button onClick={double}>
+                Double (Async)
+            </button>
+        </div>
+    );
 };
 
 module.exports.propTypes = {

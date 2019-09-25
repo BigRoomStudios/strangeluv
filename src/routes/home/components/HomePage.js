@@ -8,14 +8,15 @@ module.exports = () => {
 
     const { Image } = internals;
 
-    return <div>
-        <h4>Welcome!</h4>
-        <Image
-            alt='This is a duck, because Redux!'
-            // className={Classes.duck}
-            src={DuckImage}
-        />
-    </div>;
+    return (
+        <div>
+            <h4>Welcome!</h4>
+            <Image
+                alt='This is a duck, because Redux!'
+                src={DuckImage}
+            />
+        </div>
+    );
 };
 
 internals.Image = Styled.img`

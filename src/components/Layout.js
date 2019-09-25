@@ -12,20 +12,25 @@ module.exports = ({ children, location }) => {
 
     const { Container } = internals;
 
-    return <div>
-        <Header />
-        <Container>
-            <ErrorBoundary key={location.key} FallbackComponent={ErrorFallback}>
-                <React.Suspense fallback={<LoadingFallback />}>
-                    {children}
-                </React.Suspense>
-            </ErrorBoundary>
-        </Container>
-    </div>;
+    return (
+        <div>
+            <Header />
+            <Container>
+                <ErrorBoundary key={location.key} FallbackComponent={ErrorFallback}>
+                    <React.Suspense fallback={<LoadingFallback />}>
+                        {children}
+                    </React.Suspense>
+                </ErrorBoundary>
+            </Container>
+        </div>
+    );
 };
 
 module.exports.propTypes = {
-    children: T.any
+    children: T.any,
+    location: T.shape({
+        key: T.string
+    })
 };
 
 internals.Container = Styled.div`
