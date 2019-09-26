@@ -14,6 +14,7 @@ module.exports = {
     },
     isProduction: (process.env.NODE_ENV === 'production'),
     publicPath: '/',
+    sourceMaps: true,
     devServer: {
         open: true,
         port: process.env.PORT || 3000,
