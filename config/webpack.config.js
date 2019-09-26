@@ -1,8 +1,8 @@
 'use strict';
 
 const Path = require('path');
-const Dotenv = require('dotenv');
 const Webpack = require('webpack');
+const Config = require('.');
 
 /*
  * SplitChunksPlugin is enabled by default and replaced
@@ -29,19 +29,19 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
  *
  */
 
-Dotenv.config();
-
 const isEnvProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-    mode: isEnvProduction ? 'production' : 'development',    // TODO
-    entry: './src/index.js',
+    mode: Config.isProduction ? 'production' : 'development',
+    entry: Config.paths.src('index.js'),
     output: {
-        filename: '[name].[hash].js', // TODO HMR vs prod
-        path: Path.resolve(__dirname, 'dist'),
-        publicPath: '/',    // TODO configurable
+        filename: Config.isProduction ?
+            'static/js/[name].[contenthash:8].js' :
+            'static/js/bundle.js',
+        path: Config.paths.build(),
+        publicPath: Config.publicPath,
         // Allows clickable/openable stacktraces in development
-        devtoolModuleFilenameTemplate: isEnvProduction ?
+        devtoolModuleFilenameTemplate: Config.isProduction ?
             (info) => Path.relative(Path.resolve(__dirname, 'src'), info.absoluteResourcePath).replace(/\\/g, '/') :
             (info) => Path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
     },
@@ -53,16 +53,15 @@ module.exports = {
     plugins: [
         new Webpack.ProgressPlugin(),
         new Webpack.DefinePlugin({
-            'process.env': [
-                'NODE_ENV'
-            ].reduce((collect, key) => ({
-                ...collect,
-                [key]: JSON.stringify(process.env[key])
-            }), {})
+            'process.env': Object.entries(Config.buildEnv)
+                .reduce((collect, [key, value]) => ({
+                    ...collect,
+                    [key]: JSON.stringify(value)
+                }), {})
         }),
         new ErrorOverlayPlugin(),
         new HtmlWebpackPlugin({
-            template: 'src/index.html'
+            template: Config.paths.src('index.html')
         })
     ],
     devtool: 'cheap-module-source-map',    // Not 'eval' for overlay
@@ -137,8 +136,8 @@ module.exports = {
         }
     },
     devServer: {
-        open: true,
         hot: true,
-        historyApiFallback: true
+        historyApiFallback: true,
+        ...Config.devServer
     }
 };

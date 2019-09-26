@@ -7,7 +7,7 @@ module.exports = {
         commonjs: true,
         es6: true,
         jest: true,
-        node: true,
+        node: true
     },
     plugins: [
         'jsx-a11y',
@@ -19,8 +19,8 @@ module.exports = {
         '@hapi/eslint-config-hapi'
     ],
     rules: {
-        "react/jsx-indent": ['error', 4],
-        "react/jsx-indent-props": ['error', 4],
+        'react/jsx-indent': ['error', 4],
+        'react/jsx-indent-props': ['error', 4],
         'react-hooks/exhaustive-deps': 'warn',
         'react-hooks/rules-of-hooks': 'error'
     },

@@ -11,15 +11,15 @@
     "compile": "todo",
     "lint": "todo",
     "lint:src": "todo",
-    "start": "NODE_ENV=development webpack-dev-server",
+    "start": "webpack-dev-server --config config/webpack.config.js",
     "dev": "todo",
     "dev:no-debug": "todo",
-    "test": "todo",
+    "test": "jest --config config/jest.config.js",
     "deploy": "todo",
     "deploy:dev": "todo",
     "deploy:prod": "todo",
     "codecov": "todo",
-    "build": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack --config config/webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -71,5 +71,11 @@
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1"
+  },
+  "babel": {
+    "extends": "./config/babel.config.js"
+  },
+  "eslintConfig": {
+    "extends": "./config/eslint.config.js"
   }
 }

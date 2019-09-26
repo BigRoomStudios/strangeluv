@@ -9,7 +9,7 @@ const CounterPage = React.lazy(() => import('./counter/containers/CounterPage'))
 module.exports = [
     {
         path: '/',
-        render: NotFoundHelpers.withNotFoundPage(Layout, NotFoundPage),
+        component: NotFoundHelpers.withNotFoundPage(Layout, NotFoundPage),
         childRoutes: [
             {
                 path: '/',
