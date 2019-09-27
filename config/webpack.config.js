@@ -18,9 +18,11 @@ module.exports = {
         filename: Config.isProduction ?
             'js/[name].[contenthash:8].js' :
             'js/bundle.js',
+        chunkFilename: Config.isProduction ?
+            'js/[name].[contenthash:8].chunk.js' :
+            'js/[name].chunk.js',
         path: Config.paths.build(),
         publicPath: Config.publicPath,
-        // Allows clickable/openable stacktraces in development
         devtoolModuleFilenameTemplate: Config.isProduction ?
             (info) => Path.relative(Path.resolve(__dirname, 'src'), info.absoluteResourcePath).replace(/\\/g, '/') :
             (info) => Path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
@@ -42,13 +44,13 @@ module.exports = {
         }),
         new CopyWebpackPlugin([
             {
-                from: Config.paths.src('static'),
+                from: Config.paths.src('public'),
                 to: Config.paths.build()
             }
         ]),
         new HtmlWebpackPlugin({
             template: Config.paths.src('index.html'),
-            favicon: Config.paths.src('static', 'favicon.ico')
+            favicon: Config.paths.src('public', 'favicon.ico')
         })
     ],
     module: {
@@ -93,16 +95,15 @@ module.exports = {
                             compact: false,
                             cacheDirectory: true,
                             cacheCompression: false,
-                            // If an error happens in a package, it's possible to be
-                            // because it was compiled. Thus, we don't want the browser
-                            // debugger to show the original code. Instead, the code
-                            // being evaluated would be much more helpful.
                             sourceMaps: false
                         }
                     },
                     {
-                        test: /\.(png|svg|jpg|gif)$/,
-                        loader: 'file-loader'
+                        exclude: /\.(js|html|json)$/,
+                        loader: 'file-loader',
+                        options: {
+                            name: 'media/[name].[hash:8].[ext]'
+                        }
                     }
                 ]
             }
@@ -110,16 +111,7 @@ module.exports = {
     },
     optimization: {
         splitChunks: {
-            cacheGroups: {
-                vendors: {
-                    priority: -10,
-                    test: /[\\/]node_modules[\\/]/
-                }
-            },
-            chunks: 'async',
-            minChunks: 1,
-            minSize: 30000,
-            name: true
+            chunks: 'all'
         }
     },
     devServer: {
