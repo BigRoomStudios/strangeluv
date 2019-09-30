@@ -7,19 +7,14 @@
     "node": ">=10"
   },
   "scripts": {
-    "clean": "todo",
-    "compile": "todo",
-    "lint": "todo",
-    "lint:src": "todo",
+    "build": "NODE_ENV=production webpack --config config/webpack.config.js",
+    "build:dev": "webpack --config config/webpack.config.js",
+    "clean": "rimraf build",
+    "lint": "eslint .",
+    "serve": "NODE_ENV=production node server",
+    "serve:dev": "node server",
     "start": "webpack-dev-server --config config/webpack.config.js",
-    "dev": "todo",
-    "dev:no-debug": "todo",
-    "test": "jest --config config/jest.config.js",
-    "deploy": "todo",
-    "deploy:dev": "todo",
-    "deploy:prod": "todo",
-    "codecov": "todo",
-    "build": "NODE_ENV=production webpack --config config/webpack.config.js"
+    "test": "jest --config config/jest.config.js"
   },
   "repository": {
     "type": "git",
@@ -72,6 +67,7 @@
     "jest": "^24.9.0",
     "jest-environment-jsdom-fifteen": "^1.0.0",
     "react-dev-utils": "^9.0.4",
+    "rimraf": "^3.0.0",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1"
