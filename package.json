@@ -38,7 +38,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "strange-middle-end": "^0.1.1",
-    "strange-router": "^2.0.0",
+    "strange-router": "^2.1.0",
     "styled-components": "^4.4.0"
   },
   "devDependencies": {
