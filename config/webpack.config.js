@@ -7,6 +7,8 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Config = require('.');
 
+const publicPath = Config.isProduction ? Config.publicPath.replace(/\/*$/, '/') : '/';
+
 module.exports = {
     mode: Config.isProduction ? 'production' : 'development',
     bail: Config.isProduction,
@@ -22,9 +24,9 @@ module.exports = {
             'js/[name].[contenthash:8].chunk.js' :
             'js/[name].chunk.js',
         path: Config.paths.build(),
-        publicPath: Config.publicPath,
+        publicPath,
         devtoolModuleFilenameTemplate: Config.isProduction ?
-            (info) => Path.relative(Path.resolve(__dirname, 'src'), info.absoluteResourcePath).replace(/\\/g, '/') :
+            (info) => Path.relative(Config.paths.src(), info.absoluteResourcePath).replace(/\\/g, '/') :
             (info) => Path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
     },
     resolve: {
@@ -36,7 +38,10 @@ module.exports = {
         new Webpack.ProgressPlugin(),
         new ErrorOverlayPlugin(),
         new Webpack.DefinePlugin({
-            'process.env': Object.entries(Config.buildEnv)
+            'process.env': Object.entries({
+                ...Config.buildEnv,
+                BASE_PATH: publicPath
+            })
                 .reduce((collect, [key, value]) => ({
                     ...collect,
                     [key]: JSON.stringify(value)
@@ -117,6 +122,8 @@ module.exports = {
     devServer: {
         hot: true,
         historyApiFallback: true,
+        publicPath,
+        serveIndex: true,
         ...Config.devServer
     }
 };

@@ -50,6 +50,8 @@
     "@babel/core": "^7.6.2",
     "@hapi/eslint-config-hapi": "^12.3.0",
     "@hapi/eslint-plugin-hapi": "^4.3.4",
+    "@hapi/hapi": "^18.4.0",
+    "@hapi/inert": "^5.2.2",
     "@hot-loader/react-dom": "^16.9.0",
     "@testing-library/react": "^9.1.4",
     "babel-eslint": "^10.0.3",
