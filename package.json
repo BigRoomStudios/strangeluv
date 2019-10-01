@@ -22,11 +22,12 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^4.4.3",
+    "@material-ui/styles": "^4.4.3",
     "connected-react-router": "^6.5.2",
     "history": "^4.10.1",
     "immer": "^4.0.0",
     "normalizr": "^3.4.1",
-    "polished": "^3.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

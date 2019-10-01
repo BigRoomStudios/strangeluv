@@ -2,29 +2,37 @@ const React = require('react');
 const T = require('prop-types');
 const HotLoader = require('react-hot-loader/root');
 const ReactRedux = require('react-redux');
-const { ConnectedRouter } = require('connected-react-router');
+const Styled = require('styled-components');
+const { default: CreateMuiTheme } = require('@material-ui/core/styles/createMuiTheme');
+const { default: MuiThemeProvider } = require('@material-ui/styles/ThemeProvider');
+const { default: CssBaseline } = require('@material-ui/core/CssBaseline');
 const StrangeRouter = require('strange-router');
+const { ConnectedRouter } = require('connected-react-router');
 const { default: ErrorBoundary } = require('react-error-boundary');
 const ErrorFallback = require('./components/ErrorFallback');
-const GlobalStyle = require('./components/GlobalStyle');
 const Routes = require('./routes');
 
-module.exports = ({ store, Router = ConnectedRouter, ...routerProps }) => {
+module.exports = ({ store, theme = CreateMuiTheme(), Router = ConnectedRouter, ...routerProps }) => {
 
     return (
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <ReactRedux.Provider store={store}>
-                <GlobalStyle />
-                <Router {...routerProps}>
-                    <StrangeRouter.Routes routes={Routes} />
-                </Router>
-            </ReactRedux.Provider>
-        </ErrorBoundary>
+        <Styled.ThemeProvider theme={theme}>
+            <MuiThemeProvider theme={theme}>
+                <ErrorBoundary FallbackComponent={ErrorFallback}>
+                    <CssBaseline />
+                    <ReactRedux.Provider store={store}>
+                        <Router {...routerProps}>
+                            <StrangeRouter.Routes routes={Routes} />
+                        </Router>
+                    </ReactRedux.Provider>
+                </ErrorBoundary>
+            </MuiThemeProvider>
+        </Styled.ThemeProvider>
     );
 };
 
 module.exports.propTypes = {
     store: T.object.isRequired,
+    theme: T.object,
     Router: T.elementType
 };
 
