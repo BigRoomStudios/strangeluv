@@ -33,11 +33,13 @@ module.exports.propTypes = {
     })
 };
 
-// Alternatively, one could give the Toolbar component in <Header />
-// a disableGutters prop, and apply the spacing to the whole thing.
 internals.Container = Styled.div`
     display: flex;
     padding-top:10px;
+
+    // Alternatively,the Toolbar component in <Header /> could be given
+    // a disableGutters prop, and the left/right padding could be applied
+    // to the entire AppContainer.
     padding-left: ${(props) => props.theme.spacing(2)}px;
     padding-right: ${(props) => props.theme.spacing(2)}px;
     flex: 1;

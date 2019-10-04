@@ -15,7 +15,7 @@ module.exports = () => {
     return (
         <AppBar position='static'>
             <Toolbar>
-                <SiteTitle variant='h6'>Strangeluv</SiteTitle>
+                <SiteTitle>Strangeluv</SiteTitle>
                 <Link exact to='/'>Home</Link>
                 <Link to='/counter'>Counter</Link>
             </Toolbar>
