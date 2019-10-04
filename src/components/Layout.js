@@ -10,10 +10,10 @@ const internals = {};
 
 module.exports = ({ children, location }) => {
 
-    const { Container } = internals;
+    const { Container, AppContainer } = internals;
 
     return (
-        <div>
+        <AppContainer>
             <Header />
             <Container>
                 <ErrorBoundary key={location.key} FallbackComponent={ErrorFallback}>
@@ -22,7 +22,7 @@ module.exports = ({ children, location }) => {
                     </React.Suspense>
                 </ErrorBoundary>
             </Container>
-        </div>
+        </AppContainer>
     );
 };
 
@@ -33,6 +33,22 @@ module.exports.propTypes = {
     })
 };
 
+// Alternatively, one could give the Toolbar component in <Header />
+// a disableGutters prop, and apply the spacing to the whole thing.
 internals.Container = Styled.div`
-    padding-top:20px;
+    display: flex;
+    padding-top:10px;
+    padding-left: ${(props) => props.theme.spacing(2)}px;
+    padding-right: ${(props) => props.theme.spacing(2)}px;
+    flex: 1;
+    @media (min-width: ${(props) => props.theme.breakpoints.values.sm}px) {
+        padding-left: ${(props) => props.theme.spacing(3)}px;
+        padding-right: ${(props) => props.theme.spacing(3)}px;
+    }
+`;
+
+internals.AppContainer = Styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 `;

@@ -1,21 +1,22 @@
 const React = require('react');
 const { default: Styled } = require('styled-components');
 const DuckImage = require('../assets/duck.jpg');
+const { default: Typography } = require('@material-ui/core/Typography');
 
 const internals = {};
 
 module.exports = () => {
 
-    const { Image } = internals;
+    const { Image, HomepageContainer } = internals;
 
     return (
-        <div>
-            <h4>Welcome!</h4>
+        <HomepageContainer>
+            <Typography variant='h4' align='center'>Welcome!</Typography>
             <Image
                 alt='This is a duck, because Redux!'
                 src={DuckImage}
             />
-        </div>
+        </HomepageContainer>
     );
 };
 
@@ -23,4 +24,9 @@ internals.Image = Styled.img`
     display: block;
     width: 120px;
     margin: 1.5rem auto;
+`;
+
+internals.HomepageContainer = Styled.div`
+    align-self: center;
+    margin: auto;
 `;
