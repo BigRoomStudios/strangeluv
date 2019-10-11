@@ -15,6 +15,9 @@
     "start": "webpack-dev-server --config config/webpack.config.js",
     "test": "jest --config config/jest.config.js"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BigRoomStudios/strangeluv.git"
