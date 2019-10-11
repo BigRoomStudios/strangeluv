@@ -1,7 +1,6 @@
 {
   "name": "strangeluv",
   "version": "2.0.0",
-  "description": "My webpack project",
   "main": "server/plugin.js",
   "engines": {
     "node": ">=10"
@@ -60,12 +59,13 @@
     "eslint-config-standard-react": "^9.2.0",
     "eslint-loader": "^3.0.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.0.1",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
     "jest-environment-jsdom-fifteen": "^1.0.0",
+    "pre-commit": "^1.2.2",
     "react-dev-utils": "^9.0.4",
     "rimraf": "^3.0.0",
     "webpack": "^4.40.2",
