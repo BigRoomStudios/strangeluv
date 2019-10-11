@@ -1,14 +1,27 @@
-// Just the modules necessary for initial render!
-const CoreLayout = require('../layouts/CoreLayout');
-const Home = require('./home');
-const CounterRoute = require('./counter');
+const React = require('react');
+const Layout = require('../components/Layout');
+const NotFoundPage = require('../components/NotFoundPage');
+const NotFoundHelpers = require('./helpers/not-found');
+const HomePage = require('./home/components/HomePage');
 
-// Create routes
-module.exports = (store) => ([{
-    path: '/',
-    component: CoreLayout,
-    childRoutes: [
-        Home,
-        CounterRoute(store)
-    ]
-}]);
+const CounterPage = React.lazy(() => import('./counter/containers/CounterPage'));
+
+module.exports = [
+    {
+        path: '/',
+        component: NotFoundHelpers.withNotFoundPage(Layout, NotFoundPage),
+        childRoutes: [
+            {
+                path: '/',
+                component: HomePage,
+                exact: true
+            },
+            {
+                path: 'counter',
+                component: CounterPage,
+                exact: true
+            },
+            NotFoundHelpers.CatchAllRoute
+        ]
+    }
+];

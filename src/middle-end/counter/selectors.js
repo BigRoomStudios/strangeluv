@@ -1,0 +1,1 @@
+exports.getValue = ({ counter }) => counter;
