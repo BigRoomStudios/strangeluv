@@ -24,9 +24,8 @@ Strangeluv is an opinionated, curated set of tools for building React applicatio
 * node `10.x.x`
 
 ## Getting Started
-**Click the green "Use this template" button above**
+Click the green "Use this template" button above or install manually using git:
 
-OR
 ```bash
 $ git clone --depth=1 --origin=strangeluv --branch=strangeluv git@github.com:bigroomstudios/strangeluv.git my-project
 $ cd my-project
