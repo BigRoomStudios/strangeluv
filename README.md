@@ -8,8 +8,8 @@
 
 Strangeluv is an opinionated, curated set of tools for building React applications.
 
- - *UI* - `react` `react-dom` `prop-types`
- - *Styles* - `styled-components` `polished`
+ - *UI* - `react` `react-dom`
+ - *Styles & Design* - `styled-components` `@material-ui/core` `@material-ui/styles`
  - *State* - `redux` `react-redux` `redux-thunk` `strange-middle-end` `normalizr` `immer`
  - *Routing* - `react-router` `react-router-dom` `connected-react-router` `strange-router` `history`
  - *Errors* - `react-error-boundary` `error-overlay-webpack-plugin`

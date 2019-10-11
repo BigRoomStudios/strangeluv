@@ -1,32 +1,35 @@
 const React = require('react');
 const { NavLink } = require('react-router-dom');
 const { default: Styled } = require('styled-components');
+const { default: Typography } = require('@material-ui/core/Typography');
+const { default: AppBar } = require('@material-ui/core/AppBar');
+const { default: Toolbar } = require('@material-ui/core/Toolbar');
+const { default: Button } = require('@material-ui/core/Button');
 
 const internals = {};
 
-// NOTE: This used to be written directly in the component with curly braces
-// but there is a bug in eslint-plugin-react that says {' · '} fails linting
-// even though it is valid
-// Follow the issue's progress here https://github.com/yannickcr/eslint-plugin-react/issues/2454
-const divider = ' · ';
-
 module.exports = () => {
 
-    const { Link } = internals;
+    const { Link, SiteTitle } = internals;
 
     return (
-        <div>
-            <h1>Strangeluv</h1>
-            <Link exact to='/'>Home</Link>
-            {divider}
-            <Link to='/counter'>Counter</Link>
-        </div>
+        <AppBar position='static'>
+            <Toolbar>
+                <SiteTitle>Strangeluv</SiteTitle>
+                <Link exact to='/'>Home</Link>
+                <Link to='/counter'>Counter</Link>
+            </Toolbar>
+        </AppBar>
     );
 };
 
-internals.Link = Styled(NavLink)`
+internals.Link = Styled(Button).attrs({ component: NavLink, color: 'inherit' })`
     &.active {
         font-weight: bold;
         text-decoration: underline;
     }
+`;
+
+internals.SiteTitle = Styled(Typography).attrs({ variant: 'h6' })`
+    flex-grow: 1;
 `;
