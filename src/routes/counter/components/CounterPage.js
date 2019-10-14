@@ -1,26 +1,25 @@
 const React = require('react');
 const T = require('prop-types');
-const { default: Button } = require('@material-ui/core/Button');
-const { default: Typography } = require('@material-ui/core/Typography');
-const { default: Box } = require('@material-ui/core/Box');
+const { default: Styled } = require('styled-components');
 
 const internals = {};
 
 module.exports = ({ counter, increment, double }) => {
 
+    const { CounterContainer, CounterText } = internals;
+
     return (
         <div>
-            <Typography variant='h6'>
-                <Box fontWeight='fontWeightBold'>
-                    Counter: <Box component='span' color='primary.light'>{counter}</Box>
-                </Box>
-            </Typography>
-            <Button color='primary' onClick={increment}>
+            <CounterContainer>
+                Counter: <CounterText>{counter}</CounterText>
+            </CounterContainer>
+            <button onClick={increment}>
                 Increment
-            </Button>
-            <Button color='primary' onClick={double}>
+            </button>
+            {' '}
+            <button onClick={double}>
                 Double (Async)
-            </Button>
+            </button>
         </div>
     );
 };
@@ -30,3 +29,13 @@ module.exports.propTypes = {
     double: T.func.isRequired,
     increment: T.func.isRequired
 };
+
+
+internals.CounterContainer = Styled.h2`
+    margin: 1em auto;
+`;
+
+internals.CounterText = Styled.span`
+    font-weight: bold;
+    color: rgb(25, 200, 25);
+`;
