@@ -1,3 +1,7 @@
-const { default: CreateMuiTheme } = require('@material-ui/core/styles/createMuiTheme');
+const theme = {
+    colors: {
+        duckBill: '#DB2F2A'
+    }
+};
 
-module.exports = CreateMuiTheme({});
+module.exports = theme;

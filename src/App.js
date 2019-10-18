@@ -7,21 +7,17 @@ const StrangeRouter = require('strange-router');
 const { ConnectedRouter } = require('connected-react-router');
 const { default: ErrorBoundary } = require('react-error-boundary');
 const ErrorFallback = require('./components/ErrorFallback');
+const GlobalStyle = require('./components/GlobalStyle');
 const Routes = require('./routes');
 
-module.exports = ({ store, Router = ConnectedRouter, ...routerProps }) => {
+module.exports = ({ store, theme = { colors: {} }, Router = ConnectedRouter, ...routerProps }) => {
 
     return (
         <Styled.ThemeProvider
-            // should we provide a theme?
-            // theme={theme}
-            theme={{}}
+            theme={theme}
         >
             <ErrorBoundary FallbackComponent={ErrorFallback}>
-                {
-                    // Should we bring this in here?
-                    //<GlobalStyle />
-                }
+                <GlobalStyle />
                 <ReactRedux.Provider store={store}>
                     <Router {...routerProps}>
                         <StrangeRouter.Routes routes={Routes} />
