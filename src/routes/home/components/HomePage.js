@@ -11,7 +11,7 @@ module.exports = () => {
 
     return (
         <HomepageContainer>
-            <WelcomeMessage variant='h4' align='center'>Welcome!</WelcomeMessage>
+            <WelcomeMessage>Welcome!</WelcomeMessage>
             <Image
                 alt='This is a duck, because Redux!'
                 src={DuckImage}
@@ -33,6 +33,6 @@ internals.HomepageContainer = Styled.div`
 
 internals.WelcomeMessage = Styled(Typography).attrs({ variant: 'h4', align: 'center' })`
 
-    // Example leveraging the mui theme from styled-components
+    // Example leveraging the mui theme from inside a styled-component
     color: ${(props) => props.theme.palette.duckYellow.main};
 `;
