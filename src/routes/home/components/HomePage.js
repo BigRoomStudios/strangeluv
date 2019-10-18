@@ -34,5 +34,5 @@ internals.HomepageContainer = Styled.div`
 internals.WelcomeMessage = Styled(Typography).attrs({ variant: 'h4', align: 'center' })`
 
     // Example leveraging the mui theme from inside a styled-component
-    color: ${(props) => props.theme.palette.duckYellow.main};
+    color: ${({ theme }) => theme.palette.duckYellow.main};
 `;
