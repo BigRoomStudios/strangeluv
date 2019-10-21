@@ -1,9 +1,10 @@
 const { default: CreateMuiTheme } = require('@material-ui/core/styles/createMuiTheme');
+const { default: amber } = require('@material-ui/core/colors/amber');
 
 module.exports = CreateMuiTheme({
     palette: {
-        duckYellow: {
-            main: '#EED663'
+        secondary: {
+            main: amber[500]
         }
     },
     typography: {
