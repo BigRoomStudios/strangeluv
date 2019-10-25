@@ -29,7 +29,7 @@ internals.WelcomeMessage = Styled.h4`
     text-align: center;
 
     // example usage of the styled-components theme
-    color: ${(props) => props.theme.colors.duckBill};
+    color: ${({ theme }) => theme.colors.orange};
 `;
 
 internals.HomepageContainer = Styled.div`

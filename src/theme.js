@@ -1,6 +1,6 @@
 const theme = {
     colors: {
-        duckBill: '#DB2F2A'
+        orange: '#DB2F2A'
     }
 };
 
