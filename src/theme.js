@@ -1,5 +1,5 @@
 const { default: CreateMuiTheme } = require('@material-ui/core/styles/createMuiTheme');
-const { default: amber } = require('@material-ui/core/colors/amber');
+const { default: Amber } = require('@material-ui/core/colors/amber');
 
 module.exports = CreateMuiTheme({
     palette: {
