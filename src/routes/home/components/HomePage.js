@@ -7,11 +7,11 @@ const internals = {};
 
 module.exports = () => {
 
-    const { Image, HomepageContainer } = internals;
+    const { Image, HomepageContainer, WelcomeMessage } = internals;
 
     return (
         <HomepageContainer>
-            <Typography variant='h4' align='center'>Welcome!</Typography>
+            <WelcomeMessage>Welcome!</WelcomeMessage>
             <Image
                 alt='This is a duck, because Redux!'
                 src={DuckImage}
@@ -29,4 +29,10 @@ internals.Image = Styled.img`
 internals.HomepageContainer = Styled.div`
     align-self: center;
     margin: auto;
+`;
+
+internals.WelcomeMessage = Styled(Typography).attrs({ variant: 'h4', align: 'center' })`
+
+    // Example leveraging the mui theme from inside a styled-component
+    color: ${({ theme }) => theme.palette.secondary.main};
 `;
