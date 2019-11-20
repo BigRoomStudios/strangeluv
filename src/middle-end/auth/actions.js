@@ -1,7 +1,6 @@
 const MiddleEnd = require('strange-middle-end');
 const { CREATE_ACCOUNT, LOGIN } = require('./action-types');
 const WebClient = require('../../utils/web-client');
-// const M = require('..');
 
 const internals = {};
 

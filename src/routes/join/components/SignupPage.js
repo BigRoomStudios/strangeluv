@@ -30,12 +30,6 @@ module.exports = class SignupPage extends StrangeForms(React.Component) {
         password: ''
     };
 
-    defaultSubmit = (ev) => {
-
-        ev.preventDefault();
-        this.handleNext();
-    }
-
     constructor(props) {
 
         super(props);
@@ -76,9 +70,9 @@ module.exports = class SignupPage extends StrangeForms(React.Component) {
         ev.preventDefault();
         const accountInfo = this.formatFields();
         this.setState({ isSubmitting: true });
-        const [err, result] = await this.props.reqCreateAccount(accountInfo);
+        const [err] = await this.props.reqCreateAccount(accountInfo);
         this.setState({ isSubmitting: false });
-        if (!err && result.success) {
+        if (!err) {
             // Login and redirect
         }
     }
@@ -97,12 +91,12 @@ module.exports = class SignupPage extends StrangeForms(React.Component) {
     render() {
 
         const { isSubmitting, showPassword } = this.state;
-        const { HomepageContainer } = internals;
+        const { PageContainer, StyledForm } = internals;
 
         return (
-            <HomepageContainer>
+            <PageContainer>
                 <Typography variant='h4' align='center' gutterBottom>Sign Up</Typography>
-                <form
+                <StyledForm
                     style={{ display: 'flex', flexDirection: 'column' }}
                     onSubmit={this.handleSubmit}
                 >
@@ -140,7 +134,6 @@ module.exports = class SignupPage extends StrangeForms(React.Component) {
                                     <IconButton
                                         aria-label='toggle password visibility'
                                         onClick={this.handleClickShowPassword}
-                                        onMouseDown={this.handleMouseDownPassword}
                                     >
                                         {showPassword ? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
@@ -162,19 +155,18 @@ module.exports = class SignupPage extends StrangeForms(React.Component) {
                         </Button>
                         <Typography variant='body2'>Have an account? <Link href='/login'>Log In</Link></Typography>
                     </Box>
-                </form>
-            </HomepageContainer>
+                </StyledForm>
+            </PageContainer>
         );
     }
 };
 
-internals.Image = Styled.img`
-    display: block;
-    width: 120px;
-    margin: 1.5rem auto;
+internals.StyledForm = Styled.form`
+    display: flex;
+    flex-direction: column;
 `;
 
-internals.HomepageContainer = Styled.div`
+internals.PageContainer = Styled.div`
     align-self: center;
     margin: auto;
 `;
