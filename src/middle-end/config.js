@@ -5,6 +5,7 @@ const MiddleEnd = require('strange-middle-end');
 module.exports = {
     mods: () => ({
         counter: require('./counter'),
+        auth: require('./auth'),
         router: require('./router')
     }),
     createStore: (reducer, { router }) => {
