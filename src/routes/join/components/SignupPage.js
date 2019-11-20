@@ -60,6 +60,11 @@ module.exports = class SignupPage extends StrangeForms(React.Component) {
         }));
     }
 
+    handleMouseDownPassword = (ev) => {
+
+        ev.preventDefault();
+    }
+
     disableSubmit() {
 
         return false;
@@ -134,6 +139,7 @@ module.exports = class SignupPage extends StrangeForms(React.Component) {
                                     <IconButton
                                         aria-label='toggle password visibility'
                                         onClick={this.handleClickShowPassword}
+                                        onMouseDown={this.handleMouseDownPassword}
                                     >
                                         {showPassword ? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
