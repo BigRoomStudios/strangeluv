@@ -101,10 +101,7 @@ module.exports = class SignupPage extends StrangeForms(React.Component) {
         return (
             <PageContainer>
                 <Typography variant='h4' align='center' gutterBottom>Sign Up</Typography>
-                <StyledForm
-                    style={{ display: 'flex', flexDirection: 'column' }}
-                    onSubmit={this.handleSubmit}
-                >
+                <StyledForm onSubmit={this.handleSubmit}>
                     <TextField
                         required
                         type='text'
