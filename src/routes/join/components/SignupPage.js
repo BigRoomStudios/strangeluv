@@ -67,7 +67,12 @@ module.exports = class SignupPage extends StrangeForms(React.Component) {
 
     disableSubmit() {
 
-        return false;
+        const firstName = this.fieldValue('firstName');
+        const lastName = this.fieldValue('lastName');
+        const email = this.fieldValue('email');
+        const password = this.fieldValue('password');
+
+        return !firstName || !lastName || !email || !password;
     }
 
     handleSubmit = async (ev) => {
