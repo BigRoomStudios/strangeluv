@@ -5,7 +5,7 @@ const { default: Typography } = require('@material-ui/core/Typography');
 const { default: TextField } = require('@material-ui/core/TextField');
 const { default: Button } = require('@material-ui/core/Button');
 const { default: Box } = require('@material-ui/core/Box');
-const { default: Link } = require('@material-ui/core/Link');
+const { NavLink } = require('react-router-dom');
 const { default: FormControl } = require('@material-ui/core/FormControl');
 const { default: InputLabel } = require('@material-ui/core/InputLabel');
 const { default: Input } = require('@material-ui/core/Input');
@@ -161,7 +161,7 @@ module.exports = class SignupPage extends StrangeForms(React.Component) {
                         >
                             Sign Up
                         </Button>
-                        <Typography variant='body2'>Have an account? <Link href='/login'>Log In</Link></Typography>
+                        <Typography variant='body2'>Have an account? <NavLink to='/login'>Log In</NavLink></Typography>
                     </Box>
                 </StyledForm>
             </PageContainer>

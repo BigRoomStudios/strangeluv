@@ -19,11 +19,16 @@ exports.login = MiddleEnd.createAction(LOGIN, {
 
         const { data: results } = await WebClient.post('/login', loginInfo);
         return results;
+    },
+    after: ({ result }) => {
+
+        const { token } = result;
+        WebClient.updateAuth({ token });
     }
 });
 
 exports.logout = MiddleEnd.createAction(LOGOUT, {
-    index: true,
+    index: LOGIN.BASE,
     handler: async () => {
 
         const { data: results } = await WebClient.post('/logout');

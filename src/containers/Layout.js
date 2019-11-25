@@ -1,6 +1,6 @@
 const Connect = require('react-redux').connect;
-const LoginPage = require('../components/LoginPage');
-const M = require('../../../middle-end');
+const Layout = require('../components/Layout');
+const M = require('../middle-end');
 
 const internals = {};
 
@@ -9,13 +9,12 @@ internals.connect = Connect(
         isAuthenticated: M.selectors.auth.getIsAuthenticated(state)
     }),
     (dispatch) => ({
-        reqCreateAccount: async ( loginInfo ) => {
+        logout: async () => {
 
-            const [err, result] = await M.dispatch.auth.login(loginInfo);
-
+            const [err, result] = await M.dispatch.auth.logout();
             return [err, result];
         }
     })
 );
 
-module.exports = internals.connect(LoginPage);
+module.exports = internals.connect(Layout);

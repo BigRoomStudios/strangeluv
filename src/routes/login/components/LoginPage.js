@@ -1,11 +1,11 @@
 const React = require('react');
 const T = require('prop-types');
+const { NavLink } = require('react-router-dom');
 const { default: Styled } = require('styled-components');
 const { default: Typography } = require('@material-ui/core/Typography');
 const { default: TextField } = require('@material-ui/core/TextField');
 const { default: Button } = require('@material-ui/core/Button');
 const { default: Box } = require('@material-ui/core/Box');
-const { default: Link } = require('@material-ui/core/Link');
 const StrangeForms = require('strange-forms');
 
 const internals = {};
@@ -13,7 +13,8 @@ const internals = {};
 module.exports = class LoginPage extends StrangeForms(React.Component) {
 
     static propTypes = {
-        reqCreateAccount: T.func.isRequired
+        reqCreateAccount: T.func.isRequired,
+        isAuthenticated: T.bool
     };
 
     static fields = {
@@ -101,7 +102,7 @@ module.exports = class LoginPage extends StrangeForms(React.Component) {
                         >
                             Log In
                         </Button>
-                        <Typography variant='body2'>Don't have an account? <Link href='/join'>Sign up</Link></Typography>
+                        <Typography variant='body2'>Don't have an account? <NavLink to='/join'>Sign up</NavLink></Typography>
                     </Box>
                 </StyledForm>
             </PageContainer>

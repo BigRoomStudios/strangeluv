@@ -1,5 +1,5 @@
 const React = require('react');
-const Layout = require('../components/Layout');
+const Layout = require('../containers/Layout');
 const NotFoundPage = require('../components/NotFoundPage');
 const NotFoundHelpers = require('./helpers/not-found');
 const HomePage = require('./home/components/HomePage');
