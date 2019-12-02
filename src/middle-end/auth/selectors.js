@@ -12,7 +12,7 @@ exports.getIsAuthenticated = ({ auth }) => {
     // instead of checking for the payload shape
     const isLoginPayload = (payload) => {
 
-        return !!payload.token || ['email', 'password'].every((key) => Object.keys(payload).includes(key));
+        return  Object.keys(payload).includes('token') || ['email', 'password'].every((key) => Object.keys(payload).includes(key));
     };
 
     if (!isLoginPayload(index.original || {})) {

@@ -1,4 +1,4 @@
-const LocalStorageAvailable = () => {
+module.exports = () => {
 
     const test = 'test';
     try {
@@ -10,5 +10,3 @@ const LocalStorageAvailable = () => {
         return false;
     }
 };
-
-module.exports = LocalStorageAvailable;
