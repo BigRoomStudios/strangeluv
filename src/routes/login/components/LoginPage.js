@@ -34,10 +34,7 @@ module.exports = class LoginPage extends StrangeForms(React.Component) {
 
         this.strangeForm({
             fields: Object.keys(LoginPage.fields),
-            get: (someProps, field) => {
-
-                return someProps.data ? someProps.data[field] : '';
-            },
+            get: () => '',
             act: () => null
         });
     }
