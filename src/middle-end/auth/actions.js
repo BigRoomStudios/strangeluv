@@ -25,6 +25,11 @@ exports.login = MiddleEnd.createAction(LOGIN, {
             });
             return { token, user: results };
         }
+        else if (typeof token !== 'undefined') {
+            const error = new Error('No login token on init');
+            error.code = 'NO_TOKEN_ON_INIT';
+            throw error;
+        }
 
         // If there's no token, log in with a payload
         const { data: results } = await WebClient.post('/login', { email, password });

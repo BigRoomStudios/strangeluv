@@ -29,12 +29,6 @@ exports.getToken = ({ auth }) => {
 
     if (typeof token !== 'undefined') {
 
-        if (!token) {
-            const error = new Error('No login token on init');
-            error.code = 'NO_TOKEN_ON_INIT';
-            throw error;
-        }
-
         return token;
     }
 };
