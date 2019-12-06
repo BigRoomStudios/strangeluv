@@ -1,4 +1,5 @@
 const React = require('react');
+const Auth = require('./auth');
 const Layout = require('../containers/Layout');
 const NotFoundPage = require('../components/NotFoundPage');
 const NotFoundHelpers = require('./helpers/not-found');
@@ -35,9 +36,8 @@ module.exports = [
                 exact: true
             },
             {
-                // This should probably be wrapped in something like Auth()
                 path: 'exclusive',
-                component: ExclusivePage,
+                component: Auth.authenticate(ExclusivePage),
                 exact: true
             },
             NotFoundHelpers.CatchAllRoute
