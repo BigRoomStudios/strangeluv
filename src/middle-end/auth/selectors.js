@@ -22,6 +22,13 @@ exports.getIsAuthenticated = ({ auth }) => {
     return !!(index.result && !index.error);
 };
 
+exports.getHasAuthenticationSettled = ({ auth }) => {
+
+    const { [LOGIN.BASE]: index } = auth.indexes;
+
+    return Boolean(index && (index.result || index.error));
+};
+
 exports.getToken = ({ auth }) => {
 
     const { [LOGIN.BASE]: index } = auth.indexes;

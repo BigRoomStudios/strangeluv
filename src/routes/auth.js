@@ -4,9 +4,7 @@ const NotFoundPage = require('../components/NotFoundPage');
 
 exports.authenticate = connectedAuthWrapper({
     wrapperDisplayName: 'UserIsAuthenticated',
-    authenticatedSelector: (state) => {
-
-        return M.selectors.auth.getIsAuthenticated(state);
-    },
+    authenticatedSelector: (state) => M.selectors.auth.getIsAuthenticated(state),
+    authenticatingSelector: (state) => !M.selectors.auth.getHasAuthenticationSettled(state),
     FailureComponent: NotFoundPage
 });
