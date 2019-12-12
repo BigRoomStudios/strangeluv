@@ -6,9 +6,9 @@ const client = module.exports = Axios.create({
     headers: { common: {} }
 });
 
-client.updateConfiguration = ({ apiBaseUrl, ...rest }) => {
+client.updateAuth = ({ token }) => {
 
-    if (apiBaseUrl || apiBaseUrl === '') {
-        client.defaults.baseURL = apiBaseUrl;
-    }
+    const headers = client.defaults.headers.common;
+
+    return Object.assign(headers, { authorization: `Bearer ${token}` });
 };

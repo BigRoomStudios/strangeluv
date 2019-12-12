@@ -1,5 +1,5 @@
 const MiddleEnd = require('strange-middle-end');
-const { CREATE_ACCOUNT, LOGIN } = require('./action-types');
+const { CREATE_ACCOUNT, LOGIN, LOGOUT } = require('./action-types');
 const WebClient = require('../../utils/web-client');
 
 const internals = {};
@@ -18,6 +18,20 @@ exports.login = MiddleEnd.createAction(LOGIN, {
     handler: async (loginInfo) => {
 
         const { data: results } = await WebClient.post('/login', loginInfo);
+        return results;
+    },
+    after: ({ result }) => {
+
+        const { token } = result;
+        WebClient.updateAuth({ token });
+    }
+});
+
+exports.logout = MiddleEnd.createAction(LOGOUT, {
+    index: LOGIN.BASE,
+    handler: async () => {
+
+        const { data: results } = await WebClient.post('/logout');
         return results;
     }
 });
