@@ -9,6 +9,26 @@ const client = module.exports = Axios.create({
 client.updateAuth = ({ token }) => {
 
     const headers = client.defaults.headers.common;
+    const auth = client.getAuth({ token });
 
-    return Object.assign(headers, { authorization: `Bearer ${token}` });
+    Object.assign(headers, auth);
+
+    if (!auth.authorization) {
+        delete headers.authorization;
+    }
+
+    return headers;
+};
+
+client.getAuth = ({ token }) => {
+
+    // Axios doesn't handle null/undefined headers well
+
+    if (!token) {
+        return {};
+    }
+
+    return {
+        authorization: `Bearer ${token}`
+    };
 };

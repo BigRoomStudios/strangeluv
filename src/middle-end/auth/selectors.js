@@ -12,7 +12,7 @@ exports.getIsAuthenticated = ({ auth }) => {
     // instead of checking for the payload shape
     const isLoginPayload = (payload) => {
 
-        return ['email', 'password'].every((key) => Object.keys(payload).includes(key));
+        return  Object.keys(payload).includes('token') || ['email', 'password'].every((key) => Object.keys(payload).includes(key));
     };
 
     if (!isLoginPayload(index.original || {})) {
@@ -20,4 +20,15 @@ exports.getIsAuthenticated = ({ auth }) => {
     }
 
     return !!(index.result && !index.error);
+};
+
+exports.getToken = ({ auth }) => {
+
+    const { [LOGIN.BASE]: index } = auth.indexes;
+    const { token } = index.result || {};
+
+    if (typeof token !== 'undefined') {
+
+        return token;
+    }
 };
