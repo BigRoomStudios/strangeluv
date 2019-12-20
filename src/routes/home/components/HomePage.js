@@ -1,6 +1,6 @@
 const React = require('react');
 const { default: Styled } = require('styled-components');
-const DuckImage = require('../assets/duck.jpg');
+const DuckImage = require('../assets/duck.jpg').default;
 const { default: Typography } = require('@material-ui/core/Typography');
 
 const internals = {};
@@ -8,6 +8,8 @@ const internals = {};
 module.exports = () => {
 
     const { Image, HomepageContainer, WelcomeMessage } = internals;
+
+    console.log(DuckImage);
 
     return (
         <HomepageContainer>
