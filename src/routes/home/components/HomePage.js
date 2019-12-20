@@ -9,8 +9,6 @@ module.exports = () => {
 
     const { Image, HomepageContainer, WelcomeMessage } = internals;
 
-    console.log(DuckImage);
-
     return (
         <HomepageContainer>
             <WelcomeMessage>Welcome!</WelcomeMessage>
