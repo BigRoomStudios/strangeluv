@@ -1,6 +1,6 @@
 const React = require('react');
 const { default: Styled } = require('styled-components');
-const DuckImage = require('../assets/duck.jpg').default;
+const { default: DuckImage } = require('../assets/duck.jpg');
 const { default: Typography } = require('@material-ui/core/Typography');
 
 const internals = {};
