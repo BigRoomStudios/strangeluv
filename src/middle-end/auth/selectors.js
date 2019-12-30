@@ -19,7 +19,8 @@ exports.getIsAuthenticated = ({ auth }) => {
         return false;
     }
 
-    return !!(index.result && !index.error);
+    return !!(index.result && !index.result.loggedOut && !index.error);
+
 };
 
 exports.getHasAuthenticationSettled = ({ auth }) => {
