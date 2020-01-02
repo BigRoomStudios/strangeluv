@@ -47,8 +47,8 @@ exports.logout = MiddleEnd.createAction(LOGOUT, {
     handler: async () => {
 
         try {
-            const { data: results } = await WebClient.post('/logout');
-            return results;
+            await WebClient.post('/logout');
+            return { loggedOut: true };
         }
         finally {
             // Clear the token in local storage
