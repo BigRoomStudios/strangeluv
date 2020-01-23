@@ -48,6 +48,9 @@ $ npm start                     # Start development server
 ## Application Structure
 ```
 .
+├── cdk/                     # CDK deployment files
+│   └── index.js             # entry point for CDK, as defined in cdk.json
+│   └── static-site.js       # CDK code needed to spin up a new static site
 ├── config/                  # Project configuration settings
 │   └── index.js             # Configuration entrypoint
 ├── server/                  # hapi server/plugin for production
@@ -95,6 +98,20 @@ Runs a hapi server located in `server/` setup to serve the `build/` directory pl
 
 ### As a hapi plugin
 The production deployment can also be served as a hapi plugin, located in `server/plugin.js`.
+
+### Static Site Deployment with Amazon CDK
+This example was created based on the [CDK Static Site Example](https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/static-site). Below are steps to get setup. IMPORTANT: before following them, update your `cdk.json` file, replacing dummy parameters with real ones for your account and site.
+
+```bash
+$ sudo pip3 install awscli      # Install AWS CLI locally
+$ aws configure                 # Setup AWS creds, you'll need info from your IAM role
+$ cdk bootstrap
+$ cdk deploy                    # deploy -- this is a long process that will take about 40 minutes
+```
+Other helpful CDK commands:
+
+* `cdk synth` outputs the CloudFormation configuration your CDK code produces
+* `cdk diff` outputs what infrastructure changes would be made by executing this deployment
 
 ## Thank You
 * [Dave Zuko](https://github.com/davezuko) - for creating the [boilerplate](https://github.com/davezuko/react-redux-starter-kit) that we forked (at v3).  It contains a huge amount of effort from dozens of collaborators, and made for a fantastic start.

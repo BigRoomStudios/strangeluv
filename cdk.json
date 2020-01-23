@@ -1,0 +1,8 @@
+{
+    "app": "node ./cdk/index",
+    "context": {
+        "account": "123456789123",
+        "domain": "example.com",
+        "subdomain": "sub-domain"
+    }
+}
