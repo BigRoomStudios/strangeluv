@@ -103,6 +103,7 @@ The production deployment can also be served as a hapi plugin, located in `serve
 This example was created based on the [CDK Static Site Example](https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/static-site). Below are steps to get setup. IMPORTANT: before following them, update your `cdk.json` file, replacing dummy parameters with real ones for your account and site.
 
 ```bash
+$ npm run build                 # Create a build of the site
 $ sudo pip3 install awscli      # Install AWS CLI locally
 $ aws configure                 # Setup AWS creds, you'll need info from your IAM role
 $ cdk bootstrap
