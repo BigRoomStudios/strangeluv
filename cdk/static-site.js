@@ -2,12 +2,12 @@
 
 const Cloudfront = require('@aws-cdk/aws-cloudfront');
 const Route53 = require('@aws-cdk/aws-route53');
-const S3 = require('@aws-cdk/aws-s3');
 const S3deploy = require('@aws-cdk/aws-s3-deployment');
 const ACM = require('@aws-cdk/aws-certificatemanager');
 const CDK = require('@aws-cdk/core');
 const Targets = require('@aws-cdk/aws-route53-targets/lib');
 const Core = require('@aws-cdk/core');
+const { AutoDeleteBucket } = require('@mobileposse/auto-delete-bucket');
 
 /**
  * Static site infrastructure, which deploys site content to an S3 bucket.
@@ -23,7 +23,7 @@ class StaticSite extends Core.Construct {
         const siteDomain = props.siteSubDomain + '.' + props.domainName;
         new CDK.CfnOutput(this, 'Site', { value: 'https://' + siteDomain });
         // Content bucket
-        const siteBucket = new S3.Bucket(this, 'SiteBucket', {
+        const siteBucket = new AutoDeleteBucket(this, 'SiteBucket', {
             bucketName: siteDomain,
             websiteIndexDocument: 'index.html',
             websiteErrorDocument: 'index.html',
