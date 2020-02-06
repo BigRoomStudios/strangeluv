@@ -55,6 +55,13 @@ class StaticSite extends Core.Construct {
                     },
                     behaviors: [{ isDefaultBehavior: true }]
                 }
+            ],
+            errorConfigurations: [
+                {
+                    errorCode: 403,
+                    responseCode: 404,
+                    responsePagePath: '/index.html'
+                }
             ]
         });
         new CDK.CfnOutput(this, 'DistributionId', { value: distribution.distributionId });
