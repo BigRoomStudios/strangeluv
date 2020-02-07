@@ -21,7 +21,7 @@ Strangeluv is an opinionated, curated set of tools for building React applicatio
  - *Lint* - `eslint` `@hapi/eslint-config-hapi` `eslint-config-standard-react`
 
 ## Requirements
-* node `10.x.x`
+* node `12.x.x`
 
 ## Getting Started
 Click the green "Use this template" button above or install manually using git:
