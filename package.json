@@ -75,6 +75,7 @@
     "jest-environment-jsdom-fifteen": "^1.0.2",
     "pre-commit": "^1.2.2",
     "react-dev-utils": "^10.1.0",
+    "regenerator-runtime": "^0.13.5",
     "rimraf": "^3.0.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",

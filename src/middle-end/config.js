@@ -10,12 +10,14 @@ module.exports = {
     }),
     createStore: (reducer, { router }) => {
 
+        const middleware = [
+            MiddleEnd.middleware.thunk,
+            process.env.NODE_ENV !== 'test' && MiddleEnd.middleware.errorLogger,
+            router.middleware
+        ];
+
         return Redux.createStore(reducer, ReduxDevtools.composeWithDevTools(
-            Redux.applyMiddleware(
-                MiddleEnd.middleware.thunk,
-                MiddleEnd.middleware.errorLogger,
-                router.middleware
-            )
+            Redux.applyMiddleware(...middleware.filter(Boolean))
         ));
     }
 };
