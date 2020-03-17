@@ -13,7 +13,7 @@ exports.double = MiddleEnd.createAction(DOUBLE, async () => {
 
     await internals.wait(200);
 
-    const currentCount = M.selectors.counter.getValue(M.getState());
+    const currentCount = M.select.counter.getValue();
 
     M.dispatch.counter.increment({ amount: currentCount });
 });
