@@ -12,7 +12,7 @@ module.exports = {
         return Redux.createStore(reducer, ReduxDevtools.composeWithDevTools(
             Redux.applyMiddleware(
                 MiddleEnd.middleware.thunk,
-                MiddleEnd.middleware.errorLogger,    // TODO only in debug mode
+                MiddleEnd.middleware.errorLogger,
                 router.middleware
             )
         ));
