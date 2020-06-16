@@ -7,23 +7,26 @@ const { default: CreateMuiTheme } = require('@material-ui/core/styles/createMuiT
 const { default: MuiThemeProvider } = require('@material-ui/styles/ThemeProvider');
 const { default: CssBaseline } = require('@material-ui/core/CssBaseline');
 const StrangeRouter = require('strange-router');
+const MiddleEnd = require('strange-middle-end');
 const { ConnectedRouter } = require('connected-react-router');
 const { default: ErrorBoundary } = require('react-error-boundary');
 const ErrorFallback = require('./components/ErrorFallback');
 const Routes = require('./routes');
 
-module.exports = ({ store, theme = CreateMuiTheme(), Router = ConnectedRouter, ...routerProps }) => {
+module.exports = ({ middleEnd, store, theme = CreateMuiTheme(), Router = ConnectedRouter, ...routerProps }) => {
 
     return (
         <Styled.ThemeProvider theme={theme}>
             <MuiThemeProvider theme={theme}>
                 <ErrorBoundary FallbackComponent={ErrorFallback}>
                     <CssBaseline />
-                    <ReactRedux.Provider store={store}>
-                        <Router {...routerProps}>
-                            <StrangeRouter.Routes routes={Routes} />
-                        </Router>
-                    </ReactRedux.Provider>
+                    <MiddleEnd.Provider middleEnd={middleEnd}>
+                        <ReactRedux.Provider store={store}>
+                            <Router {...routerProps}>
+                                <StrangeRouter.Routes routes={Routes} />
+                            </Router>
+                        </ReactRedux.Provider>
+                    </MiddleEnd.Provider>
                 </ErrorBoundary>
             </MuiThemeProvider>
         </Styled.ThemeProvider>
@@ -31,6 +34,7 @@ module.exports = ({ store, theme = CreateMuiTheme(), Router = ConnectedRouter, .
 };
 
 module.exports.propTypes = {
+    middleEnd: T.object,
     store: T.object.isRequired,
     theme: T.object,
     Router: T.elementType

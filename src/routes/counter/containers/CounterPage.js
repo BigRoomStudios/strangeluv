@@ -1,17 +1,21 @@
-const { connect: Connect } = require('react-redux');
+const React = require('react');
+const { useCallback } = require('react');
+const { useSelector } = require('react-redux');
+const { useMiddleEnd } = require('strange-middle-end');
 const CounterPage = require('../components/CounterPage');
-const M = require('../../../middle-end');
 
-const internals = {};
+module.exports = function CounterContainer() {
 
-internals.connect = Connect(
-    (state) => ({
-        counter: M.selectors.counter.getValue(state)
-    }),
-    {
-        increment: () => M.actions.counter.increment({ amount: 1 }),
-        double: () => M.actions.counter.double()
-    }
-);
+    const m = useMiddleEnd();
+    const counter = useSelector(m.selectors.counter.getValue);
+    const handleIncrement = useCallback(() => m.dispatch.counter.increment({ amount: 1 }), [m]);
+    const handleDouble = useCallback(() => m.dispatch.counter.double(), [m]);
 
-module.exports = internals.connect(CounterPage);
+    return (
+        <CounterPage
+            counter={counter}
+            increment={handleIncrement}
+            double={handleDouble}
+        />
+    );
+};
