@@ -13,7 +13,9 @@ const { default: ErrorBoundary } = require('react-error-boundary');
 const ErrorFallback = require('./components/ErrorFallback');
 const Routes = require('./routes');
 
-module.exports = ({ middleEnd, store, theme = CreateMuiTheme(), Router = ConnectedRouter, ...routerProps }) => {
+module.exports = ({ middleEnd, theme = CreateMuiTheme(), Router = ConnectedRouter, ...routerProps }) => {
+
+    const { store } = middleEnd;
 
     return (
         <Styled.ThemeProvider theme={theme}>
@@ -34,8 +36,9 @@ module.exports = ({ middleEnd, store, theme = CreateMuiTheme(), Router = Connect
 };
 
 module.exports.propTypes = {
-    middleEnd: T.object,
-    store: T.object.isRequired,
+    middleEnd: T.shape({
+        store: T.object.isRequired
+    }).isRequired,
     theme: T.object,
     Router: T.elementType
 };
