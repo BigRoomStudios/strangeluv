@@ -11,6 +11,7 @@ it('renders without crashing.', () => {
 
     const { getByText } = Testing.render(
         <App
+            middleEnd={M}
             store={store}
             history={mods.router.history}
         />
