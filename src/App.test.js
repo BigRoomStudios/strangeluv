@@ -7,11 +7,11 @@ const Helpers = require('./test-helpers');
 it('renders without crashing.', () => {
 
     const { App, M } = Helpers.createAppSandbox();
-    const { store, mods } = M;
+    const { mods } = M;
 
     const { getByText } = Testing.render(
         <App
-            store={store}
+            middleEnd={M}
             history={mods.router.history}
         />
     );

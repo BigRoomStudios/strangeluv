@@ -16,7 +16,7 @@ const Theme = require('./theme');
 
     ReactDOM.render(
         <App
-            store={M.store}
+            middleEnd={M}
             history={M.mods.router.history}
             theme={Theme}
         />,
