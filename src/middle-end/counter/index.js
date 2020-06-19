@@ -1,5 +1,10 @@
-module.exports = {
-    reducer: require('./reducer'),
-    actions: require('./actions'),
-    selectors: require('./selectors')
+module.exports = (m, options) => {
+
+    return {
+        reducer: require('./reducer'),
+        actions: require('./actions')(m),
+        selectors: require('./selectors')
+    };
 };
+
+
