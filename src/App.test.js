@@ -3,13 +3,11 @@ require('regenerator-runtime/runtime');
 const React = require('react');
 const Testing = require('@testing-library/react');
 const App = require('./App');
-const MiddleEnd = require('./middle-end');
+const M = require('./middle-end');
 
 it('renders without crashing.', () => {
 
-    const middleEnd = MiddleEnd
-        .create()
-        .initialize();
+    const middleEnd = M.create().initialize();
 
     const { getByText } = Testing.render(
         <App
