@@ -106,6 +106,7 @@ This example was created based on the [CDK Static Site Example](https://github.c
 $ npm run build                 # Create a build of the site
 $ sudo pip3 install awscli      # Install AWS CLI locally
 $ aws configure                 # Setup AWS creds, you'll need info from your IAM role
+$ npm install -g aws-cdk        # Install the 'cdk' command
 $ cdk bootstrap
 $ cdk deploy                    # deploy -- this is a long process that will take about 40 minutes
 ```
