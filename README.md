@@ -126,6 +126,9 @@ Troubleshooting CDK stuff:
     * `aws s3 rb s3://bucket-name --force
       * rb - 'remove bucket'
       * --force lets you delete a bucket with objects in it
+* For FULL cleanup, check these areas for possible leftovers — these tend to be left over even after `cdk destroy`
+  * Route53 entry for the project's domain
+  * CertificateManager entry for the project's domain
 
 ## Thank You
 * [Dave Zuko](https://github.com/davezuko) - for creating the [boilerplate](https://github.com/davezuko/react-redux-starter-kit) that we forked (at v3).  It contains a huge amount of effort from dozens of collaborators, and made for a fantastic start.
