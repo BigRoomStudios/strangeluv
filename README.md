@@ -123,7 +123,7 @@ Troubleshooting CDK stuff:
   * Running this command is idempotent. It will attempt to delete resources from a failed previous deploys and then start from the beginning.
 * If something goes wrong, it's possible S3 buckets will be left behind that will cause CloudFormation stacks to fail recovery.
   * You may need to add permissions to be able to list `*` S3 buckets in order to run `aws s3 ls`, where you'll get the bucket names for:
-    * `aws s3 rb s3://bucket-name --force
+    * `aws s3 rb s3://bucket-name --force`
       * rb - 'remove bucket'
       * --force lets you delete a bucket with objects in it
 * For FULL cleanup, check these areas for possible leftovers — these tend to be left over even after `cdk destroy`
