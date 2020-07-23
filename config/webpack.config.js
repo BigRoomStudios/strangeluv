@@ -47,12 +47,14 @@ module.exports = {
                     [key]: JSON.stringify(value)
                 }), {})
         }),
-        new CopyWebpackPlugin([
-            {
-                from: Config.paths.src('public'),
-                to: Config.paths.build()
-            }
-        ]),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: Config.paths.src('public'),
+                    to: Config.paths.build()
+                }
+            ]
+        }),
         new HtmlWebpackPlugin({
             template: Config.paths.src('index.html'),
             favicon: Config.paths.src('public', 'favicon.ico')

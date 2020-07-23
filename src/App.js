@@ -9,7 +9,7 @@ const { default: CssBaseline } = require('@material-ui/core/CssBaseline');
 const StrangeRouter = require('strange-router');
 const MiddleEnd = require('strange-middle-end');
 const { ConnectedRouter } = require('connected-react-router');
-const { default: ErrorBoundary } = require('react-error-boundary');
+const { ErrorBoundary } = require('react-error-boundary');
 const ErrorFallback = require('./components/ErrorFallback');
 const Routes = require('./routes');
 
