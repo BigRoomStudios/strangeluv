@@ -102,32 +102,25 @@ The production deployment can also be served as a hapi plugin, located in `serve
 ### Static Site Deployment with Amazon CDK
 This example was created based on the [CDK Static Site Example](https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/static-site). Below are steps to get setup. IMPORTANT: before following them, update your `cdk.json` file, replacing dummy parameters with real ones for your account and site.
 
+#### Setup your IAM user
+If you have permissions to create an IAM user and add permissions, look for and add these managed permissions:
+```
+cdk-api
+cdk-api-deploy
+```
+
+Otherwise, ask someone who can get you some IAM creds, and use them in these next steps:
 ```bash
 $ npm run build                 # Create a build of the site
 $ sudo pip3 install awscli      # Install AWS CLI locally
 $ aws configure                 # Setup AWS creds, you'll need info from your IAM role
 $ npm install -g aws-cdk        # Install the 'cdk' command
-$ cdk bootstrap
-$ cdk deploy                    # deploy -- this is a long process that will take about 40 minutes
+$ cdk bootstrap -v
+$ cdk deploy -v                 # deploy -- this is a long process that will take about 40 minutes
 ```
 Other helpful CDK commands:
 * `cdk synth` outputs the CloudFormation configuration your CDK code produces
 * `cdk diff` outputs what infrastructure changes would be made by executing this deployment
-
-Troubleshooting CDK stuff:
-* `cdk bootstrap -v`
-* `cdk deploy -v`
-  * This command is idempotent. It will attempt to delete resources from a failed previous deploy and then start from the beginning.
-* `cdk destroy`
-  * Will attempt to remove the `CloudFormation` stack for the project. It will leave the `CDKToolkit` stack for further CDK endeavors. 
-* If something goes wrong, it's possible S3 buckets will be left behind that will cause CloudFormation stacks to fail recovery.
-  * You may need to add permissions to be able to list `*` S3 buckets in order to run `aws s3 ls`, where you'll get the bucket names so you can then:
-    * `aws s3 rb s3://bucket-name --force`
-      * rb - 'remove bucket'
-      * --force lets you delete a bucket with objects in it
-* For FULL cleanup, check these areas for possible leftovers — these tend to be left over even after `cdk destroy`
-  * Route53 entry for the project's domain
-  * CertificateManager entry for the project's domain
 
 ## Thank You
 * [Dave Zuko](https://github.com/davezuko) - for creating the [boilerplate](https://github.com/davezuko/react-redux-starter-kit) that we forked (at v3).  It contains a huge amount of effort from dozens of collaborators, and made for a fantastic start.
