@@ -105,8 +105,8 @@ This example was created based on the [CDK Static Site Example](https://github.c
 #### Setup your IAM user
 If you have permissions to create an IAM user and add permissions, look for and add these managed permissions:
 ```
-cdk-api
-cdk-api-deploy
+cdk-strangeluv
+cdk-strangeluv-deploy
 ```
 
 Otherwise, ask someone who can get you some IAM creds, and use them in these next steps:
