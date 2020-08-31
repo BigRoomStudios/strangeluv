@@ -115,8 +115,8 @@ $ npm run build                 # Create a build of the site
 $ sudo pip3 install awscli      # Install AWS CLI locally
 $ aws configure                 # Setup AWS creds, you'll need info from your IAM role
 $ npm install -g aws-cdk        # Install the 'cdk' command
-$ cdk bootstrap -v
-$ cdk deploy -v                 # deploy -- this is a long process that will take about 40 minutes
+$ cdk bootstrap
+$ cdk deploy                    # deploy -- this is a long process that will take about 40 minutes
 ```
 Other helpful CDK commands:
 * `cdk synth` outputs the CloudFormation configuration your CDK code produces
