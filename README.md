@@ -102,6 +102,14 @@ The production deployment can also be served as a hapi plugin, located in `serve
 ### Static Site Deployment with Amazon CDK
 This example was created based on the [CDK Static Site Example](https://github.com/aws-samples/aws-cdk-examples/tree/master/typescript/static-site). Below are steps to get setup. IMPORTANT: before following them, update your `cdk.json` file, replacing dummy parameters with real ones for your account and site.
 
+#### Setup your IAM user
+If you have permissions to create an IAM user and add permissions, look for and add these managed permissions:
+```
+cdk-strangeluv
+cdk-strangeluv-deploy
+```
+
+Otherwise, ask someone who can get you some IAM creds, and use them in these next steps:
 ```bash
 $ npm run build                 # Create a build of the site
 $ sudo pip3 install awscli      # Install AWS CLI locally
@@ -111,7 +119,6 @@ $ cdk bootstrap
 $ cdk deploy                    # deploy -- this is a long process that will take about 40 minutes
 ```
 Other helpful CDK commands:
-
 * `cdk synth` outputs the CloudFormation configuration your CDK code produces
 * `cdk diff` outputs what infrastructure changes would be made by executing this deployment
 
