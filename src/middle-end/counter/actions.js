@@ -1,22 +1,25 @@
 const MiddleEnd = require('strange-middle-end');
 const { INCREMENT, DOUBLE } = require('./action-types');
-const M = require('..');
 
 const internals = {};
 
-exports.increment = MiddleEnd.createAction(INCREMENT, ({ amount }) => {
+module.exports = (m) => {
 
-    return { amount };
-});
+    return {
+        increment: MiddleEnd.createAction(INCREMENT, ({ amount }) => {
 
-exports.double = MiddleEnd.createAction(DOUBLE, async () => {
+            return { amount };
+        }),
+        double: MiddleEnd.createAction(DOUBLE, async () => {
 
-    await internals.wait(200);
+            await internals.wait(200);
 
-    const currentCount = M.selectors.counter.getValue(M.getState());
+            const currentCount = m.select.counter.getValue();
 
-    M.dispatch.counter.increment({ amount: currentCount });
-});
+            m.dispatch.counter.increment({ amount: currentCount });
+        })
+    };
+};
 
 internals.wait = (ms) => {
 

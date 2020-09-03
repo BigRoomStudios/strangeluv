@@ -1,19 +1,21 @@
+require('regenerator-runtime/runtime');
+
 const React = require('react');
 const Testing = require('@testing-library/react');
-const MiddleEnd = require('strange-middle-end');
-const Config = require('./middle-end/config');
 const App = require('./App');
+const M = require('./middle-end');
 
 it('renders without crashing.', () => {
 
-    const { store, mods } = MiddleEnd.create(Config).initialize();
+    const middleEnd = M.create().initialize();
 
     const { getByText } = Testing.render(
         <App
-            store={store}
-            history={mods.router.history}
+            middleEnd={middleEnd}
+            history={middleEnd.mods.router.history}
         />
     );
 
     expect(getByText('Strangeluv')).toBeDefined();
+    expect(getByText('Welcome!')).toBeDefined();
 });
