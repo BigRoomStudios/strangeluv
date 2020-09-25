@@ -1,0 +1,83 @@
+name: api tests
+on: push
+
+jobs:
+  # Label of the container job; visible on Github Actions UI
+  testing-harness:
+    # Containers must run in Linux based operating systems
+    runs-on: ubuntu-latest
+    # Docker Hub image that `testing-harness` executes in
+    container: node:14
+
+    # # ========= UNCOMMENT FOR POSTGRES DB =========
+    # # Service containers to run with `testing-harness`
+    # services:
+    #   # Keys here are used to access these service containers for networking.
+    #   # The example env var for DB_HOST will be set to 'postgres-service'.
+    #   postgres-service:
+    #     # Docker Hub image
+    #     image: postgres
+    #     # Provide the password for postgres
+    #     env:
+    #       POSTGRES_PASSWORD: postgres
+    #       POSTGRES_USER: postgres
+    #       POSTGRES_DB: test-db
+    #     # Set health checks to wait until postgres has started
+    #     options: >-
+    #       --health-cmd pg_isready
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 5
+    #     ports:
+    #       # Maps tcp port 5432 on service container to the host
+    #       - 5432:5432
+
+    steps:
+      # # ========= UNCOMMENT TO INSTALL C LIBS =========
+      # - name: Update apt-get before installing
+      #   run: apt-get update
+
+      # - name: Install apt-get packages
+      #   run: apt-get install <package1> <package2> -y
+
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run api tests
+        run: npm test
+        env:
+          # Essentially, your test.env file
+
+          # There are some special context variables available here that might be interesting to you
+          # See which contexts are available in https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts
+          # Ex: github context: https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#github-context
+          COMMIT_SHA: ${{github.sha}}
+
+          # ========= SECRETS =========
+          # Add your secrets if you're an admin for the repo in the settings area.
+          # I like naming my secrets in CONSTANT_CASE to treat them like environment vars
+          # Ex:
+          # (Backslashes to prevent this from actually being parsed)
+          # SECRET_ACCESS_KEY: $\{\{secrets.SECRET_ACCESS_KEY\}\}
+
+          # ========= App .env =========
+
+          # General
+          # ...
+
+          # # ========= UNCOMMENT FOR POSTGRES DB =========
+          # # Above we can find 'postgres-service' set as the key for the service that runs a postgres docker container.
+          # # You can add other docker services for your tests if you use this pattern — just remember to expose the ports!
+          # # Db
+          # DB_HOST: postgres-service
+          # DB_USER: postgres
+          # DB_PASSWORD: postgres
+          # # This matches the POSTGRES_DB env var given above to the postgres-service docker container instance
+          # DB_NAME: test-db
+
+          # Logging
+          # LOG_ROOT_PATH: /app/logs
