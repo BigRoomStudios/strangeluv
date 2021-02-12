@@ -19,7 +19,7 @@ module.exports = {
     output: {
         filename: Config.isProduction ?
             'js/[name].[contenthash:8].js' :
-            'js/bundle.js',
+            'js/[name].bundle.js',
         chunkFilename: Config.isProduction ?
             'js/[name].[contenthash:8].chunk.js' :
             'js/[name].chunk.js',
@@ -46,6 +46,9 @@ module.exports = {
                     ...collect,
                     [key]: JSON.stringify(value)
                 }), {})
+        }),
+        new Webpack.ProvidePlugin({
+            process: 'process/browser'
         }),
         new CopyWebpackPlugin({
             patterns: [
