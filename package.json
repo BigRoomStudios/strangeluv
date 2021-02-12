@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.x.x",
+    "@babel/preset-react": "^7.x.x",
     "@hapi/eslint-config-hapi": "^13.0.2",
     "@hapi/eslint-plugin-hapi": "4.x.x",
     "@hapi/hapi": "20.x.x",
@@ -60,7 +61,7 @@
     "dotenv": "^8.2.0",
     "error-overlay-webpack-plugin": "^0.4.1",
     "eslint": "7.x.x",
-    "eslint-config-standard-react": "10.x.x",
+    "eslint-config-standard-react": "11.x.x",
     "eslint-loader": "^4.0.0",
     "eslint-plugin-jsx-a11y": "6.x.x",
     "eslint-plugin-react": "7.x.x",

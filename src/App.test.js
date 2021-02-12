@@ -1,6 +1,5 @@
 require('regenerator-runtime/runtime');
 
-const React = require('react');
 const Testing = require('@testing-library/react');
 const App = require('./App');
 const M = require('./middle-end');

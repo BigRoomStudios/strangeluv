@@ -1,4 +1,3 @@
-const React = require('react');
 const T = require('prop-types');
 const { default: Button } = require('@material-ui/core/Button');
 const { default: Typography } = require('@material-ui/core/Typography');
