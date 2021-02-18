@@ -21,6 +21,9 @@ module.exports = {
     rules: {
         'react/jsx-indent': ['error', 4],
         'react/jsx-indent-props': ['error', 4],
+        'react/jsx-uses-react': 'off',
+        'react/jsx-uses-vars': 'warn',
+        'react/react-in-jsx-scope': 'off',
         'react-hooks/exhaustive-deps': 'warn',
         'react-hooks/rules-of-hooks': 'error'
     },

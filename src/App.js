@@ -1,4 +1,3 @@
-const React = require('react');
 const T = require('prop-types');
 const HotLoader = require('react-hot-loader/root');
 const ReactRedux = require('react-redux');

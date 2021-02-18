@@ -1,4 +1,4 @@
-const React = require('react');
+const { Suspense } = require('react');
 const T = require('prop-types');
 const Header = require('./Header');
 const ErrorFallback = require('./ErrorFallback');
@@ -17,9 +17,9 @@ module.exports = ({ children, location }) => {
             <Header />
             <Container>
                 <ErrorBoundary key={location.key} FallbackComponent={ErrorFallback}>
-                    <React.Suspense fallback={<LoadingFallback />}>
+                    <Suspense fallback={<LoadingFallback />}>
                         {children}
-                    </React.Suspense>
+                    </Suspense>
                 </ErrorBoundary>
             </Container>
         </AppContainer>

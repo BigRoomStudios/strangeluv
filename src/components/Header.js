@@ -1,4 +1,3 @@
-const React = require('react');
 const { NavLink } = require('react-router-dom');
 const { default: Styled } = require('styled-components');
 const { default: Typography } = require('@material-ui/core/Typography');
