@@ -5,6 +5,7 @@ const Webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 const Config = require('.');
 
 const publicPath = Config.isProduction ? Config.publicPath.replace(/\/*$/, '/') : '/';
@@ -61,20 +62,13 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: Config.paths.src('index.html'),
             favicon: Config.paths.src('public', 'favicon.ico')
+        }),
+        new ESLintWebpackPlugin({
+            formatter: require.resolve('react-dev-utils/eslintFormatter')
         })
     ],
     module: {
         rules: [
-            {
-                enforce: 'pre',
-                test: /\.(js|mjs|jsx|ts|tsx)$/,
-                exclude: /node_modules/,
-                loader: 'eslint-loader',
-                options: {
-                    cache: true,
-                    formatter: require.resolve('react-dev-utils/eslintFormatter')
-                }
-            },
             {
                 oneOf: [
                     {
