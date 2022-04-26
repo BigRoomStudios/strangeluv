@@ -1,7 +1,7 @@
 const T = require('prop-types');
-const { default: Button } = require('@material-ui/core/Button');
-const { default: Typography } = require('@material-ui/core/Typography');
-const { default: Box } = require('@material-ui/core/Box');
+const { default: Button } = require('@mui/material/Button');
+const { default: Typography } = require('@mui/material/Typography');
+const { default: Box } = require('@mui/material/Box');
 
 const internals = {};
 
@@ -14,10 +14,10 @@ module.exports = ({ counter, increment, double }) => {
                     Counter: <Box component='span' color='primary.light'>{counter}</Box>
                 </Box>
             </Typography>
-            <Button color='primary' onClick={increment}>
+            <Button onClick={increment}>
                 Increment
             </Button>
-            <Button color='primary' onClick={double}>
+            <Button onClick={double}>
                 Double (Async)
             </Button>
         </div>
