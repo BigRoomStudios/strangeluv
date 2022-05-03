@@ -1,5 +1,4 @@
 const HotLoader = require('react-hot-loader');
-const React = require('react');
 const ReactDOM = require('react-dom');
 const M = require('./middle-end');
 const App = require('./App');
@@ -12,12 +11,15 @@ const Theme = require('./theme');
         ErrorOverlay: () => null
     });
 
-    M.initialize();
+    const middleEnd = M.create({
+        basePath: process.env.BASE_PATH,
+        logErrors: process.env.NODE_ENV !== 'test'
+    }).initialize();
 
     ReactDOM.render(
         <App
-            store={M.store}
-            history={M.mods.router.history}
+            middleEnd={middleEnd}
+            history={middleEnd.mods.router.history}
             theme={Theme}
         />,
         document.getElementById('root')

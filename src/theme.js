@@ -1,5 +1,5 @@
-const { default: CreateMuiTheme } = require('@material-ui/core/styles/createMuiTheme');
-const { default: Amber } = require('@material-ui/core/colors/amber');
+const { default: CreateMuiTheme } = require('@mui/material/styles/createTheme');
+const { amber } = require('@mui/material/colors');
 
 // The object below overrides specific values and/or extends the default material-ui theme, which can currently be found here:
 // https://material-ui.com/customization/default-theme/#default-theme
@@ -8,7 +8,7 @@ const { default: Amber } = require('@material-ui/core/colors/amber');
 
 module.exports = CreateMuiTheme({
     palette: {
-        secondary: Amber
+        secondary: amber
     },
     typography: {
         fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'

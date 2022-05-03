@@ -1,10 +1,10 @@
-const React = require('react');
+const { Component } = require('react');
 const T = require('prop-types');
 const { Redirect } = require('react-router-dom');
 
 exports.CatchAllRoute = {
     path: '',
-    render: class NotFoundCatchAll extends React.Component {
+    render: class NotFoundCatchAll extends Component {
 
         static propTypes = {
             location: T.shape({
@@ -33,7 +33,7 @@ exports.CatchAllRoute = {
 
 exports.withNotFoundPage = (RouteComponent, NotFoundComponent) => {
 
-    return class RouteComponentWithNotFoundPage extends React.Component {
+    return class RouteComponentWithNotFoundPage extends Component {
 
         static propTypes = {
             location: T.shape({

@@ -1,115 +1,93 @@
-const React = require('react');
+const { useState } = require('react');
 const T = require('prop-types');
 const { NavLink } = require('react-router-dom');
 const { default: Styled } = require('styled-components');
-const { default: Typography } = require('@material-ui/core/Typography');
-const { default: TextField } = require('@material-ui/core/TextField');
-const { default: Button } = require('@material-ui/core/Button');
-const { default: Box } = require('@material-ui/core/Box');
-const StrangeForms = require('strange-forms');
+const { default: Typography } = require('@mui/material/Typography');
+const { default: TextField } = require('@mui/material/TextField');
+const { default: Button } = require('@mui/material/Button');
+const { default: Box } = require('@mui/material/Box');
 
 const internals = {};
 
-module.exports = class LoginPage extends StrangeForms(React.Component) {
+module.exports = function SignupPage({ reqCreateAccount, isAuthenticated }) {
 
-    static propTypes = {
-        reqCreateAccount: T.func.isRequired,
-        isAuthenticated: T.bool
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const disableSubmit = () => {
+
+        return !password || !email;
     };
 
-    static fields = {
-        email: '',
-        password: ''
-    };
-
-    constructor(props) {
-
-        super(props);
-
-        this.state = {
-            email: '',
-            password: '',
-            isSubmitting: false
-        };
-
-        this.strangeForm({
-            fields: Object.keys(LoginPage.fields),
-            get: () => '',
-            act: () => null
-        });
-    }
-
-    disableSubmit() {
-
-        return !this.fieldValue('password') || !this.fieldValue('email');
-    }
-
-    handleSubmit = async (ev) => {
+    const handleSubmit = async (ev) => {
 
         ev.preventDefault();
-        const accountInfo = this.formatFields();
-        this.setState({ isSubmitting: true });
-        const [err] = await this.props.reqCreateAccount(accountInfo);
-        this.setState({ isSubmitting: false });
+        const accountInfo = formatFields();
+        setIsSubmitting(true);
+        const [err] = await reqCreateAccount(accountInfo);
+        setIsSubmitting(false);
         if (!err) {
             // Login and redirect
         }
-    }
+    };
 
-    formatFields = () => {
+    const formatFields = () => {
 
         return {
-            email: this.fieldValue('email'),
-            password: this.fieldValue('password')
+            email,
+            password
         };
     };
 
-    render() {
+    const { PageContainer, StyledForm } = internals;
 
-        const { isSubmitting } = this.state;
-        const { PageContainer, StyledForm } = internals;
-
-        return (
-            <PageContainer>
-                <Typography variant='h4' align='center' gutterBottom>Log In</Typography>
-                <StyledForm onSubmit={this.handleSubmit}>
-                    <TextField
-                        required
-                        type='email'
-                        label='Email'
-                        value={this.fieldValue('email')}
-                        onChange={this.proposeNew('email')}
-                    />
-                    <TextField
-                        required
-                        type='password'
-                        label='Password'
-                        value={this.fieldValue('password')}
-                        onChange={this.proposeNew('password')}
-                    />
-                    <Box
-                        my={2}
+    return (
+        <PageContainer>
+            <Typography variant='h4' align='center' gutterBottom>Log In</Typography>
+            <StyledForm onSubmit={handleSubmit}>
+                <TextField
+                    required
+                    type='email'
+                    label='Email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                    required
+                    type='password'
+                    label='Password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <Box
+                    my={2}
+                >
+                    <Button
+                        type='submit'
+                        variant='contained'
+                        color='primary'
+                        fullWidth
+                        disabled={disableSubmit() || isSubmitting}
                     >
-                        <Button
-                            type='submit'
-                            variant='contained'
-                            color='primary'
-                            fullWidth
-                            disabled={this.disableSubmit() || isSubmitting}
-                        >
-                            Log In
-                        </Button>
-                        <Typography variant='body2'>Don't have an account? <NavLink to='/join'>Sign up</NavLink></Typography>
-                    </Box>
-                </StyledForm>
-            </PageContainer>
-        );
-    }
+                        Log In
+                    </Button>
+                    <Typography variant='body2'>Don't have an account? <NavLink to='/join'>Sign up</NavLink></Typography>
+                </Box>
+            </StyledForm>
+        </PageContainer>
+    );
+};
+
+module.exports.propTypes = {
+    reqCreateAccount: T.func.isRequired,
+    isAuthenticated: T.bool.isRequired
 };
 
 internals.StyledForm = Styled.form`
     display: flex;
     flex-direction: column;
+    gap: ${({ theme }) => theme.spacing(2)};
 `;
 
 internals.PageContainer = Styled.div`

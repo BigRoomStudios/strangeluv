@@ -5,6 +5,7 @@ const Webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 const Config = require('.');
 
 const publicPath = Config.isProduction ? Config.publicPath.replace(/\/*$/, '/') : '/';
@@ -19,7 +20,7 @@ module.exports = {
     output: {
         filename: Config.isProduction ?
             'js/[name].[contenthash:8].js' :
-            'js/bundle.js',
+            'js/[name].bundle.js',
         chunkFilename: Config.isProduction ?
             'js/[name].[contenthash:8].chunk.js' :
             'js/[name].chunk.js',
@@ -31,7 +32,8 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'react-dom': '@hot-loader/react-dom'
+            'react-dom': '@hot-loader/react-dom',
+            '@mui/styled-engine': '@mui/styled-engine-sc'
         }
     },
     plugins: [
@@ -47,29 +49,27 @@ module.exports = {
                     [key]: JSON.stringify(value)
                 }), {})
         }),
-        new CopyWebpackPlugin([
-            {
-                from: Config.paths.src('public'),
-                to: Config.paths.build()
-            }
-        ]),
+        new Webpack.ProvidePlugin({
+            process: 'process/browser'
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: Config.paths.src('public'),
+                    to: Config.paths.build()
+                }
+            ]
+        }),
         new HtmlWebpackPlugin({
             template: Config.paths.src('index.html'),
             favicon: Config.paths.src('public', 'favicon.ico')
+        }),
+        new ESLintWebpackPlugin({
+            formatter: require.resolve('react-dev-utils/eslintFormatter')
         })
     ],
     module: {
         rules: [
-            {
-                enforce: 'pre',
-                test: /\.(js|mjs|jsx|ts|tsx)$/,
-                exclude: /node_modules/,
-                loader: 'eslint-loader',
-                options: {
-                    cache: true,
-                    formatter: require.resolve('react-dev-utils/eslintFormatter')
-                }
-            },
             {
                 oneOf: [
                     {

@@ -1,11 +1,10 @@
-const React = require('react');
 const T = require('prop-types');
 const { NavLink } = require('react-router-dom');
 const { default: Styled } = require('styled-components');
-const { default: Typography } = require('@material-ui/core/Typography');
-const { default: AppBar } = require('@material-ui/core/AppBar');
-const { default: Toolbar } = require('@material-ui/core/Toolbar');
-const { default: Button } = require('@material-ui/core/Button');
+const { default: Typography } = require('@mui/material/Typography');
+const { default: AppBar } = require('@mui/material/AppBar');
+const { default: Toolbar } = require('@mui/material/Toolbar');
+const { default: Button } = require('@mui/material/Button');
 
 const internals = {};
 

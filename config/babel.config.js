@@ -5,6 +5,9 @@ module.exports = {
         'react-hot-loader/babel'
     ],
     presets: [
-        'react-app'
+        'react-app',
+        ['@babel/preset-react', {
+            'runtime': 'automatic'
+        }]
     ]
 };
