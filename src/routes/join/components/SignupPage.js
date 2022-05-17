@@ -6,9 +6,6 @@ const { default: TextField } = require('@mui/material/TextField');
 const { default: Button } = require('@mui/material/Button');
 const { default: Box } = require('@mui/material/Box');
 const { NavLink } = require('react-router-dom');
-const { default: FormControl } = require('@mui/material/FormControl');
-const { default: InputLabel } = require('@mui/material/InputLabel');
-const { default: Input } = require('@mui/material/Input');
 const { default: InputAdornment } = require('@mui/material/InputAdornment');
 const { default: IconButton } = require('@mui/material/IconButton');
 const { default: Visibility } = require('@mui/icons-material/Visibility');
@@ -30,7 +27,7 @@ module.exports = function SignupPage({ reqCreateAccount }) {
 
     const disableSubmit = () => {
 
-        return !firstName || !lastName || !email || !password;
+        return !name || !email || !password;
     };
 
     const handleSubmit = async (ev) => {
@@ -38,7 +35,7 @@ module.exports = function SignupPage({ reqCreateAccount }) {
         ev.preventDefault();
         const accountInfo = formatFields();
         setIsSubmitting(true);
-        const [err] = await this.props.reqCreateAccount(accountInfo);
+        const [err] = await reqCreateAccount(accountInfo);
         setIsSubmitting(false);
         if (!err) {
             // Login and redirect
@@ -48,17 +45,15 @@ module.exports = function SignupPage({ reqCreateAccount }) {
     const formatFields = () => {
 
         return {
-            firstName: this.fieldValue('firstName'),
-            lastName: this.fieldValue('lastName'),
-            email: this.fieldValue('email'),
-            password: this.fieldValue('password'),
+            name,
+            username: email,
+            password,
             role: 'user'
         };
     };
 
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,16 +67,9 @@ module.exports = function SignupPage({ reqCreateAccount }) {
                 <TextField
                     required
                     type='text'
-                    label='First Name'
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                />
-                <TextField
-                    required
-                    type='text'
-                    label='Last Name'
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    label='Name'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                 />
                 <TextField
                     required

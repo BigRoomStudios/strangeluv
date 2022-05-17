@@ -2,6 +2,7 @@ const MiddleEnd = require('strange-middle-end');
 const Redux = require('redux');
 const ReduxDevtools = require('redux-devtools-extension/logOnlyInProduction');
 
+const Auth = require('./auth');
 const Counter = require('./counter');
 const Router = require('./router');
 
@@ -9,6 +10,7 @@ exports.create = (options = {}) => {
 
     const middleEnd = MiddleEnd.create({
         mods: () => ({
+            auth: Auth(middleEnd, options),
             counter: Counter(middleEnd, options),
             router: Router(middleEnd, options)
         }),

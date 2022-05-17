@@ -1,19 +1,21 @@
-const Connect = require('react-redux').connect;
+// const Connect = require('react-redux').connect;
 const SignupPage = require('../components/SignupPage');
-const M = require('../../../middle-end');
+// const M = require('../../../middle-end');
 
 const internals = {};
 
-internals.connect = Connect(
-    (state) => ({}),
-    (dispatch) => ({
-        reqCreateAccount: async ( accountInfo ) => {
+const { useMiddleEnd } = require('strange-middle-end');
 
-            const [err, result] = await M.dispatch.auth.createAccount(accountInfo);
+module.exports = function SignupPageContainer(props) {
 
-            return [err, result];
-        }
-    })
-);
+    const M = useMiddleEnd();
 
-module.exports = internals.connect(SignupPage);
+    const reqCreateAccount = async ( accountInfo ) => {
+
+        const [err, result] = await M.dispatch.auth.register(accountInfo);
+
+        return [err, result];
+    };
+
+    return (<SignupPage {...props} reqCreateAccount={reqCreateAccount} />);
+};
