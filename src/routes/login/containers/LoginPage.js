@@ -1,10 +1,5 @@
-// const Connect = require('react-redux').connect;
-const LoginPage = require('../components/LoginPage');
-// const M = require('../../../middle-end');
-
-const internals = {};
-
 const { useMiddleEnd } = require('strange-middle-end');
+const LoginPage = require('../components/LoginPage');
 
 module.exports = function LoginPageContainer(props) {
 

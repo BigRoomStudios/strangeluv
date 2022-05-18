@@ -35,7 +35,7 @@ module.exports = function SignupPage({ onPressLogin, isAuthenticated }) {
     const formatFields = () => {
 
         return {
-            email,
+            username: email,
             password
         };
     };

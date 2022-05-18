@@ -1,10 +1,5 @@
-// const Connect = require('react-redux').connect;
-const SignupPage = require('../components/SignupPage');
-// const M = require('../../../middle-end');
-
-const internals = {};
-
 const { useMiddleEnd } = require('strange-middle-end');
+const SignupPage = require('../components/SignupPage');
 
 module.exports = function SignupPageContainer(props) {
 

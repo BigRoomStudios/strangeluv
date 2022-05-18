@@ -47,8 +47,7 @@ module.exports = function SignupPage({ reqCreateAccount }) {
         return {
             name,
             username: email,
-            password,
-            role: 'user'
+            password
         };
     };
 

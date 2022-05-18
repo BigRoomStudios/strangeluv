@@ -1,5 +1,6 @@
 const MiddleEnd = require('strange-middle-end');
 const { ROLES } = require('../../utils/constants');
+const Client = require('../../utils/web-client');
 
 const {
     REGISTER,
@@ -18,13 +19,6 @@ const { createAction } = MiddleEnd;
 
 module.exports = (m) => {
 
-    const getClient = () => {
-
-        /** @type {App} */
-        const { client } = m.mods.app;
-        return client;
-    };
-
     return {
         initialize: () => m.dispatch.auth.fetchCurrentUser(),
         actions: {
@@ -32,8 +26,7 @@ module.exports = (m) => {
                 index: true,
                 handler: async () => {
 
-                    const client = getClient();
-                    const { data: results } = await client.get('/validate');
+                    const { data: results } = await Client.get('/validate');
                     const { user, config } = results.data;
 
                     return { user, config };
@@ -42,9 +35,7 @@ module.exports = (m) => {
             login: createAction(LOGIN, {
                 handler: async ({ username, password }) => {
 
-                    const client = getClient();
-
-                    const { data: results } = await client.post('/login', {
+                    const { data: results } = await Client.post('/login', {
                         username,
                         password
                     }, {
@@ -65,9 +56,8 @@ module.exports = (m) => {
             register: createAction(REGISTER, {
                 handler: async ({ name, username, password }) => {
 
-                    const client = getClient();
 
-                    const { data: results } = await client.post('/register', {
+                    const { data: results } = await Client.post('/register', {
                         name,
                         username,
                         password
@@ -86,9 +76,8 @@ module.exports = (m) => {
                 index: FETCH_CURRENT_USER.BASE,
                 handler: async ({ reauthorize } = {}) => {
 
-                    const client = getClient();
                     try {
-                        await client.logout({ reauthorize });
+                        await Client.logout({ reauthorize });
                         return null;
                     }
                     catch (err) {
@@ -104,15 +93,13 @@ module.exports = (m) => {
             forgotPassword: createAction(FORGOT_PASSWORD, {
                 handler: async ({ email }) => {
 
-                    const client = getClient();
-                    await client.post('/forgot-password', { username: email });
+                    await Client.post('/forgot-password', { username: email });
                 }
             }),
             resetPassword: createAction(RESET_PASSWORD, {
                 handler: async ({ token, hash, password }) => {
 
-                    const client = getClient();
-                    await client.post('/reset-password', { token, hash, password });
+                    await Client.post('/reset-password', { token, hash, password });
                 }
             })
         },
