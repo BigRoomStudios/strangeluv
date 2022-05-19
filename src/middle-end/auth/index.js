@@ -1,6 +1,5 @@
 const MiddleEnd = require('strange-middle-end');
 const { ROLES } = require('../../utils/constants');
-// const Client = require('../../utils/web-client');
 
 const {
     REGISTER,
@@ -116,10 +115,7 @@ module.exports = (m) => {
             })
         },
         selectors: {
-            getIsAuthenticated: ({ model, ...args }) => {
-
-                console.log(model);
-                console.log(args);
+            getIsAuthenticated: ({ model }) => {
 
                 const { [FETCH_CURRENT_USER.BASE]: index } = model.indexes;
                 return !!index?.result;
