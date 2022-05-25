@@ -5,12 +5,7 @@ module.exports = function LoginPageContainer(props) {
 
     const m = useMiddleEnd();
 
-    const onPressLogin = async ( accountInfo ) => {
-
-        const [err, result] = await M.dispatch.auth.login(accountInfo);
-
-        return [err, result];
-    };
+    const onPressLogin = (accountInfo) => m.dispatch.auth.login(accountInfo);
 
     return (<LoginPage {...props} onPressLogin={onPressLogin} />);
 };

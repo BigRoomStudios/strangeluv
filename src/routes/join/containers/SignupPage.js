@@ -5,12 +5,7 @@ module.exports = function SignupPageContainer(props) {
 
     const m = useMiddleEnd();
 
-    const reqCreateAccount = async ( accountInfo ) => {
-
-        const [err, result] = await M.dispatch.auth.register(accountInfo);
-
-        return [err, result];
-    };
+    const reqCreateAccount = (accountInfo) => m.dispatch.auth.register(accountInfo);
 
     return (<SignupPage {...props} reqCreateAccount={reqCreateAccount} />);
 };
