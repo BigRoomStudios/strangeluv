@@ -6,15 +6,11 @@ const internals = {};
 
 module.exports = function LayoutContainer(props) {
 
-    const M = useMiddleEnd();
+    const m = useMiddleEnd();
 
-    const logout = async () => {
+    const logout = () => m.dispatch.auth.logout();
 
-        const [err, result] = await M.dispatch.auth.logout();
-        return [err, result];
-    };
-
-    const isAuthenticated = useSelector(M.selectors.auth.getIsAuthenticated);
+    const isAuthenticated = useSelector(m.selectors.auth.getIsAuthenticated);
 
     return (<Layout {...props} isAuthenticated={isAuthenticated} logout={logout} />);
 };

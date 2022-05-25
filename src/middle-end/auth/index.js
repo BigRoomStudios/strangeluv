@@ -120,20 +120,10 @@ module.exports = (m) => {
                 const { [FETCH_CURRENT_USER.BASE]: index } = model.indexes;
                 return !!index?.result;
             },
-            getIsViewOnly: (state) => {
-
-                const role = m.selectors.auth.getUserRole(state);
-                return role === ROLES.VIEW_ONLY;
-            },
             getCurrentUser: ({ model }) => {
 
                 const { [FETCH_CURRENT_USER.BASE]: index } = model.indexes;
                 return index?.result?.user;
-            },
-            getUserRole: ({ model }) => {
-
-                const { [FETCH_CURRENT_USER.BASE]: index } = model.indexes;
-                return index?.result?.user.role;
             },
             getHasAuthenticationSettled: ({ model }) => {
 

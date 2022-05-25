@@ -21,12 +21,9 @@ module.exports = (m, { apiBaseUrl }) => {
             client.interceptors.response.use(null, (error) => {
 
                 if (error.config?.logoutOnFailure) {
-                    (async () => {
-
-                        await m.dispatch.auth.logout({
-                            reauthorize: error.config.reauthorize
-                        });
-                    })();
+                    m.dispatch.auth.logout({
+                        reauthorize: error.config.reauthorize
+                    });
                 }
 
                 throw error;
@@ -44,8 +41,8 @@ internals.createClient = (options) => {
         // Needed for refresh token, esp. in local development
         withCredentials: true,
         paramsSerializer: (obj) => {
-            // The default serializer turns array params into ?trades[]=A&trades[]=B
-            // which is not compatible with node's querystring parser which wants ?trades=A&trades=B.
+            // The default serializer turns array params into ?params[]=A&params[]=B
+            // which is not compatible with node's querystring parser which wants ?params=A&params=B.
             // Luckily URLSearchParams and node are in agreement, so we can customize for it below.
 
             if (!obj) {

@@ -3,7 +3,7 @@ const LoginPage = require('../components/LoginPage');
 
 module.exports = function LoginPageContainer(props) {
 
-    const M = useMiddleEnd();
+    const m = useMiddleEnd();
 
     const onPressLogin = async ( accountInfo ) => {
 

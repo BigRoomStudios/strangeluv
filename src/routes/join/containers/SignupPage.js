@@ -3,7 +3,7 @@ const SignupPage = require('../components/SignupPage');
 
 module.exports = function SignupPageContainer(props) {
 
-    const M = useMiddleEnd();
+    const m = useMiddleEnd();
 
     const reqCreateAccount = async ( accountInfo ) => {
 

@@ -23,9 +23,8 @@ module.exports = (m) => {
 
                 Object.keys(model.indexes).forEach((index) => {
 
-                    if (index === FETCH_CURRENT_USER.BASE    // This index can stay around, as it maintains auth state
-                    ) {
-                        return;
+                    if (index === FETCH_CURRENT_USER.BASE) {
+                        return; // This index can stay around, as it maintains auth state
                     }
 
                     delete model.indexes[index];
