@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "main": "server/plugin.js",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "scripts": {
     "build": "NODE_ENV=production webpack --config config/webpack.config.js",
