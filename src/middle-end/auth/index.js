@@ -1,5 +1,4 @@
 const MiddleEnd = require('strange-middle-end');
-const { ROLES } = require('../../utils/constants');
 
 const {
     REGISTER,
