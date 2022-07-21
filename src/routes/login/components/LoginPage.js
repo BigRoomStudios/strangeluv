@@ -9,7 +9,7 @@ const { default: Box } = require('@mui/material/Box');
 
 const internals = {};
 
-module.exports = function SignupPage({ reqCreateAccount, isAuthenticated }) {
+module.exports = function SignupPage({ onPressLogin, isAuthenticated }) {
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -25,7 +25,7 @@ module.exports = function SignupPage({ reqCreateAccount, isAuthenticated }) {
         ev.preventDefault();
         const accountInfo = formatFields();
         setIsSubmitting(true);
-        const [err] = await reqCreateAccount(accountInfo);
+        const [err] = await onPressLogin(accountInfo);
         setIsSubmitting(false);
         if (!err) {
             // Login and redirect
@@ -35,7 +35,7 @@ module.exports = function SignupPage({ reqCreateAccount, isAuthenticated }) {
     const formatFields = () => {
 
         return {
-            email,
+            username: email,
             password
         };
     };
@@ -80,7 +80,7 @@ module.exports = function SignupPage({ reqCreateAccount, isAuthenticated }) {
 };
 
 module.exports.propTypes = {
-    reqCreateAccount: T.func.isRequired,
+    onPressLogin: T.func.isRequired,
     isAuthenticated: T.bool.isRequired
 };
 

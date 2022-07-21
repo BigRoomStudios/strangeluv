@@ -1,20 +1,16 @@
-const Connect = require('react-redux').connect;
+const { useSelector } = require('react-redux');
+const { useMiddleEnd } = require('strange-middle-end');
 const Layout = require('../components/Layout');
-const M = require('../middle-end');
 
 const internals = {};
 
-internals.connect = Connect(
-    (state) => ({
-        isAuthenticated: M.selectors.auth.getIsAuthenticated(state)
-    }),
-    (dispatch) => ({
-        logout: async () => {
+module.exports = function LayoutContainer(props) {
 
-            const [err, result] = await M.dispatch.auth.logout();
-            return [err, result];
-        }
-    })
-);
+    const m = useMiddleEnd();
 
-module.exports = internals.connect(Layout);
+    const logout = () => m.dispatch.auth.logout();
+
+    const isAuthenticated = useSelector(m.selectors.auth.getIsAuthenticated);
+
+    return (<Layout {...props} isAuthenticated={isAuthenticated} logout={logout} />);
+};

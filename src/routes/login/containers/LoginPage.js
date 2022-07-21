@@ -1,21 +1,11 @@
-const Connect = require('react-redux').connect;
+const { useMiddleEnd } = require('strange-middle-end');
 const LoginPage = require('../components/LoginPage');
-const M = require('../../../middle-end');
 
-const internals = {};
+module.exports = function LoginPageContainer(props) {
 
-internals.connect = Connect(
-    (state) => ({
-        isAuthenticated: M.selectors.auth.getIsAuthenticated(state)
-    }),
-    (dispatch) => ({
-        reqCreateAccount: async ( loginInfo ) => {
+    const m = useMiddleEnd();
 
-            const [err, result] = await M.dispatch.auth.login(loginInfo);
+    const onPressLogin = (accountInfo) => m.dispatch.auth.login(accountInfo);
 
-            return [err, result];
-        }
-    })
-);
-
-module.exports = internals.connect(LoginPage);
+    return (<LoginPage {...props} onPressLogin={onPressLogin} />);
+};
