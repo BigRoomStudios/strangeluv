@@ -7,7 +7,7 @@ module.exports = {
     presets: [
         'react-app',
         ['@babel/preset-react', {
-            'runtime': 'automatic'
+            runtime: 'automatic'
         }]
     ]
 };
