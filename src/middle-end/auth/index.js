@@ -99,17 +99,17 @@ module.exports = (m) => {
                 }
             }),
             forgotPassword: createAction(FORGOT_PASSWORD, {
-                handler: async ({ email }) => {
+                handler: async ({ username }) => {
 
                     const client = getClient();
-                    await client.post('/forgot-password', { username: email });
+                    await client.post('/forgotpassword', { username });
                 }
             }),
             resetPassword: createAction(RESET_PASSWORD, {
-                handler: async ({ token, hash, password }) => {
+                handler: async (args) => {
 
                     const client = getClient();
-                    await client.post('/reset-password', { token, hash, password });
+                    await client.post('/resetpassword2', args);
                 }
             })
         },

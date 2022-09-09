@@ -34,6 +34,7 @@
     "immer": "9.x.x",
     "normalizr": "3.x.x",
     "prop-types": "^15.7.2",
+    "query-string": "^7.1.1",
     "react": "17.x.x",
     "react-dom": "^17.0.2",
     "react-error-boundary": "3.x.x",

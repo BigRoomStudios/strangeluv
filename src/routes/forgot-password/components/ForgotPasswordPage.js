@@ -1,6 +1,5 @@
 const { useState } = require('react');
 const T = require('prop-types');
-const { NavLink } = require('react-router-dom');
 const { default: Styled } = require('styled-components');
 const { default: Typography } = require('@mui/material/Typography');
 const { default: TextField } = require('@mui/material/TextField');
@@ -9,15 +8,15 @@ const { default: Box } = require('@mui/material/Box');
 
 const internals = {};
 
-module.exports = function LoginPage({ onPressLogin, isAuthenticated }) {
+module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
 
-    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [didEmailSend, setDidEmailSend] = useState(false);
 
     const disableSubmit = () => {
 
-        return !password || !email;
+        return !email;
     };
 
     const handleSubmit = async (ev) => {
@@ -25,19 +24,17 @@ module.exports = function LoginPage({ onPressLogin, isAuthenticated }) {
         ev.preventDefault();
         const accountInfo = formatFields();
         setIsSubmitting(true);
-        const [err] = await onPressLogin(accountInfo);
+        const [err] = await onPressForgotPassword(accountInfo);
         setIsSubmitting(false);
         if (!err) {
-            // Login and redirect
-            window.location.href = '/exclusive';
+            setDidEmailSend(true);
         }
     };
 
     const formatFields = () => {
 
         return {
-            username: email,
-            password
+            username: email
         };
     };
 
@@ -45,7 +42,7 @@ module.exports = function LoginPage({ onPressLogin, isAuthenticated }) {
 
     return (
         <PageContainer>
-            <Typography variant='h4' align='center' gutterBottom>Log In</Typography>
+            <Typography variant='h4' align='center' gutterBottom>Forgot Password</Typography>
             <StyledForm onSubmit={handleSubmit}>
                 <TextField
                     required
@@ -54,17 +51,9 @@ module.exports = function LoginPage({ onPressLogin, isAuthenticated }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
-                <Box>
-                    <TextField
-                        required
-                        type='password'
-                        label='Password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <Typography variant='body2' gutterBottom><NavLink to='/forgot-password'>Forgot password?</NavLink></Typography>
-                </Box>
-                <Box>
+                <Box
+                    my={2}
+                >
                     <Button
                         type='submit'
                         variant='contained'
@@ -72,18 +61,17 @@ module.exports = function LoginPage({ onPressLogin, isAuthenticated }) {
                         fullWidth
                         disabled={disableSubmit() || isSubmitting}
                     >
-                        Log In
+                        SEND PASSWORD RESET EMAIL
                     </Button>
+                    {didEmailSend && <Typography variant='body2'>Email sent!</Typography>}
                 </Box>
-                <Typography variant='body2'>Don't have an account? <NavLink to='/join'>Sign up</NavLink></Typography>
             </StyledForm>
         </PageContainer>
     );
 };
 
 module.exports.propTypes = {
-    onPressLogin: T.func.isRequired,
-    isAuthenticated: T.bool.isRequired
+    onPressForgotPassword: T.func.isRequired
 };
 
 internals.StyledForm = Styled.form`
