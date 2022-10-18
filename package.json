@@ -77,8 +77,8 @@
     "react-error-overlay": "6.0.9",
     "regenerator-runtime": "0.13.x",
     "rimraf": "3.x.x",
-    "webpack": "5.x.x",
-    "webpack-cli": "^4.10.0",
+    "webpack": "4.x.x",
+    "webpack-cli": "4.x.x",
     "webpack-dev-server": "3.x.x"
   },
   "babel": {
