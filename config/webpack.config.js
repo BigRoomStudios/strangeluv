@@ -122,8 +122,13 @@ module.exports = {
     devServer: {
         hot: true,
         historyApiFallback: true,
-        publicPath,
-        serveIndex: true,
+        devMiddleware: {
+            publicPath
+        },
+        static: {
+            serveIndex: true
+
+        },
         ...Config.devServer
     }
 };
