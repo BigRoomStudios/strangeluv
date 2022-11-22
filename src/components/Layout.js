@@ -1,10 +1,10 @@
-const React = require('react');
+const { Suspense } = require('react');
 const T = require('prop-types');
 const Header = require('./Header');
 const ErrorFallback = require('./ErrorFallback');
 const LoadingFallback = require('./LoadingFallback');
 const { default: Styled } = require('styled-components');
-const { default: ErrorBoundary } = require('react-error-boundary');
+const { ErrorBoundary } = require('react-error-boundary');
 
 const internals = {};
 
@@ -17,9 +17,9 @@ module.exports = ({ children, location, isAuthenticated, logout }) => {
             <Header isAuthenticated={isAuthenticated} logout={logout} />
             <Container>
                 <ErrorBoundary key={location.key} FallbackComponent={ErrorFallback}>
-                    <React.Suspense fallback={<LoadingFallback />}>
+                    <Suspense fallback={<LoadingFallback />}>
                         {children}
-                    </React.Suspense>
+                    </Suspense>
                 </ErrorBoundary>
             </Container>
         </AppContainer>

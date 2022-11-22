@@ -1,177 +1,129 @@
-const React = require('react');
+const { useState } = require('react');
 const T = require('prop-types');
 const { default: Styled } = require('styled-components');
-const { default: Typography } = require('@material-ui/core/Typography');
-const { default: TextField } = require('@material-ui/core/TextField');
-const { default: Button } = require('@material-ui/core/Button');
-const { default: Box } = require('@material-ui/core/Box');
+const { default: Typography } = require('@mui/material/Typography');
+const { default: TextField } = require('@mui/material/TextField');
+const { default: Button } = require('@mui/material/Button');
+const { default: Box } = require('@mui/material/Box');
 const { NavLink } = require('react-router-dom');
-const { default: FormControl } = require('@material-ui/core/FormControl');
-const { default: InputLabel } = require('@material-ui/core/InputLabel');
-const { default: Input } = require('@material-ui/core/Input');
-const { default: InputAdornment } = require('@material-ui/core/InputAdornment');
-const { default: IconButton } = require('@material-ui/core/IconButton');
-const { default: Visibility } = require('@material-ui/icons/Visibility');
-const { default: VisibilityOff } = require('@material-ui/icons/VisibilityOff');
-const StrangeForms = require('strange-forms');
+const { default: InputAdornment } = require('@mui/material/InputAdornment');
+const { default: IconButton } = require('@mui/material/IconButton');
+const { default: Visibility } = require('@mui/icons-material/Visibility');
+const { default: VisibilityOff } = require('@mui/icons-material/VisibilityOff');
 
 const internals = {};
 
-module.exports = class SignupPage extends StrangeForms(React.Component) {
+module.exports = function SignupPage({ reqCreateAccount }) {
 
-    static propTypes = {
-        reqCreateAccount: T.func.isRequired
+    const handleClickShowPassword = (ev) => {
+
+        setShowPassword(!showPassword);
     };
 
-    static fields = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
+    const handleMouseDownPassword = (ev) => {
+
+        ev.preventDefault();
     };
 
-    constructor(props) {
+    const disableSubmit = () => {
 
-        super(props);
+        return !name || !email || !password;
+    };
 
-        this.state = {
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
-            showPassword: false,
-            isSubmitting: false
-        };
-
-        this.strangeForm({
-            fields: Object.keys(SignupPage.fields),
-            get: (someProps, field) => {
-
-                return someProps.data ? someProps.data[field] : '';
-            },
-            act: () => null
-        });
-    }
-
-    handleClickShowPassword = (ev) => {
-
-        this.setState((currentState) => ({
-            showPassword: !currentState.showPassword
-        }));
-    }
-
-    handleMouseDownPassword = (ev) => {
+    const handleSubmit = async (ev) => {
 
         ev.preventDefault();
-    }
-
-    disableSubmit() {
-
-        const firstName = this.fieldValue('firstName');
-        const lastName = this.fieldValue('lastName');
-        const email = this.fieldValue('email');
-        const password = this.fieldValue('password');
-
-        return !firstName || !lastName || !email || !password;
-    }
-
-    handleSubmit = async (ev) => {
-
-        ev.preventDefault();
-        const accountInfo = this.formatFields();
-        this.setState({ isSubmitting: true });
-        const [err] = await this.props.reqCreateAccount(accountInfo);
-        this.setState({ isSubmitting: false });
+        const accountInfo = formatFields();
+        setIsSubmitting(true);
+        const [err] = await reqCreateAccount(accountInfo);
+        setIsSubmitting(false);
         if (!err) {
             // Login and redirect
         }
-    }
+    };
 
-    formatFields = () => {
+    const formatFields = () => {
 
         return {
-            firstName: this.fieldValue('firstName'),
-            lastName: this.fieldValue('lastName'),
-            email: this.fieldValue('email'),
-            password: this.fieldValue('password'),
-            role: 'user'
+            name,
+            username: email,
+            password
         };
     };
 
-    render() {
 
-        const { isSubmitting, showPassword } = this.state;
-        const { PageContainer, StyledForm } = internals;
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const { PageContainer, StyledForm } = internals;
 
-        return (
-            <PageContainer>
-                <Typography variant='h4' align='center' gutterBottom>Sign Up</Typography>
-                <StyledForm onSubmit={this.handleSubmit}>
-                    <TextField
-                        required
-                        type='text'
-                        label='First Name'
-                        value={this.fieldValue('firstName')}
-                        onChange={this.proposeNew('firstName')}
-                    />
-                    <TextField
-                        required
-                        type='text'
-                        label='Last Name'
-                        value={this.fieldValue('lastName')}
-                        onChange={this.proposeNew('lastName')}
-                    />
-                    <TextField
-                        required
-                        type='email'
-                        label='Email'
-                        value={this.fieldValue('email')}
-                        onChange={this.proposeNew('email')}
-                    />
-                    <FormControl>
-                        <InputLabel htmlFor='standard-adornment-password'>Password</InputLabel>
-                        <Input
-                            required
-                            id='standard-adornment-password'
-                            type={showPassword ? 'text' : 'password'}
-                            value={this.fieldValue('password')}
-                            onChange={this.proposeNew('password')}
-                            endAdornment={
-                                <InputAdornment position='end'>
-                                    <IconButton
-                                        aria-label='toggle password visibility'
-                                        onClick={this.handleClickShowPassword}
-                                        onMouseDown={this.handleMouseDownPassword}
-                                    >
-                                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
-                    </FormControl>
-                    <Box
-                        my={2}
+    return (
+        <PageContainer>
+            <Typography variant='h4' align='center' gutterBottom>Sign Up</Typography>
+            <StyledForm onSubmit={handleSubmit}>
+                <TextField
+                    required
+                    type='text'
+                    label='Name'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <TextField
+                    required
+                    type='email'
+                    label='Email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                    required
+                    type={showPassword ? 'text' : 'password'}
+                    label='Password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position='end'>
+                                <IconButton
+                                    aria-label='toggle password visibility'
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                    }}
+                />
+                <Box
+                    my={2}
+                >
+                    <Button
+                        type='submit'
+                        variant='contained'
+                        color='primary'
+                        fullWidth
+                        disabled={disableSubmit() || isSubmitting}
                     >
-                        <Button
-                            type='submit'
-                            variant='contained'
-                            color='primary'
-                            fullWidth
-                            disabled={this.disableSubmit() || isSubmitting}
-                        >
-                            Sign Up
-                        </Button>
-                        <Typography variant='body2'>Have an account? <NavLink to='/login'>Log In</NavLink></Typography>
-                    </Box>
-                </StyledForm>
-            </PageContainer>
-        );
-    }
+                        Sign Up
+                    </Button>
+                    <Typography variant='body2'>Have an account? <NavLink to='/login'>Log In</NavLink></Typography>
+                </Box>
+            </StyledForm>
+        </PageContainer>
+    );
+};
+
+module.exports.propTypes = {
+    reqCreateAccount: T.func.isRequired
 };
 
 internals.StyledForm = Styled.form`
     display: flex;
     flex-direction: column;
+    gap: ${({ theme }) => theme.spacing(2)};
 `;
 
 internals.PageContainer = Styled.div`

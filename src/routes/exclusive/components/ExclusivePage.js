@@ -1,6 +1,5 @@
-const React = require('react');
 const { default: Styled } = require('styled-components');
-const { default: Typography } = require('@material-ui/core/Typography');
+const { default: Typography } = require('@mui/material/Typography');
 
 const internals = {};
 

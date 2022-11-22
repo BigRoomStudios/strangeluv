@@ -3,13 +3,13 @@
 > How I Learned to Stop Worrying and Love React
 
 [![Build Status](https://travis-ci.org/BigRoomStudios/strangeluv.svg?branch=strangeluv)](https://travis-ci.org/BigRoomStudios/strangeluv?branch=strangeluv)
-[![dependencies](https://david-dm.org/BigRoomStudios/strangeluv/strangeluv.svg)](https://david-dm.org/BigRoomStudios/strangeluv/strangeluv)
-[![devDependency Status](https://david-dm.org/BigRoomStudios/strangeluv/strangeluv/dev-status.svg)](https://david-dm.org/BigRoomStudios/strangeluv/strangeluv#info=devDependencies)
+[![dependencies](https://status.david-dm.org/gh/BigRoomStudios/strangeluv.svg?ref=strangeluv)](https://david-dm.org/BigRoomStudios/strangeluv/strangeluv)
+[![devDependency Status](https://status.david-dm.org/gh/BigRoomStudios/strangeluv.svg?ref=strangeluv&type=dev)](https://david-dm.org/BigRoomStudios/strangeluv/strangeluv#info=devDependencies)
 
 Strangeluv is an opinionated, curated set of tools for building React applications.
 
  - *UI* - `react` `react-dom`
- - *Styles & Design* - `styled-components` `@material-ui/core` `@material-ui/styles`
+ - *Styles & Design* - `styled-components` `@mui/material` `@material-ui/styles`
  - *State* - `redux` `react-redux` `redux-thunk` `strange-middle-end` `normalizr` `immer`
  - *Routing* - `react-router` `react-router-dom` `connected-react-router` `strange-router` `history`
  - *Errors* - `react-error-boundary` `error-overlay-webpack-plugin`

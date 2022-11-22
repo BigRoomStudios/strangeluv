@@ -1,4 +1,4 @@
-const React = require('react');
+const { lazy: Lazy } = require('react');
 const Auth = require('./auth');
 const Layout = require('../containers/Layout');
 const NotFoundPage = require('../components/NotFoundPage');
@@ -8,7 +8,7 @@ const SignupPage = require('./join/containers/SignupPage');
 const LoginPage = require('./login/containers/LoginPage');
 const ExclusivePage = require('./exclusive/components/ExclusivePage');
 
-const CounterPage = React.lazy(() => import('./counter/containers/CounterPage'));
+const CounterPage = Lazy(() => import('./counter/containers/CounterPage'));
 
 module.exports = [
     {
