@@ -10,7 +10,7 @@ exports.CatchAllRoute = {
             location: T.shape({
                 state: T.object
             })
-        }
+        };
 
         render() {
 
@@ -41,7 +41,7 @@ exports.withNotFoundPage = (RouteComponent, NotFoundComponent) => {
                     notFound: T.bool
                 })
             })
-        }
+        };
 
         render() {
 
