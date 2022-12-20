@@ -106,7 +106,7 @@ module.exports = (m) => {
                 }
             }),
             resetPassword: createAction(RESET_PASSWORD, {
-                handler: async (args) => {
+                handler: async ({ oldPassword, userHash, forgotPasswordToken, newPassword }) => {
 
                     const client = getClient();
                     await client.post('/reset-password', { oldPassword, userHash, forgotPasswordToken, newPassword });

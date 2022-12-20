@@ -8,14 +8,14 @@ const { default: Box } = require('@mui/material/Box');
 
 const internals = {};
 
-module.exports = function ResetPasswordPage({ onPressResetPassword, isAuthenticated }) {
+module.exports = function ResetPasswordPage({ onPressResetPassword }) {
 
     const [password, setPassword] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const disableSubmit = () => {
 
-        return !password;
+        return !password || isSubmitting;
     };
 
     const handleSubmit = async (ev) => {
@@ -58,7 +58,7 @@ module.exports = function ResetPasswordPage({ onPressResetPassword, isAuthentica
                         variant='contained'
                         color='primary'
                         fullWidth
-                        disabled={disableSubmit() || isSubmitting}
+                        disabled={disableSubmit()}
                     >
                         Change Password
                     </Button>
@@ -69,8 +69,7 @@ module.exports = function ResetPasswordPage({ onPressResetPassword, isAuthentica
 };
 
 module.exports.propTypes = {
-    onPressResetPassword: T.func.isRequired,
-    isAuthenticated: T.bool.isRequired
+    onPressResetPassword: T.func.isRequired
 };
 
 internals.StyledForm = Styled.form`
