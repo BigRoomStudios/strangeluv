@@ -1,3 +1,4 @@
+const T = require('prop-types');
 const { NavLink } = require('react-router-dom');
 const { default: Styled } = require('styled-components');
 const { default: Typography } = require('@mui/material/Typography');
@@ -7,9 +8,10 @@ const { default: Button } = require('@mui/material/Button');
 
 const internals = {};
 
-module.exports = () => {
+module.exports = (props) => {
 
     const { Link, SiteTitle } = internals;
+    const { isAuthenticated, logout } = props;
 
     return (
         <AppBar position='static'>
@@ -17,6 +19,7 @@ module.exports = () => {
                 <SiteTitle>Strangeluv</SiteTitle>
                 <Link exact to='/'>Home</Link>
                 <Link to='/counter'>Counter</Link>
+                {isAuthenticated && <Button color='inherit' onClick={logout}>Logout</Button>}
             </Toolbar>
         </AppBar>
     );
@@ -32,3 +35,10 @@ internals.Link = Styled(Button).attrs({ component: NavLink, color: 'inherit' })`
 internals.SiteTitle = Styled(Typography).attrs({ variant: 'h6' })`
     flex-grow: 1;
 `;
+
+module.exports.displayName = 'Header';
+
+module.exports.propTypes = {
+    isAuthenticated: T.bool,
+    logout: T.func.isRequired
+};

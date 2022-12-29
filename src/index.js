@@ -13,6 +13,7 @@ const Theme = require('./theme');
 
     const middleEnd = M.create({
         basePath: process.env.BASE_PATH,
+        apiBaseUrl: process.env.API_BASE_URL,
         logErrors: process.env.NODE_ENV !== 'test'
     }).initialize();
 

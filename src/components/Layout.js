@@ -8,13 +8,13 @@ const { ErrorBoundary } = require('react-error-boundary');
 
 const internals = {};
 
-module.exports = ({ children, location }) => {
+module.exports = ({ children, location, isAuthenticated, logout }) => {
 
     const { Container, AppContainer } = internals;
 
     return (
         <AppContainer>
-            <Header />
+            <Header isAuthenticated={isAuthenticated} logout={logout} />
             <Container>
                 <ErrorBoundary key={location.key} FallbackComponent={ErrorFallback}>
                     <Suspense fallback={<LoadingFallback />}>
@@ -30,7 +30,9 @@ module.exports.propTypes = {
     children: T.any,
     location: T.shape({
         key: T.string
-    })
+    }),
+    isAuthenticated: T.bool,
+    logout: T.func.isRequired
 };
 
 internals.Container = Styled.div`
