@@ -24,9 +24,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@mui/material": "5.10.x",
-    "@mui/styled-engine-sc": "5.10.x",
-    "@mui/styles": "5.10.x",
+    "@mui/material": "5.11.x",
+    "@mui/styled-engine-sc": "5.11.x",
+    "@mui/styles": "5.11.x",
     "connected-react-router": "6.x.x",
     "history": "^4.10.1",
     "immer": "9.x.x",
