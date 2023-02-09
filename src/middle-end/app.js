@@ -117,8 +117,8 @@ internals.createClient = (options) => {
                     reauthorize: false,
                     logoutOnFailure: true
                 });
-                if (results.data) {
-                    Storage.setItem('accessToken', results.data);
+                if (results.accessToken) {
+                    Storage.setItem('accessToken', results.accessToken);
                     client.reauthorizedEvent.emit();
                 }
             }
