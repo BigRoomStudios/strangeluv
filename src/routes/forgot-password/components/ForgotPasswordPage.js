@@ -14,10 +14,7 @@ module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [didEmailSend, setDidEmailSend] = useState(false);
 
-    const disableSubmit = () => {
-
-        return !email;
-    };
+    const isSubmitDisabled = !email || isSubmitting;
 
     const handleSubmit = async (ev) => {
 
