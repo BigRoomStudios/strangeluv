@@ -102,9 +102,27 @@ The production deployment can also be served as a hapi plugin, located in `serve
 #### Integrating with `pallies`
 Internally, we use [pallies](https://github.com/frxnz/pallies) to handle user management and authentication in `hapi`. `pallies` can be used as either a plugin (recommended), or the project can be cloned and be used as its own app server.
 
+The following routes are supported:
+
+- `/join` (sign up)
+- `/login` (log in)
+- `/exclusive` (requires authentication)
+
 When used as a plugin, the application API should implement its own forgot password route, which should call `services().authService.forgotPassword(username)` with the relevant `username`  (e.g., the email address of the user that forgot their password). The service returns a `userHash` and `forgotPasswordToken`, which we'll need to reset the user's password.
 
 The reset password route on the front end has been written to expect `user` and `token` as query params, which means at this stage, we'll likely want to use something like `nodemailer` to send an email with a formatted link to `myapp.com/reset-password?token=myToken&user=myUserHash`. In development, you may wish to user a service like [ethereal](https://ethereal.email/) to capture emails. Alternatively, when using `pallies` as its own app server, testing can be conducted by modifying the `forgotPassword`  service in `lib/services/auth.js` to log the user hash and token, from which the URL can be manually constructed using the query params above.
+
+When cloning pallies, enable `CORS` by adding the following `server` block in `pallies`' `server/manifest.js`:
+
+```
+          routes: {
+            cors: {
+                // Needed for refresh token, esp. in local development
+                credentials: true
+            }
+```
+
+The `pallies` `server/.env` file should also be updated with the relevant environmental variables, including the `TOKEN_SECRET` in `server/.palliesrc.js`, which, [by default](https://github.com/derekwheee/pallies/blob/develop/server/.palliesrc.js#L6-L9), is  `kissmyants` 💋🐜
 
 ## Thank You
 * [Dave Zuko](https://github.com/davezuko) - for creating the [boilerplate](https://github.com/davezuko/react-redux-starter-kit) that we forked (at v3).  It contains a huge amount of effort from dozens of collaborators, and made for a fantastic start.
