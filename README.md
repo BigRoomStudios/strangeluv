@@ -104,9 +104,7 @@ Internally, we use [pallies](https://github.com/frxnz/pallies) to handle user ma
 
 When used as a plugin, the application API should implement its own forgot password route, which should call `services().authService.forgotPassword(username)` with the relevant `username`  (e.g., the email address of the user that forgot their password). The service returns a `userHash` and `forgotPasswordToken`, which we'll need to reset the user's password.
 
-The reset password route on the front end has been written to expect `user` and `token` as query params, which means at this stage, we'll likely want to use something like `nodemailer` to send an email with a formatted link to `myapp.com/reset-password?token=myToken&user=myUserHash`. In development, you may wish to user a service like [ethereal](https://ethereal.email/) to capture emails.
-
-Note, if using `pallies` as its own app server, the same functionality can be gained by modifying the `forgotPassword`  service in `lib/services/auth.js` to send an email with the appropriate link.
+The reset password route on the front end has been written to expect `user` and `token` as query params, which means at this stage, we'll likely want to use something like `nodemailer` to send an email with a formatted link to `myapp.com/reset-password?token=myToken&user=myUserHash`. In development, you may wish to user a service like [ethereal](https://ethereal.email/) to capture emails. Alternatively, when using `pallies` as its own app server, testing can be conducted by modifying the `forgotPassword`  service in `lib/services/auth.js` to log the user hash and token, from which the URL can be manually constructed using the query params above.
 
 ## Thank You
 * [Dave Zuko](https://github.com/davezuko) - for creating the [boilerplate](https://github.com/davezuko/react-redux-starter-kit) that we forked (at v3).  It contains a huge amount of effort from dozens of collaborators, and made for a fantastic start.

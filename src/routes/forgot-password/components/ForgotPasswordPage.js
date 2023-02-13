@@ -56,7 +56,7 @@ module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
                         variant='contained'
                         color='primary'
                         fullWidth
-                        disabled={disableSubmit() || isSubmitting}
+                        disabled={isSubmitDisabled}
                     >
                         SEND PASSWORD RESET EMAIL
                     </Button>
