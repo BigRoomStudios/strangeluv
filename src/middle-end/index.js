@@ -7,6 +7,7 @@ const App = require('./app');
 const Model = require('./model');
 const Counter = require('./counter');
 const Router = require('./router');
+const Snackbar = require('./snackbar');
 
 exports.create = (options = {}) => {
 
@@ -16,7 +17,8 @@ exports.create = (options = {}) => {
             app: App(middleEnd, options),
             model: Model(middleEnd, options),
             counter: Counter(middleEnd, options),
-            router: Router(middleEnd, options)
+            router: Router(middleEnd, options),
+            snackbar: Snackbar(middleEnd, options)
         }),
         createStore: (reducer, { router }) => {
 

@@ -7,6 +7,7 @@ const { default: Typography } = require('@mui/material/Typography');
 const { default: TextField } = require('@mui/material/TextField');
 const { default: Button } = require('@mui/material/Button');
 const { default: Box } = require('@mui/material/Box');
+const { useSnackbar } = require('../../../hooks/use-snackbar');
 
 const internals = {};
 
@@ -15,6 +16,7 @@ module.exports = function LoginPage({ onPressLogin, isAuthenticated }) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [openSnackbar] = useSnackbar();
     const m = useMiddleEnd();
 
     const disableSubmit = () => {
@@ -33,6 +35,9 @@ module.exports = function LoginPage({ onPressLogin, isAuthenticated }) {
         if (!err) {
             // Login and redirect
             m.dispatch.router.push('/exclusive');
+        }
+        else {
+            openSnackbar('An error occurred', { severity: 'error' });
         }
     };
 

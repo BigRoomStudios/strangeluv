@@ -5,6 +5,7 @@ const { default: Typography } = require('@mui/material/Typography');
 const { default: TextField } = require('@mui/material/TextField');
 const { default: Button } = require('@mui/material/Button');
 const { default: Box } = require('@mui/material/Box');
+const { useSnackbar } = require('../../../hooks/use-snackbar');
 
 const internals = {};
 
@@ -12,7 +13,7 @@ module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
 
     const [email, setEmail] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [didEmailSend, setDidEmailSend] = useState(false);
+    const [openSnackbar] = useSnackbar();
 
     const isSubmitDisabled = !email || isSubmitting;
 
@@ -24,7 +25,10 @@ module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
         const [err] = await onPressForgotPassword(accountInfo);
         setIsSubmitting(false);
         if (!err) {
-            setDidEmailSend(true);
+            openSnackbar('Email sent successfully');
+        }
+        else {
+            openSnackbar('An error occurred', { severity: 'error' });
         }
     };
 
@@ -60,7 +64,6 @@ module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
                     >
                         SEND PASSWORD RESET EMAIL
                     </Button>
-                    {didEmailSend && <Typography variant='body2'>Email sent!</Typography>}
                 </Box>
             </StyledForm>
         </PageContainer>
