@@ -31,7 +31,8 @@ module.exports = {
         'react/jsx-uses-vars': 'warn',
         'react/react-in-jsx-scope': 'off',
         'react-hooks/exhaustive-deps': 'warn',
-        'react-hooks/rules-of-hooks': 'error'
+        'react-hooks/rules-of-hooks': 'error',
+        'jsx-quotes': ['error', 'prefer-single']
     },
     overrides: [
         {
