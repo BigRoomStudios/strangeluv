@@ -1,40 +1,24 @@
 const { useState } = require('react');
-const { useMiddleEnd } = require('strange-middle-end');
 const T = require('prop-types');
 const { default: Styled } = require('styled-components');
 const { default: Typography } = require('@mui/material/Typography');
 const { default: TextField } = require('@mui/material/TextField');
 const { default: Button } = require('@mui/material/Button');
 const { default: Box } = require('@mui/material/Box');
-const { useSnackbar } = require('../../../hooks/use-snackbar');
 
 const internals = {};
 
-module.exports = function ResetPasswordPage({ onPressResetPassword }) {
+module.exports = function ResetPasswordPage({ onPressResetPassword, isSubmitting }) {
 
     const [password, setPassword] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const m = useMiddleEnd();
-    const [openSnackbar] = useSnackbar();
 
-    const disableSubmit = () => {
+    const isSubmitDisabled = !password || isSubmitting;
 
-        return !password || isSubmitting;
-    };
-
-    const handleSubmit = async (ev) => {
+    const handleSubmit = (ev) => {
 
         ev.preventDefault();
         const accountInfo = formatFields();
-        setIsSubmitting(true);
-        const [err] = await onPressResetPassword(accountInfo);
-        setIsSubmitting(false);
-        if (!err) {
-            m.dispatch.router.push('/login');
-        }
-        else {
-            openSnackbar('An error occurred', { severity: 'error' });
-        }
+        onPressResetPassword(accountInfo);
     };
 
     const formatFields = () => {
@@ -65,7 +49,7 @@ module.exports = function ResetPasswordPage({ onPressResetPassword }) {
                         variant='contained'
                         color='primary'
                         fullWidth
-                        disabled={disableSubmit()}
+                        disabled={isSubmitDisabled}
                     >
                         Change Password
                     </Button>
@@ -76,7 +60,8 @@ module.exports = function ResetPasswordPage({ onPressResetPassword }) {
 };
 
 module.exports.propTypes = {
-    onPressResetPassword: T.func.isRequired
+    onPressResetPassword: T.func.isRequired,
+    isSubmitting: T.bool
 };
 
 internals.StyledForm = Styled.form`
