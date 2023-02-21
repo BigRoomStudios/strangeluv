@@ -5,31 +5,20 @@ const { default: Typography } = require('@mui/material/Typography');
 const { default: TextField } = require('@mui/material/TextField');
 const { default: Button } = require('@mui/material/Button');
 const { default: Box } = require('@mui/material/Box');
-const { useSnackbar } = require('../../../hooks/use-snackbar');
 
 const internals = {};
 
-module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
+module.exports = function ForgotPasswordPage({ onPressForgotPassword, isSubmitting }) {
 
     const [email, setEmail] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [openSnackbar] = useSnackbar();
 
     const isSubmitDisabled = !email || isSubmitting;
 
-    const handleSubmit = async (ev) => {
+    const handleSubmit = (ev) => {
 
         ev.preventDefault();
         const accountInfo = formatFields();
-        setIsSubmitting(true);
-        const [err] = await onPressForgotPassword(accountInfo);
-        setIsSubmitting(false);
-        if (!err) {
-            openSnackbar('Email sent successfully');
-        }
-        else {
-            openSnackbar('An error occurred', { severity: 'error' });
-        }
+        onPressForgotPassword(accountInfo);
     };
 
     const formatFields = () => {
@@ -71,7 +60,8 @@ module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
 };
 
 module.exports.propTypes = {
-    onPressForgotPassword: T.func.isRequired
+    onPressForgotPassword: T.func.isRequired,
+    isSubmitting: T.bool
 };
 
 internals.StyledForm = Styled.form`
