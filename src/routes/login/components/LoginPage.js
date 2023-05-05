@@ -72,7 +72,7 @@ module.exports = function LoginPage({ onPressLogin, isAuthenticating }) {
 };
 
 module.exports.propTypes = {
-    onPressLogin: T.func.isRequired,
+    onPressLogin: T.func.isRequired
     isAuthenticating: T.bool.isRequired
 };
 

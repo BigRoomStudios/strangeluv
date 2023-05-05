@@ -32,7 +32,7 @@ module.exports = (m) => {
 
                     const client = getClient();
                     const { data: results } = await client.get('/validate');
-                    const { user, config } = results.data;
+                    const { user, config } = results;
 
                     return { user, config };
                 }
@@ -48,8 +48,8 @@ module.exports = (m) => {
                         reauthorize: false
                     });
 
-                    if (results.data.accessToken) {
-                        Storage.setItem('accessToken', results.data.accessToken);
+                    if (results.accessToken) {
+                        Storage.setItem('accessToken', results.accessToken);
                     }
 
                     await m.dispatch.auth.fetchCurrentUser();
@@ -63,7 +63,7 @@ module.exports = (m) => {
                 handler: async ({ name, username, password }) => {
 
                     const client = getClient();
-                    const { data: results } = await client.post('/register', {
+                    await client.post('/register', {
                         name,
                         username,
                         password
@@ -71,11 +71,7 @@ module.exports = (m) => {
                         reauthorize: false
                     });
 
-                    if (results.data.accessToken) {
-                        Storage.setItem('accessToken', results.data.accessToken);
-                    }
-
-                    await m.dispatch.auth.fetchCurrentUser();
+                    await m.dispatch.auth.login({ username, password });
                 }
             }),
             logout: createAction(LOGOUT, {
