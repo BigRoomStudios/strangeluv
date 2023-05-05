@@ -10,7 +10,7 @@ const { default: Box } = require('@mui/material/Box');
 
 const internals = {};
 
-module.exports = function LoginPage({ onPressLogin, isAuthenticated }) {
+module.exports = function LoginPage({ onPressLogin }) {
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -85,8 +85,7 @@ module.exports = function LoginPage({ onPressLogin, isAuthenticated }) {
 };
 
 module.exports.propTypes = {
-    onPressLogin: T.func.isRequired,
-    isAuthenticated: T.bool.isRequired
+    onPressLogin: T.func.isRequired
 };
 
 internals.StyledForm = Styled.form`
