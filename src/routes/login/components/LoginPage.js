@@ -1,7 +1,6 @@
 const { useState } = require('react');
 const T = require('prop-types');
 const { NavLink } = require('react-router-dom');
-const { useMiddleEnd } = require('strange-middle-end');
 const { default: Styled } = require('styled-components');
 const { default: Typography } = require('@mui/material/Typography');
 const { default: TextField } = require('@mui/material/TextField');
@@ -10,30 +9,18 @@ const { default: Box } = require('@mui/material/Box');
 
 const internals = {};
 
-module.exports = function LoginPage({ onPressLogin }) {
+module.exports = function LoginPage({ onPressLogin, isAuthenticating }) {
 
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const m = useMiddleEnd();
 
-    const disableSubmit = () => {
+    const isSubmitDisabled = !password || !email || isAuthenticating;
 
-        return !password || !email;
-    };
-
-    const handleSubmit = async (ev) => {
+    const handleSubmit = (ev) => {
 
         ev.preventDefault();
         const accountInfo = formatFields();
-        setIsSubmitting(true);
-        const [err] = await onPressLogin(accountInfo);
-        setIsSubmitting(false);
-
-        if (!err) {
-            // Login and redirect
-            m.dispatch.router.push('/exclusive');
-        }
+        onPressLogin(accountInfo);
     };
 
     const formatFields = () => {
@@ -73,7 +60,7 @@ module.exports = function LoginPage({ onPressLogin }) {
                         variant='contained'
                         color='primary'
                         fullWidth
-                        disabled={disableSubmit() || isSubmitting}
+                        disabled={isSubmitDisabled}
                     >
                         Log In
                     </Button>
@@ -85,7 +72,8 @@ module.exports = function LoginPage({ onPressLogin }) {
 };
 
 module.exports.propTypes = {
-    onPressLogin: T.func.isRequired
+    onPressLogin: T.func.isRequired,
+    isAuthenticating: T.bool.isRequired
 };
 
 internals.StyledForm = Styled.form`

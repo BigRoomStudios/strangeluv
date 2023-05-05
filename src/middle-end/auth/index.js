@@ -98,14 +98,18 @@ module.exports = (m) => {
                 handler: async ({ username }) => {
 
                     const client = getClient();
-                    await client.post('/forgot-password', { username });
+                    const { data } = await client.post('/forgot-password', { username });
+
+                    return data;
                 }
             }),
             resetPassword: createAction(RESET_PASSWORD, {
                 handler: async ({ oldPassword, userHash, forgotPasswordToken, newPassword }) => {
 
                     const client = getClient();
-                    await client.post('/reset-password', { oldPassword, userHash, forgotPasswordToken, newPassword });
+                    const { data } = await client.post('/reset-password', { oldPassword, userHash, forgotPasswordToken, newPassword });
+
+                    return data;
                 }
             })
         },

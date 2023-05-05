@@ -8,24 +8,17 @@ const { default: Box } = require('@mui/material/Box');
 
 const internals = {};
 
-module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
+module.exports = function ForgotPasswordPage({ onPressForgotPassword, isSubmitting }) {
 
     const [email, setEmail] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [didEmailSend, setDidEmailSend] = useState(false);
 
     const isSubmitDisabled = !email || isSubmitting;
 
-    const handleSubmit = async (ev) => {
+    const handleSubmit = (ev) => {
 
         ev.preventDefault();
         const accountInfo = formatFields();
-        setIsSubmitting(true);
-        const [err] = await onPressForgotPassword(accountInfo);
-        setIsSubmitting(false);
-        if (!err) {
-            setDidEmailSend(true);
-        }
+        onPressForgotPassword(accountInfo);
     };
 
     const formatFields = () => {
@@ -60,7 +53,6 @@ module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
                     >
                         SEND PASSWORD RESET EMAIL
                     </Button>
-                    {didEmailSend && <Typography variant='body2'>Email sent!</Typography>}
                 </Box>
             </StyledForm>
         </PageContainer>
@@ -68,7 +60,8 @@ module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
 };
 
 module.exports.propTypes = {
-    onPressForgotPassword: T.func.isRequired
+    onPressForgotPassword: T.func.isRequired,
+    isSubmitting: T.bool
 };
 
 internals.StyledForm = Styled.form`

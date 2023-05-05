@@ -9,6 +9,9 @@ const StrangeRouter = require('strange-router');
 const MiddleEnd = require('strange-middle-end');
 const { ConnectedRouter } = require('connected-react-router');
 const { ErrorBoundary } = require('react-error-boundary');
+const { SnackbarProvider } = require('./components/Snackbar');
+const MiddleEndInstallSnackbar = require('./middle-end/snackbar/Install');
+
 const ErrorFallback = require('./components/ErrorFallback');
 const Routes = require('./routes');
 
@@ -20,14 +23,17 @@ module.exports = ({ middleEnd, theme = CreateMuiTheme(), Router = ConnectedRoute
         <Styled.ThemeProvider theme={theme}>
             <MuiThemeProvider theme={theme}>
                 <ErrorBoundary FallbackComponent={ErrorFallback}>
-                    <CssBaseline />
-                    <MiddleEnd.Provider middleEnd={middleEnd}>
-                        <ReactRedux.Provider store={store}>
-                            <Router {...routerProps}>
-                                <StrangeRouter.Routes routes={Routes} />
-                            </Router>
-                        </ReactRedux.Provider>
-                    </MiddleEnd.Provider>
+                    <SnackbarProvider>
+                        <CssBaseline />
+                        <MiddleEnd.Provider middleEnd={middleEnd}>
+                            <MiddleEndInstallSnackbar />
+                            <ReactRedux.Provider store={store}>
+                                <Router {...routerProps}>
+                                    <StrangeRouter.Routes routes={Routes} />
+                                </Router>
+                            </ReactRedux.Provider>
+                        </MiddleEnd.Provider>
+                    </SnackbarProvider>
                 </ErrorBoundary>
             </MuiThemeProvider>
         </Styled.ThemeProvider>
