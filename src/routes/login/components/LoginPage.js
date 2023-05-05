@@ -1,6 +1,7 @@
 const { useState } = require('react');
 const T = require('prop-types');
 const { NavLink } = require('react-router-dom');
+const { useMiddleEnd } = require('strange-middle-end');
 const { default: Styled } = require('styled-components');
 const { default: Typography } = require('@mui/material/Typography');
 const { default: TextField } = require('@mui/material/TextField');
@@ -14,6 +15,7 @@ module.exports = function LoginPage({ onPressLogin }) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const m = useMiddleEnd();
 
     const disableSubmit = () => {
 
@@ -27,9 +29,10 @@ module.exports = function LoginPage({ onPressLogin }) {
         setIsSubmitting(true);
         const [err] = await onPressLogin(accountInfo);
         setIsSubmitting(false);
+
         if (!err) {
             // Login and redirect
-            window.location.href = '/exclusive';
+            m.dispatch.router.push('/exclusive');
         }
     };
 

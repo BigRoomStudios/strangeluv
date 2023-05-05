@@ -14,10 +14,7 @@ module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [didEmailSend, setDidEmailSend] = useState(false);
 
-    const disableSubmit = () => {
-
-        return !email;
-    };
+    const isSubmitDisabled = !email || isSubmitting;
 
     const handleSubmit = async (ev) => {
 
@@ -59,7 +56,7 @@ module.exports = function ForgotPasswordPage({ onPressForgotPassword }) {
                         variant='contained'
                         color='primary'
                         fullWidth
-                        disabled={disableSubmit() || isSubmitting}
+                        disabled={isSubmitDisabled}
                     >
                         SEND PASSWORD RESET EMAIL
                     </Button>

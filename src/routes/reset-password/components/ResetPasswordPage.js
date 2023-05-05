@@ -1,4 +1,5 @@
 const { useState } = require('react');
+const { useMiddleEnd } = require('strange-middle-end');
 const T = require('prop-types');
 const { default: Styled } = require('styled-components');
 const { default: Typography } = require('@mui/material/Typography');
@@ -12,6 +13,7 @@ module.exports = function ResetPasswordPage({ onPressResetPassword }) {
 
     const [password, setPassword] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const m = useMiddleEnd();
 
     const disableSubmit = () => {
 
@@ -26,7 +28,7 @@ module.exports = function ResetPasswordPage({ onPressResetPassword }) {
         const [err] = await onPressResetPassword(accountInfo);
         setIsSubmitting(false);
         if (!err) {
-            window.location.href = '/login';
+            m.dispatch.router.push('/login');
         }
     };
 
