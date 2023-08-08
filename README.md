@@ -16,7 +16,6 @@ Strangeluv is an opinionated, curated set of tools for building React applicatio
  - *Builds* - `webpack` `html-webpack-plugin` `copy-webpack-plugin` `file-loader` `@babel/core` `babel-preset-react-app`
  - *Production server* - `@hapi/hapi` `@hapi/inert`
  - *Development server* - `webpack-dev-server`
- - *HMR* - `react-hot-loader` `@hot-loader/react-dom`
  - *Tests* - `jest` `@testing-library/react`
  - *Lint* - `eslint` `@hapi/eslint-config-hapi` `eslint-config-standard-react`
 

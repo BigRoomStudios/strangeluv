@@ -10,7 +10,6 @@ exports.create = (options = {}) => {
     const middleEnd = MiddleEnd.create({
         mods: () => ({
             counter: Counter(middleEnd, options),
-            router: Router(middleEnd, options)
         }),
         createStore: (reducer, { router }) => {
 

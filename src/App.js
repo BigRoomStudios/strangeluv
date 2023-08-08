@@ -1,5 +1,4 @@
 const T = require('prop-types');
-const HotLoader = require('react-hot-loader/root');
 const ReactRedux = require('react-redux');
 const Styled = require('styled-components');
 const { default: CreateMuiTheme } = require('@mui/material/styles/createTheme');
@@ -42,4 +41,3 @@ module.exports.propTypes = {
     Router: T.elementType
 };
 
-module.exports = HotLoader.hot(module.exports);
